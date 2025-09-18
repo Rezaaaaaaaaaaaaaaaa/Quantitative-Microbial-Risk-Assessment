@@ -1,0 +1,30 @@
+
+NIWA SIP PROPOSAL STYLE ANALYSIS
+=================================
+
+DOCUMENT STRUCTURE:
+- Total paragraphs: 9
+- Heading levels found: ['Heading 3', 'Heading 1']
+- Average paragraph length: 178.9 characters
+- Number of tables: 3
+
+WRITING STYLE CHARACTERISTICS:
+- Average sentence length: 6.9 words
+- Technical content ratio: 4.9%
+- Sentence length range: (1, 26)
+
+TONE ANALYSIS:
+- Formal indicators: 1 occurrences
+- Collaborative indicators: 0 occurrences
+- Technical indicators: 0 occurrences
+
+TYPICAL PHRASES FOUND:
+
+
+SAMPLE HEADINGS:
+- Work programme and timeline
+- Chief Scientist support
+- Example of E. coli Calibration for North Is North (Northland and Auckland)
+
+SAMPLE CONTENT EXCERPTS:
+

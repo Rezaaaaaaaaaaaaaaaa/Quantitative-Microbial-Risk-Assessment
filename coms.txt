@@ -1,0 +1,80 @@
+SIP Project Proposal - Internal Tool Development for QMRA and Riparian Analysis
+
+
+Richard Williams
+​
+Reza Moghaddam​
+​
+Andrew Hughes;​
+Michael Bruce;​
+David Wood​
+Hi Reza
+
+Thanks for providing more detail on this tool. Please go ahead and develop a full SIP application for this. It would be helpful if you could list the value of the projects you have missed out on (and their value plus any feedback you got on your proposals). It would also be useful to list the approx value of contracts that this work may help you to win, to help us understand the value of the investment versus the value of the potential future work. Please include information on where on NIWA's systems the code will be stored and documented. Please do include other staff (e.g. David) to support you to ensure this is successful. In addition, Jochen and Jess do have visions of how and where (i.e. on what platform) models will run in the future; if you are talking about this model integrating with other modelling systems then please do pick their brains.
+
+There are already 4-5 people working on shading / temperature. So whilst I see potential here I think your project 1 idea is more distinct for you.
+
+Thanks, Richard
+
+
+Reza Moghaddam
+​
+Richard Williams​
+​
+Andrew Hughes;​
+Michael Bruce;​
+David Wood​
+Hi Richard,
+Following up on my previous email about the QMRA workflow tool - I had a good chat with David Wood about the technical side of things. Here's where we're at:
+David's been working with Mike Hickford on moving away from @Risk software towards open-source options. We've got existing R code that relies on external packages, but we're missing that integrated comprehensive engine we need.
+Why this matters right now
+The timing couldn't be better with what's happening in New Zealand's wastewater regulation:
+National wastewater environmental performance standards kick in August 2025, which means everyone needs standardized risk assessment methods
+60% of public wastewater treatment plants will need consent renewals in the next decade
+Taumata Arowai's expanded role means much more rigorous, standardized risk assessments will be required
+This regulatory shift puts NIWA's QMRA expertise right where the water industry needs it as they adapt to these new national standards.
+Technical direction
+While we have been focusing on R, I think we should build the comprehensive tool in Python instead. Here's my reasoning:
+Python handles large-scale data processing much better
+The development ecosystem is more active with libraries that keep evolving
+We can still use the existing useful R packages through Python interfaces (rpy2)
+Python's scientific stack (NumPy, SciPy, pandas) covers most of what we need
+It'll be easier to maintain long-term and integrate with NIWA's other data systems
+What I'm proposing
+I'd like 150 hours and hours for David to:
+Bring together and improve the existing R code components using Python interfaces
+Build automated workflow functions in Python
+Test everything with validated datasets
+Write proper documentation
+Work closely with David throughout the process
+This way we make the most of what we've already built while creating something scalable and maintainable.
+Do you agree with this approach and timeline? I can put together a proposal if you'd like.
+Thanks, Reza
+
+
+Reza Moghaddam
+​
+Richard Williams​
+​
+Andrew Hughes;​
+Michael Bruce​
+Hi Richard,
+Hope you're well. I wanted to run two internal tool development ideas past you for potential SIP funding - both would leverage our existing research strengths while significantly improving our consulting efficiency.
+Project 1: QMRA Workflow Engine (Python)
+We've built up considerable expertise in quantitative microbial risk assessment over the years, positioning us as one of the leading groups in nz . However, we're still rebuilding models from scratch for each consulting project, which has actually cost us a few recent bids to competitors who can turn things around faster.
+This tool would capture our institutional knowledge into reusable components:
+Standardized pathogen dose-response libraries with uncertainty distributions
+Treatment efficacy modules for common water treatment processes
+Automated Monte Carlo simulation engine
+Customizable reporting templates that meet regulatory requirements
+Expected impact: 60-70% reduction in QMRA project delivery time while ensuring consistent methodology across all team members.
+Project 2: Riparian Thermal Analysis Toolkit (R/Python)
+Our stream temperature and riparian work has gained real traction lately, especially with the regional councils. This toolkit would automate the thermal shading analysis we've been doing manually:
+Satellite imagery processing pipeline for vegetation assessment
+Solar angle modeling integrated with topographic data
+Automated identification of thermal stress zones
+Restoration prioritization algorithms based on cost-benefit analysis
+Expected impact: Would let us standardize riparian assessments and tackle multi-catchment analysis much more efficiently for regional clients.
+Both tools target the most time-intensive parts of our consulting work where we already have strong research credibility. 
+Are you free for a coffee sometime next week to discuss? I think these could be real winners for monetizing our research while making life easier internally.
+Cheers, Reza

@@ -1,0 +1,570 @@
+﻿@misc{RN14,
+   title = {Home | Environment Canterbury},
+   publisher = {NZ Government - Environment Canterbury (ECan)},
+   note = {Relevant keywords: water quality | Content preview: Home | Environment Canterbury Skip to main content Skip to site navigation Main navigation My services login Visit our social media pages: Fac... | Scraped: 2025-09-17T15:00:36.423098},
+   url = {https://www.ecan.govt.nz/your-region/plans-strategies-policies-and-bylaws/canterbury-land-and-water-regional-plan/},
+   type = {Government Document}
+}
+
+@article{RN5,
+   title = {[HTML][HTML] Quantitative Microbial Risk Assessment as support for bathing waters profiling},
+   note = {Scraped: 2025-09-17T15:00:35.806356},
+   url = {https://www.sciencedirect.com/science/article/pii/S0025326X20304367},
+   type = {Journal Article}
+}
+
+@misc{RN11,
+   title = {Publications | Ministry of Health NZ},
+   publisher = {NZ Government - Ministry of Health},
+   note = {Relevant keywords: microbial, public health, environmental health | Content preview: Publications | Ministry of Health NZ Skip to main content Careers},
+   DOI = {A releases News Publicat... | Scraped: 2025-09-17T15:00:33.403032},
+   url = {https://www.health.govt.nz/publication/food-safety-risk-management-measures-guidance-local-authorities},
+   type = {Government Document}
+}
+
+@misc{RN12,
+   title = {Publications | Ministry of Health NZ},
+   publisher = {NZ Government - Ministry of Health},
+   note = {Relevant keywords: microbial, public health, environmental health | Content preview: Publications | Ministry of Health NZ Skip to main content Careers},
+   DOI = {A releases News Publicat... | Scraped: 2025-09-17T15:00:33.445578},
+   url = {https://www.health.govt.nz/publication/drinking-water-standards-new-zealand-2005-revised-2018},
+   type = {Government Document}
+}
+
+@misc{RN13,
+   title = {Water quality data | Environment Canterbury},
+   publisher = {NZ Government - Environment Canterbury (ECan)},
+   note = {Relevant keywords: water quality | Content preview: Water quality data | Environment Canterbury Skip to main content Skip to site navigation Main navigation My services login Visit our social me... | Scraped: 2025-09-17T15:00:36.047087},
+   url = {https://www.ecan.govt.nz/data/water-quality-data/},
+   type = {Government Document}
+}
+
+@article{RN9,
+   author = {Bloomfield, S. and Wilkinson, D. and Rogers, L. and Biggs, P. and French, N. and Mohan, V. and Savoian, M. and Venter, P. and Midwinter, A.},
+   title = {Campylobacter novaezeelandiae sp. nov., isolated from birds and water in New Zealand},
+   journal = {Int J Syst Evol Microbiol},
+   volume = {70},
+   number = {6},
+   pages = {3775–3784},
+   note = {Bloomfield, Samuel
+Wilkinson, David
+Rogers, Lynn
+Biggs, Patrick
+French, Nigel
+Mohan, Vathsala
+Savoian, Matthew
+Venter, Pierre
+Midwinter, Anne
+eng
+England
+2020/06/06
+Int J Syst Evol Microbiol. 2020 Jun;70(6):3775-3784. doi: 10.1099/ijsem.0.004231. Epub 2020 Jun 5.},
+   abstract = {Six isolates of Campylobacter with similar non-standard colonial morphologies were identified during studies isolating Campylobacter from bird faeces and rivers in New Zealand. Genomic (16S rRNA gene sequencing and whole genome analysis) and phenotypic (MALDI-TOF analysis and conventional biochemical tests) showed that the isolates form a monophyletic clade with genetic relationships to Campylobacter coli/Campylobacter jejuni and Campylobacter peloridis/Campylobacter amoricus. They may be distinguished from other Campylobacter by their MALDI-TOF spectral pattern, their florid alpha-haemolysis, their ability to grow anaerobically at 37 degrees C, and on 2 % NaCl nutrient agar, and their lack of hippuricase. This study shows that these isolates represent a novel species within the genus Campylobacter for which the name Campylobacter novaezeelandiae sp. nov. is proposed. The presence of C. novaezeelandiae in water may be a confounder for freshwater microbial risk assessment as they may not be pathogenic for humans. The type strain is B423b(T) (=NZRM 4741(T)=ATCC TSD-167(T)).},
+   keywords = {Animals
+Bacterial Typing Techniques
+Base Composition
+Birds/*microbiology
+Campylobacter/*classification/isolation & purification
+DNA, Bacterial/genetics
+Fatty Acids/chemistry
+Feces/*microbiology
+New Zealand
+*Phylogeny
+RNA, Ribosomal, 16S/genetics
+Rivers/*microbiology
+Sequence Analysis, DNA
+Campylobacter
+birds
+genomics},
+   ISSN = {1466-5034 (Electronic)
+1466-5026 (Print)
+1466-5026 (Linking)},
+   DOI = {10.1099/ijsem.0.004231},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/32501787},
+   year = {2020},
+   type = {Journal Article}
+}
+
+@article{RN4,
+   author = {Dada, A. C. and Gyawali, P.},
+   title = {Quantitative microbial risk assessment (QMRA) of occupational exposure to SARS-CoV-2 in wastewater treatment plants},
+   journal = {Sci Total Environ},
+   volume = {763},
+   pages = {142989},
+   note = {Dada, Ayokunle Christopher
+Gyawali, Pradip
+eng
+Netherlands
+2021/01/28
+Sci Total Environ. 2021 Apr 1;763:142989. doi: 10.1016/j.scitotenv.2020.142989. Epub 2020 Oct 15.},
+   abstract = {The current global Severe Acute Respiratory Syndrome- Coronavirus-2 (SARS-CoV-2) epidemic has heightened calls for studies to evaluate respiratory exposure for wastewater treatment workers. In this global first study, we assess occupational health risks to wastewater treatment plant (WWTP) operators from inhalation of aerosolized SARS-CoV-2 using a Quantitative Microbiological Risk Assessment (QMRA) framework. The following considerations were used to develop the QMRA and assess the illness risks to workers: a) the proportion of the population who are infected and thus responsible for shedding SARS-CoV-2 into raw wastewater; b) the concentration of SARS-CoV-2 in raw and treated wastewater; c) the volume of aerosolized water inhaled by a WWTP operator during work; d) humidity and temperature-dependent viability of coronaviruses in aerosolized waste water; e) estimation of the amount, frequency, and duration of exposure; and f) exposure doses. The variables were then fed into an exponential dose response model to estimate the risks in three scenarios representing low-grade, moderate and aggressive outbreaks. These scenarios were designed on the assumption of 0.03%, 0.3% and 3% of the wastewater-generating population being infected with SARS-CoV-2. In terms of averaged-out illness risk profiles, the individual illness risks for low grade, moderate and aggressive outbreak scenarios respectively are 0.036, 0.32 and 3.21 illness cases per 1000 exposed WWTP operators. Our study suggests that the risk of accidental occupational exposure to SARS-CoV-2 in raw wastewater, via inhalation at the WWTP environment, is negligible, particularly when less than 0.3% of the population served by the plant are actively infected.},
+   keywords = {*covid-19
+Humans
+*Occupational Exposure
+Risk Assessment
+SARS-CoV-2
+Wastewater
+*Water Purification
+Health risks
+Qmra
+SARS-CoV-2 in wastewater
+Wastewater operators},
+   ISSN = {1879-1026 (Electronic)
+0048-9697 (Print)
+0048-9697 (Linking)},
+   DOI = {10.1016/j.scitotenv.2020.142989},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/33498115},
+   year = {2021},
+   type = {Journal Article}
+}
+
+@article{RN18,
+   author = {Feng, Y. and Reis, M. M. and Tu, C. and Soni, A. and Brightwell, G. and Chen, M. and Zhang, J. and Wang, J. and Wu, Q. and Ding, Y.},
+   title = {High-throughput, rapid, and non-destructive detection of common foodborne pathogens via hyperspectral imaging coupled with deep neural networks and support vector machines},
+   journal = {Food Res Int},
+   volume = {202},
+   pages = {115598},
+   note = {Feng, Ying
+Reis, Marlon M
+Tu, Christine
+Soni, Aswathi
+Brightwell, Gale
+Chen, Moutong
+Zhang, Jumei
+Wang, Juan
+Wu, Qingping
+Ding, Yu
+eng
+Canada
+2025/02/19
+Food Res Int. 2025 Feb;202:115598. doi: 10.1016/j.foodres.2024.115598. Epub 2025 Jan 7.},
+   abstract = {Foodborne pathogens such as Bacillus cereus, Staphylococcus aureus, and Escherichia coli are major causes of gastrointestinal diseases worldwide and frequently contaminate dairy products. Compared to nucleic acid detection and MALDI-TOF MS, hyperspectral imaging (HSI) offering advantages such as multiple bands, rapid, minimal damage, non-contact, and non-destructive detection. However, current HSI methods require agar plate cultures, which are time-consuming and labor-intensive. This study is the first to use bacterial broth in a 24-well plate to collect HSI spectra, combined with machine learning for enhanced feature extraction and classification. After data augmentation and dimensionality reduction via principal component analysis (PCA) and linear discriminant analysis (LDA), deep neural networks and support vector machines (DNN-SVM) resulted in prediction accuracies of 100 % on the training set, 98.31 % on the testing set, and 93.33 % on the validation set for classifying B. cereus, E. coli, and S. aureus. As a result, a high-throughput, rapid, and non-destructive detection method was developed, which is expected to detect 24 bacterial broth samples in less than ten minutes. It indicates the potential of HSI to be used as a feasible, robust, and non-destructive solution for real-time monitoring of microbial pathogens in food.},
+   keywords = {*Hyperspectral Imaging/methods
+*Support Vector Machine
+*Food Microbiology/methods
+Bacillus cereus/isolation & purification
+*Neural Networks, Computer
+Staphylococcus aureus/isolation & purification
+Escherichia coli/isolation & purification
+*Foodborne Diseases/microbiology
+Principal Component Analysis
+Food Contamination/analysis
+Deep Learning
+Discriminant Analysis
+*High-Throughput Screening Assays/methods
+Dnn-svm
+High-throughput
+Hyperspectral imaging
+Non-destructive detection},
+   ISSN = {1873-7145 (Electronic)
+0963-9969 (Linking)},
+   DOI = {10.1016/j.foodres.2024.115598},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/39967133},
+   year = {2025},
+   type = {Journal Article}
+}
+
+@article{RN10,
+   author = {Habib, I. and Coles, J. and Fallows, M. and Goodchild, S.},
+   title = {Human campylobacteriosis related to cross-contamination during handling of raw chicken meat: Application of quantitative risk assessment to guide intervention scenarios analysis in the Australian context},
+   journal = {Int J Food Microbiol},
+   volume = {332},
+   pages = {108775},
+   note = {Habib, Ihab
+Coles, John
+Fallows, Mark
+Goodchild, Stan
+eng
+Netherlands
+2020/07/10
+Int J Food Microbiol. 2020 Nov 2;332:108775. doi: 10.1016/j.ijfoodmicro.2020.108775. Epub 2020 Jun 30.},
+   abstract = {Quantitative Microbiological Risk Assessment (QMRA) is a methodology used to organize and analyze scientific information to both estimate the probability and severity of an adverse event as well as prioritize efforts to reduce the risk of foodborne pathogens. No QMRA efforts have been applied to Campylobacter in the Australian chicken meat sector. Hence, we present a QMRA model of human campylobacteriosis related to the occurrence of cross-contamination while handling raw chicken meat in Western Australia (WA). This work fills a gap in Campylobacter risk characterization in Australia and enables benchmarking against risk assessments undertaken in other countries. The model predicted the average probability of the occurrence of illness per serving of salad that became cross-contaminated from being handled following the handling of fresh chicken meat as 7.0 x 10(-4) (90% Confidence Interval [CI] +/- 4.7 x 10(-5)). The risk assessment model was utilized to estimate the likely impact of intervention scenarios on the predicted probability of illness (campylobacteriosis) per serving. Predicted relative risk reductions following changes in the retail prevalence of Campylobacter were proportional to the percentage desired in the reduction scenario; a target that is aiming to reduce the current baseline prevalence of Campylobacter in retail chicken by 30% is predicted to yield approximately 30% relative risk reduction. A simulated one-log reduction in the mean concentration of Campylobacter is anticipated to generate approximately 20% relative risk reductions. Relative risk reduction induced by a one-log decrease in the mean was equally achieved when the tail of the input distribution was affected-that is, by a change (one-log reduction) in the standard deviation of the baseline Campylobacter concentration. A scenario assuming a 5% point decrease in baseline probability of cross-contamination at the consumer phase would yield relative risk reductions of 14%, which is as effective as the impact of a strategic target of 10% reduction in the retail prevalence of Campylobacter. In conclusion, the present model simulates the probability of illness predicted for an average individual who consumes salad that has been cross-contaminated with Campylobacter from retail chicken meat in WA. Despite some uncertainties, this is the first attempt to utilize the QMRA approach as a scientific basis to guide risk managers toward implementing strategies to reduce the risk of human campylobacteriosis in an Australian context.},
+   keywords = {Animals
+Campylobacter/isolation & purification
+Campylobacter Infections/*epidemiology/microbiology/prevention & control
+Chickens
+*Food Handling
+*Food Microbiology
+Humans
+Poultry/*microbiology
+Prevalence
+Risk Assessment/methods
+Vegetables/microbiology
+Western Australia/epidemiology
+Campylobacter
+Public health
+Risk mitigation
+Western Australia},
+   ISSN = {1879-3460 (Electronic)
+0168-1605 (Linking)},
+   DOI = {10.1016/j.ijfoodmicro.2020.108775},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/32645510},
+   year = {2020},
+   type = {Journal Article}
+}
+
+@article{RN7,
+   author = {Hernandez-Jover, M. and Culley, F. and Heller, J. and Ward, M. P. and Jenson, I.},
+   title = {Semi-quantitative food safety risk profile of the Australian red meat industry},
+   journal = {Int J Food Microbiol},
+   volume = {353},
+   pages = {109294},
+   note = {Hernandez-Jover, Marta
+Culley, Fiona
+Heller, Jane
+Ward, Michael P
+Jenson, Ian
+eng
+Netherlands
+2021/06/21
+Int J Food Microbiol. 2021 Sep 2;353:109294. doi: 10.1016/j.ijfoodmicro.2021.109294. Epub 2021 Jun 15.},
+   abstract = {In 2017-18, the Australian red meat (beef, sheep and goat species) industry generated more than $AUD 13 billion in export trade alone and is therefore of substantial importance to the Australian GDP. With both relatively high amounts of domestic red meat consumption and dependence on international markets, food safety risk is constantly reassessed so as to maintain a resilient industry sector. The current study aimed to conduct a food safety risk rating for the Australian red meat industry. In 2002, a food safety risk profile was developed for the Australian red meat industry. It included raw and processed meat products of cattle, sheep and goats and considered microbiological, chemical and physical hazards. The current risk rating was undertaken during 2017 and 2018. The first step was to conduct a hazard characterization, which involved a review of literature and data on foodborne outbreaks, pathogen surveillance and product recalls, and an expert elicitation process with 15 Australian food safety experts. This process identified the Hazard:Product:Process combinations to be considered and the likelihood of contamination at the point of consumption. These likelihood ratings were then combined with hazard severity ratings to qualitatively estimate the relative risk posed by each combination. Combinations with a moderate-to-high risk were included in the semi-quantitative risk rating using Risk Ranger v2, a tool that allows an estimation of the public health risk of hazard: product combinations and a ranking of this risk. The Risk Ranger tool provides a risk ranking (RR), ranging from 0 (no risk) to 100 (every member of the population eats a meal that contains a lethal dose of the hazard every day). STEC E. coli O157 (RR 35-39) and Salmonella spp. (RR 33-37) in undercooked hamburgers and Listeria monocytogenes in ready-to-eat products (RR 35-38) were combinations which had the highest (moderate) risk for the general and susceptible populations. In addition, Toxoplasma gondii in undercooked lamb was identified as posing a high risk among pregnant women (RR 49). The study provides an updated food safety risk profile for the Australian red meat industry which, considering the available information, suggests red meat products do not pose a high food safety risk. The methodology developed in this study provides an easy to implement approach to profile and prioritise food safety risk and relies on data that can generated in most situations.},
+   keywords = {Animals
+Australia
+Bacterial Physiological Phenomena
+Cattle
+Food Microbiology/statistics & numerical data
+Food Parasitology/statistics & numerical data
+*Food Safety
+Humans
+*Red Meat/microbiology/parasitology
+*Risk Assessment
+Sheep
+Toxoplasma/physiology
+Foodborne hazards
+Hazard:Product:Process combinations
+Red meat
+Risk rating},
+   ISSN = {1879-3460 (Electronic)
+0168-1605 (Linking)},
+   DOI = {10.1016/j.ijfoodmicro.2021.109294},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/34147838},
+   year = {2021},
+   type = {Journal Article}
+}
+
+@article{RN15,
+   author = {Luo, X. and Liu, S. and Ren, G. and Huang, K.},
+   title = {A Versatile and Bioinspired Hierarchical Nanoflower Coating for Enhanced Photodriven Antimicrobial Efficacy against Foodborne Pathogens},
+   journal = {ACS Appl Bio Mater},
+   volume = {8},
+   number = {9},
+   pages = {8049–8058},
+   note = {Luo, Xiaoying
+Liu, Shanshan
+Ren, Guoyan
+Huang, Kang
+eng
+2025/08/29 20:45
+ACS Appl Bio Mater. 2025 Sep 15;8(9):8049-8058. doi: 10.1021/acsabm.5c01018. Epub 2025 Aug 29.},
+   abstract = {Contamination by pathogenic microbes frequently occurs on the surfaces of solid materials, posing serious threats to food safety and human health. To mitigate the spread of pathogens and reduce the risk of antimicrobial resistance, there is an urgent need for nanostructured surface modification materials that offer high bactericidal efficiency without relying on conventional antimicrobial agents or antibiotics. In this study, we report a green and facile approach for fabricating antimicrobial nanoflower (PDA-Cu NFs) coatings on solid substrates, including polystyrene, glass, and stainless steel via one-step biomimetic mineralization. The resulting coatings exhibited uniform nanoflower morphology, strong substrate adhesion, and superhydrophilicity (contact angle = 0 degrees ). Under ultraviolet A (UV-A) irradiation, the PDA-Cu NFs coatings demonstrated excellent bactericidal efficacy against Listeria innocua and Escherichia coli, achieving more than 4 log CFU/cm(2) of reduction within 1 h of treatment. This enhanced antimicrobial performance is attributed to a triple-mode synergistic combination of photothermal effects, photoinduced reactive oxygen species generation, and the hierarchical nanoflower structure, which increases bacterial contact with copper ions and induces physical membrane disruption. Durability testing revealed that the coatings maintained their hydrophilic properties even after five cycles of mechanical abrasion with only partial structural damage observed. These findings present a robust and substrate-independent strategy for developing durable, superhydrophilic, and UV-activated antimicrobial coatings, offering significant potential for applications in healthcare, food processing, and environmental sanitation.},
+   keywords = {*Anti-Bacterial Agents/pharmacology/chemistry/chemical synthesis
+Listeria/drug effects
+Escherichia coli/drug effects
+Microbial Sensitivity Tests
+Copper/chemistry/pharmacology
+*Nanostructures/chemistry
+Surface Properties
+*Coated Materials, Biocompatible/pharmacology/chemistry/chemical synthesis
+Particle Size
+Materials Testing
+Ultraviolet Rays
+antimicrobial coatings
+nanoflowers
+photodynamic inactivation
+polydopamine
+superhydrophilic},
+   ISSN = {2576-6422 (Electronic)
+2576-6422 (Linking)},
+   DOI = {10.1021/acsabm.5c01018},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/40882040},
+   year = {2025},
+   type = {Journal Article}
+}
+
+@article{RN19,
+   author = {Mashau, F. and Dada, A. C. and Msolo, L. and Ebomah, K. E. and Ekundayo, T. C. and Iwu, C. D. and Nontongana, N. and Okoh, A. I.},
+   title = {Factors affecting detection and estimation of SARS-CoV-2 RNA concentration of COVID-19 positive cases in wastewater influent: A systematic review},
+   journal = {Public Health},
+   volume = {237},
+   pages = {167–175},
+   note = {Mashau, Funanani
+Dada, Ayokunle C
+Msolo, Luyanda
+Ebomah, Kingsley E
+Ekundayo, Temitope C
+Iwu, Chidozie D
+Nontongana, Nolonwabo
+Okoh, Anthony I
+eng
+Systematic Review
+Netherlands
+2024/10/18
+Public Health. 2024 Dec;237:167-175. doi: 10.1016/j.puhe.2024.10.004. Epub 2024 Oct 17.},
+   abstract = {BACKGROUND: Wastewater Based Surveillance (WBS) has emerged as a novel monitoring tool for tracking and estimating the dissemination of the Novel Coronavirus Disease 2019 (COVID-19) within communities. OBJECTIVE: The goal of this review is to assess the factors that influence estimations of SARS-CoV-2 RNA concentration estimations in wastewater. METHODS: A literature search was conducted using the Preferred Reporting Items for Systematic Reviews and Meta-Analysis for Scoping Reviews (PRISMA-ScR) criteria in the electronic databases Scopus, PubMed, Google Scholar, and Medline. The overall quality, sample methodologies, quantification methods, and estimating approaches of selected papers were assessed. RESULTS: Our findings reveal that 16 out of 24 articles (67 %) focused on physiochemical analyses. This review showed that sampling strategies and laboratory methodologies play a crucial role in the detection of SARS-CoV-2 RNA in wastewater samples. Moreover, we found that WBS-based estimation of COVID-19 is influenced by several factors such as wastewater temperature, shedding rate, and population size. CONCLUSION: This review reveals that the identified parameters require adjustments to achieve optimum conditions that accurately predict community infections. Including these factors that influence the estimation of SARS-CoV-2 RNA concentration in wastewater is essential for developing effective public health strategies to combat the spread of COVID-19.},
+   keywords = {*Wastewater/virology
+*COVID-19/epidemiology/diagnosis
+Humans
+*SARS-CoV-2
+*RNA, Viral/analysis
+Wastewater-Based Epidemiological Monitoring
+Covid-19
+Environment
+Public health
+SARS-CoV-2 RNA
+Surveillance
+Wastewater},
+   ISSN = {1476-5616 (Electronic)
+0033-3506 (Linking)},
+   DOI = {10.1016/j.puhe.2024.10.004},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/39418699},
+   year = {2024},
+   type = {Journal Article}
+}
+
+@article{RN3,
+   author = {Ng, S. and Shao, S. and Ling, N.},
+   title = {Food safety risk-assessment systems utilized by China, Australia/New Zealand, Canada, and the United States},
+   journal = {J Food Sci},
+   volume = {87},
+   number = {11},
+   pages = {4780–4795},
+   note = {Ng, Sieh
+Shao, Shuyan
+Ling, Nan
+eng
+BZ2019059/Jiangsu Province of International Scientific and Technological Cooperation/
+Review
+2022/10/27
+J Food Sci. 2022 Nov;87(11):4780-4795. doi: 10.1111/1750-3841.16334. Epub 2022 Oct 26.},
+   abstract = {Ensuring the chemical, physical, and microbial safety of food and ingredients underpins the international trade of food items and is integral to building consumer confidence. Achieving this requires effective systems to support the safety of food across the supply chain. Differing risk-assessment approaches are utilized globally for establishing food safety systems, and bench marking these approaches against international food safety standards can assist in the development of country-specific systems. This China-Australia collaborative review examined similarities and differences in the food safety risk-assessment systems of China, Australia/New Zealand, Canada, and the United States, with the view to identify areas that could support improvements to the Chinese system. Key differences include the level of cohesiveness among stakeholders and the level to which each country promotes the international harmonization of standards. The evidence highlights a need for greater capacity-building in risk assessment in China that may support greater stakeholders' cohesion, improve hazard identification, and allow regulators to more readily keep abreast of changes to international standards. This review may help the Chinese food industry to replicate the same level of food safety risk assessment currently applied by other key countries, and reflects the determination, government prioritization, and active strengthening of China's National Centre for Food Safety Risk Assessment currently underway.},
+   keywords = {United States
+*Hazard Analysis and Critical Control Points
+*Commerce
+New Zealand
+Internationality
+Food Safety
+China
+Risk Assessment
+Canada
+food fraud},
+   ISSN = {1750-3841 (Electronic)
+0022-1147 (Print)
+0022-1147 (Linking)},
+   DOI = {10.1111/1750-3841.16334},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/36285586},
+   year = {2022},
+   type = {Journal Article}
+}
+
+@article{RN6,
+   author = {Phiri, B. J. and French, N. P. and Biggs, P. J. and Stevenson, M. A. and Reynolds, A. D. and Garcia, R. Jc and Hayman, D. T. S.},
+   title = {Microbial contamination in drinking water at public outdoor recreation facilities in New Zealand},
+   journal = {J Appl Microbiol},
+   volume = {130},
+   number = {1},
+   pages = {302–312},
+   note = {Phiri, B J
+French, N P
+Biggs, P J
+Stevenson, M A
+Reynolds, A D
+Garcia-R, J C
+Hayman, D T S
+eng
+Allan Wilson Centre/
+Massey University/
+Ministry of Health/
+England
+2020/07/09
+J Appl Microbiol. 2021 Jan;130(1):302-312. doi: 10.1111/jam.14772. Epub 2020 Jul 24.},
+   abstract = {AIM: The aim of our study was to assess the presence and risk of waterborne pathogens in the drinking water of outdoor facilities in New Zealand and track potential sources of microbial contamination in water sources. METHODS AND RESULTS: A serial cross-sectional study with a risk-based sample collection strategy was conducted at 15 public campgrounds over two summer seasons (2011-2012 and 2012-2013). Drinking water supplied to these campgrounds was not compliant with national standards, based on Escherichia coli as an indicator organism, in more than half of the sampling occasions. Campylobacter contamination of drinking water at the campgrounds was likely to be of wild bird origin. Faecal samples from rails (pukeko and weka) were 35 times more likely to return a Campylobacter-positive result compared to passerines. Water treatment using ultraviolet (UV) irradiation or a combination of filtration and UV irradiation or chemicals was more likely to result in water that was compliant with the national standards than water from a tap without any treatment. The use of filters alone was not associated with the likelihood of compliance. CONCLUSIONS: Providing microbiologically safe drinking water at outdoor recreational facilities is imperative to avoid gastroenteritis outbreaks. This requires an in-depth understanding of potential sources of contamination in drinking water sources and the installation of adequate water treatment facilities. SIGNIFICANCE AND IMPACT OF THE STUDY: Our study provides evidence that drinking water without treatment or filter-only treatment in public campgrounds is unlikely to comply with national standards for human consumption and extra water treatment measures such as UV irradiation or chemical treatment are needed.},
+   keywords = {Animals
+Birds
+Campylobacter/isolation & purification
+Cross-Sectional Studies
+Drinking Water/*microbiology/standards
+Escherichia coli/isolation & purification
+Feces/microbiology
+Gastroenteritis/epidemiology/microbiology/prevention & control
+Humans
+New Zealand/epidemiology
+*Recreation
+Seasons
+Water Purification/methods
+Water Supply/standards/*statistics & numerical data
+Campylobacter
+E. coli
+campground
+drinking water
+indicators
+water quality},
+   ISSN = {1365-2672 (Electronic)
+1364-5072 (Linking)},
+   DOI = {10.1111/jam.14772},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/32639595},
+   year = {2021},
+   type = {Journal Article}
+}
+
+@article{RN1,
+   author = {Ramos, G. L. P. A. and Nascimento, J. S. and Margalho, L. P. and Duarte, M. C. K. H. and Esmerino, E. A. and Freitas, M. Q. and Cruz, A. G. and Sant'Ana, A. S.},
+   title = {Quantitative microbiological risk assessment in dairy products: Concepts and applications},
+   journal = {Trends in Food Science & Technology},
+   volume = {111},
+   pages = {610–616},
+   note = {Rn9xe
+Times Cited:20
+Cited References Count:31},
+   abstract = {Background: Quantitative microbiological risk assessment (QMRA) is the most complex stage of risk analysis, an important management tool that considers the entire food production chain. Through safety limits, health authorities and producers are concerned with achieving the minimum risk to consumer health. Dairy products are a class of foods very susceptible to microbial contamination, and need an extensive database of studies in this regard. Scope and approach: This review aims to provide an understanding of the structure of QMRA and its application in dairy products, taking into account the processing chains of dairy products and the influence of study factors in different regions. The limitations and factors of complexity in the construction of the QMRA models in milk and cheese pasteurized or not, are also presented. Key findings and conclusion: Considerable differences were found in consumption habits between populations in different regions, significantly affecting the risk associated with infection or disease. Transport and retail conditions of the products also show a strong influence on the final risk, as well as the hygiene conditions of the milk used as raw material. Studies of this type are scarce, especially in dairy products, requiring further development of QMRA models. Risk assessment is a promising tool for verifying the effectiveness of using new processing technologies, based on the search for the lowest possible risk associated with food.},
+   keywords = {food safety
+predictive microbiology
+microbial inactivation
+dairy processing
+raw-milk
+pasteurized milk
+consumption
+farm},
+   ISSN = {0924-2244},
+   DOI = {10.1016/j.tifs.2021.03.017},
+   url = {<Go to ISI>://WOS:000640705100010},
+   year = {2021},
+   type = {Journal Article}
+}
+
+@article{RN8,
+   author = {Seis, W. and Rouault, P. and Medema, G.},
+   title = {Addressing and reducing parameter uncertainty in quantitative microbial risk assessment by incorporating external information via Bayesian hierarchical modeling},
+   journal = {Water Res},
+   volume = {185},
+   pages = {116202},
+   note = {Seis, Wolfgang
+Rouault, Pascale
+Medema, Gertjan
+eng
+England
+2020/08/02
+Water Res. 2020 Oct 15;185:116202. doi: 10.1016/j.watres.2020.116202. Epub 2020 Jul 19.},
+   abstract = {Probabilistic quantitative microbial risk assessment (QMRA) studies define model inputs as random variables and use Monte-Carlo simulation to generate distributions of potential risk outcomes. If local information on important QMRA model inputs is missing, it is widely accepted to justify assumptions about these model inputs by using external literature information. A question, which remains unexplored, is the extent to which previously published external information should influence local estimates in cases of nonexistent, scarce, and moderate local data. This question can be addressed by employing Bayesian hierarchical modeling (BHM). Thus, we study the effects and potential benefits of BHM on risk and performance target calculations at three wastewater treatment plants (WWTP) in comparison to alternative statistical modeling approaches (separate modeling, no-pooling, complete pooling). The treated wastewater from the WWTPs is used for restricted irrigation, potable reuse, or influences recreational waters, respectively. We quantify the extent to which external data affects local risk estimations in each case depending on the statistical modeling approach applied. Modeling approaches are compared by calculating the pointwise expected log-predictive density for each model. As reference pathogens and example data, we use locally collected Norovirus genogroup II data with varying sample sizes (n = 4, n = 7, n = 27), and complement local information with external information from 44 other WWTPs (n = 307). Results indicate that BHM shows the highest predictive accuracy and improves estimates by reducing parameter uncertainty when data are scarce. In such situations, it may affect risk and performance target calculations by orders of magnitude in comparison to using local data alone. Furthermore, it allows making generalizable inferences about new WWTPs, while providing the necessary flexibility to adjust for different levels of information contained in the local data. Applying this flexible technique more widely may contribute to improving methods and the evidence base for decision-making in future QMRA studies.},
+   keywords = {Bayes Theorem
+*Norovirus
+Risk Assessment
+Uncertainty
+*Wastewater
+Bayesian hierarchical modeling
+Combining information
+Meta-analysis
+Norovirus
+Performance target
+Quantitative microbial risk assessment},
+   ISSN = {1879-2448 (Electronic)
+0043-1354 (Linking)},
+   DOI = {10.1016/j.watres.2020.116202},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/32738602},
+   year = {2020},
+   type = {Journal Article}
+}
+
+@article{RN17,
+   author = {Shanebeck, K. M. and Hernandez-Ortiz, A. and Jenkins, E. J. and Thomas, P. J. and Dixon, B. R. and Merks, H. and Lagrue, C.},
+   title = {Detection of Toxoplasma gondii (Types I, II, III and 12) and Sarcocystis spp. in the brains of river otter (Lontra canadensis) from Alberta, Canada},
+   journal = {Int J Parasitol Parasites Wildl},
+   volume = {27},
+   pages = {101069},
+   note = {Shanebeck, Kyle M
+Hernandez-Ortiz, Adrian
+Jenkins, Emily J
+Thomas, Philippe J
+Dixon, Brent R
+Merks, Harriet
+Lagrue, Clement
+eng
+England
+2025/04/25
+Int J Parasitol Parasites Wildl. 2025 Apr 3;27:101069. doi: 10.1016/j.ijppaw.2025.101069. eCollection 2025 Aug.},
+   abstract = {Toxoplasma gondii and Sarcocystis spp. are globally distributed coccidian parasites infecting endothermic vertebrates. Toxoplasma gondii is zoonotic, with widespread global prevalence in humans, domestic animals, and wildlife. Sarcocystis is a related and diverse genus, with species that use a range of definitive and intermediate hosts. In intermediate hosts, these tissue dwelling coccidians can be asymptomatic or cause disease through neural, hepatic, and transplacental infections. Semiaquatic mammals such as the North American river otter (Lontra canadensis) are at high risk of exposure to T. gondii and Sarcocystis spp. due to terrestrial runoff into freshwater environments. Their high trophic position and dual habitat use make them excellent sentinel species to monitor the presence of food and waterborne pathogens in ecosystems. Brain tissue was sampled from 89 river otters in Alberta, Canada. DNA of T. gondii was detected in 34 % of otters using magnetic capture sequence-specific DNA extraction and qPCR. Genotypes of T. gondii were identified using nested PCR and sequencing of the GRA6 and SAG2 genes, and included the most common clonal lineages in North America, Types I, II, and III, as well as Type-12 (X/A), which is highly pathogenic in sea otters. DNA of Sarcocystis spp. was detected in brain lysates of 30 % of otters via conventional PCR with primers targeting ITS1 and 18S ribosomal regions, and sequencing revealed S. lutrae and a species most closely related to, but distinct from, S. kitikmeotensis. This study suggests that river otters are exposed trophically to T. gondii shed by felids, and at least 2 species of Sarcocystis shed by unknown definitive hosts. Highly pathogenic S. neurona was not detected in this population, likely reflecting the absence of possum definitive hosts in northern Canada. The potential effects of T. gondii and Sarcocystis spp. on behaviour, health, and reproduction of river otters warrant further investigation.},
+   keywords = {Lontra canadensis
+Sarcocystis spp.
+Toxoplasma gondii
+Wildlife disease
+Zoonosis},
+   ISSN = {2213-2244 (Print)
+2213-2244 (Electronic)
+2213-2244 (Linking)},
+   DOI = {10.1016/j.ijppaw.2025.101069},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/40276325},
+   year = {2025},
+   type = {Journal Article}
+}
+
+@article{RN2,
+   author = {Tang, L. and Rhoads, W. J. and Eichelberg, A. and Hamilton, K. A. and Julian, T. R.},
+   title = {Applications of Quantitative Microbial Risk Assessment to Respiratory Pathogens and Implications for Uptake in Policy: A State-of-the-Science Review},
+   journal = {Environ Health Perspect},
+   volume = {132},
+   number = {5},
+   pages = {56001},
+   note = {Tang, Lizhan
+Rhoads, William J
+Eichelberg, Antonia
+Hamilton, Kerry A
+Julian, Timothy R
+eng
+Research Support, N.I.H., Extramural
+Research Support, Non-U.S. Gov't
+Review
+2024/05/10
+Environ Health Perspect. 2024 May;132(5):56001. doi: 10.1289/EHP12695. Epub 2024 May 10.},
+   abstract = {BACKGROUND: Respiratory tract infections are major contributors to the global disease burden. Quantitative microbial risk assessment (QMRA) holds potential as a rapidly deployable framework to understand respiratory pathogen transmission and inform policy on infection control. OBJECTIVES: The goal of this paper was to evaluate, motivate, and inform further development of the use of QMRA as a rapid tool to understand the transmission of respiratory pathogens and improve the evidence base for infection control policies. METHODS: We conducted a literature review to identify peer-reviewed studies of complete QMRA frameworks on aerosol inhalation or contact transmission of respiratory pathogens. From each of the identified studies, we extracted and summarized information on the applied exposure model approaches, dose-response models, and parameter values, including risk characterization. Finally, we reviewed linkages between model outcomes and policy. RESULTS: We identified 93 studies conducted in 16 different countries with complete QMRA frameworks for diverse respiratory pathogens, including SARS-CoV-2, Legionella spp., Staphylococcus aureus, influenza, and Bacillus anthracis. Six distinct exposure models were identified across diverse and complex transmission pathways. In 57 studies, exposure model frameworks were informed by their ability to model the efficacy of potential interventions. Among interventions, masking, ventilation, social distancing, and other environmental source controls were commonly assessed. Pathogen concentration, aerosol concentration, and partitioning coefficient were influential exposure parameters as identified by sensitivity analysis. Most (84%, n = 78) studies presented policy-relevant content including a) determining disease burden to call for policy intervention, b) determining risk-based threshold values for regulations, c) informing intervention and control strategies, and d) making recommendations and suggestions for QMRA application in policy. CONCLUSIONS: We identified needs to further the development of QMRA frameworks for respiratory pathogens that prioritize appropriate aerosol exposure modeling approaches, consider trade-offs between model validity and complexity, and incorporate research that strengthens confidence in QMRA results. https://doi.org/10.1289/EHP12695.},
+   keywords = {Risk Assessment/methods
+*Respiratory Tract Infections/epidemiology/microbiology
+Humans
+SARS-CoV-2
+COVID-19/transmission/prevention & control
+Staphylococcus aureus
+Infection Control/methods
+Legionella
+Aerosols},
+   ISSN = {1552-9924 (Electronic)
+0091-6765 (Print)
+0091-6765 (Linking)},
+   DOI = {10.1289/EHP12695},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/38728217},
+   year = {2024},
+   type = {Journal Article}
+}
+
+@article{RN16,
+   author = {Zackariah, G. S. K. and Tremblay, L. A. and Li, Z. and Palmer, B. and Liu, X. and An, S. and Zhu, R. and Wang, J. and Jacob, M. K. and Kebede, Y. and Andom, O. and Dilawar, A.},
+   title = {Antibiotics, antibiotic-resistant bacteria and genes in agri-foods: A global review of the consumption risks to human health},
+   journal = {Integr Environ Assess Manag},
+   note = {Zackariah, G S K
+Tremblay, Louis A
+Li, Zhaojun
+Palmer, Barry
+Liu, Xiayan
+An, Shuxian
+Zhu, Rognsheng
+Wang, Jiancai
+Jacob, Maneh Komlanvi
+Kebede, Yohannes
+Andom, Okbagaber
+Dilawar, Abbas
+eng
+England
+2025/07/01
+Integr Environ Assess Manag. 2025 Jun 28:vjaf084. doi: 10.1093/inteam/vjaf084.},
+   abstract = {Antibiotics have reduced disease burdens in humans and animals, but the development of resistant microbes in agricultural products poses a risk. The long-term impacts of antibiotics in agri-foods remain poorly understood, making it difficult to assess their risks to human and animal health. Current research suggests that most antibiotic contamination in the agri-food chain poses negligible risks, based on assessments of measured environmental concentrations (MECs), predicted environmental concentration (PEC)/Predicted No-Effect Concentration (PNEC) ratios (MEC/PNEC<0.1), toxic units (TU = MECs/EC50 <0.01), and summed risk quotients (STUs<0.3), but hotspots and unknowns need attention. To verify existing findings, we reviewed literature from Web of Science, Scopus, and ScienceDirect (n = 281,865), excluded duplicates (n = 272,085) and irrelevant studies (n = 9,516) based on predefined criteria (relevance, Impact Factor, citations), retaining 264 articles for analysis through a One Health approach. Although AMR critically disrupts gut microbiota and increases global health/economic burdens, long-term studies frequently overlook key foodborne pathogens: Salmonella spp., Escherichia coli, Staphylococcus aureus, Listeria monocytogenes, Campylobacter, and Vibrio parahaemolyticus. This review provides new perspectives on the integration of antimicrobial resistance (AMR) within a One Health Concept by: 1) summarizing current knowledge on the spread of antibiotic-resistant bacteria (ARB) and genes (ARGs) in agri-food systems and their health and environmental human impacts, and 2) identifying critical research gaps, particularly in understanding post-ingestion effects. A major finding of this review is that while there is documented transmission of antibiotic residues, ARBs, and ARGs to humans via the food-chain, their actual impacts on gut-acquired infections remain largely unknown. Given the accelerating pace of AMR, delaying targeted research within the One Health framework is no longer an option. Immediate, coordinated action across agriculture, policy, and science is critical to close these knowledge gaps, disrupt resistance pathways, and safeguard the health of humans, animals, and ecosystems before AMR escalates beyond control.},
+   keywords = {ARGs
+Antibiotic Residue
+Exposomics
+Gut Microbiota
+One Health Concept},
+   ISSN = {1551-3793 (Electronic)
+1551-3777 (Linking)},
+   DOI = {10.1093/inteam/vjaf084},
+   url = {https://www.ncbi.nlm.nih.gov/pubmed/40580470},
+   year = {2025},
+   type = {Journal Article}
+}
+

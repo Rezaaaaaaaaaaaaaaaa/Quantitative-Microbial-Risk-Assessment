@@ -1,0 +1,28 @@
+EXTRACTED CONTENT FROM SIP_EXAMPLE.DOCX
+==================================================
+
+HEADINGS:
+Heading 3: Work programme and timeline
+Heading 3: Chief Scientist support
+Heading 1: Example of E. coli Calibration for North Is North (Northland and Auckland)
+
+
+FULL CONTENT:
+
+[1] Normal: Structured internal project application 2024-2025
+
+[2] Normal: Project Overview
+
+[3] Heading 3: Work programme and timeline
+
+[4] Normal: Outline the tasks to be done, who will do what and by when. Be as specific as possible.
+
+[5] Heading 3: Chief Scientist support
+
+[6] Normal: For reference: NIWA Impact Strategy, also see Statement of Corporate Intent
+
+[7] Heading 1: Example of E. coli Calibration for North Is North (Northland and Auckland)
+
+[8] Normal: Our experience calibrating CLUES for Northland in 2020 (NRC20101) demonstrates why recalibration at a regional level is required.  We used a manual iterative method for the calibration using an Excel version of CLUES, which was a slow and laborious process.  The calibration tool developed for the CLUES SIFF speeds up the process.  The national calibration of CLUES from 2014 had very poor fit for TN (R2 -0.06, NSE -0.06, RMSE 0.79), TP (R2 -0.10, NSE -0.13, RMSE 0.94) and E coli (R2 -0.29, NSE -0.69, RMSE 1.61). The E. coli calibration resulted improved fit (R2 0.29, NSE 0.29, RMSE 1.04).  Using our new automatic calibration too, we were about to improve the fit for the north of the North Island (Northland and Auckland) considerably (R2 0.45, NSE 0.45, RMSE 0.65).
+
+[9] Normal: The TN Northland calibration found OVERSEER overestimated pastoral nitrogen loads leading to compensating errors in the model calibration.  This was resolved by removing both SPASMO and OVERSEER from the model and calibrating the pastoral and horticultural TN loads.  The regional calibration gave a good fit for the region  (R2 0.54, NSE 0.64, RMSE 0.38).  The TP Northland calibration for Northland (R2 0.36, NSE 0.36, RMSE 0.45) did not remove OVERSEER derived yields from the model.
