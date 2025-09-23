@@ -13,7 +13,9 @@
       "Bash(git push:*)",
       "Bash(rm:*)",
       "Bash(mkdir:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "WebFetch(domain:git.niwa.local)",
+      "Bash(git clone:*)"
     ],
     "deny": [],
     "ask": []
