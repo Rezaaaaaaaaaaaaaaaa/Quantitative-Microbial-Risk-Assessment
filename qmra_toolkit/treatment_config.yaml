@@ -1,0 +1,24 @@
+treatment_barriers:
+  - name: "Primary Settling"
+    type: "physical"
+    lrv: 0.5
+    variability: 0.2
+    description: "Physical settling tank removes particles"
+
+  - name: "Secondary Treatment"
+    type: "biological"
+    lrv: 2.0
+    variability: 0.5
+    description: "Activated sludge biological treatment"
+
+  - name: "UV Disinfection"
+    type: "uv_disinfection"
+    lrv: 3.5
+    variability: 0.3
+    description: "UV light disinfection system"
+
+  - name: "Chlorination"
+    type: "chlorination"
+    lrv: 1.5
+    variability: 0.4
+    description: "Chlorine contact tank disinfection"

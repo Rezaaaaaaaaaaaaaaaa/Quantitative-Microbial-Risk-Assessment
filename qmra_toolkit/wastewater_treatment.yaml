@@ -1,0 +1,18 @@
+treatment_barriers:
+  - name: "Primary Settling"
+    type: "physical"
+    lrv: 0.5
+    variability: 0.2
+    description: "Removes 68% of pathogens via settling"
+
+  - name: "Activated Sludge"
+    type: "biological"
+    lrv: 2.0
+    variability: 0.3
+    description: "Removes 99% of pathogens via biological treatment"
+
+  - name: "UV Disinfection"
+    type: "uv_disinfection"
+    lrv: 3.0
+    variability: 0.2
+    description: "Removes 99.9% of pathogens via UV light"

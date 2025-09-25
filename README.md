@@ -1,53 +1,93 @@
-# Quantitative Microbial Risk Assessment (QMRA) Project
+# Quantitative Microbial Risk Assessment Project
 
-This repository contains the NIWA Quantitative Microbial Risk Assessment project files and documentation.
+This repository contains the NIWA QMRA Assessment Toolkit and associated project documentation.
 
 ## Project Structure
 
 ```
-├── docs/                   # Documentation and proposal files
-│   ├── NIWA_QMRA_SIP_Final_with_Diagram.docx    # Final SIP proposal with diagrams
-│   ├── SIP_QMRA.docx                             # SIP QMRA documentation
-│   ├── QMRA_Research_Document_20250918.docx     # Research documentation
-│   ├── response_to_comments.md                   # Response to review comments
-│   ├── pdf/                                      # PDF versions
-│   └── NIWA QMRA Workflow Engine - Improved Project Application.pdf
-├── src/                    # Source code and scripts
-│   ├── Lit.py             # Literature analysis script
-│   └── generate_qmra_doc.py # Document generation script
-├── data/                   # Research data and references
-│   ├── QMRA.enl           # EndNote library
-│   ├── QMRA.txt           # Text data
-│   └── QMRA.Data/         # Database files
-└── README.md              # This file
+.
+├── qmra_toolkit/              # Main QMRA Assessment Toolkit
+│   ├── src/                   # Core toolkit modules
+│   ├── data/                  # Pathogen database and parameters
+│   ├── tests/                 # Comprehensive test suite
+│   ├── examples/              # Usage examples and demos
+│   ├── docs/                  # Technical documentation
+│   └── README.md              # Toolkit documentation
+├── project_documentation/     # Strategic Investment Proposal and reviews
+├── data/                      # Additional project data
+└── docs/                      # General project documentation
 ```
 
-## Description
+## Quick Start
 
-This project focuses on developing a Quantitative Microbial Risk Assessment (QMRA) workflow engine for NIWA. The project includes:
+1. **Navigate to the toolkit directory:**
+   ```bash
+   cd qmra_toolkit
+   ```
 
-- Strategic Investment Proposal (SIP) documentation
-- Research literature analysis
-- Technical implementation plans
-- Data management and reference materials
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Key Documents
+3. **Run a basic assessment:**
+   ```bash
+   python src/qmra_toolkit.py assess --pathogen norovirus --exposure-route primary_contact --concentration 10.0 --volume 50.0 --frequency 10 --population 10000 --report
+   ```
 
-- **NIWA_QMRA_SIP_Final_with_Diagram.docx**: Final version of the Strategic Investment Proposal
-- **response_to_comments.md**: Responses to stakeholder feedback and comments
-- **QMRA_Research_Document_20250918.docx**: Comprehensive research documentation
+4. **Explore examples:**
+   ```bash
+   cd examples
+   python pathogen_comparison.py
+   ```
 
-## Scripts
+## Documentation
 
-- **Lit.py**: Literature analysis and processing
-- **generate_qmra_doc.py**: Automated document generation
+- **[Toolkit README](qmra_toolkit/README.md)** - Complete toolkit documentation
+- **[User Guide](qmra_toolkit/docs/user_guide.md)** - Detailed usage instructions
+- **[Examples Documentation](qmra_toolkit/examples/README.md)** - Example scripts and demos
 
-## Getting Started
+## Project Background
 
-1. Review the documentation in the `docs/` folder
-2. Examine the research data in the `data/` folder
-3. Run scripts from the `src/` folder as needed
+This toolkit was developed as part of NIWA's Strategic Investment Programme to replace @Risk Excel functionality with automated, reproducible Python workflows for regulatory compliance QMRA assessments.
 
-## Contact
+**Key Objectives:**
+- ✅ Replace @Risk Excel dependency with native Python
+- ✅ Reduce project delivery time by 60-70%
+- ✅ Eliminate manual, error-prone processes
+- ✅ Integrate NIWA's dilution modeling expertise
+- ✅ Support regulatory compliance market expansion
 
-NIWA - National Institute of Water and Atmospheric Research
+**Development Team:**
+- **Reza Moghaddam** - Lead Developer (150 hours)
+- **David Wood** - Model Review & Support (40 hours)
+- **Andrew Hughes** - Project Manager
+
+## Key Features
+
+- 🦠 **Comprehensive Pathogen Database** - Validated dose-response models
+- 💧 **Multiple Exposure Routes** - Primary contact, shellfish consumption, drinking water
+- 🔬 **Dilution Modeling Integration** - NIWA's key differentiator with engineer-provided LRVs
+- 📊 **Monte Carlo Simulation** - Advanced uncertainty analysis replacing @Risk
+- 📋 **Automated Reporting** - Generate regulatory compliance reports in Word format
+- ⚡ **Command-Line Interface** - Easy-to-use CLI for common workflows
+
+## Benefits Over @Risk
+
+| Feature | @Risk | QMRA Toolkit |
+|---------|-------|--------------|
+| **Platform** | Excel-dependent | Native Python |
+| **Security** | Firewall conflicts | No external dependencies |
+| **Automation** | Manual processes | Fully automated |
+| **Reproducibility** | Limited | Complete version control |
+| **Cost** | Commercial license | Open source |
+| **Integration** | Limited | NIWA dilution modeling |
+
+## Support
+
+For technical support, feature requests, or bug reports, contact the NIWA QMRA team.
+
+---
+
+*Developed by NIWA Earth Sciences New Zealand*
+*Strategic Investment Programme 2025-2026*

@@ -1,0 +1,72 @@
+{
+  "norovirus": {
+    "name": "Norovirus",
+    "pathogen_type": "virus",
+    "dose_response_models": {
+      "beta_poisson": {
+        "alpha": 0.04,
+        "beta": 0.055,
+        "source": "Teunis et al. (2008)",
+        "notes": "Optimized model for human norovirus",
+        "r_squared": 0.85
+      },
+      "exponential": {
+        "r": 0.5,
+        "source": "Alternative simplified model",
+        "notes": "Conservative exponential approximation"
+      }
+    },
+    "illness_to_infection_ratio": 0.7,
+    "dalys_per_case": 0.002,
+    "exposure_routes": [
+      "primary_contact",
+      "shellfish_consumption",
+      "contaminated_water"
+    ],
+    "environmental_data": {
+      "survival_time_days": 60,
+      "inactivation_rate_per_day": 0.1,
+      "typical_concentrations": {
+        "raw_wastewater": 1e6,
+        "treated_wastewater": 1e3,
+        "recreational_water": 10,
+        "shellfish_tissue": 1e3
+      }
+    }
+  },
+  "campylobacter": {
+    "name": "Campylobacter jejuni",
+    "pathogen_type": "bacteria",
+    "dose_response_models": {
+      "beta_poisson": {
+        "alpha": 0.145,
+        "beta": 7.59,
+        "source": "Teunis et al. (2005)",
+        "notes": "Hypergeometric-based model"
+      }
+    },
+    "illness_to_infection_ratio": 0.3,
+    "dalys_per_case": 0.005,
+    "exposure_routes": [
+      "contaminated_water",
+      "food_consumption"
+    ]
+  },
+  "cryptosporidium": {
+    "name": "Cryptosporidium parvum",
+    "pathogen_type": "protozoa",
+    "dose_response_models": {
+      "exponential": {
+        "r": 0.0042,
+        "source": "Haas et al. (1996)",
+        "notes": "Based on human feeding studies"
+      }
+    },
+    "illness_to_infection_ratio": 1.0,
+    "dalys_per_case": 0.003,
+    "exposure_routes": [
+      "contaminated_water",
+      "recreational_water"
+    ]
+  }
+}

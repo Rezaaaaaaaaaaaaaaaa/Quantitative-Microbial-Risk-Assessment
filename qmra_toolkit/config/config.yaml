@@ -1,0 +1,40 @@
+# QMRA Toolkit Configuration
+
+# Regulatory Thresholds
+regulatory_thresholds:
+  acceptable_risk_per_year: 1e-6  # 1 in 1 million per year
+  recreational_water_risk: 1e-3   # 1 in 1000 per exposure
+  drinking_water_risk: 1e-4      # 1 in 10,000 per year
+
+# Monte Carlo Simulation Parameters
+simulation:
+  default_iterations: 10000
+  max_iterations: 100000
+  random_seed: 42
+
+# Default Exposure Scenarios
+exposure_scenarios:
+  primary_contact:
+    water_ingestion_volume: 50  # mL per swimming event
+    events_per_year: 10
+
+  shellfish_consumption:
+    shellfish_consumption: 150  # grams per serving
+    servings_per_year: 12
+
+# Report Settings
+reports:
+  default_template: "regulatory_compliance_template.docx"
+  output_format: "docx"
+  include_uncertainty_plots: true
+
+# Pathogen Database Settings
+pathogens:
+  norovirus:
+    enabled: true
+    default_model: "beta_poisson"
+
+# Log Reduction Values (LRV) Settings
+treatment:
+  default_log_reduction: 0  # No treatment assumed unless specified
+  max_log_reduction: 10     # Maximum realistic LRV
