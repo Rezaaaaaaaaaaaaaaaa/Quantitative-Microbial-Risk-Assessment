@@ -1,0 +1,1494 @@
+TY  - JOUR
+TI  - Risk assessment of a septic tank variant used for the blackwater treatment.
+AU  - Miyazaki, Caroline Kimie
+AU  - Tonetti, Adriano Luiz
+JO  - Environmental monitoring and assessment
+PY  - 2025
+VL  - 197
+IS  - 10
+SP  - 1141
+AB  - The reuse of wastewater in agriculture on a single-family scale presents a series of challenges regarding operation, maintenance, and sanitary safety. The present study therefore aimed to assess the potential microbiological risks to which users of a variant of septic tank (biodigester septic tank, BST) are exposed when using this system for treating blackwater (wastewater from toilets) and to propose control measures using the quantitative microbiological risk assessment (QMRA) methodology. This methodology entailed mapping the routes of exposure and calculating the probabilistic infection risk of E. coli. The results indicated that there is a microbiological health risk associated with the BST maintenance and usage. It was proposed that the fresh bovine feces addition for system maintenance should be stopped and that the reuse of the effluent for agricultural purposes should be reused via subsurface irrigation. It is therefore vital to exercise caution and implement a risk management strategy in order to ensure the safe dissemination of this technology in Brazil and Latin America.
+KW  - Risk Assessment
+KW  - Waste Disposal, Fluid
+KW  - Wastewater
+KW  - Water Microbiology
+KW  - Brazil
+KW  - Animals
+KW  - Escherichia coli
+KW  - Cattle
+DO  - 10.1007/s10661-025-14530-4
+DP  - PubMed
+AN  - 40987923
+ER  - 
+
+TY  - JOUR
+TI  - Physiologically Based Pharmacokinetic Modeling and Dose Optimization of Linezolid in Pediatric Patients With Renal Impairment.
+AU  - Lou, Jia-Qi
+AU  - Huo, Ben-Nian
+AU  - Yang, Ya
+AU  - Wang, Shu-Feng
+AU  - Zhang, Lu-Dan
+AU  - Jia, Yun-Tao
+AU  - Song, Lin
+JO  - Drug design, development and therapy
+PY  - 2025
+VL  - 19
+SP  - 8427-8440
+AB  - OBJECTIVE: Linezolid (LZD), a commonly used antimicrobial agent in clinical practice, has not undergone adequate pharmacokinetic (PK) assessment in pediatric populations with renal impairment (RI). Physiologically based pharmacokinetic (PBPK) modeling provides unique benefits for investigating drug pharmacokinetics in specific patient groups. This study aimed to employ the PBPK model to refine and optimize the therapeutic dosing protocol of LZD for RI pediatric patients. METHODS: The model was developed and validated for both healthy adults and RI adults, which was subsequently adapted for pediatric applications. Upon verification of the pediatric Based on clinical PK data and real-world study findings, the PBPK model demonstrated precise prediction of LZD exposure in pediatric populations with varying degrees of RI, encompassing weight- and age-associated PK variations. RESULTS: The PBPK modeling simulations exhibited robust agreement with observational data for LZD across both oral and intravenous delivery routes under diverse dosing protocols, as evidenced by the fold error (FE) always between 0.5 and 2 times, geometric mean fold error (GMFE) was less than 2.0 and mean absolute prediction error (MAPE) was within 100%. Pediatric populations with severe or end-stage RI exhibited 1.21-fold and 1.28-fold elevations in plasma concentration-time curve (AUC) values, respectively, relative to healthy pediatric counterparts when administered equivalent 10 mg/kg LZD doses. Pharmacodynamic analysis confirmed that the proposed dosing regimens-8 mg/kg every 8 hours for children with severe or end-stage RI -were effective in achieving the target AUC CONCLUSION: Our model provides a predictive instrument to enhance precision in determining therapeutic LZD dosage regimens for pediatric populations through systematic integration of developmental PK parameters.
+KW  - Humans
+KW  - Linezolid
+KW  - Child
+KW  - Models, Biological
+KW  - Renal Insufficiency
+KW  - Adolescent
+KW  - Anti-Bacterial Agents
+KW  - Male
+KW  - Dose-Response Relationship, Drug
+KW  - Child, Preschool
+KW  - Female
+KW  - Adult
+KW  - Administration, Oral
+KW  - Infant
+KW  - Microbial Sensitivity Tests
+DO  - 10.2147/DDDT.S525400
+DP  - PubMed
+AN  - 40985023
+ER  - 
+
+TY  - JOUR
+TI  - Prediction of reduction behavior by heating and strain variability of Campylobacter jejuni using amino acid phylogenetics from whole genome sequencing data.
+AU  - Abe, Hiroki
+AU  - Kawasaki, Susumu
+JO  - International journal of food microbiology
+PY  - 2025
+VL  - 444
+SP  - 111446
+AB  - Predicting bacterial behavior and strain variability is essential for quantitative microbial risk assessments in food safety. The growing availability of whole-genome sequencing (WGS) data enables deeper insights into microbial thermotolerance. However, capturing the reduction behavior of Campylobacter jejuni during thermal inactivation, while accounting for strain variability, remains challenging. We aimed to develop a machine-learning model leveraging amino acid phylogenetic information from WGS data to predict the reduction behavior and strain variability of C. jejuni during thermal inactivation. We developed a machine learning model utilizing 38 complete genomes of C. jejuni and their parameters of modified Weibull models describing the reduction behaviors heated at 55 °C. Correlation analyses identified genes that could be relevant to thermotolerance and highlighted genes potentially linked to thermotolerance. Leave-one-out cross-validation yielded a root mean square error of 0.83 log. Strain variability was further estimated using 679 genomes from genomic databases. Strain variability exhibited a multimodal distribution with one prominent peak and three minor peaks, indicating that traditional unimodal distributions could not fully represent the variability in C. jejuni thermal reduction. The machine-learning model effectively predicted reduction behavior and strain variability of C. jejuni during thermal inactivation using WGS data. Nonetheless, its prediction range is limited by the diversity of the training set, suggesting that broader genomic datasets could enhance accuracy. These findings provide a pathway for improved microbial risk assessments through genomic data integration.
+DO  - 10.1016/j.ijfoodmicro.2025.111446
+DP  - PubMed
+AN  - 40974773
+ER  - 
+
+TY  - JOUR
+TI  - Allicin Aplealleviates Gouty Arthritis by Regulating the Gut-Joint Axis, Reducing XOD Activity, Inhibiting Oxidative Stress, and Suppressing NLRP3 Inflammasome Activation.
+AU  - Wu, Hao
+AU  - Pang, Mi-Mi
+AU  - Li, Yao-Lei
+AU  - Hong, Jia-Hui
+AU  - Liu, Pan-Miao
+AU  - Bian, Meng
+AU  - Yang, Jian-Jun
+JO  - Drug design, development and therapy
+PY  - 2025
+VL  - 19
+SP  - 7887-7907
+AB  - BACKGROUND: Gouty arthritis (GA) is a common joint inflammation closely related to hyperuricemia and urate crystal deposition, and its incidence is on the rise worldwide. Allicin, the primary biologically active component found in freshly crushed garlic extracts, has been reported to possess many beneficial biological functions. METHODS: An animal model was used to evaluate the efficacy of allicin on GA rats, and 16S rRNA sequencing and metabolomics were used to explore changes in the gut microbiota and metabolites. Fecal microbiota transplantation (FMT) and fibroblast-like synoviocytes (FLS) used to explore the mechanism of allicin treating GA. RESULTS: The results showed that allicin effectively improved the general state of GA rats, inhibited XOD activity, and significantly reduced ROS production and activation of the NLRP3 inflammasome, thereby exerting therapeutic efficacy to protect the kidneys and joints. Examination of the gut microbiota showed that the composition of the gut microbiota of GA rats improved after allicin treatment (increase in  CONCLUSION: This study highlights allicin as a promising therapeutic candidate for GA, emphasizing its potential to inhibit oxidative stress and inflammatory responses by regulating the gut-joint axis.
+KW  - Animals
+KW  - Sulfinic Acids
+KW  - NLR Family, Pyrin Domain-Containing 3 Protein
+KW  - Oxidative Stress
+KW  - Inflammasomes
+KW  - Rats
+KW  - Gastrointestinal Microbiome
+KW  - Disulfides
+KW  - Arthritis, Gouty
+KW  - Male
+KW  - Rats, Sprague-Dawley
+KW  - Superoxide Dismutase
+KW  - Disease Models, Animal
+KW  - Dose-Response Relationship, Drug
+DO  - 10.2147/DDDT.S540116
+DP  - PubMed
+AN  - 40969847
+ER  - 
+
+TY  - JOUR
+TI  - Anti-aging potential of 
+AU  - Rungruang, Rittipun
+AU  - Panichakul, Tasanee
+AU  - Peasura, Napassorn
+AU  - Kongruang, Sasithorn
+JO  - Pharmaceutical biology
+PY  - 2025
+VL  - 63
+IS  - 1
+SP  - 683-697
+AB  - CONTEXT: Natural pigments derived from microbial sources are garnering increasing attention owing to their multifunctional roles in cosmetic and biomedical applications. OBJECTIVE: We investigated the antioxidant and biological activities of biocolor extracts of  MATERIALS AND METHODS:  RESULTS: Notably, MPTR extract demonstrated superior pigment production compared with conventional potato dextrose broth cultured fungi. MPTR extract exhibited potent antioxidant properties and was non-cytotoxic to human skin fibroblasts at concentrations up to 0.5 mg/mL. MPTR extract effectively inhibited collagenase and elastase enzymes, and induced cellular collagen type I and elastin production. Moreover, MPTR extract promoted wound healing, significantly reducing the wound area by up to 90% within 48 h. DISCUSSION AND CONCLUSION: MPTR extract from 
+KW  - Monascus
+KW  - Humans
+KW  - Antioxidants
+KW  - Pigments, Biological
+KW  - Fibroblasts
+KW  - Skin Aging
+KW  - Cell Survival
+KW  - Skin Care
+KW  - Wound Healing
+KW  - Fermentation
+KW  - Oryza
+KW  - Cells, Cultured
+KW  - Elastin
+KW  - Skin
+KW  - Collagenases
+KW  - Dose-Response Relationship, Drug
+DO  - 10.1080/13880209.2025.2557983
+DP  - PubMed
+AN  - 40964924
+ER  - 
+
+TY  - JOUR
+TI  - Exposure assessment model of Campylobacter concentration in United States broiler processing plants.
+AU  - Rivera, Rafael E
+AU  - Wang, Jinquan
+AU  - Mishra, Abhinav
+AU  - Thippareddi, Harshavardhan
+AU  - Kumar, Sanjay
+AU  - Singh, Manpreet
+JO  - Poultry science
+PY  - 2025
+VL  - 104
+IS  - 11
+SP  - 105758
+AB  - Poultry processing establishments play a critical role in mitigating Campylobacter contamination; a leading bacterial pathogen linked to poultry associated gastrointestinal illnesses in the United States. Quantitative microbial risk assessments (QMRA), suggest that reducing Campylobacter loads during processing can significantly mitigate public health risks. However, existing QMRAs often exclude contamination levels from cut-up parts and comminuted poultry products in their exposure assessments. To address this gap, a systematic review and meta-analysis were performed to estimate Campylobacter concentrations on whole birds, cut-up parts, and comminuted products, with and without interventions. Initial contamination levels derived from literature averaged 4.81 log
+DO  - 10.1016/j.psj.2025.105758
+DP  - PubMed
+AN  - 40961772
+ER  - 
+
+TY  - JOUR
+TI  - Thresholds and Key Environmental Drivers of Agricultural Film-Derived Microplastic Effects on Soil CO
+AU  - Qi, Ruimin
+AU  - Zhu, Heyi
+AU  - Jones, Davey L
+AU  - Yan, Changrong
+AU  - Chi, Yihan
+AU  - Tang, Yuanyuan
+JO  - Environmental science & technology
+PY  - 2025
+AB  - Microplastics are emerging pollutants that can disrupt soil structure and key biogeochemical processes, such as carbon and nitrogen cycling. However, critical gaps remain in identifying contamination thresholds and understanding how different microplastics affect CO
+DO  - 10.1021/acs.est.5c03685
+DP  - PubMed
+AN  - 40960156
+ER  - 
+
+TY  - JOUR
+TI  - Discovery and characterization of novel hematopoietic prostaglandin D synthase inhibitors from traditional Chinese medicine: the bioactive potential of dihydroberberine in treatments of Duchenne muscular dystrophy and inflammation-related diseases.
+AU  - Li, Cheng-Han
+AU  - Tung, Min-Che
+AU  - Tsai, Cheng-Kuan
+AU  - Ju, Tz-Chuen
+AU  - Tseng, Tien-Sheng
+JO  - Journal of enzyme inhibition and medicinal chemistry
+PY  - 2025
+VL  - 40
+IS  - 1
+SP  - 2555624
+AB  - Inflammation plays a central role in various diseases, necessitating effective anti-inflammatory agents. Prostaglandin D2 (PGD2), a key mediator synthesised by haematopoietic prostaglandin D synthase (H-PGDS), is linked to allergic and inflammatory conditions. This study employed pharmacophore-based screening to identify inhibitors targeting H-PGDS. The model 
+KW  - Humans
+KW  - Structure-Activity Relationship
+KW  - Intramolecular Oxidoreductases
+KW  - Inflammation
+KW  - Drug Discovery
+KW  - Muscular Dystrophy, Duchenne
+KW  - Molecular Structure
+KW  - Enzyme Inhibitors
+KW  - Lipocalins
+KW  - Medicine, Chinese Traditional
+KW  - Berberine
+KW  - Dose-Response Relationship, Drug
+KW  - Molecular Dynamics Simulation
+DO  - 10.1080/14756366.2025.2555624
+DP  - PubMed
+AN  - 40960081
+ER  - 
+
+TY  - JOUR
+TI  - Towards the integration of antibiotic resistance gene mobility into environmental surveillance and risk assessment.
+AU  - Klümper, Uli
+AU  - Fang, Peiju
+AU  - Li, Bing
+AU  - Xia, Yu
+AU  - Frigon, Dominic
+AU  - Hamilton, Kerry A
+AU  - Quon, Hunter
+AU  - Berendonk, Thomas U
+AU  - de la Cruz Barron, Magali
+JO  - npj antimicrobials and resistance
+PY  - 2025
+VL  - 3
+IS  - 1
+SP  - 81
+AB  - Antibiotic resistance gene (ARG) mobility plays a crucial role in the spread of antimicrobial resistance across One Health settings. Current environmental surveillance often overlooks the significance of ARG mobility, limiting risk assessment accuracy. This perspective highlights that with recent methodological advances in detecting ARG mobility, relevant databases, and improved quantitative microbial risk assessment frameworks, the time to integrate ARG mobility into environmental antimicrobial resistance (AMR) surveillance and risk assessment is now.
+DO  - 10.1038/s44259-025-00154-8
+DP  - PubMed
+AN  - 40957922
+ER  - 
+
+TY  - JOUR
+TI  - Fecal ingestion rate based on worker activity patterns during stool handling in a ruminant farm.
+AU  - Paramitadevi, Yudith V
+AU  - Priadi, Cindy R
+AU  - Rahmatika, Iftita
+AU  - Rukmana, Andriansjah
+JO  - Narra J
+PY  - 2025
+VL  - 5
+IS  - 2
+SP  - e1989
+AB  - Farm workers who handle livestock stools face an increased risk of infection by pathogenic bacteria, such as 
+KW  - Feces
+KW  - Animals
+KW  - Humans
+KW  - Indonesia
+KW  - Farmers
+KW  - Cattle
+KW  - Farms
+KW  - Escherichia coli O157
+KW  - Ruminants
+KW  - Occupational Exposure
+KW  - Salmonella
+DO  - 10.52225/narra.v5i2.1989
+DP  - PubMed
+AN  - 40951502
+ER  - 
+
+TY  - JOUR
+TI  - Dose-response of floc sludge-based partial nitritation-anammox system to multiple antibiotics: Microbial community and metabolic network variations.
+AU  - Tian, Yajie
+AU  - Li, Jianzheng
+AU  - Fan, Yiyang
+AU  - Meng, Jia
+AU  - Li, Jiuling
+JO  - Bioresource technology
+PY  - 2025
+VL  - 439
+SP  - 133322
+AB  - The mechanisms by which antibiotics affect floc sludge-based partial nitritation-anammox (PN/A) systems remain unclear. This study investigated the dose-response relationships and microbial adaptation mechanisms of the PN/A system under antibiotic exposure. Results demonstrated that the core nitrogen removal pathway of the PN/A system persisted, despite antibiotic-induced metabolic deceleration and biomass reduction. The floc sludge-based system exhibited resilience by recovering from low-dose antibiotic stress (10-100 μg/L) and even achieving enhanced nitrogen removal under high-dose exposure (200-1000 μg/L). This resilience was supported by three microbial strategies: (i) adaptive evolution dominated by Proteobacteria; (ii) enhanced interaction networks, as indicated by greater network complexity, calcium signaling pathway, two-component systems, and cell motility; and (iii) strengthened secretion systems for self-protection through elevated ABC transporters and biofilm formation. This study deciphers adaptive mechanisms of floc sludge-based PN/A systems to antibiotics and provides a scientific basis for their application in environments with fluctuating antibiotic stress.
+DO  - 10.1016/j.biortech.2025.133322
+DP  - PubMed
+AN  - 40945802
+ER  - 
+
+TY  - JOUR
+TI  - Effects of Two Compound Probiotic Formulations on Gastrointestinal Symptoms and Gut Microbiota: A 4-Week Randomized, Double-Blind Intervention Trial.
+AU  - Qu, Zhen
+AU  - Wu, Ying
+AU  - Jiang, Yiru
+AU  - Fan, Jiajia
+AU  - Cao, Li
+AU  - Dong, Yao
+AU  - Fang, Shuguang
+AU  - Gu, Shaobin
+JO  - Nutrients
+PY  - 2025
+VL  - 17
+IS  - 17
+KW  - Humans
+KW  - Gastrointestinal Microbiome
+KW  - Probiotics
+KW  - Double-Blind Method
+KW  - Male
+KW  - Female
+KW  - Adult
+KW  - Middle Aged
+KW  - Feces
+KW  - Leukocyte L1 Antigen Complex
+KW  - Gastrointestinal Diseases
+KW  - Immunoglobulin A
+KW  - Biomarkers
+KW  - RNA, Ribosomal, 16S
+KW  - Lipopolysaccharides
+KW  - Treatment Outcome
+DO  - 10.3390/nu17172886
+DP  - PubMed
+AN  - 40944274
+ER  - 
+
+TY  - JOUR
+TI  - Novel tricycle expanded purine nucleosides with pan-viral activity.
+AU  - Martin-Ghoteimi, Céline
+AU  - Davis, Kyle A
+AU  - Ghoteimi, Rayane
+AU  - Amare, Meareg
+AU  - Diefenbacher, Meghan V
+AU  - Kutz, Christianna
+AU  - Smith, Jessica L
+AU  - Stevens, Laura J
+AU  - Tchesnokov, Egor
+AU  - Walker, Simon M
+AU  - Denison, Mark
+AU  - Götte, Matthias
+AU  - Halfmann, Peter
+AU  - Hirsch, Alec J
+AU  - Sheahan, Timothy P
+AU  - Seley-Radtke, Katherine L
+JO  - Bioorganic & medicinal chemistry
+PY  - 2025
+VL  - 130
+SP  - 118384
+AB  - A series of thiophene-expanded tricyclic nucleosides featuring modifications not previously investigated, including sugar and nucleobase modifications, were synthesized as potential antiviral therapeutics. In addition, their corresponding prodrugs were also pursued to probe their potential antiviral activity, as typically prodrugs increase solubility and delivery. Initial interest was focused on ribose analogues as we had previously only synthesized a few compounds, and none had been tested against new viruses, particularly those of pandemic concern. In that regard, CEM-007, showed promising antiviral activity against several viral families. Given this promising lead, the 2'-α-fluoro-2'-β-methyl-modified analogues of CEM-007 were also synthesized for comparison. While 2'-modified analogue CEM-024 showed little to no antiviral activity, several of its prodrugs including CEM-042, CEM-052, CEM-053, CEM-054 and CEM-055, exhibited potent, broad-spectrum antiviral activity across several viral families including flaviviruses, filoviruses, and coronaviruses, with EC
+KW  - Antiviral Agents
+KW  - Purine Nucleosides
+KW  - Structure-Activity Relationship
+KW  - Humans
+KW  - Microbial Sensitivity Tests
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+KW  - Animals
+KW  - Prodrugs
+KW  - Viruses
+DO  - 10.1016/j.bmc.2025.118384
+DP  - PubMed
+AN  - 40939252
+ER  - 
+
+TY  - JOUR
+TI  - Quantitative microbial risk assessment of drug-resistant tuberculosis exposure from wastewater systems across Sub-Saharan Africa.
+AU  - Mtetwa, Hlengiwe N
+AU  - Amoah, Isaac D
+AU  - Kumari, Sheena
+AU  - Bux, Faizal
+AU  - Reddy, Poovendhree
+JO  - The Science of the total environment
+PY  - 2025
+VL  - 1000
+SP  - 180408
+AB  - Tuberculosis (TB), especially in its drug-resistant form, remains a critical public health challenge in sub-Saharan Africa, where conventional airborne transmission has been well-characterized. However, wastewater systems prevalent across urban centres may serve as overlooked environmental reservoirs for Mycobacterium tuberculosis, posing occupational and environmental health risks. Despite this, the health implications of wastewater exposure remain underexplored, particularly in high TB-burden settings. To address this research gap, we applied the Quantitative Microbial Risk Assessment (QMRA) framework, incorporating Disability-Adjusted Life Years (DALYs), to assess the health risks of exposure to drug-resistant TB pathogens in wastewater. Our study uniquely focuses on three exposure scenarios: untreated wastewater at the head of works, aerosols from aeration tanks, and reuse of treated wastewater for irrigation, across six African countries: Ghana, Nigeria, Kenya, Uganda, Cameroon, and South Africa. The study found the highest concentrations of M. tuberculosis in Ghana, with rifampicin-resistant strains present at lower levels across all countries. Infection risks ranged from 3 % to 100 %, with irrigation posing the highest median infection risk (0.77). The greatest disease burdens were observed at the head of works (112.46 DALYs) and during irrigation (105.31 DALYs). Our findings highlight wastewater as a significant and previously underestimated route for TB transmission. This study underscores the urgent need for enhanced treatment technologies, occupational safety protocols, and environmental surveillance. Integrating wastewater-based epidemiology into national TB monitoring could provide a valuable early-warning system, especially in regions reusing wastewater for agriculture, and may significantly strengthen global TB control strategies.
+DO  - 10.1016/j.scitotenv.2025.180408
+DP  - PubMed
+AN  - 40934595
+ER  - 
+
+TY  - JOUR
+TI  - Therapeutic Efficacy and Drug Metabolism of Griseorhodin A Induced by a Co-culture of Actinomycete Strain TMPU-20A002 and Mycobacterium smegmatis in Silkworm Infection Models.
+AU  - Yagi, Akiho
+AU  - Sasaki, Reo
+AU  - Uchida, Ryuji
+JO  - Chemical & pharmaceutical bulletin
+PY  - 2025
+VL  - 73
+IS  - 9
+SP  - 828-830
+AB  - In screening for antibacterial agents from co-cultures of Mycobacterium smegmatis and microbial resources, such as actinomycetes and fungi, the known hydroxyquinone antibiotic griseorhodin A (1) was isolated from a co-culture of actinomycete strain TMPU-20A002 and M. smegmatis. Compound 1 exhibited antibacterial activity against methicillin-resistant Staphylococcus aureus (MRSA) and vancomycin-resistant Enterococcus faecalis (VRE), with minimum inhibitory concentrations of 0.25 and 2.0 μg/mL, respectively. In silkworm infection models with MRSA and VRE, 1 exhibited therapeutic efficacy, with ED
+KW  - Animals
+KW  - Anti-Bacterial Agents
+KW  - Bombyx
+KW  - Microbial Sensitivity Tests
+KW  - Methicillin-Resistant Staphylococcus aureus
+KW  - Mycobacterium smegmatis
+KW  - Enterococcus faecalis
+KW  - Actinobacteria
+KW  - Coculture Techniques
+KW  - Disease Models, Animal
+KW  - Dose-Response Relationship, Drug
+KW  - Molecular Structure
+DO  - 10.1248/cpb.c25-00389
+DP  - PubMed
+AN  - 40930816
+ER  - 
+
+TY  - JOUR
+TI  - Quantitative Analysis of Haemodynamic Influences on Cerebral Circulation in Hybrid Thoracic Endovascular Aortic Repair: A Prospective Study.
+AU  - Goto, Takasumi
+AU  - Shimamura, Kazuo
+AU  - Watanabe, Yoshiki
+AU  - Tanaka, Hisashi
+AU  - Sakaniwa, Ryoto
+AU  - Miyagawa, Shigeru
+JO  - European journal of vascular and endovascular surgery : the official journal of the European Society for Vascular Surgery
+PY  - 2025
+AB  - OBJECTIVE: This study aimed to use quantitative magnetic resonance angiography (qMRA) to investigate the haemodynamic influences on cerebral circulation after hybrid thoracic endovascular aortic repair (TEVAR). METHODS: Between January 2016 and October 2019, zone 1 and 2 TEVAR with supra-arch rerouting procedure in extra-anatomical fashion was performed in 24 patients (mean age 72.9 ± 11.7 years) and hybrid total arch replacement (TAR) was performed in eight patients (mean age 72.0 ± 8.5 years), all of whom underwent qMRA before and after the procedure. Degenerative and dissected aneurysms were observed in 23 and nine cases, respectively. Blood flow in the internal carotid artery (ICA) and vertebral artery (VA) was measured using qMRA. The anterior and posterior cerebral circulation flows were defined as the sum of bilateral ICA and VA flows, respectively. Total intracranial blood flow (TICF) was defined as the sum of anterior and posterior cerebral circulation flows. The pre- and post-operative values of these parameters were compared for each procedure. RESULTS: Zone 1 and 2 TEVAR caused no significant post-operative differences in TICF or anterior and posterior cerebral circulation. The right VA flow increased statistically significantly after zone 1 and 2 TEVAR (median [interquartile range] 68.0 mL/min [36.8, 95.5] vs. 110.5 mL/min [76.0, 159.5] mL/min; p < .001), whereas the left VA flow decreased statistically significantly (median [interquartile range] 92.0 mL/min [60.3, 107.0] vs. 39.0 mL/min [19.3, 81.0]; p < .001). The post-operative ICA flow was maintained at the pre-operative level after all procedures. The hybrid TAR group showed no significant post-operative differences in TICF or anterior and posterior cerebral circulation. The post-operative distribution of each branch flow was also not significantly different from the pre-operative distribution. CONCLUSION: Although VA flow showed a disproportionate distribution in the posterior circulation after zone 1 and 2 TEVAR, TICF remained comparable with the pre-operative level after both zone 1 and 2 TEVAR and TAR.
+DO  - 10.1016/j.ejvs.2025.08.064
+DP  - PubMed
+AN  - 40930392
+ER  - 
+
+TY  - JOUR
+TI  - Antifungal profile of menadione tethered to 1H-1,2,3-triazolyl-selenoester: synthesis, in vitro and in silico analyses.
+AU  - Martins, Nathália R C
+AU  - Ribeiro, Ruan C B
+AU  - Desmarais, Mariana O L
+AU  - Lourenço, André Luiz
+AU  - da Silva, Aldo R
+AU  - Almeida, Thaís D C
+AU  - Gonçalves, Sarah Christina G
+AU  - Ratcliffe, Norman A
+AU  - Andrade, Isadora M G
+AU  - Marins, Laís M
+AU  - Valle, Sandy P
+AU  - Forezi, Luana da S M
+AU  - Ferreira, Vitor F
+AU  - Nascimento, Vanessa
+AU  - Castro, Helena Carla
+AU  - da Silva, Fernando de C
+JO  - Bioorganic & medicinal chemistry
+PY  - 2025
+VL  - 130
+SP  - 118380
+AB  - Invasive Candidiasis infections are a clinical challenge, with limited effective therapeutic agents and increasing resistance. The discovery of new antifungal agents is urgently required. Here, we developed a new series of 2-methyl-1,4-naphthoquinone (Menadione) Tethered to 1H-1,2,3-triazolyl-selenoester in good yields, which exhibit antifungal potential activity against Candida species. Antifungal and antibiofilm activities for the twenty-one compounds were performed in vitro against Candida spp and exhibited inhibitory effects at different concentrations for several Candida species. Two compounds showed strong inhibitory effects, with fungicidal activity at 16 and 32 μg/mL, respectively, against planktonic cells and biofilms of Candida glabrata. In silico studies were conducted to determine the binding energies against BonFIRE spectral images of antifungal protein targets, and provided stereo electronic, pharmacokinetic and toxicological profiles. The analysis through molecular docking with CYP51 and Hsp90 highlighted the inhibitory potential of the compounds in comparison to itraconazole and radicicol, and further underscored the favorable pharmacokinetic profile for all molecules, characterized by a low toxicity profile. We therefore concluded that two compounds especially exhibited potent antifungal activity against C. glabrata.
+KW  - Antifungal Agents
+KW  - Microbial Sensitivity Tests
+KW  - Vitamin K 3
+KW  - Structure-Activity Relationship
+KW  - Molecular Docking Simulation
+KW  - Triazoles
+KW  - Candida
+KW  - Molecular Structure
+KW  - Organoselenium Compounds
+KW  - Biofilms
+KW  - Dose-Response Relationship, Drug
+KW  - Humans
+KW  - Esters
+DO  - 10.1016/j.bmc.2025.118380
+DP  - PubMed
+AN  - 40929783
+ER  - 
+
+TY  - JOUR
+TI  - Anticancer, Antioxidant and Antimicrobial Activity of 
+AU  - Doğan, Serap
+AU  - Meşe, Ahmet
+AU  - Baran, Mehmet Fırat
+AU  - Baran, Ayse
+AU  - Aktepe, Necmettin
+AU  - Ahmadian, Elham
+AU  - Mohamed, Ali Jimale
+AU  - Eftekhari, Aziz
+AU  - Aktaş, Hüsnü
+JO  - Drug design, development and therapy
+PY  - 2025
+VL  - 19
+SP  - 7719-7734
+AB  - OBJECTIVE: This study was conducted to determine and compare the antioxidant, cytotoxic, and antimicrobial effects of spindle leaves of  METHODS: Total phenolic content was measured using the Folin-Ciocalteu method, phenolic compound analysis by liquid chromatography-electrospray ionization-tandem mass spectrometry (LC-ESI-MS/MS) and antimicrobial effect by the minimum inhibition concentration (MIC) method. The free radical scavenging activity was determined by t RESULTS: High amounts of gallic acid, protocatechuic acid, and o-coumaric acid were identified as phenolic compounds.  CONCLUSION: Our study will contribute greatly to the search for anticancer and antimicrobial agents, especially from a pharmacological perspective, by examining biological activity using three different methods.
+KW  - Humans
+KW  - Plant Extracts
+KW  - Plant Leaves
+KW  - Antioxidants
+KW  - Microbial Sensitivity Tests
+KW  - Antineoplastic Agents, Phytogenic
+KW  - Elaeagnaceae
+KW  - Drug Screening Assays, Antitumor
+KW  - Anti-Infective Agents
+KW  - Dose-Response Relationship, Drug
+KW  - Anti-Bacterial Agents
+KW  - Cell Proliferation
+KW  - Candida albicans
+KW  - Cell Survival
+KW  - Cell Line, Tumor
+KW  - Antifungal Agents
+KW  - Structure-Activity Relationship
+KW  - Biphenyl Compounds
+DO  - 10.2147/DDDT.S509705
+DP  - PubMed
+AN  - 40923006
+ER  - 
+
+TY  - JOUR
+TI  - Design, Synthesis, Biological Evaluation, and In Silico Studies of New Nitazoxanide Derivatives: Toward Broad-Spectrum Antimicrobial Agents.
+AU  - Saleh, Mahmoud
+AU  - Thabet, Momen M
+AU  - Kumari, Jyothi
+AU  - Mostafa, Yaser A
+AU  - Sriram, Dharmarajan
+AU  - Suganuma, Keisuke
+AU  - Kandeel, Mahmoud
+AU  - Abdu-Allah, Hajjaj H M
+JO  - Archiv der Pharmazie
+PY  - 2025
+VL  - 358
+IS  - 9
+SP  - e70091
+AB  - Nitazoxanide (NTZ), an FDA-approved drug, served as the framework for synthesizing 22 new broad-spectrum antimicrobial agents from 4-aminosalicylic acid via protection-deprotection, Staudinger reduction, Clauson-Kaas pyrrole synthesis, and nucleophilic substitution. These compounds were evaluated for antibacterial, antimycobacterial, and antitrypanosomal activities. Several compounds, particularly 10, 11, 13, and 22, surpassed the antibacterial activity of NTZ and its active metabolite tizoxanide (TIZ) against all tested pathogens, with MICs ranging from 1.025 to 9.81 μM. Compounds 10 and 13 were twice as potent as ciprofloxacin against Klebsiella pneumoniae, while 11 and 17 were equipotent against Pseudomonas aeruginosa (MIC 5.34 μM). Compounds 11 and 14 matched ciprofloxacin against Staphylococcus aureus (MIC 3.20 and 2.98 µM), whereas 13 and 21 were 1.5- and 2.5-fold more potent against Enterococcus faecalis, respectively. Compound 10 outperformed ciprofloxacin against Helicobacter pylori (MIC 1.025 μM). Compounds 6 (MIC 9.46 μM) and 7 (MIC 16.78 μM) outperformed NTZ against Mycobacterium tuberculosis, and compound 3 emerged as a promising antitrypanosomal agent (MICs 2.59-4.73 μg/mL) against six Trypanosoma species. Cytotoxicity and pharmacokinetic studies confirmed the compounds' favorable drug-like properties and high selectivity. Docking results showed strong binding to key targets like pyruvate ferredoxin oxidoreductase (PFOR), glucosamine-6-phosphate synthase (G6PS), dihydrofolate reductase (DHFR), and ornithine decarboxylase (ODC). Overall, several NTZ derivatives, particularly compounds 3, 6, 10, 11, 13, and 22, showed potent broad-spectrum antimicrobial activity and offer convenient leads for further optimization.
+KW  - Microbial Sensitivity Tests
+KW  - Structure-Activity Relationship
+KW  - Drug Design
+KW  - Anti-Bacterial Agents
+KW  - Thiazoles
+KW  - Molecular Structure
+KW  - Nitro Compounds
+KW  - Animals
+KW  - Humans
+KW  - Dose-Response Relationship, Drug
+KW  - Molecular Docking Simulation
+KW  - Computer Simulation
+KW  - Gram-Positive Bacteria
+DO  - 10.1002/ardp.70091
+DP  - PubMed
+AN  - 40922403
+ER  - 
+
+TY  - JOUR
+TI  - Tackling microbial resistance with 4H-chromen-4-one derivatives as a novel class of penicillin binding protein 2a inhibitors.
+AU  - Shalaby, Menna-Allah W
+AU  - Abutaleb, Nader S
+AU  - Dokla, Eman M E
+AU  - Elgammal, Yehia
+AU  - Liang, Hsin-Wen
+AU  - Serya, Rabah A T
+AU  - Abdallah, Inas A
+AU  - Fishovitz, Jennifer
+AU  - Seleem, Mohamed N
+AU  - Abouzid, Khaled A M
+JO  - Bioorganic & medicinal chemistry
+PY  - 2025
+VL  - 130
+SP  - 118376
+AB  - With the continued upsurge of antibiotic resistance and reduced susceptibility to almost all frontline antibiotics, there is a pressing need for the development of new, effective, and safe alternatives. In this study, a scaffold-hopping strategy was utilized to develop a novel class of penicillin-binding protein 2a (PBP2a) inhibitors, centered around a 4H-chromen-4-one core structure. These newly designed compounds demonstrated strong antibacterial efficacy against methicillin-resistant Staphylococcus aureus (MRSA) and other drug-resistant gram-positive pathogens. Notably, compounds 16 and 18-20 exhibited significant potency against the tested Staphylococcal strains, with minimum inhibitory concentrations (MICs) ranging from 0.008 to 1 μg/mL, outperforming standard treatments such as vancomycin and linezolid, as well as the reference compound III. These derivatives also retained their activity against a range of clinically relevant multidrug-resistant gram-positive bacteria and showed no detectable cytotoxicity in human cell assays. Additionally, compounds 19 and 20 displayed synergistic effects when co-administered with β-lactam antibiotics against two MRSA strains. Finally, these derivatives exhibited excellent binding affinities to the allosteric site of PBP2a, with dissociation constants ranging from 13 to 23 μM, indicating that this novel class inhibits PBP2a as the primary target by binding non-covalently to its allosteric site, hence impairing cell-wall crosslinking, and resulting in cell death. Accordingly, the reported 4H-chromen-4-one-based class of inhibitors merit further investigation as potential therapeutic options for treatment of staphylococcal infections.
+KW  - Anti-Bacterial Agents
+KW  - Microbial Sensitivity Tests
+KW  - Penicillin-Binding Proteins
+KW  - Humans
+KW  - Structure-Activity Relationship
+KW  - Methicillin-Resistant Staphylococcus aureus
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+KW  - Gram-Positive Bacteria
+KW  - Benzopyrans
+DO  - 10.1016/j.bmc.2025.118376
+DP  - PubMed
+AN  - 40914108
+ER  - 
+
+TY  - JOUR
+TI  - Skin-targeted AhR activation by microbial and synthetic indoles: Insights from the AhaRaCaT reporter cell line.
+AU  - Vrzal, Radim
+AU  - Grycová, Aneta
+AU  - Vrzalová, Aneta
+JO  - Toxicology letters
+PY  - 2025
+VL  - 412
+SP  - 191-201
+AB  - Disruption of the epidermal barrier contributes to skin disorders such as atopic dermatitis and psoriasis. The aryl hydrocarbon receptor (AhR), a ligand-activated transcription factor, plays a key role in skin homeostasis and immune regulation. While traditionally associated with toxicity, AhR has emerged as a promising therapeutic target, particularly via tryptophan-derived indoles. To support AhR research in a dermatological context, we developed AhaRaCaT, a stable luciferase-based reporter cell line derived from human keratinocytes (HaCaT), enabling the assessment of AhR transcriptional activity in a skin-relevant model. We characterized the inducibility of AhaRaCaT in response to model AhR ligands (TCDD, BaP, FICZ) in dose- and time-dependent assays. Antagonist profiling with MNF, CH223191, GNF, carvone, and jasmone yielded IC50 values over 4- and 24-hour exposures. A panel of indoles previously studied in other models was evaluated for AhR activation, revealing a robust luciferase response at 4 h that declined at 24 h, consistent with trends observed in other cell types. Selected indoles also induced CYP1A1 mRNA expression and reversed cytokine-induced downregulation of filaggrin in HaCaT cells, highlighting their potential in mitigating inflammation-associated skin barrier defects. In summary, the AhaRaCaT cell line offers a sensitive and physiologically relevant tool for studying AhR signaling in skin, with broad applications in toxicology, dermatological research, and the development of AhR-targeted therapies for inflammatory skin diseases.
+KW  - Humans
+KW  - Receptors, Aryl Hydrocarbon
+KW  - Indoles
+KW  - Filaggrin Proteins
+KW  - Skin
+KW  - Keratinocytes
+KW  - HaCaT Cells
+KW  - Cytochrome P-450 CYP1A1
+KW  - Genes, Reporter
+KW  - Basic Helix-Loop-Helix Transcription Factors
+KW  - Cell Line
+KW  - Dose-Response Relationship, Drug
+KW  - Ligands
+KW  - Luciferases
+DO  - 10.1016/j.toxlet.2025.09.001
+DP  - PubMed
+AN  - 40907674
+ER  - 
+
+TY  - JOUR
+TI  - In Silico and in Vitro Evaluation of Synthetic Chalcones against Paracoccidioides brasiliensis.
+AU  - da Conceição Pereira, Giuliano
+AU  - Monteiro, Jessica Raquel B
+AU  - da Costa, Felipe Antonio Carvalho
+AU  - de Oliveira, Marcelo Kurgonas
+AU  - Farias, Eduardo Vieiras
+AU  - Carnielli-Queiroz, Lorena
+AU  - Taborda, Carlos Pelleschi
+AU  - Coitinho, Juliana Barbosa
+AU  - Dos Santos, Reginaldo Bezerra
+AU  - Kitagawa, Rodrigo Rezende
+AU  - Ribeiro Gonçalves, Rita de Cássia
+JO  - Chemical & pharmaceutical bulletin
+PY  - 2025
+VL  - 73
+IS  - 9
+SP  - 772-782
+AB  - Paracoccidioidomycosis (PCM) is an infectious disease caused by dimorphic fungi of the Paracoccidioides genus and causes a series of discomforts in affected patients. This work aimed to evaluate the antifungal potential of synthetic chalcones against Paracoccidioides brasiliensis (Pb) and to determine in silico possible therapeutic targets. An in silico evaluation of a database of 21 synthesized chalcones was carried out based on pharmacokinetic parameters, enzymatic inhibition, Tanimoto similarity, and the prediction of the spectrum of activity by PASS (prediction of activity spectra of substances). The most viable chalcones from the previous evaluation were selected for the measurement of minimum inhibitory concentration (MIC) against Pb and for cytotoxicity assays pre- and post-metabolization using HEPG2 cells. After in silico evaluation, the compounds 4, 11, 12, 20, and 21 were selected to carry out the molecular docking and in vitro tests. In the docking studies, multiple hydrophobic and polar intermolecular interactions were observed, such as hydrogen bonds, with emphasis on compound 20 in the active site of thioredoxin, where it made 4 hydrogen bonds with the residues Gln43, Ala36, and Thr38. In vitro testing revealed antifungal activity, with the MICs ranging from 32 to 128 μg/mL. In cytotoxicity assays, the 5 compounds exhibited reduced IC
+KW  - Paracoccidioides
+KW  - Antifungal Agents
+KW  - Microbial Sensitivity Tests
+KW  - Humans
+KW  - Chalcones
+KW  - Molecular Docking Simulation
+KW  - Structure-Activity Relationship
+KW  - Hep G2 Cells
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+KW  - Computer Simulation
+KW  - Cell Survival
+DO  - 10.1248/cpb.c25-00044
+DP  - PubMed
+AN  - 40903291
+ER  - 
+
+TY  - JOUR
+TI  - Discovery of benzopyronyl imidazolidinediones as new structural skeleton of potential multitargeting antibacterial agents.
+AU  - Li, Shu-Rui
+AU  - Yu, Jia-Chen
+AU  - Cheng, Yu
+AU  - Zhou, Cheng-He
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108923
+AB  - This work developed a class of unique benzopyronyl imidazolidinediones (BIs) as new structural skeleton of potential multitargeting antibacterial agents to confront dreadful Staphylococcus aureus infections. Some target compounds exhibited effective antibacterial activities against the tested strains. Especially, butyl BI 6c and 5-hydroxy BI 26d exerted excellent inhibitory activity toward Staphylococcus aureus ATCC 25923 and MRSA 43300 with a low MIC value of 0.5 and 0.25 μg/mL, being 2- and 4-fold more active than norfloxacin, respectively. BIs 6c and 26d displayed inconspicuous hemolytic rates and good pharmacokinetics. Moreover, BIs 6c and 26d could effectively inhibit and eliminate bacterial biofilms and block the development of resistance. Preliminary mechanistic investigations revealed that BIs 6c and 26d could trigger bacterial oxidative stress, intercalate into DNA, and bind with DNA gyrase B, which showed multitargeting antibacterial potential. Furthermore, BI 26d displayed superior anti-MRSA 43300 efficacy to norfloxacin in vivo. These findings suggested that benzopyronyl imidazolidinediones might provide new promise as potential new structural multitargeting antibacterial candidates for the prevention and treatment of Staphylococcus aureus.
+KW  - Anti-Bacterial Agents
+KW  - Microbial Sensitivity Tests
+KW  - Structure-Activity Relationship
+KW  - Molecular Structure
+KW  - Biofilms
+KW  - Staphylococcus aureus
+KW  - Animals
+KW  - Dose-Response Relationship, Drug
+KW  - Drug Discovery
+KW  - Methicillin-Resistant Staphylococcus aureus
+KW  - Staphylococcal Infections
+KW  - Humans
+KW  - Mice
+DO  - 10.1016/j.bioorg.2025.108923
+DP  - PubMed
+AN  - 40902305
+ER  - 
+
+TY  - JOUR
+TI  - Gastrointestinal flora and serum metabolomic elucidation of 
+AU  - Yan, Jianpeng
+AU  - Zhou, Ke
+AU  - Ma, Ting
+AU  - Ji, Peng
+AU  - Wei, Yanming
+JO  - Frontiers in veterinary science
+PY  - 2025
+VL  - 12
+SP  - 1611467
+AB  - BACKGROUND: This study addresses the global challenge of subclinical bovine mastitis (SCBM) in dairy cows, a prevalent disease causing substantial economic losses, by investigating the mechanistic basis of  METHODS: Initially, the active components of  RESULTS: ARWD administration dose-dependently improved milk yield and protein content while reducing somatic cell counts. Serum pro-inflammatory cytokines (TNF-α, IL-6, IL-1β) decreased, contrasting with increases in immunoglobulins (IgA, IgM, IgG) and enhanced superoxide dismutase activity. Microbiota restructuring featured ruminal enrichment of Bifidobacterium and fecal dominance of Rikenellaceae_RC9_gut_group, coupled with suppression of pro-inflammatory taxa (e.g., Christensenellaceae_R-7_group). Metabolomic analysis identified four ARWD-responsive biomarkers, notably Spirotaccagenin and Pelanin, operating through linoleic acid metabolism and phospholipase D signaling pathways. Strong correlations linked microbial shifts to improved lactation parameters and reduced inflammation. CONCLUSION: The findings establish that ARWD alleviates SCBM through coordinated microbiota remodeling and metabolic reprogramming, specifically enhancing antioxidant defenses, restoring mammary barrier integrity, and modulating immune-inflammation crosstalk, with optimal efficacy at 0.4 g·kg
+DO  - 10.3389/fvets.2025.1611467
+DP  - PubMed
+AN  - 40901059
+ER  - 
+
+TY  - JOUR
+TI  - New Anti-HIV Agents Isolated From Two Euphorbia Species.
+AU  - Krstić, Gordana B
+AU  - Schols, Dominique
+AU  - Claes, Sandra
+AU  - Jadranin, Milka B
+AU  - Mandić, Boris M
+AU  - Wittine, Karlo
+AU  - Tešević, Vele V
+JO  - Archiv der Pharmazie
+PY  - 2025
+VL  - 358
+IS  - 9
+SP  - e70080
+AB  - Four previously unreported tigliane diterpenes (1, 2, 4, and 6), along with two known tiglianes (3 and 5), were isolated from the latex of Euphorbia palustris and Euphorbia lucida. The structures of the isolated compounds were elucidated by spectroscopic techniques. Antiviral activity assays for compounds 1‒4 and 6 against HIV-1 and HIV-2 replication were performed on a CD4
+KW  - Euphorbia
+KW  - Anti-HIV Agents
+KW  - HIV-1
+KW  - Humans
+KW  - HIV-2
+KW  - Structure-Activity Relationship
+KW  - Diterpenes
+KW  - Molecular Structure
+KW  - Virus Replication
+KW  - Dose-Response Relationship, Drug
+KW  - Cell Line
+KW  - Microbial Sensitivity Tests
+KW  - Plant Extracts
+KW  - HIV Infections
+KW  - CD4-Positive T-Lymphocytes
+DO  - 10.1002/ardp.70080
+DP  - PubMed
+AN  - 40899427
+ER  - 
+
+TY  - JOUR
+TI  - Impact of physiological transitions during forward processing on Shiga-toxin producing Escherichia coli risks in lettuce.
+AU  - Owade, Joshua Ombaka
+AU  - Bergholz, Teresa M
+AU  - Mitchell, Jade
+JO  - Food microbiology
+PY  - 2026
+VL  - 133
+SP  - 104892
+AB  - Cold stress during forward processing delays of lettuce can induce the formation of viable but nonculturable (VBNC) cells of Shiga toxin-producing Escherichia coli (STEC) O157:H7 and pose risks of foodborne disease outbreaks. This study investigated the effect of physiological changes during the forward processing cold chain on the risks of illness from consuming lettuce contaminated with STEC O157:H7. A probabilistic quantitative microbial risk assessment model was developed to quantify the risks associated with consuming field-bagged Romaine hearts and shredded and packaged lettuce contaminated with STEC O157:H7. The exposure assessment included the farm-to-consumer pathway, with probability distributions generated using 10
+KW  - Lactuca
+KW  - Food Handling
+KW  - Food Contamination
+KW  - Shiga-Toxigenic Escherichia coli
+KW  - Escherichia coli O157
+KW  - Humans
+KW  - Risk Assessment
+KW  - Food Microbiology
+DO  - 10.1016/j.fm.2025.104892
+DP  - PubMed
+AN  - 40889865
+ER  - 
+
+TY  - JOUR
+TI  - A synergistic-available and high-potent New Delhi metallo-β-lactamase-1 (NDM-1) covalent inhibitor by the modification of naturally occurring 3-formyl chromone.
+AU  - Liang, Yaowen
+AU  - Huang, Manna
+AU  - Zhu, Xinhai
+AU  - Wang, Lifang
+AU  - Wan, Yiqian
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108902
+AB  - The discovery of novel NDM-1 inhibitors is one of the currently rocky and urgent tasks to fight superbug crisis. Here, we designed and synthesized three types derivatives of the 3-formyl chromone that is a naturally occurring covalent NDM-1 inhibitor. Further, their sodium bisulfite adducts have been obtained and the inhibitory activities have been explored. As a result, CS-23 has been identified to be an effective NDM-1 inhibitor with IC
+KW  - beta-Lactamases
+KW  - Anti-Bacterial Agents
+KW  - Escherichia coli
+KW  - Microbial Sensitivity Tests
+KW  - beta-Lactamase Inhibitors
+KW  - Structure-Activity Relationship
+KW  - Chromones
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+DO  - 10.1016/j.bioorg.2025.108902
+DP  - PubMed
+AN  - 40886480
+ER  - 
+
+TY  - JOUR
+TI  - Design, synthesis, and biological evaluation of dual-site HIV-1 inhibitors simultaneously targeting the NNRTI binding pocket and an adjacent site with favorable resistance profiles.
+AU  - Ji, Xiangkai
+AU  - Jiang, Xiangyi
+AU  - Huang, Xing
+AU  - Gao, Heng
+AU  - Gao, Zhen
+AU  - Gao, Ping
+AU  - De Clercq, Erik
+AU  - Pannecouque, Christophe
+AU  - Kang, Dongwei
+AU  - Zhan, Peng
+AU  - Liu, Xinyong
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108924
+AB  - Given high mutation rate of HIV-1 and its impact on NNRTIs' efficacy, targeting novel binding pockets has emerged as a viable strategy to overcome the drug resistance. In this study, we designed and synthesized 26 novel "dual-site" HIV-1 inhibitors that simultaneously target two distinct sites on reverse transcriptase (RT): the classical non-nucleoside inhibitor binding pocket (NNIBP) and a newly identified NNRTIs-adjacent site (NNIAS). Antiviral evaluation demonstrated that all compounds possessed potent activity against the wild-type (WT) HIV-1 strain, with EC
+KW  - HIV-1
+KW  - Reverse Transcriptase Inhibitors
+KW  - Drug Design
+KW  - Anti-HIV Agents
+KW  - Humans
+KW  - HIV Reverse Transcriptase
+KW  - Binding Sites
+KW  - Structure-Activity Relationship
+KW  - Molecular Docking Simulation
+KW  - Molecular Structure
+KW  - Drug Resistance, Viral
+KW  - Microbial Sensitivity Tests
+KW  - Dose-Response Relationship, Drug
+DO  - 10.1016/j.bioorg.2025.108924
+DP  - PubMed
+AN  - 40886479
+ER  - 
+
+TY  - JOUR
+TI  - Synthesis, in vitro and in silico evaluation of halogenated xanthone and benzophenone derivatives as antibacterial agents against acne-causing bacteria.
+AU  - Devakrishnan, Pavithren
+AU  - Nasir, Nadiah Mad
+AU  - Hasan, Hanan
+AU  - Tejo, Bimo Ario
+AU  - Baharuddin, Fatin Farhana
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108906
+AB  - Acne which is caused by Cutibacterium acnes and Staphylococcus aureus bacteria is the most common skin problem among adolescents and young adults. Topical antibiotics like tetracycline are commonly used to treat acne but their effectiveness has declined as bacteria develop antibiotic resistance. Thus, this research emphasizes the antibacterial properties of new synthetic derivatives of halogenated xanthone and benzophenone (1a-1f), (2a-2d), (3a-3i), and (4a-4j) via in vitro antibacterial assay with tetracycline, erythromycin, and salicylic acid as reference standards. Based on the well diffusion assay (WDA), compound 1 f revealed the most potent antibacterial properties by inhibiting the acne-causing bacteria strains with a recorded inhibition zone of 15.67 ± 0.58 mm (C. acnes; ATCC 6919), 16.00 ± 0.00 mm (C. acnes; ATCC 11827), 15.00 ± 0.00 mm (S. aureus; ATCC 6538), and 30.00 ± 0.00 mm (S. aureus; ATCC 10832). These findings were further supported by the MIC and MBC values of compound 1 f, which ranged from 0.02 to 0.50 mg/mL. Next, the structure-activity relationship study revealed the attachment of different substituents at different positions that were responsible for the potent activity of compound 1 f. Compound 1 f reveals good binding affinity values towards C. acnes and S. aureus and better interaction with the protein active site. In silico study of drug-likeness and therapeutic effectiveness properties, including Lipinski's 'rule of five', Veber's rule, and ADME properties, projected that the compound 1 f would be toxicity-free, non-carcinogenic, and risk-free, which could be used as a better therapeutic agent for acne formulation with a guarantee for healthy skin.
+KW  - Anti-Bacterial Agents
+KW  - Benzophenones
+KW  - Xanthones
+KW  - Microbial Sensitivity Tests
+KW  - Structure-Activity Relationship
+KW  - Staphylococcus aureus
+KW  - Molecular Structure
+KW  - Acne Vulgaris
+KW  - Propionibacterium acnes
+KW  - Dose-Response Relationship, Drug
+KW  - Humans
+KW  - Molecular Docking Simulation
+KW  - Halogenation
+DO  - 10.1016/j.bioorg.2025.108906
+DP  - PubMed
+AN  - 40884916
+ER  - 
+
+TY  - JOUR
+TI  - Discovery of dimethyl quaternary ammonium salt based on harmane against MRSA infections by multi-target mechanism.
+AU  - Xiong, Yingyan
+AU  - Liu, Panpan
+AU  - Gao, Hui
+AU  - Wei, Yi
+AU  - Li, Runchu
+AU  - Wang, Mengyu
+AU  - Cao, Menglu
+AU  - Dan, Wenjia
+AU  - Dai, Jiangkun
+JO  - European journal of medicinal chemistry
+PY  - 2025
+VL  - 299
+SP  - 118099
+AB  - With rising antimicrobial resistance and continuous failure of conventional therapies, innovative drug development against methicillin-resistant Staphylococcus aureus (MRSA) is crucial for effective clinical treatment. Here, new dimethyl quaternary ammonium salt 5b derived from harmane were designed, exhibiting potent anti-MRSA activities including clinical strains (MIC = 0.25-0.5 μg/mL) with rapid bactericidal mode, slow resistance acquisition, favorable stability and low cytotoxicity and hemolytic toxicity. Moreover, compound 5b demonstrated effective therapeutic effects in the mouse skin infection model, being competitive compared with vancomycin. Mechanistic investigations revealed that compound 5b inhibited biofilm formation by reducing extracellular polysaccharides, damaged the structure and function of cell wall by binding to peptidoglycan and lipoteichoic acids (LTA), targeted to membranes by interaction with phosphatidylethanolamine (PE) accompanying with depolarization, permeability alteration and integrity damage. Especially, compound 5b could further reduce intracellular metabolic activity, disrupt the redox balance with increasing levels of reactive oxygen species (ROS) and decreasing activity of glutathione (GSH) as well as superoxide dismutase (SOD). Moreover, compound 5b could bind to DNA driven by entropy and enthalpy via a spontaneous process. Overall, this work provided a prominent anti-MRSA lead candidate, managing resistant infections by multi-target mechanism.
+KW  - Animals
+KW  - Humans
+KW  - Mice
+KW  - Anti-Bacterial Agents
+KW  - Biofilms
+KW  - Dose-Response Relationship, Drug
+KW  - Drug Discovery
+KW  - Methicillin-Resistant Staphylococcus aureus
+KW  - Microbial Sensitivity Tests
+KW  - Molecular Structure
+KW  - Peptidoglycan
+KW  - Quaternary Ammonium Compounds
+KW  - Staphylococcal Infections
+KW  - Structure-Activity Relationship
+KW  - Superoxide Dismutase
+KW  - Heterocyclic Compounds, 3-Ring
+DO  - 10.1016/j.ejmech.2025.118099
+DP  - PubMed
+AN  - 40882439
+ER  - 
+
+TY  - JOUR
+TI  - Quantifying Temporal Dynamics of 
+AU  - Sarker, Shishir K
+AU  - Dapkus, Ryan T
+AU  - Byrne, Diana M
+AU  - Fryar, Alan E
+AU  - Hutchison, Justin M
+JO  - Water
+PY  - 2025
+VL  - 17
+IS  - 5
+AB  - Karst aquifers can be highly productive water sources but are vulnerable to contamination by pathogens because of integrated surface and subsurface drainage. Our study focuses on the karstic Royal Spring basin in Kentucky, encompassing urban and agricultural land uses. The city of Georgetown distributes treated water from Royal Spring to over 33,000 customers. We examined 
+DO  - 10.3390/w17050745
+DP  - PubMed
+AN  - 40852087
+ER  - 
+
+TY  - JOUR
+TI  - [Development and immunogenicity evaluation in mice of a novel mRNA vaccine expressing herpes simplex virus type 2 envelope glycoprotein gD].
+AU  - Bing, Jialuo
+AU  - Jin, Liye
+AU  - Deng, Yao
+AU  - Sun, Shucai
+AU  - Han, Xiaotian
+AU  - Cheng, Xueting
+AU  - Qi, Zhenyong
+AU  - Wang, Tangqi
+AU  - Han, Ruiwen
+AU  - Zhai, Desheng
+AU  - Tan, Wenjie
+JO  - Sheng wu gong cheng xue bao = Chinese journal of biotechnology
+PY  - 2025
+VL  - 41
+IS  - 8
+SP  - 3241-3251
+AB  - Human alphaherpesvirus 2 (HSV-2) is the main pathogen resulting human genital herpes, which poses a major threat to the socio-economic development, while there is no effective vaccine. In this study, we developed a novel lipopolyplex (LPP)-delivered mRNA vaccine expressing the HSV-2 envelope glycoprotein gD and evaluated its immunogenicity in mice. The mRNA vaccine was prepared from the genetically modified gD mRNA synthesized 
+KW  - Animals
+KW  - Herpesvirus 2, Human
+KW  - Viral Envelope Proteins
+KW  - Mice
+KW  - Herpes Genitalis
+KW  - RNA, Messenger
+KW  - Female
+KW  - Mice, Inbred BALB C
+KW  - Antibodies, Viral
+KW  - mRNA Vaccines
+KW  - Antibodies, Neutralizing
+KW  - Humans
+DO  - 10.13345/j.cjb.250158
+DP  - PubMed
+AN  - 40873325
+ER  - 
+
+TY  - JOUR
+TI  - Bio-guided discovery of antibacterial metabolites from 
+AU  - Mira, Amira
+AU  - Abdel Bar, Fatma M
+AU  - Foudah, Ahmed I
+AU  - Aboutaleb, Mohamed H
+AU  - Ibrahim, Tarek S
+AU  - Hassan, Ahmed H E
+AU  - Khalil, Ashraf T
+JO  - Journal of enzyme inhibition and medicinal chemistry
+PY  - 2025
+VL  - 40
+IS  - 1
+SP  - 2547258
+AB  - Bio-guided isolation from the Red Sea-derived 
+KW  - Penicillium chrysogenum
+KW  - Anti-Bacterial Agents
+KW  - Microbial Sensitivity Tests
+KW  - Humans
+KW  - Structure-Activity Relationship
+KW  - Molecular Structure
+KW  - Gram-Negative Bacteria
+KW  - Dose-Response Relationship, Drug
+KW  - Drug Discovery
+KW  - Molecular Docking Simulation
+KW  - Gram-Positive Bacteria
+KW  - beta-Lactamases
+DO  - 10.1080/14756366.2025.2547258
+DP  - PubMed
+AN  - 40856353
+ER  - 
+
+TY  - JOUR
+TI  - Development of novel 1,4-Dihydropyridine-tethered Isatin scaffolds as potential candidates for the treatment of Cancer and fungal infections.
+AU  - Takkar, Priya
+AU  - Kaushik, Shikha
+AU  - Deswal, Nidhi
+AU  - Deswal, Deepa
+AU  - Sharma, Parul
+AU  - Narula, Anudeep Kumar
+AU  - Srivastava, Tapasya
+AU  - Kumar, Rakesh
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108882
+AB  - The pursuit of novel therapeutic agents with potent anticancer activity remains a key priority in medicinal chemistry, particularly for addressing liver and stomach malignancies, which continue to present substantial clinical challenges. In this study, we have reported the synthesis and biological assessment of a new series of novel 1,4-Dihydropyridine (DHP) tethered Isatin scaffolds, aimed at identifying promising candidates with significant anticancer potential. A combined approach of in-silico ADMET analysis, molecular docking and in-vitro cytotoxic screening was employed. The ADMET predictions indicated favorable pharmacokinetic profiles and minimal toxicity for most of the compounds. Molecular docking revealed strong binding with CDK2, supporting their anticancer potential. Compounds P3, P6, P7, P10, P11, and P12 demonstrated substantial anticancer activity against HepG2 (liver cancer) and AGS (gastric cancer) cell lines when compared to cisplatin, with P11 being the most potent (IC
+KW  - Humans
+KW  - Antineoplastic Agents
+KW  - Dihydropyridines
+KW  - Structure-Activity Relationship
+KW  - Isatin
+KW  - Drug Screening Assays, Antitumor
+KW  - Molecular Structure
+KW  - Antifungal Agents
+KW  - Microbial Sensitivity Tests
+KW  - Dose-Response Relationship, Drug
+KW  - Cell Proliferation
+KW  - Molecular Docking Simulation
+KW  - Aspergillus fumigatus
+KW  - Mycoses
+KW  - Hep G2 Cells
+KW  - Cell Line, Tumor
+DO  - 10.1016/j.bioorg.2025.108882
+DP  - PubMed
+AN  - 40857786
+ER  - 
+
+TY  - JOUR
+TI  - A within-host birth-death and time-dose-response model for Legionnaires' disease.
+AU  - Jamieson, Nyall
+AU  - Charalambous, Christiana
+AU  - Schultz, David
+AU  - Hall, Ian
+JO  - Royal Society open science
+PY  - 2025
+VL  - 12
+IS  - 7
+SP  - 250226
+AB  - Understanding the dose-response (DR) relationship for infectious diseases is important for quantitative microbial risk assessment studies to mitigate risk. To capture the DR dynamics, understanding the pathogenesis of the infectious agent is desirable. Typically, attempting to understand the DR dynamics would involve within-host mathematical modelling and fitting DR curves to experimental data. No mathematical model exists that describes the within-host dynamics that occur within an individual infected with Legionnaires' disease. Further, most DR models are based either on a single-hit or threshold hypothesis for the cause of illness. Here, we derive a model to explain within-host dynamics post-infection with Legionnaires' disease that incorporates heterogeneity at the cellular and population levels. We develop a new DR model that allows for either of two hypotheses for the cause of illness, adding a new level of flexibility not currently seen in the literature. We extend the DR model to incorporate time as we develop a dose-dependent incubation-period model that is based on biological mechanisms. Our within-host models provide an ID50 of between eight and nine 
+DO  - 10.1098/rsos.250226
+DP  - PubMed
+AN  - 40852581
+ER  - 
+
+TY  - JOUR
+TI  - Dose-dependent neurotoxicity of starch-adorned silver nanoparticles: A chronic in vivo study.
+AU  - Agwa, Mona M
+AU  - Fouda, Moustafa M G
+AU  - Abdelaal, Shereen E
+AU  - Abdelmonsif, Doaa A
+AU  - El-Shennawy, Lamiaa
+AU  - Sabra, Sally A
+JO  - International journal of biological macromolecules
+PY  - 2025
+VL  - 323
+IS  - Pt 1
+SP  - 147078
+AB  - Silver nanoparticles (AgNPs) are widely used in various fields, including medicine, food products, water filtration systems, cosmetics, textiles, and packaging, due to their powerful antimicrobial activity. However, chronic exposure to AgNPs was found to pose risks to human health owing to their highly reactive surface, large surface area, and the potential to penetrate the blood brain barrier (BBB). In this study, the effects of chronic oral administration of AgNPs on the cognitive and behavioral functions of rats were investigated, and the molecular mechanisms underlying AgNPs-induced neurotoxicity were reported. Male Wistar adult rats were orally administered doses ranging from 10 μg/kg body weight (BW) to 10 mg/kg BW/day for 90 days. Results revealed that the effects of chronic oral administration of AgNPs were dose dependent. Spatial learning, memory, and locomotor activity in rats were impaired at doses above 500 μg/kg BW/day. Significant decline in the levels of brain neurotransmitters, including serotonin and acetylcholinesterase, was observed at doses above 100 μg/kg BW/day. However, a significant reduction in dopamine levels was observed to be between 10 and 100 μg/kg BW/day, indicating that dopaminergic pathways are highly sensitive to AgNPs exposure, even at minimal concentrations. Interesentingly, increase in oxidative stress markers (ROS, protein carbonylation and MDA) at doses above 100 μg/Kg BW/day, decrease in antioxidant potential (GSH and TAC) at dose of 10 μg/Kg BW/day, induction of DNA damage (8-OHdG), and apoptosis in the brain at doses above 100 μg/Kg BW/day were observed. Furthermore, H&E staining and immunohistochemical analysis of brain tissue revealed inflammation, apoptosis and alterations in brain architecture, with signs of degeneration observed at doses starting from 10 μg/kg BW/day. The presence of AgNPs was also detected in the cerebral cortex of animals receiving 2 and 5 mg/kg BW/day. The no-observed-adverse-effect level (NOAEL) for chronic administration of starch-coated AgNPs on brain health was determined to be 10 μg/kg BW/day, demonstrating that even low-dose, long-term exposure to AgNPs poses significant risks to the central nervous system.
+KW  - Animals
+KW  - Silver
+KW  - Metal Nanoparticles
+KW  - Male
+KW  - Rats
+KW  - Oxidative Stress
+KW  - Brain
+KW  - Starch
+KW  - Rats, Wistar
+KW  - Dose-Response Relationship, Drug
+KW  - Antioxidants
+KW  - Acetylcholinesterase
+DO  - 10.1016/j.ijbiomac.2025.147078
+DP  - PubMed
+AN  - 40850404
+ER  - 
+
+TY  - JOUR
+TI  - Synthesis, biological evaluation, and molecular docking of novel quinazoline derivatives as multifunctional bioactive agents.
+AU  - Zine, Djihane
+AU  - Dems, Mohamed Abdesselem
+AU  - Boutebdja, Mehdi
+AU  - Bensouici, Chawki
+AU  - Robert, Anthony
+AU  - Harakat, Dominique
+AU  - Roisnel, Thierry
+AU  - Debache, Abdelmadjid
+AU  - Boulcina, Raouf
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108881
+AB  - In this study, a new series of 1,2-dihydroquinazoline and quinazoline derivatives was synthesized via an efficient one-pot multicomponent reaction between 2-aminobenzophenone, various aromatic or heteroaromatic aldehydes, and ammonium acetate, using DABCO as an organocatalyst in ethanol under mild conditions. The structures of the synthesized compounds were confirmed by spectroscopic techniques including 
+KW  - Quinazolines
+KW  - Molecular Docking Simulation
+KW  - Cholinesterase Inhibitors
+KW  - Acetylcholinesterase
+KW  - Butyrylcholinesterase
+KW  - Structure-Activity Relationship
+KW  - Anti-Bacterial Agents
+KW  - Microbial Sensitivity Tests
+KW  - Antioxidants
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+KW  - Gram-Positive Bacteria
+KW  - Humans
+KW  - Gram-Negative Bacteria
+DO  - 10.1016/j.bioorg.2025.108881
+DP  - PubMed
+AN  - 40850284
+ER  - 
+
+TY  - JOUR
+TI  - Lead and Cadmium in Orange Juices Marketed in Morocco: A Comprehensive Survey and Human Health Risk Assessment.
+AU  - El Youssfi, Mourad
+AU  - Benabbou, Asmae
+AU  - Flayou, Majda
+AU  - El Hazzat, Mouatamid
+AU  - Belekbir, Soukayna
+AU  - Mahnine, Naima
+AU  - Zinedine, Abdellah
+AU  - Laghzizil, Abdelaziz
+AU  - Fegrouche, Rachida
+AU  - El Hamidi, Adnane
+AU  - Bellaouchou, Abdelkbir
+AU  - Ben Aakame, Rachid
+AU  - Sifou, Aicha
+JO  - Biological trace element research
+PY  - 2025
+AB  - This study aimed to determine the levels of lead (Pb) and cadmium (Cd) in orange juice samples collected from various markets in Rabat (Morocco), using graphite furnace atomic absorption spectrometry (GF-AAS), and to evaluate the risk posed to consumer health. Pb was detected in 58% of samples, with concentrations ranging from 0.009 to 0.047 mg/kg and an average of 0.024 mg/kg. The incidence rates were 81.8% in pure juices, 70% in nectars, and 90% in juice concentrates. Five samples (16%) exceeded the maximum authorized limit for Pb (0.03 mg/kg) according to the standards of the European Commission, the Codex Alimentarius, and the Moroccan authorities. In the case of Cd, it was detected in 74.2% of samples, with levels ranging from 0.014 to 0.041 mg/kg (average: 0.025 mg/kg). Although no specific regulatory limit has been set for Cd in juices, the concentrations observed greatly exceeded the United States Environmental Protection Agency (US EPA) reference (0.005 mg/L) for drinking water. The non-carcinogenic risk assessment, based on hazard quotient (HQ) and hazard index (HI) values, revealed values of less than 1, indicating no significant long-term health risk. On the other hand, the carcinogenic risk (CR) and total carcinogenic risk (TCR) values for Cd exceeded the acceptable threshold of 1 × 10
+DO  - 10.1007/s12011-025-04795-8
+DP  - PubMed
+AN  - 40849555
+ER  - 
+
+TY  - JOUR
+TI  - Alterisocoumarins A-M: Isocoumarins with anti-inflammatory and anti-tuberculosis activities from a mangrove endophytic fungus Alternaria sp. HN-17.
+AU  - Wang, Guisheng
+AU  - Yuan, Yilin
+AU  - Mu, Ruxue
+AU  - Xue, Zhongqian
+AU  - Zhang, Yuhan
+AU  - Xie, Dongge
+AU  - Chen, Yan
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108898
+AB  - Fifteen new isocoumarin derivatives 1-3, (±)-4, (±)-5, 6-10, (+)-11, (+)-12, and 13, together with eleven known analogues (-)-11, (-)-12, and 14-22 were isolated from the mangrove endophytic fungus Alternaria sp. HN-17. Their structures were unambiguously established by 1D/2D NMR and HRESIMS spectra, and electronic circular dichroism (ECD) calculations. Alterisocoumarin A (1) possesses a rare 6/6/6/5 tetracyclic skeleton featuring a γ-butyrolactone-fused dibenzo-α-pyrone core, while 2 and 3 have an unusual chlorinated furan ring system. In bioassay, compounds 1, (-)-4, 10, and 18 displayed good anti-inflammatory activity with IC
+KW  - Isocoumarins
+KW  - Alternaria
+KW  - Structure-Activity Relationship
+KW  - Molecular Structure
+KW  - Antitubercular Agents
+KW  - Molecular Docking Simulation
+KW  - Humans
+KW  - Animals
+KW  - Mice
+KW  - Dose-Response Relationship, Drug
+KW  - Anti-Inflammatory Agents, Non-Steroidal
+KW  - Anti-Inflammatory Agents
+KW  - Protein Tyrosine Phosphatase, Non-Receptor Type 1
+KW  - RAW 264.7 Cells
+KW  - Microbial Sensitivity Tests
+DO  - 10.1016/j.bioorg.2025.108898
+DP  - PubMed
+AN  - 40848709
+ER  - 
+
+TY  - JOUR
+TI  - Expanding the antimicrobial spectrum of lugdunin: Discovery of multi-cationic derivatives of lugdunin with antimicrobial activity against gram-positive and gram-negative bacteria.
+AU  - He, Yuhang
+AU  - Li, Min
+AU  - Su, Jie
+AU  - Ren, Yixuan
+AU  - Fareed, Muhammad S
+AU  - Shen, Zhiqiang
+AU  - Wang, Panpan
+AU  - Ji, Qingxian
+AU  - Wang, Zhaopeng
+AU  - Wan, Daicao
+AU  - Ma, Ting
+AU  - Yan, Jiexi
+AU  - Wang, Kairong
+JO  - European journal of medicinal chemistry
+PY  - 2025
+VL  - 299
+SP  - 118078
+AB  - Lugdunin, a newly discovered antibiotic with a unique structure, emerged during a decade-long antibiotic discovery void and is considered a promising lead for combating drug-resistant bacteria. However, its narrow spectrum targeting only Gram-positive bacteria and its structural limitations have hindered its development and clinical application. Herein, inspired by our previous combinatorial modification strategies for lugdunin, we designed and synthesized a series of multi-cationic lugdunin derivatives using a biphenylmethyl modification on the tryptophan indole structure combined with multi-cationic amino acid mutations, aiming to expand its antimicrobial spectrum. Our results showed that the optimized derivative, Lug-15, exhibited strong antibacterial activity against both Gram-positive and Gram-negative bacteria, including Escherichia coli and Pseudomonas aeruginosa. Lug-15 rapidly kills bacteria primarily through membrane disruption and had a very low propensity to induce bacterial resistance. Additionally, it demonstrated low hemolytic toxicity and significant therapeutic potential in various infection models, including keratitis caused by MRSA and P. aeruginosa, MRSA-induced pneumonia, thigh muscle infection, and wound infection, indicating Lug-15's broad-spectrum therapeutic potential. Therefore, this study overcomes the historical limitation of prior SAR attempts and offers a new lead for combating drug-resistant bacteria.
+KW  - Animals
+KW  - Humans
+KW  - Mice
+KW  - Anti-Bacterial Agents
+KW  - Cations
+KW  - Dose-Response Relationship, Drug
+KW  - Drug Discovery
+KW  - Gram-Negative Bacteria
+KW  - Gram-Positive Bacteria
+KW  - Microbial Sensitivity Tests
+KW  - Molecular Structure
+KW  - Pseudomonas aeruginosa
+KW  - Structure-Activity Relationship
+KW  - Peptides, Cyclic
+KW  - Thiazolidines
+DO  - 10.1016/j.ejmech.2025.118078
+DP  - PubMed
+AN  - 40848518
+ER  - 
+
+TY  - JOUR
+TI  - Alkyl-chain-wrenched lipophilic binuclear organoselenium compounds: Synthesis, characterization, and evaluation of enhanced cytotoxicity.
+AU  - Mahmood, Zofishan
+AU  - Iqbal, Muhammad Adnan
+AU  - Bhatti, Haq Nawaz
+AU  - Shahid, Muhammad
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108889
+AB  - NHC-containing compounds are well known for their diverse and promising bioactivities. Incorporation of a metal center into a heterocyclic framework can significantly enhance the bioactivity, leading to improved efficiency. In this scenario, three new bi-imidazolium salts (ZS1-ZS3) and their respective organoselenium compounds (ZC4-ZC6) were synthesized and characterized using various techniques, including UV-visible, FTIR and FT-NMR (
+KW  - Humans
+KW  - Organoselenium Compounds
+KW  - Antineoplastic Agents
+KW  - Microbial Sensitivity Tests
+KW  - Anti-Bacterial Agents
+KW  - Structure-Activity Relationship
+KW  - Drug Screening Assays, Antitumor
+KW  - Antifungal Agents
+KW  - Molecular Structure
+KW  - Escherichia coli
+KW  - Dose-Response Relationship, Drug
+KW  - Staphylococcus aureus
+KW  - Cell Proliferation
+KW  - Cell Line, Tumor
+KW  - Aspergillus niger
+DO  - 10.1016/j.bioorg.2025.108889
+DP  - PubMed
+AN  - 40845554
+ER  - 
+
+TY  - JOUR
+TI  - Targeting isoprenoid-precursor biosynthesis in Klebsiella pneumoniae: Design, synthesis and evaluation of 1-deoxy-D-xylulose 5-phosphate synthase (DXPS) inhibitors.
+AU  - Eisa, Sidra
+AU  - Lacour, Antoine
+AU  - Johannsen, Sandra
+AU  - Hamid, Rawia
+AU  - Raj, Prateek
+AU  - Heinz, Dirk W
+AU  - Hamed, Mostafa M
+AU  - Diamanti, Eleonora
+AU  - Hirsch, Anna K H
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108877
+AB  - Klebsiella pneumoniae is a critical-priority pathogen based on the 2024 WHO list and poses a significant threat to human health. The methylerythritol phosphate (MEP) pathway, crucial for isoprenoid biosynthesis in many pathogenic bacteria, including K. pneumoniae, represents a promising source of targets for antibacterial drug discovery. In this study, we targeted the enzyme 1-deoxy-D-xylulose 5-phosphate synthase (DXPS) from K. pneumoniae that catalyzes the initial step of the MEP pathway and, apart from broad-spectrum thiamine analogues, has no reported inhibitors to date. We identified thienopyrimidinone 6 as a promising initial hit against KpDXPS and conducted a structure-activity relationship (SAR) exploration to enhance potency, solubility and toxicity profiles. This effort led to the development of compounds 14 and 19, which exhibit improved solubility and reduced toxicity while maintaining inhibitory activity against KpDXPS. These findings provide a strong foundation for the development of novel anti-infective agents to address infections caused by K. pneumoniae.
+KW  - Klebsiella pneumoniae
+KW  - Structure-Activity Relationship
+KW  - Transferases
+KW  - Drug Design
+KW  - Enzyme Inhibitors
+KW  - Anti-Bacterial Agents
+KW  - Molecular Structure
+KW  - Microbial Sensitivity Tests
+KW  - Dose-Response Relationship, Drug
+KW  - Terpenes
+KW  - Humans
+DO  - 10.1016/j.bioorg.2025.108877
+DP  - PubMed
+AN  - 40845551
+ER  - 
+
+TY  - JOUR
+TI  - Broad-spectrum antiviral peptide targets infectious bronchitis virus S2 subunit to attenuate viral infection and transmission.
+AU  - Li, Shu-Yun
+AU  - Li, Tong
+AU  - Fang, He-Jun
+AU  - Shen, Yu-Xi
+AU  - Xiang, Xue-Lian
+AU  - Cui, Min
+AU  - Xia, Jing
+AU  - Huang, Yong
+JO  - European journal of medicinal chemistry
+PY  - 2025
+VL  - 299
+SP  - 118070
+AB  - Blocking the membrane fusion function mediated by the S2 subunit 6-helix bundle (6-HB) structure is an effective strategy for treating coronavirus infections. However, the 6-HB structure of infectious bronchitis virus (IBV) remains unclear, hindering the development of targeted drugs. In this study, we predicted the 6-HB structure of IBV via in silico and designed an antiviral peptide HR2P based on this structure. This peptide, derived from a conserved HR2 domain identified via amino acid sequence alignment of 511 IBV strains, disrupted IBV-mediated intercellular membrane fusion. The inhibition results demonstrated that HR2P had broad-spectrum inhibitory activity against different IBV strains representing four dominant genotypes in vitro, reducing viral proliferation and replication by 100- to 1000-fold. Notably, the most potent suppression was observed against the IBV Sczy3 strain of the predominant GI-19 genotype. Meanwhile, in vivo treatment with HR2P effectively mitigated IBV infection and reduced horizontal transmission capacity, as evidenced by reduced morbidity and mortality in IBV-infected chickens and alleviated tracheal and kidney damage. Early administration of HR2P showed superior suppression efficacy. Therefore, the HR2P peptide demonstrates potential as a targeted therapeutic agent against IBV, offering a foundation for IBV prevention strategies.
+KW  - Animals
+KW  - Amino Acid Sequence
+KW  - Antiviral Agents
+KW  - Chickens
+KW  - Coronavirus Infections
+KW  - Dose-Response Relationship, Drug
+KW  - Infectious bronchitis virus
+KW  - Microbial Sensitivity Tests
+KW  - Peptides
+KW  - Poultry Diseases
+KW  - Structure-Activity Relationship
+KW  - Virus Replication
+KW  - Spike Glycoprotein, Coronavirus
+DO  - 10.1016/j.ejmech.2025.118070
+DP  - PubMed
+AN  - 40839918
+ER  - 
+
+TY  - JOUR
+TI  - Dietary Carbohydrates and the Intestinal Barrier: Emerging Insights into NF-κB Modulation and Health Outcomes.
+AU  - Zheng, Bo
+AU  - Wen, Hui
+AU  - Zheng, Bin
+AU  - Xiang, Xingwei
+AU  - Zhu, Caihong
+JO  - Journal of agricultural and food chemistry
+PY  - 2025
+VL  - 73
+IS  - 34
+SP  - 21264-21282
+AB  - The intestinal barrier is essential for maintaining mucosal homeostasis, and its dysfunction, often mediated by aberrant nuclear factor-kappa B (NF-κB) activation, is closely linked to chronic inflammation. Dietary carbohydrates modulate this barrier primarily through microbial fermentation and metabolite-mediated signaling. This review synthesized current evidence on how carbohydrate structure, including degree of polymerization, branching, and chemical modifications, influenced gut microbiota, short-chain fatty acid (SCFAs) production, and NF-κB regulation. Interestingly, glycemic carbohydrates promote barrier disruption and chronic inflammation by enhancing NF-κB activation, while nonglycemic carbohydrates such as oligosaccharides, fibers, and resistant starch strengthen the gut barrier and suppress inflammatory pathways through beneficial microbiota shifts and SCFAs production. Mechanistic insights are supported by both preclinical and emerging clinical data, although human evidence remains limited and heterogeneous in the dose-response and population outcomes. The review also highlights recent advances in carbohydrate engineering, which show promise for precision modulation of the carbohydrate-microbial metabolites-NF-κB-barrier axis. Future research directions are outlined, including the development of functional carbohydrates tailored for personalized nutrition and techno-functional hybrids. These findings support dietary strategies and functional food innovations targeting carbohydrate structure to optimize gut health and reduce inflammation-driven diseases through the precise regulation of NF-κB signaling pathways.
+KW  - Humans
+KW  - NF-kappa B
+KW  - Gastrointestinal Microbiome
+KW  - Animals
+KW  - Dietary Carbohydrates
+KW  - Intestinal Mucosa
+KW  - Fatty Acids, Volatile
+KW  - Signal Transduction
+KW  - Bacteria
+KW  - Inflammation
+DO  - 10.1021/acs.jafc.5c06354
+DP  - PubMed
+AN  - 40827561
+ER  - 
+
+TY  - JOUR
+TI  - Novel Indoline Derivatives as Ferroptosis Inhibitors: Synthesis, Biological Evaluation, and Mechanistic Investigation.
+AU  - Shao, Wen
+AU  - Liu, Yuanyuan
+AU  - Jiang, Deling
+AU  - Xing, Zhiyang
+AU  - Qiao, Jiale
+AU  - Liu, Man
+AU  - Huang, Xupeng
+AU  - Zhang, Renyu
+AU  - Fang, Yuying
+AU  - Peng, Wei
+JO  - ChemMedChem
+PY  - 2025
+VL  - 20
+IS  - 17
+SP  - e202500487
+AB  - Ferroptosis, a form of regulated cell death characterized by excessive lipid peroxidation, has been implicated in various neurological disorders. Ferrostatin-1 (Fer-1), a well-known ferroptosis inhibitor, exhibits therapeutic potential but suffers from poor metabolic stability, limiting its applications. In this study, a phenotype-based screening of an in-house compound library is conducted and a novel ferroptosis inhibitor, TJC-2-1, is identified. To optimize its inhibitory activity, a series of 35 indoline derivatives are synthesized and evaluated. Among them, compound 14 exhibits the most potent inhibition against erastin-induced (EC
+KW  - Ferroptosis
+KW  - Animals
+KW  - Mice
+KW  - Structure-Activity Relationship
+KW  - Indoles
+KW  - Molecular Structure
+KW  - Lipid Peroxidation
+KW  - Dose-Response Relationship, Drug
+KW  - Cell Line
+KW  - Piperazines
+KW  - Antioxidants
+KW  - Phenylenediamines
+KW  - Cyclohexylamines
+DO  - 10.1002/cmdc.202500487
+DP  - PubMed
+AN  - 40824902
+ER  - 
+
+TY  - JOUR
+TI  - Development of triaryl antimicrobials by scaffold hopping from an aminopropanol hit targeting bacterial RNA polymerase-NusG interactions.
+AU  - Liu, Tiankuang
+AU  - Kan, Cheuk Hei
+AU  - Zheng, Yingbo
+AU  - Tsang, Tsz Fung
+AU  - Liu, Yanpeng
+AU  - Tsang, Man Wai
+AU  - Fang, Hantian
+AU  - Lam, Long Yin
+AU  - Yang, Xiao
+AU  - Ma, Cong
+JO  - Journal of enzyme inhibition and medicinal chemistry
+PY  - 2025
+VL  - 40
+IS  - 1
+SP  - 2543923
+AB  - Bacterial RNA polymerase (RNAP) requires the NusG factor to facilitate transcription, with the RNAP clamp-helix domain (CH) serving as the primary binding site for NusG and representing a promising target for antimicrobial intervention. In previous work, we unprecedentedly developed a pharmacophore model based on key clamp-helix residues (R270, R278, R281) at RNAP CH essential for NusG binding, which led to the identification of a hit compound exhibiting modest antimicrobial activity against 
+KW  - DNA-Directed RNA Polymerases
+KW  - Microbial Sensitivity Tests
+KW  - Anti-Bacterial Agents
+KW  - Structure-Activity Relationship
+KW  - Molecular Structure
+KW  - Streptococcus pneumoniae
+KW  - Dose-Response Relationship, Drug
+KW  - Enzyme Inhibitors
+KW  - Transcription Factors
+KW  - Bacterial Proteins
+KW  - Drug Development
+DO  - 10.1080/14756366.2025.2543923
+DP  - PubMed
+AN  - 40823998
+ER  - 
+
+TY  - JOUR
+TI  - Exploration of New Dihydroindazole Derivatives as Promising Anti-TB Agents: Design, Synthesis, In Silico, and Biological Evaluation.
+AU  - Kumar, Pardeep
+AU  - Malik, Pradip
+AU  - Ali, Juned
+AU  - Saxena, Deepanshi
+AU  - Singampalli, Anuradha
+AU  - Rani, Bandela
+AU  - Bellapukonda, Sri Mounika
+AU  - Devi, Ankita
+AU  - Bhale, Nagesh A
+AU  - Dikundwar, Amol G
+AU  - Nanduri, Srinivas
+AU  - Dasgupta, Arunava
+AU  - Chopra, Sidharth
+AU  - Madhavi, Yaddanapudi Venkata
+JO  - Archiv der Pharmazie
+PY  - 2025
+VL  - 358
+IS  - 8
+SP  - e70074
+AB  - The escalating threat of drug-resistant Mycobacterium tuberculosis (Mtb) necessitates the discovery of novel chemotherapeutic agents. In this study, a series of dihydroindazole-based derivatives were designed, synthesized, and evaluated for their antimycobacterial potential. Among the synthesized compounds, 8u exhibited the most potent in vitro activity against Mtb H
+KW  - Antitubercular Agents
+KW  - Mycobacterium tuberculosis
+KW  - Microbial Sensitivity Tests
+KW  - Structure-Activity Relationship
+KW  - Drug Design
+KW  - Vero Cells
+KW  - Chlorocebus aethiops
+KW  - Animals
+KW  - Molecular Docking Simulation
+KW  - Indazoles
+KW  - Molecular Structure
+KW  - Molecular Dynamics Simulation
+KW  - Dose-Response Relationship, Drug
+DO  - 10.1002/ardp.70074
+DP  - PubMed
+AN  - 40817577
+ER  - 
+
+TY  - JOUR
+TI  - Synthesis, antifungal activity, structure-activity relationship and mechanism of action of nicotinohydrazide derivatives.
+AU  - Qiu, Longjian
+AU  - Zhang, Yuhui
+AU  - Kang, Xunbo
+AU  - Liu, Yaru
+AU  - Zhu, Wenyi
+AU  - Zhao, Yanyan
+AU  - Yu, Yanan
+AU  - Hu, Aixi
+AU  - Ye, Jiao
+AU  - Yan, Zhongzhong
+JO  - Bioorganic chemistry
+PY  - 2025
+VL  - 164
+SP  - 108868
+AB  - This study aimed to develop novel and highly effective antifungal agents to control key plant diseases. Based on the 2-chloronicotinohydrazide core structure, 22 new nicotinohydrazide derivatives were designed and synthesized by optimizing phenoxy substitution sites. Antifungal evaluation revealed that this series of compounds possess highly effective broad-spectrum fungicidal activity. Among them, compound J15 exhibited particularly outstanding inhibitory activity against Rhizoctonia solani (EC
+KW  - Structure-Activity Relationship
+KW  - Antifungal Agents
+KW  - Microbial Sensitivity Tests
+KW  - Rhizoctonia
+KW  - Humans
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+KW  - Molecular Docking Simulation
+KW  - Hydrazines
+KW  - Succinate Dehydrogenase
+KW  - Niacinamide
+KW  - Reactive Oxygen Species
+KW  - Cell Survival
+KW  - Membrane Potential, Mitochondrial
+DO  - 10.1016/j.bioorg.2025.108868
+DP  - PubMed
+AN  - 40815991
+ER  - 
+
+TY  - JOUR
+TI  - Antiviral activities of phenylalanine derivatives carrying carboxylic acid bioisosteres against chikungunya and parainfluenza virus type 3.
+AU  - Eren, Merve Camcı
+AU  - Güngör, Görkem
+AU  - De Jonghe, Steven
+AU  - Jochmans, Dirk
+AU  - Özbil, Mehmet
+AU  - Neyts, Johan
+AU  - Kaptein, Suzanne
+AU  - Şenol, Halil
+AU  - Köse, Aytekin
+AU  - Gezginci, Mikail Hakan
+AU  - Karalı, Nilgün
+JO  - Bioorganic & medicinal chemistry
+PY  - 2025
+VL  - 130
+SP  - 118343
+AB  - Pathogenic RNA viruses from various virus families represent substantial public health hazards. Specific antiviral drugs effective against most RNA virus infections have not yet been developed. In this study, it was aimed to investigate the broad-spectrum antiviral activities of phenylalanine derivatives designed by replacing the carboxylic acid moiety with various bioisosteres such as nitrile, hydroxamidine and 5-oxo/thioxo-1,2,4-oxadiazole. Novel synthesized N-(1-substituted 2-phenylethyl)-N-(3-chlorobenzyl)-2,4-dichlorobenzamides (6e, 7e, 8e and 9d), together with phenylalanine derivatives previously prepared by our group, were evaluated antiviral activities against chikungunya (CHIKV), Zika (ZIKV), parainfluenza virus type 3 (PIV3), and enterovirus 71 (EV71). All phenylalanine derivatives showed antiviral activities against PIV3, with the 3-fluorobenzyl substituted analogue 6d emerging as the most potent compound (IC
+KW  - Antiviral Agents
+KW  - Chikungunya virus
+KW  - Phenylalanine
+KW  - Parainfluenza Virus 3, Human
+KW  - Structure-Activity Relationship
+KW  - Molecular Docking Simulation
+KW  - Carboxylic Acids
+KW  - Molecular Structure
+KW  - Microbial Sensitivity Tests
+KW  - Humans
+KW  - Dose-Response Relationship, Drug
+KW  - Chlorocebus aethiops
+KW  - Animals
+KW  - Vero Cells
+DO  - 10.1016/j.bmc.2025.118343
+DP  - PubMed
+AN  - 40812194
+ER  - 
+
+TY  - JOUR
+TI  - Design, synthesis and antibacterial evaluation of bis-pyridinium cationic antimicrobial peptide mimics with low hemolytic toxicity.
+AU  - Li, Yuanbo
+AU  - Yang, Yi
+AU  - Kong, Hongtao
+AU  - Li, Ruirui
+AU  - Qu, Ye
+AU  - Ge, Xiaofan
+AU  - Li, Zhi-Hao
+AU  - Li, Daran
+AU  - Wu, Yuequan
+AU  - Wang, Ya-Na
+AU  - Zhang, En
+JO  - European journal of medicinal chemistry
+PY  - 2025
+VL  - 299
+SP  - 118012
+AB  - The rampant overuse of antibiotics has triggered widespread bacterial resistance, further exacerbated by biofilm-forming pathogens and non-mutating persisters, necessitating urgent development of novel antibiotics. Here, a series of bis-pyridinium cationic amphiphilic antimicrobial small molecules were designed and synthesized. Structure-activity relationships indicated that the hydrophobic tail chain length is crucial for the antibacterial activity. In vitro bioassay demonstrated that compound 3g exerted potent antibacterial activity (MIC
+KW  - Anti-Bacterial Agents
+KW  - Structure-Activity Relationship
+KW  - Drug Design
+KW  - Microbial Sensitivity Tests
+KW  - Hemolysis
+KW  - Animals
+KW  - Mice
+KW  - Pyridinium Compounds
+KW  - Staphylococcus aureus
+KW  - Molecular Structure
+KW  - Dose-Response Relationship, Drug
+KW  - Antimicrobial Cationic Peptides
+KW  - Biofilms
+KW  - Escherichia coli
+KW  - Humans
+DO  - 10.1016/j.ejmech.2025.118012
+DP  - PubMed
+AN  - 40812065
+ER  - 
+

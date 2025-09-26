@@ -1,0 +1,35 @@
+[
+  {
+    "pathogen": "norovirus",
+    "pathogen_type": "virus",
+    "model_type": "beta_poisson",
+    "single_event_infection_risk": 0.1654244425924695,
+    "single_event_illness_risk": 0.11579710981472859,
+    "annual_risk": 0.8360706896430543,
+    "dalys_per_person": 0.00023159421962945729,
+    "expected_annual_cases": 83607.06896430544,
+    "regulatory_compliant": false
+  },
+  {
+    "pathogen": "campylobacter",
+    "pathogen_type": "bacteria",
+    "model_type": "beta_poisson",
+    "single_event_infection_risk": 0.07075265989002444,
+    "single_event_illness_risk": 0.02122579796700733,
+    "annual_risk": 0.5199203839869185,
+    "dalys_per_person": 0.00010612898983503665,
+    "expected_annual_cases": 51992.03839869185,
+    "regulatory_compliant": false
+  },
+  {
+    "pathogen": "cryptosporidium",
+    "pathogen_type": "protozoa",
+    "model_type": "exponential",
+    "single_event_infection_risk": 0.020781035430540443,
+    "single_event_illness_risk": 0.020781035430540443,
+    "annual_risk": 0.18941575402981314,
+    "dalys_per_person": 6.234310629162132e-05,
+    "expected_annual_cases": 18941.575402981314,
+    "regulatory_compliant": false
+  }
+]

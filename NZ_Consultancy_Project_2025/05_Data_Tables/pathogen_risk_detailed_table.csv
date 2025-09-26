@@ -1,0 +1,4 @@
+Pathogen,Concentration (org/100mL),Annual Risk,Expected Cases/Year,NZ Annual Compliance,NZ Event Compliance
+Norovirus,1.0e+01,9.34e-01,"466,814",FAIL,FAIL
+Campylobacter,1.0e+00,1.30e-01,"64,781",FAIL,FAIL
+Cryptosporidium,1.0e-01,3.15e-03,"1,573",FAIL,PASS

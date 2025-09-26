@@ -1,0 +1,5 @@
+scenario,pathogen,treatment_lrv,annual_risk,expected_cases
+Current Secondary Treatment,norovirus,1.0,0.9832293793916187,491614.6896958093
+Proposed Tertiary Treatment,norovirus,3.5,0.5563397001303062,278169.8500651531
+Current Secondary - Campylobacter,campylobacter,2.0,0.12956202874318046,64781.01437159023
+Proposed Tertiary - Campylobacter,campylobacter,4.0,0.0014313092908214697,715.6546454107348

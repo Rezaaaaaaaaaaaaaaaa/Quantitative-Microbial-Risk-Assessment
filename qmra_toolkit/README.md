@@ -32,17 +32,41 @@ pip install -r requirements.txt
 python tests/run_all_tests.py
 ```
 
-### GUI Application (Recommended)
+### GUI Applications
 
-For easy-to-use graphical interface:
+Two graphical interfaces available:
+
+#### **🎨 Enhanced Professional GUI** (Recommended)
+Modern, professional interface with advanced features:
 
 **Windows:**
 ```bash
-# Double-click Launch_QMRA_GUI.bat or run:
+# Double-click Launch_Enhanced_QMRA_GUI.bat or run:
+Launch_Enhanced_QMRA_GUI.bat
+```
+
+**Cross-platform:**
+```bash
+python launch_enhanced_gui.py
+```
+
+**Features:**
+- 8 specialized tabs (Project Setup, Assessment, Scenarios, Results, Plots, Reports, Database, Settings)
+- Interactive matplotlib plotting and visualizations
+- Professional report generation (PDF/Word formats)
+- Multi-pathogen assessment capabilities
+- Treatment scenario comparison tools
+- NIWA professional styling and branding
+
+#### **📋 Basic GUI** (Legacy)
+Simple interface for basic assessments:
+
+**Windows:**
+```bash
 Launch_QMRA_GUI.bat
 ```
 
-**Mac/Linux:**
+**Cross-platform:**
 ```bash
 python launch_gui.py
 ```

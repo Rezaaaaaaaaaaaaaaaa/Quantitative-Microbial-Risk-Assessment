@@ -1,0 +1,5 @@
+Treatment Scenario,Pathogen,LRV,Annual Risk,Expected Cases/Year
+Current Secondary Treatment,Norovirus,1.0,9.83e-01,"491,615"
+Proposed Tertiary Treatment,Norovirus,3.5,5.56e-01,"278,170"
+Current Secondary - Campylobacter,Campylobacter,2.0,1.30e-01,"64,781"
+Proposed Tertiary - Campylobacter,Campylobacter,4.0,1.43e-03,716

@@ -1,0 +1,46 @@
+[
+  {
+    "scenario": "Current Secondary Treatment",
+    "description": "Activated sludge + clarification (existing)",
+    "pathogen": "norovirus",
+    "treatment_lrv": 1.0,
+    "final_concentration": 100.0,
+    "annual_risk": 0.9832293793916187,
+    "expected_cases": 491614.6896958093,
+    "nz_annual_compliant": false,
+    "nz_recreational_compliant": false
+  },
+  {
+    "scenario": "Proposed Tertiary Treatment",
+    "description": "Secondary + sand filtration + UV disinfection",
+    "pathogen": "norovirus",
+    "treatment_lrv": 3.5,
+    "final_concentration": 0.31622776601683794,
+    "annual_risk": 0.5563397001303062,
+    "expected_cases": 278169.8500651531,
+    "nz_annual_compliant": false,
+    "nz_recreational_compliant": false
+  },
+  {
+    "scenario": "Current Secondary - Campylobacter",
+    "description": "Activated sludge + clarification (bacterial pathogen)",
+    "pathogen": "campylobacter",
+    "treatment_lrv": 2.0,
+    "final_concentration": 1.0,
+    "annual_risk": 0.12956202874318046,
+    "expected_cases": 64781.01437159023,
+    "nz_annual_compliant": false,
+    "nz_recreational_compliant": false
+  },
+  {
+    "scenario": "Proposed Tertiary - Campylobacter",
+    "description": "Secondary + sand filtration + UV disinfection (bacterial)",
+    "pathogen": "campylobacter",
+    "treatment_lrv": 4.0,
+    "final_concentration": 0.01,
+    "annual_risk": 0.0014313092908214697,
+    "expected_cases": 715.6546454107348,
+    "nz_annual_compliant": false,
+    "nz_recreational_compliant": false
+  }
+]

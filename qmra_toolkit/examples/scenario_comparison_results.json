@@ -1,0 +1,30 @@
+[
+  {
+    "scenario": "No Treatment",
+    "treatment_lrv": 0.0,
+    "annual_risk": 0.9739061617382085,
+    "expected_cases": 9739.061617382085,
+    "compliant": "FAIL"
+  },
+  {
+    "scenario": "Basic Treatment (2-log)",
+    "treatment_lrv": 2.0,
+    "annual_risk": 0.8360706896430545,
+    "expected_cases": 8360.706896430545,
+    "compliant": "FAIL"
+  },
+  {
+    "scenario": "Advanced Treatment (4-log)",
+    "treatment_lrv": 4.0,
+    "annual_risk": 0.22790746022783728,
+    "expected_cases": 2279.074602278373,
+    "compliant": "FAIL"
+  },
+  {
+    "scenario": "Best Practice (6-log)",
+    "treatment_lrv": 6.0,
+    "annual_risk": 0.003613390144872608,
+    "expected_cases": 36.13390144872608,
+    "compliant": "FAIL"
+  }
+]

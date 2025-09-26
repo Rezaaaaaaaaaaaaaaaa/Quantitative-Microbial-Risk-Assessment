@@ -1,0 +1,41 @@
+[
+  {
+    "pathogen": "norovirus",
+    "pathogen_type": "virus",
+    "model_type": "beta_poisson",
+    "concentration": 10.0,
+    "single_event_infection_risk": 0.1654244425924695,
+    "single_event_illness_risk": 0.11579710981472859,
+    "annual_risk": 0.933627997979083,
+    "dalys_per_person": 0.00023159421962945729,
+    "expected_annual_cases": 466813.9989895415,
+    "nz_annual_compliant": false,
+    "nz_event_compliant": false
+  },
+  {
+    "pathogen": "campylobacter",
+    "pathogen_type": "bacteria",
+    "model_type": "beta_poisson",
+    "concentration": 1.0,
+    "single_event_infection_risk": 0.009207930216711624,
+    "single_event_illness_risk": 0.002762379065013487,
+    "annual_risk": 0.12956202874318046,
+    "dalys_per_person": 1.3811895325067435e-05,
+    "expected_annual_cases": 64781.01437159023,
+    "nz_annual_compliant": false,
+    "nz_event_compliant": false
+  },
+  {
+    "pathogen": "cryptosporidium",
+    "pathogen_type": "protozoa",
+    "model_type": "exponential",
+    "concentration": 0.1,
+    "single_event_infection_risk": 0.00020997795154342747,
+    "single_event_illness_risk": 0.00020997795154342747,
+    "annual_risk": 0.0031450439552128673,
+    "dalys_per_person": 6.299338546302822e-07,
+    "expected_annual_cases": 1572.5219776064337,
+    "nz_annual_compliant": false,
+    "nz_event_compliant": true
+  }
+]

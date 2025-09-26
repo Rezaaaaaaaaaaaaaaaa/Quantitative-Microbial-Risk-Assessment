@@ -1,0 +1,60 @@
+# New Zealand Coastal Wastewater Treatment QMRA Project
+# Consultancy Assessment for Auckland Council
+# Date: September 2025
+
+project_details:
+  client: "Auckland Council"
+  project_name: "Wastewater Treatment Upgrade Risk Assessment"
+  location: "Mangere Wastewater Treatment Plant, Auckland"
+  consultant: "NIWA Earth Sciences"
+  date: "2025-09-26"
+
+scenario_description: |
+  Assessment of public health risk from upgraded wastewater treatment discharge
+  into Manukau Harbour. Evaluation of current secondary treatment vs proposed
+  tertiary treatment with UV disinfection for compliance with NZ health guidelines.
+
+exposure_scenarios:
+  primary_contact_recreation:
+    description: "Swimming and water sports in Manukau Harbour"
+    exposure_route: "primary_contact"
+    water_ingestion_volume: 50  # mL per event
+    events_per_year: 15  # Auckland summer recreation
+    dilution_factor: 100  # Harbor dilution modeling
+
+  shellfish_harvesting:
+    description: "Traditional Maori shellfish gathering (pipi, cockles)"
+    exposure_route: "shellfish_consumption"
+    shellfish_consumption: 200  # grams per serving (cultural significance)
+    servings_per_year: 24  # Twice monthly traditional gathering
+    bioaccumulation_factor: 10
+
+treatment_scenarios:
+  current_secondary:
+    description: "Existing activated sludge + clarification"
+    pathogen_log_reductions:
+      norovirus: 1.0
+      campylobacter: 2.0
+      cryptosporidium: 0.5
+
+  proposed_tertiary:
+    description: "Secondary + sand filtration + UV disinfection"
+    pathogen_log_reductions:
+      norovirus: 3.5
+      campylobacter: 4.0
+      cryptosporidium: 3.0
+
+raw_wastewater_concentrations:
+  norovirus: 1000000      # copies/L
+  campylobacter: 100000   # CFU/L
+  cryptosporidium: 1000   # oocysts/L
+
+regulatory_context:
+  guidelines: "NZ Ministry of Health Guidelines for Drinking-water Quality"
+  acceptable_risk: 0.000001  # per person per year
+  recreational_risk: 0.001  # per exposure event
+
+environmental_factors:
+  harbour_temperature: 16  # degrees C (annual average)
+  tidal_exchange: 0.8     # fraction per tidal cycle
+  background_contamination: 0.1  # baseline risk multiplier

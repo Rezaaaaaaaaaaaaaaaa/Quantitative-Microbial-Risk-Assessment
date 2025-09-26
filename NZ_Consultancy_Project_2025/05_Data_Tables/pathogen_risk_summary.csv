@@ -1,0 +1,4 @@
+pathogen,concentration,annual_risk,expected_annual_cases,nz_annual_compliant,compliance_status
+norovirus,10.0,0.933627997979083,466813.9989895415,False,FAIL
+campylobacter,1.0,0.12956202874318046,64781.01437159023,False,FAIL
+cryptosporidium,0.1,0.0031450439552128673,1572.5219776064337,False,FAIL
