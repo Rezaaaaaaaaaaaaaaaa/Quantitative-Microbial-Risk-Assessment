@@ -148,7 +148,7 @@ def check_dependencies():
     for package in required_packages:
         try:
             if package == 'docx':
-                import python_docx
+                import docx
                 print(f"[OK] python-docx")
             elif package == 'yaml':
                 import yaml
