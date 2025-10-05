@@ -26,7 +26,9 @@ def run_test_suite():
     test_modules = [
         'test_pathogen_database',
         'test_dose_response',
-        'test_integration'
+        'test_integration',
+        'test_validation',
+        'test_error_handling'
     ]
 
     suite = unittest.TestSuite()
@@ -106,7 +108,9 @@ def validate_installation():
         'monte_carlo',
         'risk_characterization',
         'report_generator',
-        'qmra_toolkit'
+        'qmra_toolkit',
+        'validation',
+        'error_handling'
     ]
 
     missing_modules = []

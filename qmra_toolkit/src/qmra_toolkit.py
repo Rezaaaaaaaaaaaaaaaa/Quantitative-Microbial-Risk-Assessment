@@ -24,6 +24,7 @@ from dilution_model import DilutionModel, TreatmentBarrier, DilutionScenario, Tr
 from monte_carlo import MonteCarloSimulator, create_normal_distribution, create_lognormal_distribution
 from risk_characterization import RiskCharacterization
 from report_generator import ReportGenerator
+from validation import validate_assessment_inputs, ValidationError, create_validation_summary
 
 
 # Configure logging
@@ -96,14 +97,33 @@ def assess(ctx, pathogen, exposure_route, concentration, volume, frequency,
     logger.info(f"Starting QMRA assessment for {pathogen}")
 
     try:
+        # Validate all input parameters first
+        try:
+            validated_params = validate_assessment_inputs(
+                pathogen=pathogen,
+                concentration=concentration,
+                volume=volume,
+                frequency=frequency,
+                population=population,
+                iterations=iterations
+            )
+
+            if ctx.obj.get('config', {}).get('verbose', False):
+                click.echo("\n" + create_validation_summary(validated_params))
+
+        except ValidationError as e:
+            click.echo(f"❌ Input validation failed: {e}", err=True)
+            sys.exit(1)
+
         # Initialize components
         pathogen_db = PathogenDatabase()
         risk_calc = RiskCharacterization(pathogen_db)
 
-        # Validate pathogen
-        if pathogen not in pathogen_db.get_available_pathogens():
-            click.echo(f"Error: Pathogen '{pathogen}' not found in database")
-            click.echo(f"Available pathogens: {', '.join(pathogen_db.get_available_pathogens())}")
+        # Validate pathogen exists in database
+        available_pathogens = pathogen_db.get_available_pathogens()
+        if validated_params['pathogen'] not in available_pathogens:
+            click.echo(f"❌ Error: Pathogen '{pathogen}' not found in database", err=True)
+            click.echo(f"Available pathogens: {', '.join(available_pathogens)}")
             sys.exit(1)
 
         # Set up exposure assessment
@@ -176,9 +196,29 @@ def assess(ctx, pathogen, exposure_route, concentration, volume, frequency,
             )
             click.echo(f"\nComprehensive report generated: {report_path}")
 
+    except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
+        click.echo(f"❌ File error: {e}", err=True)
+        click.echo("Please check that all required data files are present.", err=True)
+        sys.exit(1)
+    except ValueError as e:
+        logger.error(f"Value error in assessment: {e}")
+        click.echo(f"❌ Data error: {e}", err=True)
+        click.echo("Please check your input parameters and data values.", err=True)
+        sys.exit(1)
+    except MemoryError:
+        logger.error("Insufficient memory for assessment")
+        click.echo("❌ Memory error: Insufficient memory for this assessment.", err=True)
+        click.echo("Try reducing the number of Monte Carlo iterations.", err=True)
+        sys.exit(1)
+    except KeyboardInterrupt:
+        logger.info("Assessment interrupted by user")
+        click.echo("\n❌ Assessment interrupted by user.", err=True)
+        sys.exit(1)
     except Exception as e:
-        logger.error(f"Assessment failed: {e}")
-        click.echo(f"Error: {e}", err=True)
+        logger.error(f"Unexpected error during assessment: {e}", exc_info=True)
+        click.echo(f"❌ Unexpected error: {e}", err=True)
+        click.echo("Please report this issue to the development team.", err=True)
         sys.exit(1)
 
 
