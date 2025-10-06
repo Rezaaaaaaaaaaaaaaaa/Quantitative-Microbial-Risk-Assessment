@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import numpy as np
+import webbrowser
+import subprocess
 
 # Import QMRA modules
 sys.path.insert(0, os.path.dirname(__file__))
@@ -49,6 +51,9 @@ class EnhancedQMRAGui:
             self.root.iconbitmap("assets/niwa_icon.ico")
         except:
             pass
+
+        # Create menu bar
+        self.create_menu_bar()
 
         # Configure main grid
         self.root.columnconfigure(0, weight=1)
@@ -683,6 +688,45 @@ class EnhancedQMRAGui:
         """Load initial data and set up the interface."""
         self.status_var.set("Ready - Professional QMRA Assessment Toolkit v2.0")
 
+    def create_menu_bar(self):
+        """Create menu bar with File, Edit, and Help menus."""
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
+
+        # File menu
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="New Project", command=self.new_project, accelerator="Ctrl+N")
+        file_menu.add_command(label="Open Project...", command=self.open_project, accelerator="Ctrl+O")
+        file_menu.add_command(label="Save Project", command=self.save_project, accelerator="Ctrl+S")
+        file_menu.add_command(label="Save Project As...", command=self.save_project_as)
+        file_menu.add_separator()
+        file_menu.add_command(label="Export Results...", command=self.export_results)
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self.root.quit)
+
+        # Edit menu
+        edit_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Edit", menu=edit_menu)
+        edit_menu.add_command(label="Preferences...", command=self.show_preferences)
+
+        # Help menu
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Help", menu=help_menu)
+        help_menu.add_command(label="📖 User Manual", command=self.open_user_manual)
+        help_menu.add_command(label="🚀 Quick Start Guide", command=self.show_quick_start)
+        help_menu.add_command(label="💡 Troubleshooting", command=self.show_troubleshooting)
+        help_menu.add_separator()
+        help_menu.add_command(label="📊 Example Projects", command=self.open_examples)
+        help_menu.add_command(label="🔗 Online Resources", command=self.open_online_resources)
+        help_menu.add_separator()
+        help_menu.add_command(label="ℹ️ About QMRA Toolkit", command=self.show_about)
+
+        # Bind keyboard shortcuts
+        self.root.bind('<Control-n>', lambda e: self.new_project())
+        self.root.bind('<Control-o>', lambda e: self.open_project())
+        self.root.bind('<Control-s>', lambda e: self.save_project())
+
     # Event handlers and methods
     def new_project(self):
         """Create a new project."""
@@ -862,6 +906,550 @@ class EnhancedQMRAGui:
         """Preview report before generation."""
         report_type = self.report_type_var.get()
         messagebox.showinfo("Report Preview", f"Preview of {report_type} report would be shown here.")
+
+    # Help menu methods
+    def open_user_manual(self):
+        """Open the comprehensive user manual."""
+        manual_path = Path(__file__).parent.parent / "docs" / "USER_MANUAL.md"
+
+        if not manual_path.exists():
+            messagebox.showerror("Manual Not Found",
+                               f"User manual not found at:\n{manual_path}\n\n"
+                               "Please ensure the USER_MANUAL.md file exists in the docs directory.")
+            return
+
+        try:
+            # Try to open with default markdown viewer or text editor
+            if sys.platform == 'win32':
+                os.startfile(manual_path)
+            elif sys.platform == 'darwin':  # macOS
+                subprocess.run(['open', manual_path])
+            else:  # Linux
+                subprocess.run(['xdg-open', manual_path])
+            self.status_var.set("User manual opened")
+        except Exception as e:
+            # Fallback: open in browser
+            try:
+                webbrowser.open(f'file://{manual_path.absolute()}')
+                self.status_var.set("User manual opened in browser")
+            except:
+                messagebox.showerror("Error Opening Manual",
+                                   f"Could not open user manual.\n\n"
+                                   f"Please open manually:\n{manual_path}")
+
+    def show_quick_start(self):
+        """Show quick start guide dialog."""
+        quick_start_window = tk.Toplevel(self.root)
+        quick_start_window.title("Quick Start Guide")
+        quick_start_window.geometry("800x600")
+
+        # Create scrolled text widget
+        frame = ttk.Frame(quick_start_window, padding="20")
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        text_widget = scrolledtext.ScrolledText(frame, wrap=tk.WORD, font=('Segoe UI', 10))
+        text_widget.pack(fill=tk.BOTH, expand=True)
+
+        # Add quick start content
+        quick_start_content = """
+QMRA TOOLKIT - QUICK START GUIDE
+═══════════════════════════════════════════════════════════════════
+
+BASIC WORKFLOW (5 STEPS)
+─────────────────────────────────────────────────────────────────
+
+1. PROJECT SETUP (Tab 1: 📋 Project Setup)
+   • Enter project name and your details
+   • Set population at risk
+   Example: "Beach Assessment", 100,000 people
+
+2. CONFIGURE PARAMETERS (Tab 2: 🧬 Assessment Parameters)
+   • Select pathogen (e.g., Norovirus)
+   • Choose exposure route (e.g., Primary Contact)
+   • Enter concentration: 1000 copies/L
+   • Set volume: 100 mL
+   • Set frequency: 7 events/year
+   Tip: Click 📊 for typical concentration ranges
+
+3. RUN ASSESSMENT
+   • Click "Run Assessment" button (bottom of tab)
+   • Wait for Monte Carlo simulation to complete
+   • Progress bar shows status
+
+4. VIEW RESULTS (Tab 4: 📈 Results)
+   • Check Summary tab for key metrics
+   • Review Regulatory Compliance status
+   • Note: Green = compliant, Yellow = marginal, Red = non-compliant
+
+5. GENERATE OUTPUTS
+   • Tab 5: Create plots (📊 Risk Comparison, 🎲 Monte Carlo)
+   • Tab 6: Generate professional report (PDF or Word)
+   • Save your project: File → Save Project
+
+COMMON SCENARIOS
+─────────────────────────────────────────────────────────────────
+
+SCENARIO A: Swimming Safety Assessment
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Pathogen: Norovirus
+• Route: Primary Contact
+• Concentration: 1,000 copies/L
+• Volume: 100 mL (typical ingestion)
+• Frequency: 7 times/year (summer season)
+
+SCENARIO B: Drinking Water Safety
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Pathogen: Cryptosporidium
+• Route: Drinking Water
+• Concentration: 1 oocyst/L
+• Volume: 2,000 mL (2 liters/day)
+• Frequency: 365 times/year
+
+SCENARIO C: Treatment Comparison (Tab 3: 🔬 Treatment Scenarios)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Current: Secondary Treatment, LRV = 1.5
+• Proposed: Tertiary Treatment, LRV = 3.5
+• Click "🔄 Compare Scenarios"
+
+UNDERSTANDING RESULTS
+─────────────────────────────────────────────────────────────────
+
+Key Metrics:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Pinf (Infection Risk): Risk per single exposure
+  Example: 0.05 = 5% chance of infection per swim
+
+• Pannual (Annual Risk): Risk over a year
+  Example: 0.30 = 30% chance of at least one infection/year
+
+• Population Impact: Expected cases in population
+  Example: 30,000 cases/year in 100,000 people
+
+Regulatory Benchmarks:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• NZ Drinking Water: ≤ 10⁻⁶ DALY/person/year
+• WHO Guidelines: ≤ 10⁻⁶ DALY/person/year
+
+Status Indicators:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ COMPLIANT     - Risk ≤ 10⁻⁶ (meets standard)
+⚠️ MARGINAL      - Risk 10⁻⁶ to 10⁻⁵ (requires attention)
+❌ NON-COMPLIANT - Risk > 10⁻⁵ (exceeds standard)
+
+KEYBOARD SHORTCUTS
+─────────────────────────────────────────────────────────────────
+Ctrl+N    New Project
+Ctrl+O    Open Project
+Ctrl+S    Save Project
+F1        Open User Manual
+F5        Refresh Results
+
+TYPICAL CONCENTRATION RANGES
+─────────────────────────────────────────────────────────────────
+Raw Wastewater:     10³ - 10⁷ copies/L
+Treated Effluent:   10¹ - 10⁴ copies/L
+Surface Water:      10⁰ - 10² copies/L
+Drinking Water:     < 10¹ copies/L
+
+LOG REDUCTION VALUES (LRV)
+─────────────────────────────────────────────────────────────────
+Primary Treatment:      0.5 - 1.0 log
+Secondary Treatment:    1.0 - 2.0 log
+Advanced Secondary:     2.0 - 3.0 log
+Tertiary Treatment:     3.0 - 5.0 log
+Advanced Tertiary:      5.0+ log
+
+Note: 1 log = 90% removal, 2 log = 99%, 3 log = 99.9%
+
+TROUBLESHOOTING TIPS
+─────────────────────────────────────────────────────────────────
+❌ Results too high?
+   → Check units (L vs mL, copies vs CFU)
+   → Verify LRV is applied to concentration
+
+❌ Simulation slow?
+   → Reduce iterations to 1,000 for testing
+   → Close other applications
+
+❌ Can't save project?
+   → Check folder write permissions
+   → Try different location
+
+❌ Plots blank?
+   → Go to Settings tab
+   → Enable "Generate plots automatically"
+   → Return to Plots tab
+
+NEED MORE HELP?
+─────────────────────────────────────────────────────────────────
+📖 Full User Manual: Help → User Manual
+💡 Troubleshooting: Help → Troubleshooting
+📊 Examples: Help → Example Projects
+ℹ️ About: Help → About QMRA Toolkit
+
+For technical support, contact the NIWA QMRA Team.
+
+═══════════════════════════════════════════════════════════════════
+© 2025 NIWA - QMRA Assessment Toolkit v2.0
+"""
+
+        text_widget.insert(tk.END, quick_start_content)
+        text_widget.config(state=tk.DISABLED)
+
+        # Add close button
+        ttk.Button(frame, text="Close", command=quick_start_window.destroy).pack(pady=10)
+
+    def show_troubleshooting(self):
+        """Show troubleshooting guide."""
+        troubleshooting_window = tk.Toplevel(self.root)
+        troubleshooting_window.title("Troubleshooting Guide")
+        troubleshooting_window.geometry("900x650")
+
+        frame = ttk.Frame(troubleshooting_window, padding="20")
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        text_widget = scrolledtext.ScrolledText(frame, wrap=tk.WORD, font=('Consolas', 9))
+        text_widget.pack(fill=tk.BOTH, expand=True)
+
+        troubleshooting_content = """
+TROUBLESHOOTING GUIDE
+═════════════════════════════════════════════════════════════════════════════
+
+COMMON ISSUES AND SOLUTIONS
+─────────────────────────────────────────────────────────────────────────────
+
+1. APPLICATION WON'T LAUNCH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Symptoms: Double-clicking launcher does nothing or shows error
+
+Solutions:
+  ✓ Verify Python installation
+    Command: python --version
+    Expected: Python 3.8 or higher
+
+  ✓ Install dependencies
+    Command: pip install -r requirements.txt
+    Location: Run from qmra_toolkit directory
+
+  ✓ Manual launch
+    Command: python launch_enhanced_gui.py
+
+  ✓ Check error logs
+    Location: qmra_toolkit/logs/error.log
+
+─────────────────────────────────────────────────────────────────────────────
+
+2. RESULTS SEEM UNREALISTIC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Symptoms: Risk values too high (>1.0) or too low (<10⁻¹⁵)
+
+Common Causes and Fixes:
+
+  ❌ Wrong units for concentration
+     Problem: Entered 1000 CFU/100mL instead of copies/L
+     Fix: Convert to copies/L (multiply by 10)
+
+  ❌ Wrong volume units
+     Problem: Entered 2 L instead of 2000 mL
+     Fix: Use mL in volume field
+
+  ❌ LRV not applied
+     Problem: Used raw concentration instead of treated
+     Fix: Either reduce concentration manually or use Treatment Scenarios tab
+
+  ❌ Frequency too high
+     Problem: Entered 365 for seasonal activity
+     Fix: Use actual events per year (e.g., 7 for summer swimming)
+
+  ✓ Use Concentration Helper
+     Location: Click 📊 button next to Pathogen Concentration field
+     Shows: Typical ranges for verification
+
+─────────────────────────────────────────────────────────────────────────────
+
+3. MONTE CARLO SIMULATION TOO SLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Symptoms: Simulation takes >5 minutes or appears frozen
+
+Solutions:
+
+  ✓ Reduce iterations for testing
+     Change: 10,000 → 1,000 iterations
+     Note: Use 10,000 for final results
+
+  ✓ Free up system memory
+     Action: Close other applications
+     Check: Task Manager (Windows) or Activity Monitor (Mac)
+
+  ✓ Disable auto-plotting
+     Location: Settings tab → Uncheck "Generate plots automatically"
+     Benefit: Faster calculation, plot manually later
+
+  ✓ Check population size
+     Problem: Very large population (>10 million)
+     Fix: Use representative sample size
+
+─────────────────────────────────────────────────────────────────────────────
+
+4. CAN'T GENERATE REPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Symptoms: Report generation fails, blank document, or error message
+
+Solutions:
+
+  ✓ Run assessment first
+     Problem: No results to report
+     Fix: Complete assessment before generating report
+
+  ✓ Check file permissions
+     Problem: Can't write to selected directory
+     Fix: Choose different save location or check folder permissions
+
+  ✓ Verify report libraries
+     Command: pip install python-docx reportlab
+     Note: Required for Word and PDF generation
+
+  ✓ Try different format
+     If Word fails: Try PDF
+     If PDF fails: Try Word
+
+─────────────────────────────────────────────────────────────────────────────
+
+5. PLOTS NOT DISPLAYING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Symptoms: Blank plot area or error when clicking plot buttons
+
+Solutions:
+
+  ✓ Verify matplotlib
+     Command: pip install matplotlib
+     Update: pip install --upgrade matplotlib
+
+  ✓ Enable auto-plotting
+     Location: Settings tab
+     Check: "Generate plots automatically"
+
+  ✓ Refresh display
+     Action: Close and reopen Plots tab
+     Or: Click Refresh button
+
+  ✓ Check for results
+     Problem: No data to plot
+     Fix: Run assessment first
+
+─────────────────────────────────────────────────────────────────────────────
+
+ERROR MESSAGES
+─────────────────────────────────────────────────────────────────────────────
+
+Error: "PathogenDatabase not found"
+  Meaning: Missing database file
+  Fix: Reinstall toolkit or download pathogen_database.json
+       Place in: qmra_toolkit/data/
+
+Error: "Invalid concentration value"
+  Meaning: Non-numeric input in concentration field
+  Fix: Enter numbers only (e.g., 1000 not "1,000" or "1e3")
+
+Error: "LRV out of range"
+  Meaning: Log Reduction Value too high or negative
+  Fix: Use LRV between 0 and 8
+       Typical: 0.5 to 5.0
+
+Error: "Monte Carlo simulation failed"
+  Meaning: Error in calculation
+  Fix: Check all parameters are positive numbers
+       Verify concentration > 0, volume > 0, frequency > 0
+
+Error: "Memory error"
+  Meaning: Insufficient RAM for calculation
+  Fix: Reduce iterations (10,000 → 1,000)
+       Or reduce population size
+       Close other applications
+
+Error: "Division by zero"
+  Meaning: Zero value in critical parameter
+  Fix: Check population > 0
+       Verify concentration > 0
+
+─────────────────────────────────────────────────────────────────────────────
+
+DATA QUALITY CHECKS
+─────────────────────────────────────────────────────────────────────────────
+
+Before finalizing assessment, verify:
+
+  ✓ Units are correct
+    Concentration: copies/L (not /100mL or /mL)
+    Volume: mL (not L)
+    Frequency: events/year (not per month or day)
+
+  ✓ Values are reasonable
+    Compare to typical ranges in Concentration Helper (📊 button)
+
+  ✓ LRV applied correctly
+    Check: Treated concentration = Raw / (10^LRV)
+    Example: 10,000 / (10^2) = 100 copies/L for 2-log treatment
+
+  ✓ Population realistic
+    Check: Is population at risk realistic for scenario?
+    Example: Beach might be 10,000-100,000, not 10 million
+
+  ✓ Results make sense
+    Annual risk should be between 10⁻¹⁰ and 1.0
+    If outside range, check parameters
+
+─────────────────────────────────────────────────────────────────────────────
+
+GETTING ADDITIONAL HELP
+─────────────────────────────────────────────────────────────────────────────
+
+1. Check Full User Manual
+   Location: Help → User Manual
+   Contains: Complete documentation with detailed examples
+
+2. Review Example Projects
+   Location: Help → Example Projects
+   Contains: Working examples you can open and examine
+
+3. Contact NIWA Support
+   Prepare:
+   • Screenshot of error message
+   • Your project file (.qmra)
+   • Description of what you were trying to do
+   • List of parameter values used
+
+4. Check Online Resources
+   Location: Help → Online Resources
+   Links to: US EPA QMRA Wiki, WHO guidelines, etc.
+
+═════════════════════════════════════════════════════════════════════════════
+© 2025 NIWA - QMRA Assessment Toolkit v2.0
+"""
+
+        text_widget.insert(tk.END, troubleshooting_content)
+        text_widget.config(state=tk.DISABLED)
+
+        ttk.Button(frame, text="Close", command=troubleshooting_window.destroy).pack(pady=10)
+
+    def open_examples(self):
+        """Open examples directory."""
+        examples_path = Path(__file__).parent.parent / "examples"
+
+        if not examples_path.exists():
+            messagebox.showinfo("Examples",
+                              "Example projects directory not found.\n\n"
+                              "Examples can be found in the project repository.")
+            return
+
+        try:
+            if sys.platform == 'win32':
+                os.startfile(examples_path)
+            elif sys.platform == 'darwin':
+                subprocess.run(['open', examples_path])
+            else:
+                subprocess.run(['xdg-open', examples_path])
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not open examples directory:\n{e}")
+
+    def open_online_resources(self):
+        """Open online resources in browser."""
+        resources_window = tk.Toplevel(self.root)
+        resources_window.title("Online Resources")
+        resources_window.geometry("600x400")
+
+        frame = ttk.Frame(resources_window, padding="20")
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        ttk.Label(frame, text="QMRA Online Resources",
+                 style='Header.TLabel').pack(pady=(0, 20))
+
+        resources = [
+            ("US EPA QMRA Wiki", "https://qmrawiki.org/"),
+            ("WHO Water Safety", "https://www.who.int/water_sanitation_health/"),
+            ("WHO Guidelines for Drinking Water", "https://www.who.int/publications/i/item/9789241549950"),
+            ("NZ Ministry of Health - Water", "https://www.health.govt.nz/our-work/environmental-health/drinking-water"),
+            ("Water Research Foundation", "https://www.waterrf.org/"),
+        ]
+
+        for name, url in resources:
+            btn_frame = ttk.Frame(frame)
+            btn_frame.pack(fill=tk.X, pady=5)
+
+            ttk.Label(btn_frame, text=f"• {name}:",
+                     font=('Segoe UI', 10, 'bold')).pack(side=tk.LEFT)
+            ttk.Button(btn_frame, text="Open",
+                      command=lambda u=url: webbrowser.open(u)).pack(side=tk.RIGHT)
+
+        ttk.Button(frame, text="Close",
+                  command=resources_window.destroy).pack(pady=20)
+
+    def show_about(self):
+        """Show about dialog."""
+        about_text = """
+NIWA QMRA Assessment Toolkit
+Professional Edition v2.0
+
+Quantitative Microbial Risk Assessment Software
+
+═══════════════════════════════════════════════════
+
+Developed by:
+• Reza Moghaddam - Lead Developer
+• David Wood - Model Review & Support
+• Andrew Hughes - Project Manager
+
+NIWA Earth Sciences
+National Institute of Water & Atmospheric Research
+New Zealand
+
+═══════════════════════════════════════════════════
+
+Key Features:
+✓ Comprehensive pathogen database
+✓ Monte Carlo uncertainty analysis
+✓ Multiple exposure route assessment
+✓ Treatment scenario comparison
+✓ Automated professional reporting
+✓ Regulatory compliance evaluation
+
+═══════════════════════════════════════════════════
+
+References:
+• NZ Drinking Water Standards 2005 (Revised 2008)
+• WHO Guidelines for Drinking-water Quality (2011)
+• Haas, Rose & Gerba: Quantitative Microbial
+  Risk Assessment (2014)
+
+═══════════════════════════════════════════════════
+
+© 2025 NIWA
+Licensed for professional QMRA assessments
+
+For support and updates, contact the NIWA QMRA Team.
+"""
+        messagebox.showinfo("About QMRA Toolkit", about_text)
+
+    def save_project_as(self):
+        """Save project with new filename."""
+        filename = filedialog.asksaveasfilename(
+            title="Save QMRA Project As",
+            defaultextension=".qmra",
+            filetypes=[("QMRA Project files", "*.qmra"), ("JSON files", "*.json")]
+        )
+        if filename:
+            self.current_project = filename
+            self.save_project()
+
+    def show_preferences(self):
+        """Show preferences dialog."""
+        # Switch to settings tab
+        self.notebook.select(7)  # Settings tab is index 7
 
 
 def main():

@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_name": "Wastewater Treatment Upgrade Evaluation",
+    "assessor_name": "Dr. Emma Williams",
+    "client_name": "Christchurch City Council",
+    "assessment_date": "2025-10-06",
+    "description": "Multi-pathogen assessment comparing current secondary vs. proposed tertiary treatment",
+    "location": "Christchurch WWTP - Estuary discharge",
+    "project_type": "Treatment Optimization"
+  },
+  "population": {
+    "at_risk": 75000,
+    "description": "Estuary recreational users and shellfish consumers",
+    "demographics": "Recreational water users, fishers, shellfish gatherers"
+  },
+  "pathogen": {
+    "primary": "norovirus",
+    "description": "Multi-pathogen assessment: Norovirus, Campylobacter, Cryptosporidium",
+    "multi_pathogen": true,
+    "secondary_pathogens": ["campylobacter", "cryptosporidium"]
+  },
+  "exposure": {
+    "route": "primary_contact",
+    "route_description": "Primary contact recreation (swimming, kayaking)",
+    "concentration": 5000.0,
+    "concentration_unit": "copies/L",
+    "concentration_source": "Effluent monitoring - 95th percentile (Norovirus)",
+    "volume": 50.0,
+    "volume_unit": "mL",
+    "volume_description": "Conservative estimate for water sports",
+    "frequency": 12,
+    "frequency_unit": "events/year",
+    "frequency_description": "Year-round recreational use"
+  },
+  "secondary_exposures": {
+    "campylobacter": {
+      "concentration": 2000.0,
+      "concentration_unit": "CFU/100mL",
+      "source": "Bacterial monitoring - 95th percentile"
+    },
+    "cryptosporidium": {
+      "concentration": 10.0,
+      "concentration_unit": "oocysts/L",
+      "source": "Protozoan monitoring - 95th percentile"
+    }
+  },
+  "treatment": {
+    "current": {
+      "type": "Secondary Treatment",
+      "lrv": 1.5,
+      "description": "Activated sludge with basic chlorination",
+      "norovirus_lrv": 1.5,
+      "campylobacter_lrv": 2.0,
+      "cryptosporidium_lrv": 0.5
+    },
+    "proposed": {
+      "type": "Tertiary Treatment",
+      "lrv": 3.5,
+      "description": "Secondary + UV disinfection + membrane filtration",
+      "norovirus_lrv": 3.5,
+      "campylobacter_lrv": 4.0,
+      "cryptosporidium_lrv": 4.5
+    },
+    "dilution_factor": 50.0,
+    "dilution_description": "Initial mixing zone dilution in estuary"
+  },
+  "analysis_settings": {
+    "monte_carlo_iterations": 10000,
+    "confidence_level": 95.0,
+    "uncertainty_analysis": true,
+    "sensitivity_analysis": true,
+    "generate_plots": true,
+    "save_intermediate": true
+  },
+  "cost_benefit": {
+    "current_treatment_cost_annual": 500000,
+    "proposed_treatment_cost_annual": 1200000,
+    "additional_capex": 5000000,
+    "currency": "NZD",
+    "economic_analysis": true,
+    "cost_per_case_avoided": "To be calculated from results"
+  },
+  "regulatory": {
+    "standard": "NZ Guidelines for Recreational Water Quality",
+    "benchmark": 1e-3,
+    "benchmark_description": "1 in 1,000 illness risk (recreational)",
+    "compliance_required": true
+  },
+  "results": {
+    "calculated": false,
+    "timestamp": null,
+    "summary": "Results will appear after running assessment"
+  },
+  "notes": [
+    "Multi-pathogen assessment critical for comprehensive evaluation",
+    "Cost-benefit analysis required for council decision",
+    "Pathogen-specific LRVs based on pilot study results",
+    "Cryptosporidium is key driver due to low removal in current system",
+    "Public health benefits expected to justify upgrade costs"
+  ],
+  "tags": ["wastewater", "treatment_comparison", "multi-pathogen", "cost-benefit", "example"],
+  "version": "2.0",
+  "created": "2025-10-06",
+  "modified": "2025-10-06"
+}

@@ -1,0 +1,72 @@
+{
+  "project_info": {
+    "project_name": "Beach Swimming Risk Assessment",
+    "assessor_name": "Dr. Sarah Johnson",
+    "client_name": "Auckland Council",
+    "assessment_date": "2025-10-06",
+    "description": "Assessment of public health risk from swimming at Mission Bay Beach during summer season",
+    "location": "Mission Bay, Auckland",
+    "project_type": "Recreational Water Quality"
+  },
+  "population": {
+    "at_risk": 50000,
+    "description": "Estimated summer beach visitors (Nov-Mar)",
+    "demographics": "General population including children and adults"
+  },
+  "pathogen": {
+    "primary": "norovirus",
+    "description": "Norovirus GII - most common cause of gastroenteritis",
+    "multi_pathogen": false,
+    "secondary_pathogens": []
+  },
+  "exposure": {
+    "route": "primary_contact",
+    "route_description": "Swimming and water sports",
+    "concentration": 1000.0,
+    "concentration_unit": "copies/L",
+    "concentration_source": "Weekly monitoring data - summer average",
+    "volume": 100.0,
+    "volume_unit": "mL",
+    "volume_description": "Typical incidental ingestion during swimming",
+    "frequency": 7,
+    "frequency_unit": "events/year",
+    "frequency_description": "Average summer swimming visits per person"
+  },
+  "treatment": {
+    "current": {
+      "type": "Secondary Treatment",
+      "lrv": 1.5,
+      "description": "Mangere WWTP current configuration"
+    },
+    "proposed": {
+      "type": "Tertiary Treatment",
+      "lrv": 3.5,
+      "description": "Proposed UV disinfection upgrade"
+    },
+    "dilution_factor": 100.0,
+    "dilution_description": "Initial dilution in receiving waters"
+  },
+  "analysis_settings": {
+    "monte_carlo_iterations": 10000,
+    "confidence_level": 95.0,
+    "uncertainty_analysis": true,
+    "sensitivity_analysis": false,
+    "generate_plots": true,
+    "save_intermediate": false
+  },
+  "results": {
+    "calculated": false,
+    "timestamp": null,
+    "summary": "Results will appear after running assessment"
+  },
+  "notes": [
+    "Based on 2024 summer monitoring campaign",
+    "Concentration represents 95th percentile to be conservative",
+    "Volume estimate from WHO recreational water guidelines",
+    "Frequency based on beach visitor surveys"
+  ],
+  "tags": ["recreational", "swimming", "norovirus", "beach", "example"],
+  "version": "2.0",
+  "created": "2025-10-06",
+  "modified": "2025-10-06"
+}

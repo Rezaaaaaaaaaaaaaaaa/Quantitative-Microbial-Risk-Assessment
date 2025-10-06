@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_name": "Municipal Drinking Water Safety Assessment",
+    "assessor_name": "Dr. Michael Chen",
+    "client_name": "Wellington Water",
+    "assessment_date": "2025-10-06",
+    "description": "Cryptosporidium risk assessment for Wellington municipal water supply",
+    "location": "Wellington City Water Treatment Plant",
+    "project_type": "Drinking Water Compliance"
+  },
+  "population": {
+    "at_risk": 200000,
+    "description": "Wellington city water consumers",
+    "demographics": "Urban population including immunocompromised individuals"
+  },
+  "pathogen": {
+    "primary": "cryptosporidium",
+    "description": "Cryptosporidium parvum oocysts",
+    "multi_pathogen": false,
+    "secondary_pathogens": []
+  },
+  "exposure": {
+    "route": "drinking_water",
+    "route_description": "Direct consumption of treated drinking water",
+    "concentration": 0.5,
+    "concentration_unit": "oocysts/L",
+    "concentration_source": "Post-treatment monitoring - annual average",
+    "volume": 2000.0,
+    "volume_unit": "mL",
+    "volume_description": "Average daily water consumption (2 liters)",
+    "frequency": 365,
+    "frequency_unit": "events/year",
+    "frequency_description": "Daily consumption throughout year"
+  },
+  "treatment": {
+    "current": {
+      "type": "Advanced Secondary",
+      "lrv": 2.5,
+      "description": "Conventional treatment with chlorination"
+    },
+    "proposed": {
+      "type": "Tertiary Treatment",
+      "lrv": 4.0,
+      "description": "Addition of UV disinfection"
+    },
+    "dilution_factor": 1.0,
+    "dilution_description": "No dilution - direct consumption"
+  },
+  "analysis_settings": {
+    "monte_carlo_iterations": 10000,
+    "confidence_level": 95.0,
+    "uncertainty_analysis": true,
+    "sensitivity_analysis": true,
+    "generate_plots": true,
+    "save_intermediate": true
+  },
+  "regulatory": {
+    "standard": "NZ Drinking Water Standards 2005 (Revised 2008)",
+    "benchmark": 1e-6,
+    "benchmark_description": "1 in 1,000,000 DALY/person/year",
+    "compliance_required": true
+  },
+  "results": {
+    "calculated": false,
+    "timestamp": null,
+    "summary": "Results will appear after running assessment"
+  },
+  "notes": [
+    "Critical assessment for regulatory compliance",
+    "Cryptosporidium is chlorine-resistant - requires additional treatment",
+    "Concentration based on continuous monitoring",
+    "UV treatment expected to achieve >3 log reduction",
+    "Assessment includes immunocompromised population"
+  ],
+  "tags": ["drinking_water", "cryptosporidium", "regulatory", "compliance", "example"],
+  "version": "2.0",
+  "created": "2025-10-06",
+  "modified": "2025-10-06"
+}
