@@ -17,7 +17,9 @@
       "WebFetch(domain:git.niwa.local)",
       "Bash(git clone:*)",
       "Read(//c/Users/moghaddamr/OneDrive - NIWA/Attachments/**)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Read(//c/Users/moghaddamr/OneDrive - NIWA/**)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []
