@@ -1,21 +1,31 @@
-# QMRA Assessment Toolkit
+# QMRA Assessment Toolkit - Enhanced Edition v2.0
 
-A comprehensive Python-based Quantitative Microbial Risk Assessment toolkit developed by NIWA Earth Sciences New Zealand.
+A comprehensive Python-based Quantitative Microbial Risk Assessment toolkit developed by NIWA Earth Sciences New Zealand. Now enhanced with features from Charlotte Jones-Todd's R QMRA package.
 
 ## Overview
 
-This toolkit replaces @Risk Excel functionality with automated, reproducible workflows for regulatory compliance QMRA assessments. It addresses the key issues with @Risk including security conflicts, manual processes, and Excel-based errors.
+This toolkit replaces @Risk Excel functionality with automated, reproducible workflows for regulatory compliance QMRA assessments. Version 2.0 incorporates advanced features from Charlotte Jones-Todd's comprehensive R package, providing professional-grade QMRA capabilities matching NIWA report standards.
 
 ## Key Features
 
-- 🦠 **Comprehensive Pathogen Database** - Validated dose-response models for key pathogens
+### Core Features
+- 🦠 **Comprehensive Pathogen Database** - 14+ pathogens with literature-validated parameters
 - 💧 **Multiple Exposure Routes** - Primary contact, shellfish consumption, drinking water, aerosols
-- 🔬 **Dilution Modeling Integration** - NIWA's key differentiator with engineer-provided LRVs
+- 🔬 **Dilution Modeling Integration** - NIWA's key differentiator with hydrodynamic modeling
 - 📊 **Monte Carlo Simulation** - Advanced uncertainty analysis replacing @Risk
 - 📋 **Automated Reporting** - Generate regulatory compliance reports in Word format
 - ⚡ **Command-Line Interface** - Easy-to-use CLI for common workflows
 - 🖥️ **Graphical User Interface** - User-friendly GUI for non-technical users
-- 🧪 **Comprehensive Testing** - Extensive test suite with validation benchmarks
+- 🧪 **Comprehensive Testing** - 100+ tests with validation benchmarks
+
+### New in Version 2.0 (Enhanced from R Package)
+- 🔬 **11 Dose-Response Models** - Exponential, Beta-Poisson, Fractional Poisson, Weibull, Log-logistic, and more
+- 📊 **Advanced Monte Carlo Framework** - Multiple distributions, empirical CDFs, hydrodynamic integration
+- 🦠 **Extended Pathogen Database** - Complete parameters from Haas, Rose & Gerba and recent literature
+- 🌊 **Hydrodynamic Dilution Modeling** - Process concentration data to dilution factors
+- 📈 **Professional Risk Metrics** - IIR, annual risks, percentiles matching NIWA standards
+- 🔄 **Multi-site Assessment** - Compare risks across multiple locations
+- 📝 **Treatment Scenario Comparison** - Evaluate bypass, primary, secondary, tertiary, UV options
 
 ## Quick Start
 
