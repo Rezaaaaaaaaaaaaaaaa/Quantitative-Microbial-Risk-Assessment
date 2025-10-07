@@ -293,9 +293,9 @@ def benchmark_model_performance(model: DoseResponseModel, test_doses: np.ndarray
     """
     import time
 
-    start_time = time.time()
+    start_time = time.perf_counter()
     probabilities = model.calculate_infection_probability(test_doses)
-    end_time = time.time()
+    end_time = time.perf_counter()
 
     return {
         "execution_time_seconds": end_time - start_time,
