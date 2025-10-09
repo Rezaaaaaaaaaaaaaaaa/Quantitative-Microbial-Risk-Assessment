@@ -19,7 +19,14 @@
       "Read(//c/Users/moghaddamr/OneDrive - NIWA/Attachments/**)",
       "Bash(tree:*)",
       "Read(//c/Users/moghaddamr/OneDrive - NIWA/**)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(find:*)",
+      "Bash(git checkout:*)",
+      "Bash(pip install:*)",
+      "mcp__ide__getDiagnostics",
+      "Read(//o/NPD22201/RawData/From_MetOcean/sites_NPWWTP_hybrid/**)",
+      "Bash(curl:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []

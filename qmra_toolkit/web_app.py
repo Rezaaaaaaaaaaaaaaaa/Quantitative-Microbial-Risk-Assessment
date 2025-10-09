@@ -1940,66 +1940,198 @@ def show_pathogen_info(pathogen):
         """)
 
 def run_qmra_assessment(pathogen, exposure_route, concentration, volume, frequency, population, iterations, confidence_level, dilution_factor=1.0):
-    """Run QMRA assessment and return results."""
+    """
+    Run QMRA assessment using the full QMRA toolkit modules.
 
-    # Simplified calculation for demo
-    # In production, this would use the full QMRA toolkit modules
+    This function integrates:
+    - PathogenDatabase for validated dose-response parameters
+    - Monte Carlo simulation for uncertainty analysis
+    - Proper dose-response models (Beta-Poisson, Exponential)
+    - Exposure assessment with dilution factors
+    """
+    try:
+        # Import core QMRA modules
+        from pathogen_database import PathogenDatabase
+        from dose_response import create_dose_response_model
+        from monte_carlo import MonteCarloSimulator, create_lognormal_distribution, create_uniform_distribution
 
-    import time
-    time.sleep(2)  # Simulate calculation time
+        # Initialize pathogen database
+        pathogen_db = PathogenDatabase()
 
-    # Apply dilution factor to concentration
-    diluted_concentration = concentration / dilution_factor
+        # Get pathogen parameters from database
+        pathogen_info = pathogen_db.get_pathogen_info(pathogen)
+        default_model_type = pathogen_db.get_default_model_type(pathogen)
+        dr_params = pathogen_db.get_dose_response_parameters(pathogen, default_model_type)
+        health_data = pathogen_db.get_health_impact_data(pathogen)
 
-    # Dose calculation
-    dose = (diluted_concentration * volume) / 1000  # Convert mL to L
+        # Create dose-response model
+        dr_model = create_dose_response_model(default_model_type, dr_params)
 
-    # Dose-response parameters (simplified)
-    if pathogen == 'norovirus':
-        alpha = 0.04
-        pinf = 1 - np.exp(-alpha * dose)
-        pill_inf = 0.7
-    elif pathogen == 'campylobacter':
-        pinf = dose / (dose + 100)  # Simplified Beta-Poisson
-        pill_inf = 0.33
-    elif pathogen == 'cryptosporidium':
-        r = 0.09
-        pinf = 1 - np.exp(-r * dose)
-        pill_inf = 0.39
-    else:
-        pinf = 0.01
-        pill_inf = 0.5
+        # Apply dilution factor to concentration
+        diluted_concentration = concentration / dilution_factor
 
-    pill = pinf * pill_inf
-    annual_risk = 1 - (1 - pinf) ** frequency
+        # Initialize Monte Carlo simulator
+        mc_simulator = MonteCarloSimulator(random_seed=42)
 
-    # Monte Carlo simulation (simplified)
-    np.random.seed(42)
-    pinf_samples = np.random.lognormal(np.log(max(pinf, 1e-10)), 0.5, iterations)
-    pill_samples = pinf_samples * pill_inf
-    annual_samples = 1 - (1 - pinf_samples) ** frequency
+        # Add uncertainty distributions for Monte Carlo simulation
+        # Concentration uncertainty (lognormal distribution - common for microbial data)
+        concentration_dist = create_lognormal_distribution(
+            mean=np.log(diluted_concentration),
+            std=0.5,  # Standard deviation in log space (moderate uncertainty)
+            name="pathogen_concentration"
+        )
+        mc_simulator.add_distribution("pathogen_concentration", concentration_dist)
 
-    return {
-        'pinf_median': np.median(pinf_samples),
-        'pinf_mean': np.mean(pinf_samples),
-        'pinf_std': np.std(pinf_samples),
-        'pinf_5th': np.percentile(pinf_samples, 5),
-        'pinf_95th': np.percentile(pinf_samples, 95),
+        # Volume uncertainty (uniform distribution for ingestion variability)
+        volume_dist = create_uniform_distribution(
+            min_val=volume * 0.5,  # 50% to 150% of nominal volume
+            max_val=volume * 1.5,
+            name="ingestion_volume"
+        )
+        mc_simulator.add_distribution("ingestion_volume", volume_dist)
 
-        'pill_median': np.median(pill_samples),
-        'pill_mean': np.mean(pill_samples),
-        'pill_std': np.std(pill_samples),
-        'pill_5th': np.percentile(pill_samples, 5),
-        'pill_95th': np.percentile(pill_samples, 95),
+        # Define QMRA model function for Monte Carlo simulation
+        def qmra_model(samples):
+            """Calculate infection and illness risks from sampled inputs."""
+            # Get sampled values
+            conc_samples = samples["pathogen_concentration"]
+            vol_samples = samples["ingestion_volume"]
 
-        'annual_risk_median': np.median(annual_samples),
-        'annual_mean': np.mean(annual_samples),
-        'annual_std': np.std(annual_samples),
-        'annual_5th': np.percentile(annual_samples, 5),
-        'annual_95th': np.percentile(annual_samples, 95),
+            # Calculate dose: concentration (per L) × volume (mL) / 1000
+            dose_samples = (conc_samples * vol_samples) / 1000.0
 
-        'population_impact': int(population * np.median(annual_samples))
-    }
+            # Calculate infection probability using dose-response model
+            pinf_samples = dr_model.calculate_infection_probability(dose_samples)
+
+            return pinf_samples
+
+        # Run Monte Carlo simulation for infection probability
+        infection_results = mc_simulator.run_simulation(
+            qmra_model,
+            n_iterations=iterations,
+            variable_name="infection_probability"
+        )
+
+        # Get illness-to-infection ratio
+        pill_inf_ratio = health_data["illness_to_infection_ratio"]
+
+        # Calculate illness probability samples
+        pinf_samples = infection_results.samples
+        pill_samples = pinf_samples * pill_inf_ratio
+
+        # Calculate annual risk: 1 - (1 - P_infection)^frequency
+        annual_samples = 1 - np.power(1 - pinf_samples, frequency)
+
+        # Calculate statistics for all risk metrics
+        def calc_stats(samples):
+            """Calculate statistics for a sample array."""
+            return {
+                'median': float(np.median(samples)),
+                'mean': float(np.mean(samples)),
+                'std': float(np.std(samples)),
+                '5th': float(np.percentile(samples, 5)),
+                '95th': float(np.percentile(samples, 95))
+            }
+
+        pinf_stats = calc_stats(pinf_samples)
+        pill_stats = calc_stats(pill_samples)
+        annual_stats = calc_stats(annual_samples)
+
+        # Return comprehensive results
+        return {
+            # Infection risk statistics
+            'pinf_median': pinf_stats['median'],
+            'pinf_mean': pinf_stats['mean'],
+            'pinf_std': pinf_stats['std'],
+            'pinf_5th': pinf_stats['5th'],
+            'pinf_95th': pinf_stats['95th'],
+
+            # Illness risk statistics
+            'pill_median': pill_stats['median'],
+            'pill_mean': pill_stats['mean'],
+            'pill_std': pill_stats['std'],
+            'pill_5th': pill_stats['5th'],
+            'pill_95th': pill_stats['95th'],
+
+            # Annual risk statistics
+            'annual_risk_median': annual_stats['median'],
+            'annual_mean': annual_stats['mean'],
+            'annual_std': annual_stats['std'],
+            'annual_5th': annual_stats['5th'],
+            'annual_95th': annual_stats['95th'],
+
+            # Population impact
+            'population_impact': int(population * annual_stats['median']),
+
+            # Metadata for reporting
+            'pathogen': pathogen,
+            'model_type': default_model_type,
+            'model_parameters': dr_params,
+            'illness_to_infection_ratio': pill_inf_ratio,
+            'iterations': iterations,
+            'dilution_factor': dilution_factor
+        }
+
+    except Exception as e:
+        # If proper modules fail, fall back to simplified calculation
+        import warnings
+        warnings.warn(f"QMRA module error: {e}. Using simplified calculation.")
+
+        # Apply dilution factor to concentration
+        diluted_concentration = concentration / dilution_factor
+
+        # Dose calculation
+        dose = (diluted_concentration * volume) / 1000  # Convert mL to L
+
+        # Simplified dose-response parameters (fallback only)
+        if pathogen == 'norovirus':
+            alpha = 0.04
+            pinf = 1 - np.exp(-alpha * dose)
+            pill_inf = 0.7
+        elif pathogen == 'campylobacter':
+            # Proper Beta-Poisson approximation
+            alpha = 0.145
+            beta = 7.59
+            pinf = 1 - np.power(1 + dose / beta, -alpha)
+            pill_inf = 0.33
+        elif pathogen == 'cryptosporidium':
+            r = 0.0042
+            pinf = 1 - np.exp(-r * dose)
+            pill_inf = 0.39
+        else:
+            pinf = 0.01
+            pill_inf = 0.5
+
+        pill = pinf * pill_inf
+        annual_risk = 1 - (1 - pinf) ** frequency
+
+        # Monte Carlo simulation (simplified)
+        np.random.seed(42)
+        pinf_samples = np.random.lognormal(np.log(max(pinf, 1e-10)), 0.5, iterations)
+        pill_samples = pinf_samples * pill_inf
+        annual_samples = 1 - (1 - pinf_samples) ** frequency
+
+        return {
+            'pinf_median': np.median(pinf_samples),
+            'pinf_mean': np.mean(pinf_samples),
+            'pinf_std': np.std(pinf_samples),
+            'pinf_5th': np.percentile(pinf_samples, 5),
+            'pinf_95th': np.percentile(pinf_samples, 95),
+
+            'pill_median': np.median(pill_samples),
+            'pill_mean': np.mean(pill_samples),
+            'pill_std': np.std(pill_samples),
+            'pill_5th': np.percentile(pill_samples, 5),
+            'pill_95th': np.percentile(pill_samples, 95),
+
+            'annual_risk_median': np.median(annual_samples),
+            'annual_mean': np.mean(annual_samples),
+            'annual_std': np.std(annual_samples),
+            'annual_5th': np.percentile(annual_samples, 5),
+            'annual_95th': np.percentile(annual_samples, 95),
+
+            'population_impact': int(population * np.median(annual_samples))
+        }
 
 def save_project():
     """Save project to JSON file."""

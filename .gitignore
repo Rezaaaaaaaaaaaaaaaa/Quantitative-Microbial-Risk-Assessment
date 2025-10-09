@@ -151,3 +151,17 @@ test_results/
 
 # Matplotlib cache
 .matplotlib/
+
+# Literature database (large files)
+QMRA_Literature_Database/
+
+# Temporary documentation/manuals (work in progress)
+*_Technical_Manual.docx
+SCREENSHOT_GUIDE.md
+generate_marine_qmra_manual.py
+
+# Temporary logo/image files
+Earth_Sciences_New_Zealand_logo*.png
+
+# Empty/null files
+nul
