@@ -1,0 +1,15 @@
+date,beach_name,location_code,pathogen,concentration_per_L,water_temp_C,salinity_ppt,weather_condition,notes
+2025-01-15,Takapuna Beach,BEACH-001,norovirus,0.5,18.5,35.2,Sunny,Swimming area
+2025-01-15,Takapuna Beach,BEACH-001,e_coli,15.0,18.5,35.2,Sunny,Swimming area
+2025-01-15,Mission Bay,BEACH-002,norovirus,0.8,19.2,35.0,Sunny,Near stormwater outlet
+2025-01-15,Mission Bay,BEACH-002,campylobacter,0.3,19.2,35.0,Sunny,Near stormwater outlet
+2025-01-16,Takapuna Beach,BEACH-001,norovirus,0.3,18.8,35.3,Cloudy,Swimming area
+2025-01-16,Takapuna Beach,BEACH-001,e_coli,12.0,18.8,35.3,Cloudy,Swimming area
+2025-01-17,Mission Bay,BEACH-002,norovirus,1.2,19.5,34.8,Rain,After rainfall event
+2025-01-17,Mission Bay,BEACH-002,e_coli,45.0,19.5,34.8,Rain,After rainfall event
+2025-01-18,Takapuna Beach,BEACH-001,norovirus,0.4,18.9,35.1,Sunny,Swimming area
+2025-01-18,Takapuna Beach,BEACH-001,cryptosporidium,0.08,18.9,35.1,Sunny,Swimming area
+2025-01-19,Mission Bay,BEACH-002,norovirus,0.6,19.0,35.2,Cloudy,Swimming area
+2025-01-19,Mission Bay,BEACH-002,rotavirus,0.4,19.0,35.2,Cloudy,Swimming area
+2025-01-20,Takapuna Beach,BEACH-001,norovirus,0.3,18.7,35.4,Sunny,Swimming area
+2025-01-20,Takapuna Beach,BEACH-001,e_coli,10.0,18.7,35.4,Sunny,Swimming area
