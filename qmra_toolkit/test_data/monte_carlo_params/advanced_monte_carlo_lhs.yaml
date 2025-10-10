@@ -1,0 +1,53 @@
+simulation_name: Advanced Monte Carlo with LHS
+n_iterations: 50000
+sampling_method: latin_hypercube
+random_seed: 123
+parallel_processing: true
+n_cores: 8
+sensitivity_analysis:
+  enabled: true
+  method: sobol
+  n_resample: 1000
+uncertainty_parameters:
+  pathogen_concentration:
+    distribution: lognormal
+    parameters:
+      meanlog: 6.9
+      sdlog: 1.2
+    description: Treated effluent norovirus concentration
+  dilution_factor:
+    distribution: lognormal
+    parameters:
+      meanlog: 2.3
+      sdlog: 0.7
+    description: Near-field dilution
+  ingestion_volume:
+    distribution: lognormal
+    parameters:
+      meanlog: 3.5
+      sdlog: 0.5
+    description: Water ingestion during swimming (mL)
+  exposure_frequency:
+    distribution: poisson
+    parameters:
+      lambda: 20
+    description: Swimming events per year
+output_options:
+  save_all_iterations: true
+  save_percentiles:
+  - 1
+  - 5
+  - 10
+  - 25
+  - 50
+  - 75
+  - 90
+  - 95
+  - 99
+  export_format: hdf5
+  create_plots: true
+  plot_types:
+  - histogram
+  - cdf
+  - tornado
+  - scatter

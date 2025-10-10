@@ -1,0 +1,21 @@
+scenario_name: Drinking Water from Treated Source
+exposure_route: drinking_water
+description: Drinking water supply with advanced treatment
+population:
+  size: 50000
+  description: Town water supply consumers
+exposure_parameters:
+  daily_consumption_L:
+    distribution: lognormal
+    meanlog: 0.7
+    sdlog: 0.3
+    source: WHO water consumption guidelines
+  consumption_days_per_year: 365
+  vulnerable_populations:
+    immunocompromised: 0.05
+    elderly: 0.15
+    children_under_5: 0.08
+pathogen: cryptosporidium
+treatment_train: full_advanced_treatment
+risk_threshold: 1.0e-06
+daly_target: 1.0e-06

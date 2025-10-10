@@ -1,0 +1,7 @@
+scenario_name: Emergency Bypass - No Treatment
+description: Storm overflow with no treatment
+treatment_barriers: []
+total_log_reduction: 0
+frequency_per_year: 5
+duration_hours: 6
+trigger_condition: Rainfall > 50mm in 24 hours

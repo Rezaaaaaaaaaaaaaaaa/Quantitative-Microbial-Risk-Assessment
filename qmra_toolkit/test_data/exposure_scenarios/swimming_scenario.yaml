@@ -1,0 +1,30 @@
+scenario_name: Recreational Swimming - Summer Season
+exposure_route: primary_contact
+description: Swimming at beach near wastewater outfall during summer
+population:
+  size: 10000
+  age_distribution:
+    children_0_5: 0.1
+    children_6_12: 0.15
+    adults_13_64: 0.65
+    elderly_65plus: 0.1
+exposure_parameters:
+  water_ingestion_volume_mL:
+    distribution: lognormal
+    meanlog: 3.5
+    sdlog: 0.5
+    source: Dufour et al. (2006)
+  exposure_duration_minutes: 60
+  events_per_year:
+    distribution: poisson
+    lambda: 20
+    description: Swimming events per summer season
+  season: November to March
+  peak_usage_days: 90
+pathogen: norovirus
+site_locations:
+- Site_100m
+- Site_250m
+- Site_500m
+risk_threshold: 0.001
+assessment_year: 2024

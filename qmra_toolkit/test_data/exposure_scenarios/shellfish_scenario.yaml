@@ -1,0 +1,30 @@
+scenario_name: Shellfish Harvesting and Consumption
+exposure_route: shellfish_consumption
+description: Consumption of recreationally harvested shellfish
+population:
+  size: 5000
+  description: Recreational shellfish harvesters
+exposure_parameters:
+  shellfish_consumption_grams:
+    distribution: normal
+    mean: 150
+    sd: 50
+    source: NZFSA consumption survey
+  consumption_frequency_per_year:
+    distribution: poisson
+    lambda: 12
+    description: Monthly consumption average
+  bioaccumulation_factor:
+    distribution: uniform
+    min: 10
+    max: 100
+    description: Virus concentration in shellfish vs water
+  cooking_reduction:
+    raw_shellfish_proportion: 0.3
+    cooked_log_reduction: 2.0
+pathogen: norovirus
+harvest_locations:
+- Site_250m
+- Site_500m
+risk_threshold: 0.0001
+closure_threshold: 0.001

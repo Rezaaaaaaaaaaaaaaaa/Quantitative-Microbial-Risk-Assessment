@@ -1,0 +1,15 @@
+scenario_name: Multi-Pathogen Risk Comparison
+exposure_route: primary_contact
+description: Compare risks from multiple pathogens at same exposure
+pathogens:
+- norovirus
+- cryptosporidium
+- campylobacter
+- e_coli
+exposure_parameters:
+  water_ingestion_volume_mL: 50
+  events_per_year: 20
+population: 10000
+sites:
+- Site_100m
+analysis_type: comparative

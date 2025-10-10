@@ -1,0 +1,19 @@
+simulation_name: Basic Monte Carlo Simulation
+n_iterations: 10000
+random_seed: 42
+parallel_processing: true
+n_cores: 4
+convergence_criteria:
+  check_convergence: true
+  tolerance: 0.01
+  check_interval: 1000
+output_options:
+  save_all_iterations: false
+  save_percentiles:
+  - 5
+  - 25
+  - 50
+  - 75
+  - 95
+  export_format: csv
+  create_plots: true

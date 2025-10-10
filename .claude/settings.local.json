@@ -26,7 +26,13 @@
       "mcp__ide__getDiagnostics",
       "Read(//o/NPD22201/RawData/From_MetOcean/sites_NPWWTP_hybrid/**)",
       "Bash(curl:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(powershell:*)",
+      "Bash(move golestan_bab5_hekayats.json \"C:\\Users\\moghaddamr\\Dropbox\\Golestan\"\" && move golestan_bab5_hekayats.txt \"C:UsersmoghaddamrDropboxGolestan\"\")",
+      "Bash(move generate_golestan_analysis.py \"C:\\Users\\moghaddamr\\Dropbox\\Golestan\"\" && move Golestan_Chapter5_Analysis_Complete.docx \"C:UsersmoghaddamrDropboxGolestan\"\")",
+      "Bash(move generate_golestan_comprehensive.py \"C:\\Users\\moghaddamr\\Dropbox\\Golestan\"\" && move GOLESTAN_ANALYSIS_README.md \"C:UsersmoghaddamrDropboxGolestan\"\")",
+      "Bash(move generate_golestan_expanded.py \"C:\\Users\\moghaddamr\\Dropbox\\Golestan\"\" && move Golestan_Chapter5_Expanded_Analysis.docx \"C:UsersmoghaddamrDropboxGolestan\"\")",
+      "Bash(streamlit run:*)"
     ],
     "deny": [],
     "ask": []

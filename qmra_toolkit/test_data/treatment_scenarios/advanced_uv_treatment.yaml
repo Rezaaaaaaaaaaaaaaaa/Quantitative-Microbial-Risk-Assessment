@@ -1,0 +1,42 @@
+scenario_name: Advanced Treatment with UV Disinfection
+description: Full treatment train with tertiary filtration and UV
+treatment_barriers:
+- name: Screening
+  type: physical
+  lrv: 0.2
+  variability: 0.1
+- name: Primary Settling
+  type: physical
+  lrv: 0.8
+  variability: 0.3
+- name: Activated Sludge
+  type: biological
+  lrv: 1.5
+  variability: 0.5
+  srt_days: 15
+- name: Secondary Clarifier
+  type: physical
+  lrv: 0.5
+  variability: 0.2
+- name: Sand Filtration
+  type: physical
+  lrv: 1.0
+  variability: 0.3
+  description: Rapid sand filtration
+  filter_rate_m_per_hr: 5
+- name: UV Disinfection
+  type: uv_disinfection
+  lrv: 4.0
+  variability: 0.5
+  description: Medium pressure UV
+  dose_mJ_cm2: 40
+  validation_protocol: NWRI/AwwaRF 2012
+total_log_reduction: 8.0
+pathogen_specific_lrv:
+  cryptosporidium: 7.5
+  norovirus: 5.5
+  bacteria: 9.0
+compliance_monitoring:
+  uv_intensity_monitoring: continuous
+  uv_dose_verification: online
+  turbidity_limit_NTU: 2

@@ -1,0 +1,30 @@
+simulation_name: Treatment Performance Uncertainty Analysis
+description: Probabilistic assessment of treatment train LRV variability
+n_iterations: 20000
+treatment_barriers:
+  primary_settling:
+    lrv_distribution: uniform
+    parameters:
+      min: 0.5
+      max: 1.0
+    failure_probability: 0.001
+  activated_sludge:
+    lrv_distribution: normal
+    parameters:
+      mean: 2.0
+      sd: 0.5
+    min_lrv: 1.0
+    max_lrv: 3.5
+    failure_probability: 0.005
+  uv_disinfection:
+    lrv_distribution: normal
+    parameters:
+      mean: 4.0
+      sd: 0.6
+    min_lrv: 2.0
+    max_lrv: 5.0
+    failure_probability: 0.01
+    failure_lrv: 0.5
+correlations:
+  primary_activated_sludge: 0.3
+  description: Partial correlation between treatment stages

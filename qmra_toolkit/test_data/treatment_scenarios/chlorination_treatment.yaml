@@ -1,0 +1,35 @@
+scenario_name: Secondary Treatment with Chlorination
+description: Activated sludge with chlorine disinfection
+treatment_barriers:
+- name: Screening
+  type: physical
+  lrv: 0.2
+  variability: 0.1
+- name: Primary Settling
+  type: physical
+  lrv: 0.8
+  variability: 0.3
+- name: Activated Sludge
+  type: biological
+  lrv: 1.5
+  variability: 0.5
+- name: Chlorination
+  type: chlorination
+  lrv: 2.5
+  variability: 0.6
+  description: Sodium hypochlorite disinfection
+  contact_time_minutes: 30
+  ct_value: 450
+  target_residual_mg_L: 5.0
+- name: Dechlorination
+  type: chemical
+  lrv: 0
+  description: Sodium bisulfite for residual removal
+total_log_reduction: 5.0
+pathogen_specific_lrv:
+  cryptosporidium: 1.0
+  norovirus: 3.5
+  bacteria: 6.0
+dbp_formation:
+  monitor: true
+  thm_limit_ug_L: 100
