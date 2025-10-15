@@ -1,16 +1,16 @@
 Scenario_ID,Scenario_Name,Pathogen,Exposure_Route,Effluent_Conc,Treatment_LRV,Dilution_Factor,Volume_mL,Frequency_Year,Population,Priority,Monte_Carlo_Iterations,Notes
-S001,Beach_A_Summer_Norovirus,norovirus,primary_contact,1000000,3.0,100,50,25,15000,High,10000,Main tourist beach summer season
-S002,Beach_A_Winter_Norovirus,norovirus,primary_contact,1500000,3.0,50,30,8,2000,Medium,10000,Winter swimmers only
-S003,Beach_B_Summer_Norovirus,norovirus,primary_contact,800000,3.0,200,50,25,10000,High,10000,Secondary beach with better dilution
-S004,Beach_C_Summer_Norovirus,norovirus,primary_contact,1200000,3.0,75,50,20,8000,Medium,10000,Smaller beach moderate use
-S005,Shellfish_Area_1_Norovirus,norovirus,shellfish_consumption,1000000,3.0,800,100,24,5000,High,10000,Commercial shellfish harvesting area
-S006,Shellfish_Area_2_Norovirus,norovirus,shellfish_consumption,1200000,3.0,500,100,18,3000,Medium,10000,Secondary shellfish area
+S001,Beach_A_Summer_Norovirus,norovirus,primary_contact,1000000,3,100,50,25,15000,High,10000,Main tourist beach summer season
+S002,Beach_A_Winter_Norovirus,norovirus,primary_contact,1500000,3,50,30,8,2000,Medium,10000,Winter swimmers only
+S003,Beach_B_Summer_Norovirus,norovirus,primary_contact,800000,3,200,50,25,10000,High,10000,Secondary beach with better dilution
+S004,Beach_C_Summer_Norovirus,norovirus,primary_contact,1200000,3,75,50,20,8000,Medium,10000,Smaller beach moderate use
+S005,Shellfish_Area_1_Norovirus,norovirus,shellfish_consumption,1000000,3,800,100,24,5000,High,10000,Commercial shellfish harvesting area
+S006,Shellfish_Area_2_Norovirus,norovirus,shellfish_consumption,1200000,3,500,100,18,3000,Medium,10000,Secondary shellfish area
 S007,Beach_A_Summer_Campylo,campylobacter,primary_contact,500000,3.5,100,50,25,15000,Medium,10000,Campylobacter assessment same beach
 S008,Beach_A_Summer_Crypto,cryptosporidium,primary_contact,50000,2.5,100,50,25,15000,Low,10000,Cryptosporidium assessment same beach
 S009,Beach_A_Summer_Ecoli,e_coli,primary_contact,800000,3.5,100,50,25,15000,Low,10000,E. coli indicator assessment
-S010,Beach_D_NoTreatment,norovirus,primary_contact,1000000,0.0,150,50,20,5000,High,10000,Worst case - bypass scenario
-S011,Beach_A_UV_Treatment,norovirus,primary_contact,1000000,8.0,100,50,25,15000,High,10000,With UV disinfection upgrade
+S010,Beach_D_NoTreatment,norovirus,primary_contact,1000000,0,150,50,20,5000,High,10000,Worst case - bypass scenario
+S011,Beach_A_UV_Treatment,norovirus,primary_contact,1000000,8,100,50,25,15000,High,10000,With UV disinfection upgrade
 S012,Beach_A_MBR_Treatment,norovirus,primary_contact,1000000,9.3,100,50,25,15000,High,10000,With MBR upgrade (best case)
-S013,Beach_E_Poor_Dilution,norovirus,primary_contact,1000000,3.0,25,50,25,12000,High,10000,Enclosed bay poor mixing
-S014,Beach_F_Excellent_Dilution,norovirus,primary_contact,1000000,3.0,500,50,25,12000,Low,10000,Open coast excellent dilution
-S015,Peak_Summer_Weekend,norovirus,primary_contact,1500000,3.0,60,75,40,20000,High,10000,Peak weekend high use high concentration
+S013,Beach_E_Poor_Dilution,norovirus,primary_contact,1000000,3,25,50,25,12000,High,10000,Enclosed bay poor mixing
+S014,Beach_F_Excellent_Dilution,norovirus,primary_contact,1000000,3,500,50,25,12000,Low,10000,Open coast excellent dilution
+S015,Peak_Summer_Weekend,norovirus,primary_contact,1500000,3,60,75,40,20000,High,10000,Peak weekend high use high concentration
