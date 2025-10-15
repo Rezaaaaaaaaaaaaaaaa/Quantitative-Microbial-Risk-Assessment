@@ -135,7 +135,7 @@ class BatchProcessor:
                 'Annual_Risk_5th': result['annual_5th'],
                 'Annual_Risk_95th': result['annual_95th'],
                 'Population_Impact': result['population_impact'],
-                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-6 else 'NON-COMPLIANT'
+                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT'
             })
 
             print(f"  {site_name:20s} {distance:6.0f}m  Dilution: {dilution_factor:8.1f}x  Risk: {result['annual_risk_median']:.2e}  {results[-1]['Compliance_Status']}")
@@ -225,7 +225,7 @@ class BatchProcessor:
                 'Annual_Risk_5th': result['annual_5th'],
                 'Annual_Risk_95th': result['annual_95th'],
                 'Population_Impact': result['population_impact'],
-                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-6 else 'NON-COMPLIANT'
+                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT'
             })
 
             if (idx + 1) % 10 == 0:
@@ -308,7 +308,7 @@ class BatchProcessor:
                 'Annual_Risk_Median': result['annual_risk_median'],
                 'Annual_Risk_95th': result['annual_95th'],
                 'Population_Impact': result['population_impact'],
-                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-6 else 'NON-COMPLIANT',
+                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT',
                 'Risk_Reduction_vs_Raw': raw_concentration / receiving_water_conc
             })
 
@@ -393,7 +393,7 @@ class BatchProcessor:
                 'Annual_Risk_5th': result['annual_5th'],
                 'Annual_Risk_95th': result['annual_95th'],
                 'Population_Impact': result['population_impact'],
-                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-6 else 'NON-COMPLIANT'
+                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT'
             })
 
             print(f"  Annual Risk: {result['annual_risk_median']:.2e}  {results[-1]['Compliance_Status']}")
@@ -447,10 +447,26 @@ class BatchProcessor:
             print(f"\n[{idx+1}/{len(scenarios_df)}] Processing: {scenario_id} - {scenario_name}")
 
             # Apply treatment and dilution
+            # Note: Treatment and dilution uncertainty handled in concentration uncertainty
             post_treatment_conc = scenario['Effluent_Conc'] / (10 ** scenario['Treatment_LRV'])
             receiving_water_conc = post_treatment_conc / scenario['Dilution_Factor']
 
-            # Run QMRA
+            # Read distribution parameters (with backwards compatibility)
+            effluent_conc_cv = scenario.get('Effluent_Conc_CV', 0.5)
+            treatment_lrv_uncertainty = scenario.get('Treatment_LRV_Uncertainty', 0.2)
+            dilution_factor_cv = scenario.get('Dilution_Factor_CV', 0.3)
+            volume_min = scenario.get('Volume_Min', None)
+            volume_max = scenario.get('Volume_Max', None)
+
+            # Combine uncertainties: effluent + treatment + dilution
+            # Using uncertainty propagation: CV_total = sqrt(CV1^2 + CV2^2 + CV3^2)
+            total_concentration_cv = np.sqrt(
+                effluent_conc_cv**2 +
+                (treatment_lrv_uncertainty * np.log(10))**2 +  # Convert LRV uncertainty to relative
+                dilution_factor_cv**2
+            )
+
+            # Run QMRA with custom distributions
             result = self._run_single_assessment(
                 pathogen=scenario['Pathogen'],
                 concentration=receiving_water_conc,
@@ -458,7 +474,12 @@ class BatchProcessor:
                 volume_ml=scenario['Volume_mL'],
                 frequency_per_year=scenario['Frequency_Year'],
                 population=scenario['Population'],
-                iterations=scenario.get('Monte_Carlo_Iterations', 10000)
+                iterations=scenario.get('Monte_Carlo_Iterations', 10000),
+                concentration_cv=total_concentration_cv,
+                volume_min=volume_min,
+                volume_max=volume_max,
+                dilution_cv=dilution_factor_cv,
+                treatment_uncertainty=treatment_lrv_uncertainty
             )
 
             results.append({
@@ -478,7 +499,7 @@ class BatchProcessor:
                 'Annual_Risk_5th': result['annual_5th'],
                 'Annual_Risk_95th': result['annual_95th'],
                 'Population_Impact': result['population_impact'],
-                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-6 else 'NON-COMPLIANT',
+                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT',
                 'Priority': scenario.get('Priority', 'Medium')
             })
 
@@ -511,22 +532,52 @@ class BatchProcessor:
 
     def _run_single_assessment(self, pathogen, concentration, exposure_route,
                                volume_ml, frequency_per_year, population,
-                               iterations=10000):
+                               iterations=10000, concentration_cv=0.5,
+                               volume_min=None, volume_max=None,
+                               dilution_cv=0.3, treatment_uncertainty=0.2):
         """
         Run a single QMRA assessment.
 
         Internal method used by all batch processors.
+
+        Args:
+            pathogen: Pathogen name
+            concentration: Mean concentration in receiving water
+            exposure_route: Exposure route
+            volume_ml: Mean ingestion volume
+            frequency_per_year: Exposure frequency
+            population: Exposed population
+            iterations: Monte Carlo iterations
+            concentration_cv: Coefficient of variation for concentration (default 0.5)
+            volume_min: Minimum volume (default: volume_ml * 0.5)
+            volume_max: Maximum volume (default: volume_ml * 1.5)
+            dilution_cv: Coefficient of variation for dilution (default 0.3)
+            treatment_uncertainty: Uncertainty in treatment LRV (default 0.2)
         """
         if QMRA_MODULES_AVAILABLE:
             return self._run_full_qmra(pathogen, concentration, exposure_route,
-                                      volume_ml, frequency_per_year, population, iterations)
+                                      volume_ml, frequency_per_year, population, iterations,
+                                      concentration_cv, volume_min, volume_max,
+                                      dilution_cv, treatment_uncertainty)
         else:
             return self._run_simplified_qmra(pathogen, concentration, exposure_route,
-                                            volume_ml, frequency_per_year, population, iterations)
+                                            volume_ml, frequency_per_year, population, iterations,
+                                            concentration_cv, volume_min, volume_max)
 
     def _run_full_qmra(self, pathogen, concentration, exposure_route,
-                       volume_ml, frequency_per_year, population, iterations):
-        """Run full QMRA with proper modules."""
+                       volume_ml, frequency_per_year, population, iterations,
+                       concentration_cv=0.5, volume_min=None, volume_max=None,
+                       dilution_cv=0.3, treatment_uncertainty=0.2):
+        """
+        Run full QMRA with proper modules using custom distributions.
+
+        Args:
+            concentration_cv: Coefficient of variation for concentration
+            volume_min: Minimum ingestion volume
+            volume_max: Maximum ingestion volume
+            dilution_cv: Not used directly here (applied upstream)
+            treatment_uncertainty: Not used directly here (applied upstream)
+        """
         # Get pathogen parameters
         pathogen_info = self.pathogen_db.get_pathogen_info(pathogen)
         default_model_type = self.pathogen_db.get_default_model_type(pathogen)
@@ -539,17 +590,25 @@ class BatchProcessor:
         # Monte Carlo simulation
         mc_simulator = MonteCarloSimulator(random_seed=42)
 
-        # Add distributions
+        # Add concentration distribution with custom CV
+        # CV relates to std for lognormal: std = sqrt(log(1 + CV^2))
+        log_std = np.sqrt(np.log(1 + concentration_cv**2))
         conc_dist = create_lognormal_distribution(
             mean=np.log(max(concentration, 1e-10)),
-            std=0.5,
+            std=log_std,
             name="concentration"
         )
         mc_simulator.add_distribution("concentration", conc_dist)
 
+        # Add volume distribution with custom min/max
+        if volume_min is None:
+            volume_min = volume_ml * 0.5
+        if volume_max is None:
+            volume_max = volume_ml * 1.5
+
         vol_dist = create_uniform_distribution(
-            min_val=volume_ml * 0.5,
-            max_val=volume_ml * 1.5,
+            min_val=volume_min,
+            max_val=volume_max,
             name="volume"
         )
         mc_simulator.add_distribution("volume", vol_dist)
@@ -588,8 +647,16 @@ class BatchProcessor:
         }
 
     def _run_simplified_qmra(self, pathogen, concentration, exposure_route,
-                            volume_ml, frequency_per_year, population, iterations):
-        """Run simplified QMRA when modules unavailable."""
+                            volume_ml, frequency_per_year, population, iterations,
+                            concentration_cv=0.5, volume_min=None, volume_max=None):
+        """
+        Run simplified QMRA when modules unavailable.
+
+        Args:
+            concentration_cv: Coefficient of variation for concentration
+            volume_min: Minimum ingestion volume
+            volume_max: Maximum ingestion volume
+        """
         # Simplified dose-response parameters
         dr_params = {
             'norovirus': {'alpha': 0.04, 'model': 'exponential', 'pill_inf': 0.7},
@@ -602,21 +669,31 @@ class BatchProcessor:
 
         params = dr_params.get(pathogen, {'alpha': 0.1, 'model': 'exponential', 'pill_inf': 0.5})
 
-        # Calculate dose
-        dose = (concentration * volume_ml) / 1000.0
+        # Set volume range
+        if volume_min is None:
+            volume_min = volume_ml * 0.5
+        if volume_max is None:
+            volume_max = volume_ml * 1.5
+
+        # Simple Monte Carlo with custom distributions
+        np.random.seed(42)
+
+        # Sample concentrations with custom CV
+        log_std = np.sqrt(np.log(1 + concentration_cv**2))
+        conc_samples = np.random.lognormal(np.log(max(concentration, 1e-10)), log_std, iterations)
+
+        # Sample volumes uniformly
+        vol_samples = np.random.uniform(volume_min, volume_max, iterations)
+
+        # Calculate doses
+        dose_samples = (conc_samples * vol_samples) / 1000.0
 
         # Dose-response
         if params['model'] == 'exponential':
-            pinf = 1 - np.exp(-params['alpha'] * dose)
+            pinf_samples = 1 - np.exp(-params['alpha'] * dose_samples)
         else:  # beta_poisson
-            pinf = 1 - np.power(1 + dose / params['beta'], -params['alpha'])
+            pinf_samples = 1 - np.power(1 + dose_samples / params['beta'], -params['alpha'])
 
-        pill = pinf * params['pill_inf']
-        annual_risk = 1 - (1 - pinf) ** frequency_per_year
-
-        # Simple Monte Carlo
-        np.random.seed(42)
-        pinf_samples = np.random.lognormal(np.log(max(pinf, 1e-10)), 0.5, iterations)
         pill_samples = pinf_samples * params['pill_inf']
         annual_samples = 1 - (1 - pinf_samples) ** frequency_per_year
 

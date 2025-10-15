@@ -32,7 +32,7 @@ class QMRAPDFReportGenerator:
             'negligible': '#17a2b8'
         }
 
-    def generate_report(self, results_df, output_file, report_title="QMRA Batch Assessment Report"):
+    def generate_report(self, results_df, output_file, report_title="QMRA Batch Assessment Report", plots=None):
         """
         Generate comprehensive PDF report from batch results.
 
@@ -44,6 +44,10 @@ class QMRAPDFReportGenerator:
             Output PDF filename
         report_title : str
             Title for the report
+        plots : dict, optional
+            Dictionary of pre-generated matplotlib figures from web app
+            Expected keys: 'risk_overview', 'compliance_distribution',
+                          'risk_distribution', 'population_impact'
         """
         # Create PDF
         with PdfPages(output_file) as pdf:
@@ -53,16 +57,29 @@ class QMRAPDFReportGenerator:
             # Page 2: Executive summary
             self._add_executive_summary(pdf, results_df)
 
-            # Page 3: Risk overview chart
-            self._add_risk_overview_chart(pdf, results_df)
+            # Page 3: Risk overview chart (use web app plot if available)
+            if plots and 'risk_overview' in plots:
+                self._add_pregenerated_plot(pdf, plots['risk_overview'], 'Risk Overview')
+            else:
+                self._add_risk_overview_chart(pdf, results_df)
 
-            # Page 4: Compliance status
-            self._add_compliance_chart(pdf, results_df)
+            # Page 4: Compliance status (use web app plot if available)
+            if plots and 'compliance_distribution' in plots:
+                self._add_pregenerated_plot(pdf, plots['compliance_distribution'], 'Compliance Status')
+            else:
+                self._add_compliance_chart(pdf, results_df)
 
-            # Page 5: Priority analysis
-            self._add_priority_analysis(pdf, results_df)
+            # Page 5: Risk distribution (use web app plot if available)
+            if plots and 'risk_distribution' in plots:
+                self._add_pregenerated_plot(pdf, plots['risk_distribution'], 'Risk Distribution')
+            else:
+                self._add_priority_analysis(pdf, results_df)
 
-            # Page 6-7: Treatment comparison (if multiple treatments)
+            # Page 6: Population impact (use web app plot if available)
+            if plots and 'population_impact' in plots:
+                self._add_pregenerated_plot(pdf, plots['population_impact'], 'Population Impact')
+
+            # Page 7: Treatment comparison (if multiple treatments)
             if 'Treatment_LRV' in results_df.columns:
                 self._add_treatment_comparison(pdf, results_df)
 
@@ -84,6 +101,22 @@ class QMRAPDFReportGenerator:
             d['CreationDate'] = datetime.now()
 
         print(f"PDF report generated: {output_file}")
+
+    def _add_pregenerated_plot(self, pdf, fig, title):
+        """
+        Add a pre-generated matplotlib figure to the PDF.
+
+        Parameters:
+        -----------
+        pdf : PdfPages
+            PDF file object
+        fig : matplotlib.figure.Figure
+            Pre-generated matplotlib figure from web app
+        title : str
+            Title for the page (optional, as figure may have its own title)
+        """
+        # Save the figure to PDF as-is
+        pdf.savefig(fig, bbox_inches='tight')
 
     def _add_title_page(self, pdf, title, results_df):
         """Add title page."""
@@ -553,7 +586,7 @@ Total Predicted Illnesses: {int(total_impact):,}
         plt.close()
 
 
-def generate_batch_pdf_report(csv_file, output_pdf=None, title="QMRA Batch Assessment Report"):
+def generate_batch_pdf_report(csv_file, output_pdf=None, title="QMRA Batch Assessment Report", plots=None):
     """
     Convenience function to generate PDF report from CSV file.
 
@@ -565,6 +598,8 @@ def generate_batch_pdf_report(csv_file, output_pdf=None, title="QMRA Batch Asses
         Output PDF filename (auto-generated if None)
     title : str
         Report title
+    plots : dict, optional
+        Dictionary of pre-generated matplotlib figures from web app
     """
     # Read CSV
     results_df = pd.read_csv(csv_file)
@@ -575,7 +610,7 @@ def generate_batch_pdf_report(csv_file, output_pdf=None, title="QMRA Batch Asses
 
     # Generate report
     generator = QMRAPDFReportGenerator()
-    generator.generate_report(results_df, output_pdf, title)
+    generator.generate_report(results_df, output_pdf, title, plots=plots)
 
     return output_pdf
 

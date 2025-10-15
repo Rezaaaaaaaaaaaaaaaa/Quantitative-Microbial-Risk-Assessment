@@ -963,7 +963,7 @@ def display_results_and_reports():
             with col2:
                 # PDF report
                 if st.button("📑 Generate PDF Report", use_container_width=True):
-                    generate_pdf_report(results_file, df)
+                    generate_pdf_report(results_file, df, plots)
 
             with col3:
                 # Download all bundle
@@ -1101,14 +1101,14 @@ def display_results_and_reports():
         st.info("👆 Run an assessment to see results here")
 
 
-def generate_pdf_report(csv_file, df):
+def generate_pdf_report(csv_file, df, plots=None):
     """Generate and download PDF report."""
     with st.spinner("📑 Generating comprehensive PDF report..."):
         try:
             pdf_file = csv_file.replace('.csv', '_report.pdf')
 
             generator = QMRAPDFReportGenerator()
-            generator.generate_report(df, pdf_file, "QMRA Batch Assessment Report")
+            generator.generate_report(df, pdf_file, "QMRA Batch Assessment Report", plots=plots)
 
             # Read PDF and provide download
             with open(pdf_file, 'rb') as f:

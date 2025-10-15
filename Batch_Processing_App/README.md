@@ -194,13 +194,35 @@ total_log_reduction: 6.0
 
 ### 4. Batch Scenario CSV
 
-All parameters in one spreadsheet:
+All parameters in one spreadsheet with custom uncertainty distributions:
 
 ```csv
-Scenario_ID,Scenario_Name,Pathogen,Exposure_Route,Effluent_Conc,Treatment_LRV,Dilution_Factor,Volume_mL,Frequency_Year,Population
-S001,Beach_A_Summer,norovirus,primary_contact,1000000,3.0,100,50,20,10000
-S002,Beach_B_Winter,norovirus,primary_contact,1500000,3.0,50,30,5,2000
+Scenario_ID,Scenario_Name,Pathogen,Exposure_Route,Effluent_Conc,Effluent_Conc_CV,Treatment_LRV,Treatment_LRV_Uncertainty,Dilution_Factor,Dilution_Factor_CV,Volume_mL,Volume_Min,Volume_Max,Frequency_Year,Population
+S001,Beach_A_Summer,norovirus,primary_contact,1000000,0.4,3.0,0.3,100,0.3,50,35,75,20,10000
+S002,Beach_B_Winter,norovirus,primary_contact,1500000,0.8,3.0,0.5,50,0.6,30,20,50,5,2000
 ```
+
+**Distribution Parameters:**
+- **Effluent_Conc_CV**: Coefficient of variation for concentration (e.g., 0.4 = 40% variability)
+  - 0.3-0.4 = Good monitoring data, low variability
+  - 0.5-0.6 = Moderate uncertainty
+  - 0.7-0.9 = High uncertainty, limited data
+
+- **Treatment_LRV_Uncertainty**: Uncertainty in treatment effectiveness (log units)
+  - 0.2-0.3 = Well-characterized, reliable treatment
+  - 0.4-0.5 = Variable performance
+  - 0.6+ = Uncertain or poorly maintained treatment
+
+- **Dilution_Factor_CV**: Coefficient of variation for dilution
+  - 0.2-0.3 = Stable conditions (open coast)
+  - 0.4-0.5 = Moderate variability (tidal effects)
+  - 0.6-0.8 = Highly variable (enclosed bays, seasonal changes)
+
+- **Volume_Min/Volume_Max**: Range of ingestion volumes (mL)
+  - Primary contact: 20-100 mL typical
+  - Shellfish consumption: 50-200 mL typical
+
+These parameters allow scenario-specific uncertainty, improving Monte Carlo realism.
 
 ---
 
@@ -295,6 +317,27 @@ streamlit run web_app.py --server.port 8503
 - **Median_Annual_Risk** - 50th percentile (less influenced by outliers)
 - **P95_Annual_Risk** - 95th percentile (captures uncertainty)
 - **Population_Impact** - Expected annual illnesses
+
+### Understanding Uncertainty Distributions
+
+The tool now supports **scenario-specific uncertainty** through custom distribution parameters. During Monte Carlo simulation:
+
+**Concentration Distribution (Lognormal):**
+- Uses `Effluent_Conc_CV` to set variability
+- Accounts for measurement error, temporal variation
+- Combined with treatment and dilution uncertainty
+- Formula: `CV_total = √(CV_effluent² + CV_treatment² + CV_dilution²)`
+
+**Volume Distribution (Uniform):**
+- Uses `Volume_Min` and `Volume_Max` as bounds
+- Reflects range of human behavior
+- Winter (20-50 mL) vs Summer (40-100 mL)
+
+**Why This Matters:**
+- **S001** (Beach A Summer, CV=0.4): Well-monitored, narrow risk range
+- **S010** (Bypass scenario, CV=0.9): High uncertainty, wide risk range
+- Results show both **median risk** and **confidence intervals** (5th-95th percentiles)
+- High-uncertainty scenarios may need **conservative decision-making**
 
 ### Risk Classification
 
