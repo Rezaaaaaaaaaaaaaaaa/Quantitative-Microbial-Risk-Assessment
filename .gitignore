@@ -37,3 +37,8 @@ Thumbs.db
 
 # Local settings
 .claude/settings.local.json
+
+# Test outputs and temporary results
+**/test_*.csv
+**/test_*.pdf
+**/review_*.png
