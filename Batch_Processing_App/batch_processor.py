@@ -24,18 +24,18 @@ import json
 from datetime import datetime
 import warnings
 
-# Add QMRA toolkit to path
-toolkit_path = Path(__file__).parent.parent / 'qmra_toolkit' / 'src'
-if toolkit_path.exists():
-    sys.path.insert(0, str(toolkit_path))
-
+# Import QMRA core modules from local qmra_core package
 try:
-    from pathogen_database import PathogenDatabase
-    from dose_response import create_dose_response_model
-    from monte_carlo import MonteCarloSimulator, create_lognormal_distribution, create_uniform_distribution
+    from qmra_core import (
+        PathogenDatabase,
+        create_dose_response_model,
+        MonteCarloSimulator,
+        create_lognormal_distribution,
+        create_uniform_distribution
+    )
     QMRA_MODULES_AVAILABLE = True
-except ImportError:
-    warnings.warn("QMRA modules not found. Using simplified calculations.")
+except ImportError as e:
+    warnings.warn(f"QMRA core modules not found ({e}). Using simplified calculations.")
     QMRA_MODULES_AVAILABLE = False
 
 

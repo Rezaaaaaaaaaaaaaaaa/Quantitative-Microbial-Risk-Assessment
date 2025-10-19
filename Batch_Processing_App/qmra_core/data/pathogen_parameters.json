@@ -1,0 +1,173 @@
+{
+  "norovirus": {
+    "name": "Norovirus",
+    "pathogen_type": "virus",
+    "dose_response_models": {
+      "beta_poisson": {
+        "alpha": 0.04,
+        "beta": 0.055,
+        "source": "Teunis et al. (2008)",
+        "notes": "Optimized model for human norovirus",
+        "r_squared": 0.85
+      },
+      "exponential": {
+        "r": 0.5,
+        "source": "Alternative simplified model",
+        "notes": "Conservative exponential approximation"
+      }
+    },
+    "illness_to_infection_ratio": 0.7,
+    "dalys_per_case": 0.002,
+    "exposure_routes": [
+      "primary_contact",
+      "shellfish_consumption",
+      "contaminated_water"
+    ],
+    "environmental_data": {
+      "survival_time_days": 60,
+      "inactivation_rate_per_day": 0.1,
+      "typical_concentrations": {
+        "raw_wastewater": 1e6,
+        "treated_wastewater": 1e3,
+        "recreational_water": 10,
+        "shellfish_tissue": 1e3
+      }
+    }
+  },
+  "campylobacter": {
+    "name": "Campylobacter jejuni",
+    "pathogen_type": "bacteria",
+    "dose_response_models": {
+      "beta_poisson": {
+        "alpha": 0.145,
+        "beta": 7.59,
+        "source": "Teunis et al. (2005)",
+        "notes": "Hypergeometric-based model"
+      }
+    },
+    "illness_to_infection_ratio": 0.3,
+    "dalys_per_case": 0.005,
+    "exposure_routes": [
+      "contaminated_water",
+      "food_consumption"
+    ]
+  },
+  "cryptosporidium": {
+    "name": "Cryptosporidium parvum",
+    "pathogen_type": "protozoa",
+    "dose_response_models": {
+      "exponential": {
+        "r": 0.0042,
+        "source": "Haas et al. (1996)",
+        "notes": "Based on human feeding studies"
+      }
+    },
+    "illness_to_infection_ratio": 1.0,
+    "dalys_per_case": 0.003,
+    "exposure_routes": [
+      "contaminated_water",
+      "recreational_water"
+    ]
+  },
+  "e_coli": {
+    "name": "Escherichia coli O157:H7",
+    "pathogen_type": "bacteria",
+    "dose_response_models": {
+      "exponential": {
+        "r": 0.00156,
+        "source": "Haas et al. (1999)",
+        "notes": "Exponential model for E. coli O157:H7"
+      },
+      "beta_poisson": {
+        "alpha": 0.1778,
+        "beta": 1.18e6,
+        "source": "Haas et al. (1999)",
+        "notes": "Alternative beta-Poisson model"
+      }
+    },
+    "illness_to_infection_ratio": 0.5,
+    "dalys_per_case": 0.015,
+    "exposure_routes": [
+      "contaminated_water",
+      "food_consumption",
+      "recreational_water"
+    ],
+    "environmental_data": {
+      "survival_time_days": 30,
+      "inactivation_rate_per_day": 0.2,
+      "typical_concentrations": {
+        "raw_wastewater": 1e5,
+        "treated_wastewater": 1e2,
+        "recreational_water": 5,
+        "contaminated_food": 1e4
+      }
+    }
+  },
+  "salmonella": {
+    "name": "Salmonella spp.",
+    "pathogen_type": "bacteria",
+    "dose_response_models": {
+      "beta_poisson": {
+        "alpha": 0.3126,
+        "beta": 2.2e6,
+        "source": "Haas et al. (1999)",
+        "notes": "Beta-Poisson model for Salmonella"
+      },
+      "exponential": {
+        "r": 0.00001,
+        "source": "Alternative conservative model",
+        "notes": "Simplified exponential approximation"
+      }
+    },
+    "illness_to_infection_ratio": 0.6,
+    "dalys_per_case": 0.008,
+    "exposure_routes": [
+      "contaminated_water",
+      "food_consumption"
+    ],
+    "environmental_data": {
+      "survival_time_days": 45,
+      "inactivation_rate_per_day": 0.15,
+      "typical_concentrations": {
+        "raw_wastewater": 1e4,
+        "treated_wastewater": 1e1,
+        "recreational_water": 2,
+        "contaminated_food": 1e5
+      }
+    }
+  },
+  "rotavirus": {
+    "name": "Rotavirus",
+    "pathogen_type": "virus",
+    "dose_response_models": {
+      "beta_poisson": {
+        "alpha": 0.26,
+        "beta": 0.42,
+        "source": "Ward et al. (1986)",
+        "notes": "Beta-Poisson model from human challenge studies"
+      },
+      "exponential": {
+        "r": 0.167,
+        "source": "Regli et al. (1991)",
+        "notes": "Alternative exponential model"
+      }
+    },
+    "illness_to_infection_ratio": 0.5,
+    "dalys_per_case": 0.012,
+    "exposure_routes": [
+      "contaminated_water",
+      "food_consumption",
+      "recreational_water"
+    ],
+    "environmental_data": {
+      "survival_time_days": 60,
+      "inactivation_rate_per_day": 0.1,
+      "typical_concentrations": {
+        "raw_wastewater": 1e5,
+        "treated_wastewater": 1e2,
+        "recreational_water": 10,
+        "drinking_water": 0.1
+      }
+    }
+  }
+}

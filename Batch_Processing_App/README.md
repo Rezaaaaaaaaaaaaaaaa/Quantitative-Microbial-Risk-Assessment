@@ -1,6 +1,6 @@
 # QMRA Batch Processing Web Application
 
-**Interactive Web-Based Quantitative Microbial Risk Assessment Tool**
+**Standalone Interactive Web-Based Quantitative Microbial Risk Assessment Tool**
 
 Version 1.0 | October 2025 | NIWA Earth Sciences New Zealand
 
@@ -8,7 +8,9 @@ Version 1.0 | October 2025 | NIWA Earth Sciences New Zealand
 
 ## Overview
 
-This web-based application provides an intuitive interface for running multiple QMRA scenarios with comprehensive visualizations and downloadable results.
+This is a **standalone** web-based application that provides an intuitive interface for running multiple QMRA scenarios with comprehensive visualizations and downloadable results.
+
+**Key Feature:** This application is completely self-contained with all necessary QMRA modules bundled in the `qmra_core/` package. It can be copied anywhere and will function independently without requiring the parent QMRA toolkit.
 
 ### Features
 
@@ -39,8 +41,11 @@ This web-based application provides an intuitive interface for running multiple 
 ### 1. Install Requirements
 
 ```bash
-pip install streamlit pandas numpy matplotlib pyyaml openpyxl
+# Use the included requirements.txt for all dependencies
+pip install -r requirements.txt
 ```
+
+**For detailed installation instructions including virtual environments and troubleshooting, see `INSTALLATION.md`**
 
 ### 2. Launch the Application
 
@@ -66,6 +71,13 @@ The application will open automatically in your browser at `http://localhost:850
 
 ```
 Batch_Processing_App/
+├── qmra_core/                    # Standalone QMRA modules (self-contained)
+│   ├── pathogen_database.py      # Pathogen parameters & dose-response
+│   ├── dose_response.py          # Dose-response models
+│   ├── monte_carlo.py            # Monte Carlo simulation
+│   └── data/
+│       └── pathogen_parameters.json  # Pathogen database
+│
 ├── web_app.py                    # Main web application
 ├── batch_processor.py            # Core QMRA processing engine
 ├── pdf_report_generator.py       # PDF report generation
