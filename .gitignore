@@ -42,3 +42,6 @@ Thumbs.db
 **/test_*.csv
 **/test_*.pdf
 **/review_*.png
+**/multi_pathogen_results.csv
+**/treatment_comparison.csv
+**/.ipynb_checkpoints/
