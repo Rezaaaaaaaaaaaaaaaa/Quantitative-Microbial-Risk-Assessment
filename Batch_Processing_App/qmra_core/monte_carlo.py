@@ -7,7 +7,7 @@ in quantitative microbial risk assessment, replacing @Risk functionality.
 
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Optional, Union, Callable, Any
+from typing import Dict, List, Optional, Union, Callable, Any, Tuple
 from scipy import stats
 import warnings
 from dataclasses import dataclass
@@ -27,6 +27,8 @@ class DistributionType(Enum):
     WEIBULL = "weibull"
     POISSON = "poisson"
     BINOMIAL = "binomial"
+    EMPIRICAL_CDF = "empirical_cdf"  # For sampling dilution data
+    HOCKEY_STICK = "hockey_stick"  # For pathogen concentration estimation
 
 
 @dataclass
@@ -49,7 +51,9 @@ class DistributionParameters:
             DistributionType.EXPONENTIAL: ["scale"],
             DistributionType.WEIBULL: ["shape", "scale"],
             DistributionType.POISSON: ["mu"],
-            DistributionType.BINOMIAL: ["n", "p"]
+            DistributionType.BINOMIAL: ["n", "p"],
+            DistributionType.EMPIRICAL_CDF: ["x_values", "probabilities"],  # x values and cumulative probs
+            DistributionType.HOCKEY_STICK: ["x_min", "x_median", "x_max"]  # min, median, max values
         }
 
         required = required_params.get(self.distribution_type, [])
@@ -179,6 +183,70 @@ class MonteCarloSimulator:
 
         elif dist_type == DistributionType.BINOMIAL:
             return np.random.binomial(params["n"], params["p"], n_samples)
+
+        elif dist_type == DistributionType.EMPIRICAL_CDF:
+            # Sample from empirical cumulative distribution function
+            # This is used for dilution data
+            x_values = np.array(params["x_values"])
+            probabilities = np.array(params["probabilities"])
+
+            # Ensure values are sorted by x
+            sorted_idx = np.argsort(x_values)
+            x_sorted = x_values[sorted_idx]
+            p_sorted = probabilities[sorted_idx]
+
+            # Generate uniform random samples and interpolate
+            uniform_samples = np.random.uniform(0, 1, n_samples)
+            samples = np.interp(uniform_samples, p_sorted, x_sorted)
+
+            # Apply optional bounds
+            if "min" in params:
+                samples = np.maximum(samples, params["min"])
+            if "max" in params:
+                samples = np.minimum(samples, params["max"])
+
+            return samples
+
+        elif dist_type == DistributionType.HOCKEY_STICK:
+            # Hockey stick distribution for pathogen concentrations
+            # Based on McBride's formulation (see PDF page 5-6)
+            x_min = params["x_min"]  # X₀ - minimum
+            x_median = params["x_median"]  # X₅₀ - median
+            x_max = params["x_max"]  # X₁₀₀ - maximum
+            percentile = params.get("percentile", 95)  # P - default 95th percentile
+
+            # Calculate h1 and h2 from equations (9.9) and (9.11)
+            h1 = 1.0 / (x_median - x_min)
+            h2 = 2.0 * (1 - percentile/100.0) / (x_max - x_median)
+
+            # Calculate X_P (the Pth percentile position) using equation (9.10)
+            # This is a simplified version - full equation is quadratic
+            sq = percentile / 100.0
+            x_p = 0.5 * (x_median + x_max + 1.0/h1 -
+                        np.sqrt((x_max - x_median)**2 +
+                               (x_median * (2 - 8*sq) + x_max * (2 - 8*sq))/(h1) +
+                               1.0/(h1**2)))
+
+            samples = np.zeros(n_samples)
+            for i in range(n_samples):
+                u = np.random.uniform(0, 1)
+
+                if u <= 0.5:
+                    # Left triangle (A-B region): uniform probability
+                    # Linear interpolation from x_min to x_median
+                    samples[i] = x_min + (x_median - x_min) * (u / 0.5)
+                elif u <= percentile/100.0:
+                    # Middle region (B-C): proportional area
+                    # Linear interpolation from x_median to x_p
+                    u_scaled = (u - 0.5) / (percentile/100.0 - 0.5)
+                    samples[i] = x_median + (x_p - x_median) * u_scaled
+                else:
+                    # Right tail (C-D): remaining probability
+                    # Linear interpolation from x_p to x_max
+                    u_scaled = (u - percentile/100.0) / (1 - percentile/100.0)
+                    samples[i] = x_p + (x_max - x_p) * u_scaled
+
+            return samples
 
         else:
             raise ValueError(f"Unsupported distribution type: {dist_type}")
@@ -412,6 +480,133 @@ def create_triangular_distribution(min_val: float, mode: float, max_val: float, 
         parameters={"min": min_val, "mode": mode, "max": max_val},
         name=name
     )
+
+def create_empirical_cdf_distribution(x_values: Union[List[float], np.ndarray],
+                                      probabilities: Union[List[float], np.ndarray],
+                                      min_val: Optional[float] = None,
+                                      max_val: Optional[float] = None,
+                                      name: str = None) -> DistributionParameters:
+    """
+    Create empirical cumulative distribution function parameters.
+
+    This is used for sampling dilution data where we have empirical measurements.
+
+    Args:
+        x_values: Array of x values (e.g., dilution factors)
+        probabilities: Array of cumulative probabilities (0 to 1)
+        min_val: Optional minimum bound
+        max_val: Optional maximum bound
+        name: Optional name for the distribution
+
+    Returns:
+        DistributionParameters for ECDF sampling
+    """
+    params = {
+        "x_values": np.array(x_values) if not isinstance(x_values, np.ndarray) else x_values,
+        "probabilities": np.array(probabilities) if not isinstance(probabilities, np.ndarray) else probabilities
+    }
+
+    if min_val is not None:
+        params["min"] = min_val
+    if max_val is not None:
+        params["max"] = max_val
+
+    return DistributionParameters(
+        distribution_type=DistributionType.EMPIRICAL_CDF,
+        parameters=params,
+        name=name,
+        description="Empirical cumulative distribution function for dilution data"
+    )
+
+def create_hockey_stick_distribution(x_min: float, x_median: float, x_max: float,
+                                     percentile: float = 95.0,
+                                     name: str = None) -> DistributionParameters:
+    """
+    Create hockey stick distribution parameters for pathogen concentrations.
+
+    Based on McBride's formulation for right-skewed environmental microbiological data.
+    The distribution joins the median and maximum with a "hockey stick" shape.
+
+    Args:
+        x_min: Minimum value (X₀)
+        x_median: Median value (X₅₀)
+        x_max: Maximum value (X₁₀₀)
+        percentile: Percentile for the "toe" of the hockey stick (default 95)
+        name: Optional name for the distribution
+
+    Returns:
+        DistributionParameters for hockey stick sampling
+
+    Reference:
+        McBride (2009), "Microbial Water Quality and Human Health"
+        Section 9.3.2 - Hockey stick distribution
+    """
+    if x_min >= x_median or x_median >= x_max:
+        raise ValueError("Must have x_min < x_median < x_max")
+
+    if not 0 < percentile < 100:
+        raise ValueError("Percentile must be between 0 and 100")
+
+    return DistributionParameters(
+        distribution_type=DistributionType.HOCKEY_STICK,
+        parameters={
+            "x_min": x_min,
+            "x_median": x_median,
+            "x_max": x_max,
+            "percentile": percentile
+        },
+        name=name,
+        description="Hockey stick distribution for right-skewed pathogen data"
+    )
+
+
+def calculate_empirical_cdf(data: Union[List[float], np.ndarray]) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Calculate empirical cumulative distribution function from data.
+
+    This is the estDistribution function mentioned in the PDF for sampling dilution data.
+
+    Args:
+        data: Array of observed values (e.g., dilution factors from hydrodynamic modeling)
+
+    Returns:
+        Tuple of (sorted values, cumulative probabilities)
+    """
+    data_array = np.array(data) if not isinstance(data, np.ndarray) else data
+    sorted_data = np.sort(data_array)
+    n = len(sorted_data)
+    # Use (i)/(n) for cumulative probabilities (Weibull plotting position)
+    probs = np.arange(1, n + 1) / n
+    return sorted_data, probs
+
+
+def create_empirical_cdf_from_data(data: Union[List[float], np.ndarray],
+                                   min_val: Optional[float] = None,
+                                   max_val: Optional[float] = None,
+                                   name: str = None) -> DistributionParameters:
+    """
+    Create empirical CDF distribution from raw data.
+
+    This is a convenience function that calculates the ECDF and creates
+    the distribution parameters in one step.
+
+    Args:
+        data: Array of observed values (e.g., dilution factors)
+        min_val: Optional minimum bound
+        max_val: Optional maximum bound
+        name: Optional name for the distribution
+
+    Returns:
+        DistributionParameters for ECDF sampling
+
+    Example:
+        >>> dilution_data = [100, 250, 500, 1000, 2000]
+        >>> dilution_dist = create_empirical_cdf_from_data(dilution_data, name="dilution")
+        >>> mc = MonteCarloSimulator()
+        >>> mc.add_distribution("dilution", dilution_dist)
+    """
+    x_values, probabilities = calculate_empirical_cdf(data)
+    return create_empirical_cdf_distribution(x_values, probabilities, min_val, max_val, name)
 
 
 if __name__ == "__main__":

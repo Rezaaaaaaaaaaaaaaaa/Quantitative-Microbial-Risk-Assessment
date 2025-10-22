@@ -19,10 +19,14 @@ from .monte_carlo import (
     MonteCarloSimulator,
     create_lognormal_distribution,
     create_uniform_distribution,
-    create_triangular_distribution
+    create_triangular_distribution,
+    create_empirical_cdf_from_data,
+    create_empirical_cdf_distribution,
+    create_hockey_stick_distribution,
+    calculate_empirical_cdf
 )
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __all__ = [
     "PathogenDatabase",
     "get_norovirus_parameters",
@@ -30,5 +34,9 @@ __all__ = [
     "MonteCarloSimulator",
     "create_lognormal_distribution",
     "create_uniform_distribution",
-    "create_triangular_distribution"
+    "create_triangular_distribution",
+    "create_empirical_cdf_from_data",
+    "create_empirical_cdf_distribution",
+    "create_hockey_stick_distribution",
+    "calculate_empirical_cdf"
 ]

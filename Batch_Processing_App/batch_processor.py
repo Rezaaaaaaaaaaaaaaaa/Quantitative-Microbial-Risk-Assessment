@@ -31,7 +31,10 @@ try:
         create_dose_response_model,
         MonteCarloSimulator,
         create_lognormal_distribution,
-        create_uniform_distribution
+        create_uniform_distribution,
+        create_empirical_cdf_from_data,
+        create_hockey_stick_distribution,
+        calculate_empirical_cdf
     )
     QMRA_MODULES_AVAILABLE = True
 except ImportError as e:
@@ -54,17 +57,19 @@ class BatchProcessor:
 
         self.results_cache = []
 
-    def run_spatial_assessment(self, dilution_file, pathogen, effluent_concentration,
+    def run_spatial_assessment(self, dilution_file, pathogen, effluent_concentration=None,
                                exposure_route='primary_contact', volume_ml=50,
                                frequency_per_year=20, population=10000,
-                               treatment_lrv=0, iterations=10000, output_file=None):
+                               treatment_lrv=0, iterations=10000, output_file=None,
+                               use_ecdf_dilution=True, use_hockey_pathogen=False,
+                               pathogen_min=None, pathogen_median=None, pathogen_max=None):
         """
-        Run risk assessment at multiple spatial locations.
+        Run risk assessment at multiple spatial locations with empirical distributions.
 
         Args:
             dilution_file: CSV file with Site_Name, Distance_m, Dilution_Factor columns
             pathogen: Pathogen name (e.g., 'norovirus')
-            effluent_concentration: Pathogen concentration in effluent (copies/L)
+            effluent_concentration: Fixed pathogen concentration (copies/L) - ignored if use_hockey_pathogen=True
             exposure_route: 'primary_contact' or 'shellfish_consumption'
             volume_ml: Ingestion volume per exposure (mL)
             frequency_per_year: Exposure events per year
@@ -72,6 +77,11 @@ class BatchProcessor:
             treatment_lrv: Log reduction from treatment
             iterations: Monte Carlo iterations
             output_file: Output CSV file path
+            use_ecdf_dilution: Use full ECDF of dilution data (True) or median only (False)
+            use_hockey_pathogen: Use Hockey Stick distribution for pathogen concentration
+            pathogen_min: Minimum pathogen concentration (required if use_hockey_pathogen=True)
+            pathogen_median: Median pathogen concentration (required if use_hockey_pathogen=True)
+            pathogen_max: Maximum pathogen concentration (required if use_hockey_pathogen=True)
 
         Returns:
             DataFrame with spatial risk results
@@ -80,38 +90,53 @@ class BatchProcessor:
         print("SPATIAL RISK ASSESSMENT")
         print(f"{'='*80}")
         print(f"Pathogen: {pathogen}")
-        print(f"Effluent concentration: {effluent_concentration:,.0f} copies/L")
+
+        # Validate Hockey Stick parameters if needed
+        if use_hockey_pathogen:
+            if None in [pathogen_min, pathogen_median, pathogen_max]:
+                raise ValueError("When use_hockey_pathogen=True, must provide pathogen_min, pathogen_median, pathogen_max")
+            print(f"Pathogen concentration: Hockey Stick (min={pathogen_min:.0e}, median={pathogen_median:.0e}, max={pathogen_max:.0e})")
+        else:
+            if effluent_concentration is None:
+                raise ValueError("Must provide effluent_concentration when use_hockey_pathogen=False")
+            print(f"Effluent concentration: {effluent_concentration:,.0f} copies/L")
+
         print(f"Treatment LRV: {treatment_lrv}")
+        print(f"Using ECDF for dilution: {use_ecdf_dilution}")
 
         # Load dilution data
         dilution_df = pd.read_csv(dilution_file)
         print(f"\nLoaded {len(dilution_df)} dilution data points")
 
         # Get unique sites
-        sites = dilution_df.groupby('Site_Name').agg({
-            'Distance_m': 'first',
-            'Dilution_Factor': 'median'
-        }).reset_index()
-
-        print(f"Processing {len(sites)} sites...")
+        site_names = dilution_df['Site_Name'].unique()
+        print(f"Processing {len(site_names)} sites...")
 
         results = []
 
-        for idx, site in sites.iterrows():
-            site_name = site['Site_Name']
-            distance = site['Distance_m']
-            dilution_factor = site['Dilution_Factor']
+        for site_name in site_names:
+            # Get all dilution data for this site
+            site_data = dilution_df[dilution_df['Site_Name'] == site_name]
+            distance = site_data['Distance_m'].iloc[0]
+            dilution_values = site_data['Dilution_Factor'].values
 
-            # Apply treatment
-            post_treatment_conc = effluent_concentration / (10 ** treatment_lrv)
+            if use_ecdf_dilution:
+                print(f"\n  {site_name}: Using ECDF with {len(dilution_values)} simulations")
+            else:
+                dilution_median = np.median(dilution_values)
+                print(f"\n  {site_name}: Using median dilution: {dilution_median:.2f}x")
 
-            # Apply dilution
-            receiving_water_conc = post_treatment_conc / dilution_factor
-
-            # Run QMRA assessment
-            result = self._run_single_assessment(
+            # Run QMRA assessment with distributions
+            result = self._run_spatial_assessment_with_distributions(
                 pathogen=pathogen,
-                concentration=receiving_water_conc,
+                dilution_values=dilution_values,
+                use_ecdf_dilution=use_ecdf_dilution,
+                effluent_concentration=effluent_concentration,
+                use_hockey_pathogen=use_hockey_pathogen,
+                pathogen_min=pathogen_min,
+                pathogen_median=pathogen_median,
+                pathogen_max=pathogen_max,
+                treatment_lrv=treatment_lrv,
                 exposure_route=exposure_route,
                 volume_ml=volume_ml,
                 frequency_per_year=frequency_per_year,
@@ -120,13 +145,16 @@ class BatchProcessor:
             )
 
             # Compile results
+            dilution_summary = f"{len(dilution_values)} ECDF" if use_ecdf_dilution else f"{np.median(dilution_values):.2f}x"
             results.append({
                 'Site_Name': site_name,
                 'Distance_m': distance,
-                'Dilution_Factor': dilution_factor,
-                'Effluent_Conc': effluent_concentration,
-                'Post_Treatment_Conc': post_treatment_conc,
-                'Receiving_Water_Conc': receiving_water_conc,
+                'Dilution_Factor_Median': np.median(dilution_values),
+                'Dilution_Factor_Min': np.min(dilution_values),
+                'Dilution_Factor_Max': np.max(dilution_values),
+                'Dilution_Method': 'ECDF' if use_ecdf_dilution else 'Median',
+                'Pathogen_Method': 'Hockey_Stick' if use_hockey_pathogen else 'Fixed',
+                'Effluent_Conc_Input': pathogen_median if use_hockey_pathogen else effluent_concentration,
                 'Infection_Risk_Median': result['pinf_median'],
                 'Infection_Risk_5th': result['pinf_5th'],
                 'Infection_Risk_95th': result['pinf_95th'],
@@ -138,7 +166,7 @@ class BatchProcessor:
                 'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT'
             })
 
-            print(f"  {site_name:20s} {distance:6.0f}m  Dilution: {dilution_factor:8.1f}x  Risk: {result['annual_risk_median']:.2e}  {results[-1]['Compliance_Status']}")
+            print(f"    Risk: {result['annual_risk_median']:.2e} (5th: {result['annual_5th']:.2e}, 95th: {result['annual_95th']:.2e}) {results[-1]['Compliance_Status']}")
 
         results_df = pd.DataFrame(results)
 
@@ -149,6 +177,129 @@ class BatchProcessor:
             print(f"\nResults saved to: {output_path}")
 
         return results_df
+
+    def _run_spatial_assessment_with_distributions(self, pathogen, dilution_values,
+                                                    use_ecdf_dilution, effluent_concentration,
+                                                    use_hockey_pathogen, pathogen_min, pathogen_median,
+                                                    pathogen_max, treatment_lrv, exposure_route,
+                                                    volume_ml, frequency_per_year, population, iterations):
+        """
+        Internal method to run spatial assessment with empirical distributions.
+
+        Uses ECDF for dilution and/or Hockey Stick for pathogen concentration.
+        """
+        if not QMRA_MODULES_AVAILABLE:
+            raise RuntimeError("QMRA modules required for distribution-based assessments")
+
+        # Get pathogen parameters
+        pathogen_info = self.pathogen_db.get_pathogen_info(pathogen)
+        default_model_type = self.pathogen_db.get_default_model_type(pathogen)
+        dr_params = self.pathogen_db.get_dose_response_parameters(pathogen, default_model_type)
+        health_data = self.pathogen_db.get_health_impact_data(pathogen)
+
+        # Create dose-response model
+        dr_model = create_dose_response_model(default_model_type, dr_params)
+
+        # Setup Monte Carlo simulator
+        mc_simulator = MonteCarloSimulator(random_seed=42)
+
+        # Add pathogen concentration distribution
+        if use_hockey_pathogen:
+            pathogen_dist = create_hockey_stick_distribution(
+                x_min=pathogen_min,
+                x_median=pathogen_median,
+                x_max=pathogen_max,
+                name="pathogen_concentration"
+            )
+            mc_simulator.add_distribution("pathogen_concentration", pathogen_dist)
+        else:
+            # Use lognormal with moderate uncertainty for fixed concentration
+            log_std = np.sqrt(np.log(1 + 0.5**2))  # CV = 0.5
+            conc_dist = create_lognormal_distribution(
+                mean=np.log(max(effluent_concentration, 1e-10)),
+                std=log_std,
+                name="pathogen_concentration"
+            )
+            mc_simulator.add_distribution("pathogen_concentration", conc_dist)
+
+        # Add dilution distribution
+        if use_ecdf_dilution:
+            dilution_dist = create_empirical_cdf_from_data(
+                dilution_values,
+                name="dilution_factor"
+            )
+            mc_simulator.add_distribution("dilution_factor", dilution_dist)
+        else:
+            # Use single median value as fixed
+            median_dilution = np.median(dilution_values)
+            # Create narrow distribution around median
+            dilution_dist = create_lognormal_distribution(
+                mean=np.log(median_dilution),
+                std=0.01,  # Very narrow
+                name="dilution_factor"
+            )
+            mc_simulator.add_distribution("dilution_factor", dilution_dist)
+
+        # Add ingestion volume distribution
+        volume_dist = create_uniform_distribution(
+            min_val=volume_ml * 0.7,
+            max_val=volume_ml * 1.3,
+            name="ingestion_volume"
+        )
+        mc_simulator.add_distribution("ingestion_volume", volume_dist)
+
+        # Define QMRA model
+        def qmra_model(samples):
+            """Calculate infection risk from sampled variables."""
+            pathogen_conc = samples["pathogen_concentration"]
+            dilution = samples["dilution_factor"]
+            volume = samples["ingestion_volume"]
+
+            # Apply treatment
+            post_treatment = pathogen_conc / (10 ** treatment_lrv)
+
+            # Apply dilution
+            exposure_conc = post_treatment / dilution
+
+            # Calculate dose (organisms ingested)
+            # Convert: exposure_conc is in organisms/L, volume is in mL
+            dose = exposure_conc * (volume / 1000.0)  # Convert mL to L
+
+            # Calculate infection probability
+            infection_prob = dr_model.calculate_infection_probability(dose)
+
+            return infection_prob
+
+        # Run simulation
+        mc_results = mc_simulator.run_simulation(qmra_model, n_iterations=iterations,
+                                                 variable_name="infection_probability")
+
+        # Calculate illness probability
+        pill_median = mc_results.statistics['median'] * health_data['illness_to_infection_ratio']
+        pill_5th = mc_results.percentiles['5%'] * health_data['illness_to_infection_ratio']
+        pill_95th = mc_results.percentiles['95%'] * health_data['illness_to_infection_ratio']
+
+        # Calculate annual risk
+        pinf_per_event = mc_results.statistics['median']
+        annual_risk_median = 1 - (1 - pinf_per_event) ** frequency_per_year
+        annual_5th = 1 - (1 - mc_results.percentiles['5%']) ** frequency_per_year
+        annual_95th = 1 - (1 - mc_results.percentiles['95%']) ** frequency_per_year
+
+        # Population impact
+        population_impact = annual_risk_median * population
+
+        return {
+            'pinf_median': mc_results.statistics['median'],
+            'pinf_5th': mc_results.percentiles['5%'],
+            'pinf_95th': mc_results.percentiles['95%'],
+            'pill_median': pill_median,
+            'pill_5th': pill_5th,
+            'pill_95th': pill_95th,
+            'annual_risk_median': annual_risk_median,
+            'annual_5th': annual_5th,
+            'annual_95th': annual_95th,
+            'population_impact': population_impact
+        }
 
     def run_temporal_assessment(self, monitoring_file, pathogen,
                                 concentration_column=None,
