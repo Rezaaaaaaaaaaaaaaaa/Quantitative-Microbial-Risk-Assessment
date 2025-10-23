@@ -1,0 +1,11 @@
+Pathogen_ID,Pathogen_Name,Pathogen_Type,Effluent_Conc,Effluent_Conc_Min,Effluent_Conc_Median,Effluent_Conc_Max,Effluent_Conc_CV,Distribution_Type,Pathogen_Data_File,Notes
+PATH001,Norovirus_Typical_1M,norovirus,1000000,,,,,lognormal,,"Typical norovirus concentration - 1e6 copies/L"
+PATH002,Norovirus_High_1.5M,norovirus,1500000,,,,,lognormal,,"High norovirus concentration - 1.5e6 copies/L"
+PATH003,Norovirus_Low_800k,norovirus,800000,,,,,lognormal,,"Lower norovirus concentration - 8e5 copies/L"
+PATH004,Norovirus_Variable_1.2M,norovirus,1200000,,,,0.5,lognormal,,"Variable norovirus - higher uncertainty CV=0.5"
+PATH005,Norovirus_Hockey_Stick,norovirus,,500000,1000000,2000000,,hockey_stick,,"Norovirus with Hockey Stick distribution"
+PATH006,Campylobacter_Typical_500k,campylobacter,500000,,,,0.5,lognormal,,"Typical Campylobacter concentration"
+PATH007,Cryptosporidium_Typical_50k,cryptosporidium,50000,,,,0.7,lognormal,,"Typical Cryptosporidium concentration - higher uncertainty"
+PATH008,Ecoli_Typical_800k,e_coli,800000,,,,0.4,lognormal,,"Typical E. coli concentration"
+PATH009,Norovirus_Monitoring_Weekly,norovirus,,,,,,,weekly_monitoring_2024.csv,"Time series from weekly monitoring"
+PATH010,Norovirus_Very_High_2M,norovirus,2000000,,,,0.7,lognormal,,"Very high concentration - high uncertainty"
