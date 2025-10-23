@@ -681,6 +681,272 @@ class BatchProcessor:
 
         return results_df
 
+    def run_batch_scenarios_from_libraries(self, scenarios_file, dilution_data_file,
+                                           pathogen_data_file, output_dir=None):
+        """
+        Run batch scenarios using simplified three-file approach.
+
+        Files:
+        - dilution_data.csv: Time, Location, Dilution_Factor (raw data from models)
+        - pathogen_data.csv: Pathogen_ID, Pathogen_Name, Pathogen_Type,
+                             Min_Concentration, Median_Concentration, Max_Concentration
+        - scenarios.csv: All scenario parameters (references Location and Pathogen_ID)
+
+        Args:
+            scenarios_file: CSV with scenario definitions
+            dilution_data_file: CSV with dilution time-series data
+            pathogen_data_file: CSV with pathogen Hockey Stick parameters
+            output_dir: Directory for output files
+
+        Returns:
+            DataFrame with all scenario results
+        """
+        print(f"\n{'='*80}")
+        print("BATCH SCENARIO EXECUTION (Simplified Approach)")
+        print(f"{'='*80}")
+
+        # Load data files
+        print("\nLoading data files...")
+        dilution_data = pd.read_csv(dilution_data_file)
+        pathogen_data = pd.read_csv(pathogen_data_file)
+        scenarios_df = pd.read_csv(scenarios_file)
+
+        print(f"  Dilution data: {len(dilution_data)} records")
+        print(f"  Pathogen data: {len(pathogen_data)} entries")
+        print(f"  Scenarios: {len(scenarios_df)}")
+
+        # Show unique locations in dilution data
+        unique_locations = dilution_data['Location'].unique()
+        print(f"  Unique locations: {', '.join(unique_locations)}")
+
+        if output_dir:
+            output_path = Path(output_dir)
+        else:
+            output_path = self.output_dir
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        results = []
+
+        for idx, scenario in scenarios_df.iterrows():
+            scenario_id = scenario['Scenario_ID']
+            scenario_name = scenario['Scenario_Name']
+
+            print(f"\n[{idx+1}/{len(scenarios_df)}] Processing: {scenario_id} - {scenario_name}")
+
+            # Look up pathogen data by Pathogen_ID
+            pathogen_id = scenario['Pathogen_ID']
+            pathogen_row = pathogen_data[pathogen_data['Pathogen_ID'] == pathogen_id]
+
+            if len(pathogen_row) == 0:
+                raise ValueError(f"Pathogen ID '{pathogen_id}' not found in pathogen data")
+
+            pathogen_row = pathogen_row.iloc[0]
+            pathogen_type = pathogen_row['Pathogen_Type']
+
+            # Get Hockey Stick parameters for pathogen
+            pathogen_min = pathogen_row['Min_Concentration']
+            pathogen_median = pathogen_row['Median_Concentration']
+            pathogen_max = pathogen_row['Max_Concentration']
+
+            print(f"    Pathogen: {pathogen_type} (Hockey Stick: min={pathogen_min:.0e}, median={pathogen_median:.0e}, max={pathogen_max:.0e})")
+
+            # Look up dilution data by Location
+            location = scenario['Location']
+            location_dilution = dilution_data[dilution_data['Location'] == location]
+
+            if len(location_dilution) == 0:
+                raise ValueError(f"Location '{location}' not found in dilution data")
+
+            # Get all dilution values for this location (for ECDF)
+            dilution_values = location_dilution['Dilution_Factor'].values
+            dilution_median = np.median(dilution_values)
+
+            print(f"    Location: {location} ({len(dilution_values)} dilution records, median={dilution_median:.1f}x)")
+
+            # Run QMRA with empirical distributions
+            result = self._run_assessment_with_distributions(
+                pathogen=pathogen_type,
+                dilution_values=dilution_values,
+                pathogen_min=pathogen_min,
+                pathogen_median=pathogen_median,
+                pathogen_max=pathogen_max,
+                treatment_lrv=scenario['Treatment_LRV'],
+                treatment_lrv_uncertainty=scenario.get('Treatment_LRV_Uncertainty', 0.2),
+                exposure_route=scenario['Exposure_Route'],
+                volume_ml=scenario['Ingestion_Volume_mL'],
+                volume_min=scenario.get('Volume_Min_mL', None),
+                volume_max=scenario.get('Volume_Max_mL', None),
+                frequency_per_year=scenario['Exposure_Frequency_per_Year'],
+                population=scenario['Exposed_Population'],
+                iterations=scenario.get('Monte_Carlo_Iterations', 10000)
+            )
+
+            results.append({
+                'Scenario_ID': scenario_id,
+                'Scenario_Name': scenario_name,
+                'Pathogen_ID': pathogen_id,
+                'Pathogen': pathogen_type,
+                'Location': location,
+                'Dilution_Median': dilution_median,
+                'Dilution_Min': np.min(dilution_values),
+                'Dilution_Max': np.max(dilution_values),
+                'Dilution_Records': len(dilution_values),
+                'Pathogen_Conc_Median': pathogen_median,
+                'Exposure_Route': scenario['Exposure_Route'],
+                'Treatment_LRV': scenario['Treatment_LRV'],
+                'Volume_mL': scenario['Ingestion_Volume_mL'],
+                'Frequency_Year': scenario['Exposure_Frequency_per_Year'],
+                'Population': scenario['Exposed_Population'],
+                'Infection_Risk_Median': result['pinf_median'],
+                'Annual_Risk_Median': result['annual_risk_median'],
+                'Annual_Risk_5th': result['annual_5th'],
+                'Annual_Risk_95th': result['annual_95th'],
+                'Population_Impact': result['population_impact'],
+                'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT',
+                'Priority': scenario.get('Priority', 'Medium')
+            })
+
+            print(f"    Risk: {result['annual_risk_median']:.2e}  {results[-1]['Compliance_Status']}")
+
+        results_df = pd.DataFrame(results)
+
+        # Save combined results
+        output_file = output_path / 'batch_scenarios_results.csv'
+        results_df.to_csv(output_file, index=False)
+        print(f"\n{'='*80}")
+        print(f"All results saved to: {output_file}")
+        print(f"{'='*80}")
+
+        # Summary statistics
+        total_scenarios = len(results_df)
+        compliant = len(results_df[results_df['Compliance_Status'] == 'COMPLIANT'])
+
+        print(f"\nBatch Summary:")
+        print(f"  Total scenarios: {total_scenarios}")
+        print(f"  Compliant: {compliant} ({100*compliant/total_scenarios:.1f}%)")
+        print(f"  Non-compliant: {total_scenarios - compliant} ({100*(total_scenarios-compliant)/total_scenarios:.1f}%)")
+
+        return results_df
+
+    def _run_assessment_with_distributions(self, pathogen, dilution_values,
+                                            pathogen_min, pathogen_median, pathogen_max,
+                                            treatment_lrv, treatment_lrv_uncertainty,
+                                            exposure_route, volume_ml, volume_min, volume_max,
+                                            frequency_per_year, population, iterations):
+        """
+        Run QMRA with empirical dilution ECDF and Hockey Stick pathogen distribution.
+
+        Args:
+            pathogen: Pathogen name
+            dilution_values: Array of dilution factors for ECDF
+            pathogen_min: Min pathogen concentration
+            pathogen_median: Median pathogen concentration
+            pathogen_max: Max pathogen concentration
+            treatment_lrv: Log reduction value
+            treatment_lrv_uncertainty: Uncertainty in treatment
+            exposure_route: Exposure route
+            volume_ml: Mean ingestion volume
+            volume_min: Minimum volume
+            volume_max: Maximum volume
+            frequency_per_year: Exposure frequency
+            population: Exposed population
+            iterations: Monte Carlo iterations
+
+        Returns:
+            Dictionary with risk results
+        """
+        if not QMRA_MODULES_AVAILABLE:
+            raise RuntimeError("QMRA modules required for distribution-based assessments")
+
+        # Get pathogen parameters
+        pathogen_info = self.pathogen_db.get_pathogen_info(pathogen)
+        default_model_type = self.pathogen_db.get_default_model_type(pathogen)
+        dr_params = self.pathogen_db.get_dose_response_parameters(pathogen, default_model_type)
+        health_data = self.pathogen_db.get_health_impact_data(pathogen)
+
+        # Create dose-response model
+        dr_model = create_dose_response_model(default_model_type, dr_params)
+
+        # Setup Monte Carlo simulator
+        mc_simulator = MonteCarloSimulator(random_seed=42)
+
+        # Add pathogen concentration as Hockey Stick distribution
+        pathogen_dist = create_hockey_stick_distribution(
+            x_min=pathogen_min,
+            x_median=pathogen_median,
+            x_max=pathogen_max,
+            name="pathogen_concentration"
+        )
+        mc_simulator.add_distribution("pathogen_concentration", pathogen_dist)
+
+        # Add dilution as ECDF from data
+        dilution_dist = create_empirical_cdf_from_data(
+            dilution_values,
+            name="dilution_factor"
+        )
+        mc_simulator.add_distribution("dilution_factor", dilution_dist)
+
+        # Add ingestion volume distribution
+        if volume_min is None:
+            volume_min = volume_ml * 0.7
+        if volume_max is None:
+            volume_max = volume_ml * 1.3
+
+        volume_dist = create_uniform_distribution(
+            min_val=volume_min,
+            max_val=volume_max,
+            name="ingestion_volume"
+        )
+        mc_simulator.add_distribution("ingestion_volume", volume_dist)
+
+        # Define QMRA model
+        def qmra_model(samples):
+            """Calculate infection risk from sampled variables."""
+            pathogen_conc = samples["pathogen_concentration"]
+            dilution = samples["dilution_factor"]
+            volume = samples["ingestion_volume"]
+
+            # Apply treatment
+            post_treatment = pathogen_conc / (10 ** treatment_lrv)
+
+            # Apply dilution
+            exposure_conc = post_treatment / dilution
+
+            # Calculate dose (organisms ingested)
+            dose = exposure_conc * (volume / 1000.0)  # Convert mL to L
+
+            # Calculate infection probability
+            infection_prob = dr_model.calculate_infection_probability(dose)
+
+            return infection_prob
+
+        # Run simulation
+        mc_results = mc_simulator.run_simulation(qmra_model, n_iterations=iterations,
+                                                 variable_name="infection_probability")
+
+        # Calculate illness probability
+        pill_median = mc_results.statistics['median'] * health_data['illness_to_infection_ratio']
+
+        # Calculate annual risk
+        pinf_per_event = mc_results.statistics['median']
+        annual_risk_median = 1 - (1 - pinf_per_event) ** frequency_per_year
+        annual_5th = 1 - (1 - mc_results.percentiles['5%']) ** frequency_per_year
+        annual_95th = 1 - (1 - mc_results.percentiles['95%']) ** frequency_per_year
+
+        # Population impact
+        population_impact = annual_risk_median * population
+
+        return {
+            'pinf_median': mc_results.statistics['median'],
+            'pinf_5th': mc_results.percentiles['5%'],
+            'pinf_95th': mc_results.percentiles['95%'],
+            'pill_median': pill_median,
+            'annual_risk_median': annual_risk_median,
+            'annual_5th': annual_5th,
+            'annual_95th': annual_95th,
+            'population_impact': int(population_impact)
+        }
+
     def _run_single_assessment(self, pathogen, concentration, exposure_route,
                                volume_ml, frequency_per_year, population,
                                iterations=10000, concentration_cv=0.5,

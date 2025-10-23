@@ -399,6 +399,7 @@ def main():
         **QMRA Batch Processing Tool**
 
         Automate risk assessments for multiple scenarios with:
+        - 📚 **Library-based input**: Reusable data libraries
         - 📑 Comprehensive PDF reports
         - 📊 Interactive visualizations
         - 📄 Individual plot downloads (PNG)
@@ -408,7 +409,7 @@ def main():
         - 🦠 Multi-pathogen analysis
         """)
 
-        st.markdown("**NIWA Earth Sciences**  \nVersion 1.0 | October 2025")
+        st.markdown("**NIWA Earth Sciences**  \nVersion 2.0 | October 2025")
 
     # Main content
     if assessment_mode == "Batch Scenarios":
@@ -428,83 +429,158 @@ def batch_scenarios_page():
     st.markdown('<div class="sub-header">📋 Batch Scenario Processing</div>', unsafe_allow_html=True)
 
     st.markdown("""
-    Run multiple pre-configured scenarios from a master CSV file. Perfect for:
-    - Comprehensive site assessments
-    - What-if scenario analysis
-    - Treatment upgrade evaluations
-    - Seasonal risk comparisons
+    Run multiple pre-configured scenarios using **three simple data files**:
+    - 🌊 **Dilution Data**: Time, Location, Dilution_Factor (from models)
+    - 🦠 **Pathogen Data**: Hockey Stick distribution (Min, Median, Max)
+    - 📋 **Scenarios**: All scenario parameters (references Location & Pathogen_ID)
+
+    **Benefits**: Simple, straightforward, empirical distributions
     """)
 
     # Tabs
     tab1, tab2, tab3 = st.tabs(["📁 Input Data", "▶️ Run Assessment", "📊 Results & Reports"])
 
     with tab1:
-        st.markdown("#### Upload Scenario File or Use Example Data")
+        st.markdown("#### Upload Data Files or Use Example Data")
 
-        col1, col2 = st.columns([2, 1])
+        use_example = st.checkbox("Use example data (15 pre-configured scenarios)", value=True)
 
-        with col1:
-            use_example = st.checkbox("Use example data (15 pre-configured scenarios)", value=True)
+        if use_example:
+            st.success("✓ Using example data files from `input_data/`")
 
-            if use_example:
-                scenario_file = "input_data/batch_scenarios/master_batch_scenarios.csv"
-                st.success(f"Using example file: `{scenario_file}`")
+            dilution_file = "input_data/dilution_data.csv"
+            pathogen_file = "input_data/pathogen_data.csv"
+            scenario_file = "input_data/scenarios.csv"
 
-                # Show preview
+            # Show previews in columns
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.markdown("**Dilution Data**")
+                st.caption("Time-series from models")
+                if Path(dilution_file).exists():
+                    df_dil = pd.read_csv(dilution_file)
+                    st.dataframe(df_dil[['Time', 'Location', 'Dilution_Factor']].head(5),
+                               use_container_width=True, height=200)
+                    st.caption(f"{len(df_dil)} records, {df_dil['Location'].nunique()} locations")
+
+            with col2:
+                st.markdown("**Pathogen Data**")
+                st.caption("Hockey Stick parameters")
+                if Path(pathogen_file).exists():
+                    df_path = pd.read_csv(pathogen_file)
+                    st.dataframe(df_path[['Pathogen_ID', 'Pathogen_Type', 'Median_Concentration']].head(5),
+                               use_container_width=True, height=200)
+                    st.caption(f"{len(df_path)} pathogens")
+
+            with col3:
+                st.markdown("**Scenarios**")
+                st.caption("All scenario parameters")
                 if Path(scenario_file).exists():
-                    df = pd.read_csv(scenario_file)
-                    st.markdown("**Preview:**")
-                    st.dataframe(df.head(10), use_container_width=True)
-                    st.info(f"Total scenarios: {len(df)}")
-            else:
-                uploaded_file = st.file_uploader("Upload scenario CSV file", type=['csv'])
-                if uploaded_file:
-                    scenario_file = f"temp_uploads/{uploaded_file.name}"
-                    Path("temp_uploads").mkdir(exist_ok=True)
-                    with open(scenario_file, 'wb') as f:
-                        f.write(uploaded_file.getvalue())
+                    df_scen = pd.read_csv(scenario_file)
+                    st.dataframe(df_scen[['Scenario_ID', 'Scenario_Name', 'Pathogen_ID', 'Location']].head(5),
+                               use_container_width=True, height=200)
+                    st.caption(f"{len(df_scen)} scenarios")
 
-                    df = pd.read_csv(scenario_file)
-                    st.success(f"File uploaded: {len(df)} scenarios")
-                    st.dataframe(df.head(), use_container_width=True)
+        else:
+            st.info("Upload all three library files:")
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.markdown("**1. Dilution Data**")
+                st.caption("Time, Location, Dilution_Factor")
+                dilution_upload = st.file_uploader("Upload dilution_data.csv", type=['csv'], key='dilution')
+                if dilution_upload:
+                    dilution_file = save_uploaded_file(dilution_upload)
+                    df_dil = pd.read_csv(dilution_file)
+                    st.success(f"✓ {len(df_dil)} records")
+                else:
+                    dilution_file = None
+
+            with col2:
+                st.markdown("**2. Pathogen Data**")
+                st.caption("Hockey Stick (Min, Median, Max)")
+                pathogen_upload = st.file_uploader("Upload pathogen_data.csv", type=['csv'], key='pathogen')
+                if pathogen_upload:
+                    pathogen_file = save_uploaded_file(pathogen_upload)
+                    df_path = pd.read_csv(pathogen_file)
+                    st.success(f"✓ {len(df_path)} pathogens")
+                else:
+                    pathogen_file = None
+
+            with col3:
+                st.markdown("**3. Scenarios**")
+                st.caption("All parameters")
+                scenario_upload = st.file_uploader("Upload scenarios.csv", type=['csv'], key='scenarios')
+                if scenario_upload:
+                    scenario_file = save_uploaded_file(scenario_upload)
+                    df_scen = pd.read_csv(scenario_file)
+                    st.success(f"✓ {len(df_scen)} scenarios")
                 else:
                     scenario_file = None
 
-        with col2:
-            st.markdown("**Required Columns:**")
-            st.code("""
-Scenario_ID
-Scenario_Name
-Pathogen
-Exposure_Route
-Effluent_Conc
-Treatment_LRV
-Dilution_Factor
-Volume_mL
-Frequency_Year
-Population
+        # Help section
+        with st.expander("📖 File Format Guide"):
+            st.markdown("""
+            ### Required Files:
+
+            **1. dilution_data.csv** (3 columns only)
+            - `Time` - Date/time of observation
+            - `Location` - Site identifier (Site_A, Site_B, etc.)
+            - `Dilution_Factor` - Dilution value from hydrodynamic model
+
+            **2. pathogen_data.csv** (6 columns - Hockey Stick only)
+            - `Pathogen_ID` - Unique ID (PATH001, PATH002, ...)
+            - `Pathogen_Name` - Descriptive name
+            - `Pathogen_Type` - norovirus, campylobacter, cryptosporidium, e_coli, rotavirus, salmonella
+            - `Min_Concentration` - Minimum concentration (copies/L)
+            - `Median_Concentration` - Median concentration (copies/L)
+            - `Max_Concentration` - Maximum concentration (copies/L)
+
+            **3. scenarios.csv** (All scenario parameters)
+            - `Scenario_ID`, `Scenario_Name`, `Pathogen_ID`, `Location`, `Exposure_Route`
+            - `Treatment_LRV`, `Treatment_LRV_Uncertainty`
+            - `Ingestion_Volume_mL`, `Volume_Min_mL`, `Volume_Max_mL`
+            - `Exposure_Frequency_per_Year`, `Exposed_Population`, `Monte_Carlo_Iterations`
+            - `Priority`, `Notes`
+
+            **Key Points**:
+            - Dilution uses ECDF from all Location data automatically
+            - Pathogen uses Hockey Stick distribution (you determine min/median/max)
+            - Scenarios reference Location (not Dilution_ID) and Pathogen_ID
             """)
 
     with tab2:
         st.markdown("#### Run Batch Assessment")
 
-        if 'scenario_file' in locals() and scenario_file:
-            col1, col2 = st.columns([3, 1])
+        if 'scenario_file' in locals() and scenario_file and 'dilution_file' in locals() and dilution_file and 'pathogen_file' in locals() and pathogen_file:
+            # Check all files are valid
+            all_files_ready = all([
+                scenario_file and Path(scenario_file).exists(),
+                dilution_file and Path(dilution_file).exists(),
+                pathogen_file and Path(pathogen_file).exists()
+            ])
 
-            with col1:
-                st.markdown("**Settings:**")
-                output_name = st.text_input("Output filename (without extension):",
-                                           value=f"batch_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+            if all_files_ready:
+                col1, col2 = st.columns([3, 1])
 
-                iterations = st.slider("Monte Carlo iterations:", 1000, 50000, 10000, 1000)
+                with col1:
+                    st.markdown("**Settings:**")
+                    output_name = st.text_input("Output filename (without extension):",
+                                               value=f"batch_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
 
-            with col2:
-                st.markdown("**Actions:**")
-                if st.button("🚀 Run Batch Assessment", type="primary", use_container_width=True):
-                    run_batch_assessment(scenario_file, output_name, iterations)
+                    iterations = st.slider("Monte Carlo iterations:", 1000, 50000, 10000, 1000)
+
+                with col2:
+                    st.markdown("**Actions:**")
+                    if st.button("🚀 Run Batch Assessment", type="primary", use_container_width=True):
+                        run_batch_assessment_library(scenario_file, dilution_file, pathogen_file, output_name, iterations)
+            else:
+                st.warning("⚠️ One or more files are missing. Please check the Input Data tab.")
 
         else:
-            st.warning("⚠️ Please provide a scenario file in the Input Data tab")
+            st.warning("⚠️ Please provide all three library files in the Input Data tab")
 
     with tab3:
         display_results_and_reports()
@@ -731,8 +807,36 @@ def multi_pathogen_page():
 
 
 # Processing functions
+def run_batch_assessment_library(scenario_file, dilution_file, pathogen_file, output_name, iterations):
+    """Run batch scenario assessment using library-based approach."""
+    with st.spinner("🔄 Processing batch scenarios from libraries..."):
+        try:
+            processor = BatchProcessor(output_dir='outputs/results')
+
+            # Run using simplified three-file method
+            results = processor.run_batch_scenarios_from_libraries(
+                scenarios_file=scenario_file,
+                dilution_data_file=dilution_file,
+                pathogen_data_file=pathogen_file,
+                output_dir='outputs/results'
+            )
+
+            output_csv = "outputs/results/batch_scenarios_results.csv"
+
+            st.session_state['last_results'] = output_csv
+            st.session_state['last_assessment'] = 'batch'
+
+            st.success("✅ Batch assessment complete!")
+            st.balloons()
+
+        except Exception as e:
+            st.error(f"❌ Error: {str(e)}")
+            import traceback
+            st.code(traceback.format_exc())
+
+
 def run_batch_assessment(scenario_file, output_name, iterations):
-    """Run batch scenario assessment."""
+    """Run batch scenario assessment (legacy single-file method)."""
     with st.spinner("🔄 Processing batch scenarios..."):
         try:
             processor = BatchProcessor(output_dir='outputs/results')
