@@ -53,7 +53,7 @@ class DistributionParameters:
             DistributionType.POISSON: ["mu"],
             DistributionType.BINOMIAL: ["n", "p"],
             DistributionType.EMPIRICAL_CDF: ["x_values", "probabilities"],  # x values and cumulative probs
-            DistributionType.HOCKEY_STICK: ["x_min", "x_median", "x_max"]  # min, median, max values
+            DistributionType.HOCKEY_STICK: ["x_min", "x_median", "x_max"]  # min, median, max (P is optional)
         }
 
         required = required_params.get(self.distribution_type, [])
@@ -209,42 +209,97 @@ class MonteCarloSimulator:
 
         elif dist_type == DistributionType.HOCKEY_STICK:
             # Hockey stick distribution for pathogen concentrations
-            # Based on McBride's formulation (see PDF page 5-6)
-            x_min = params["x_min"]  # X₀ - minimum
-            x_median = params["x_median"]  # X₅₀ - median
-            x_max = params["x_max"]  # X₁₀₀ - maximum
-            percentile = params.get("percentile", 95)  # P - default 95th percentile
+            # Based on McBride's formulation (Graham McBride, 2009)
+            # Reference: David Wood's R implementation (From_David package)
 
-            # Calculate h1 and h2 from equations (9.9) and (9.11)
-            h1 = 1.0 / (x_median - x_min)
-            h2 = 2.0 * (1 - percentile/100.0) / (x_max - x_median)
+            x_min = params["x_min"]  # X₀ - minimum concentration
+            x_median = params["x_median"]  # X₅₀ - median concentration
+            x_max = params["x_max"]  # X₁₀₀ - maximum concentration
+            P = params.get("P", 0.95)  # P - breakpoint percentile (default 0.95 = 95th percentile)
 
-            # Calculate X_P (the Pth percentile position) using equation (9.10)
-            # This is a simplified version - full equation is quadratic
-            sq = percentile / 100.0
-            x_p = 0.5 * (x_median + x_max + 1.0/h1 -
-                        np.sqrt((x_max - x_median)**2 +
-                               (x_median * (2 - 8*sq) + x_max * (2 - 8*sq))/(h1) +
-                               1.0/(h1**2)))
+            # Validate inputs
+            if x_min >= x_median or x_median >= x_max:
+                raise ValueError(f"Hockey stick requires x_min ({x_min}) < x_median ({x_median}) < x_max ({x_max})")
 
+            # Fixed area proportions (McBride convention)
+            A = 0.5  # Area between X₀ and X₅₀ (left section)
+            B = P - 0.5  # Area between X₅₀ and X_P (middle section)
+            C = 1 - P  # Area between X_P and X₁₀₀ (right section)
+
+            # Calculate peak height parameters (equations from McBride 9.9, 9.11)
+            h1 = (2 * A) / (x_median - x_min)  # Height at median (left side peak)
+
+            # Calculate X_P (the percentile breakpoint) using quadratic formula
+            # From equation (9.10): X_P = (X₅₀ + X₁₀₀ + 1/h1 - sqrt(...)) / 2
+            discriminant = ((x_max - x_median)**2 +
+                          (1.0 / (h1**2)) +
+                          ((x_median / h1) * (2 - 8*C)) +
+                          ((x_max / h1) * (2 - 8*B)))
+            x_p = (x_median + x_max + 1.0/h1 - np.sqrt(discriminant)) / 2.0
+
+            h2 = (2 * C) / (x_max - x_p)  # Height at X_P (right side peak)
+
+            # Calculate slope coefficients for piecewise linear PDF
+            m1 = h1 / (x_median - x_min)  # Slope: X₀ to X₅₀
+            m2 = (h2 - h1) / (x_p - x_median)  # Slope: X₅₀ to X_P
+            m3 = -h2 / (x_max - x_p)  # Slope: X_P to X₁₀₀
+
+            c1 = 0  # Intercept for section 1
+            c2 = h1  # Intercept for section 2
+            c3 = h2  # Intercept for section 3
+
+            # Generate samples using inverse CDF method
             samples = np.zeros(n_samples)
             for i in range(n_samples):
                 u = np.random.uniform(0, 1)
 
                 if u <= 0.5:
-                    # Left triangle (A-B region): uniform probability
-                    # Linear interpolation from x_min to x_median
-                    samples[i] = x_min + (x_median - x_min) * (u / 0.5)
-                elif u <= percentile/100.0:
-                    # Middle region (B-C): proportional area
-                    # Linear interpolation from x_median to x_p
-                    u_scaled = (u - 0.5) / (percentile/100.0 - 0.5)
-                    samples[i] = x_median + (x_p - x_median) * u_scaled
+                    # Section 1 (X₀ to X₅₀): Area = 0.5
+                    # CDF: (m1 * (x - X₀)²) / 2 = u
+                    # x = X₀ + sqrt(2*u / m1)
+                    x_sample = x_min + np.sqrt(2.0 * u / m1) if m1 > 0 else x_min
+                    samples[i] = x_sample
+
+                elif u <= P:
+                    # Section 2 (X₅₀ to X_P): Area = P - 0.5
+                    # CDF: 0.5 + ((2*h1 + m2*(x - X₅₀)) / 2) * (x - X₅₀) = u
+                    # This is quadratic: m2/2 * (x - X₅₀)² + h1 * (x - X₅₀) + 0.5 - u = 0
+                    u_scaled = u - 0.5
+                    if m2 != 0:
+                        # Quadratic formula: ax² + bx + c = 0
+                        a = m2 / 2.0
+                        b = h1
+                        c = -u_scaled
+                        discriminant_quad = b**2 - 4*a*c
+                        if discriminant_quad >= 0:
+                            x_delta = (-b + np.sqrt(discriminant_quad)) / (2*a)
+                            samples[i] = x_median + x_delta
+                        else:
+                            samples[i] = x_median  # Fallback
+                    else:
+                        # Linear case (shouldn't happen with hockey stick)
+                        samples[i] = x_median + u_scaled / h1 if h1 > 0 else x_median
+
                 else:
-                    # Right tail (C-D): remaining probability
-                    # Linear interpolation from x_p to x_max
-                    u_scaled = (u - percentile/100.0) / (1 - percentile/100.0)
-                    samples[i] = x_p + (x_max - x_p) * u_scaled
+                    # Section 3 (X_P to X₁₀₀): Area = 1 - P
+                    # CDF: P + ((2*h2 + m3*(x - X_P)) / 2) * (x - X_P) = u
+                    # This is quadratic: m3/2 * (x - X_P)² + h2 * (x - X_P) + P - u = 0
+                    u_scaled = u - P
+                    if m3 != 0:
+                        a = m3 / 2.0
+                        b = h2
+                        c = -u_scaled
+                        discriminant_quad = b**2 - 4*a*c
+                        if discriminant_quad >= 0:
+                            x_delta = (-b + np.sqrt(discriminant_quad)) / (2*a)
+                            samples[i] = x_p + x_delta
+                        else:
+                            samples[i] = x_p  # Fallback
+                    else:
+                        samples[i] = x_p + u_scaled / h2 if h2 > 0 else x_p
+
+                # Ensure sample is within bounds
+                samples[i] = np.clip(samples[i], x_min, x_max)
 
             return samples
 
@@ -519,33 +574,50 @@ def create_empirical_cdf_distribution(x_values: Union[List[float], np.ndarray],
     )
 
 def create_hockey_stick_distribution(x_min: float, x_median: float, x_max: float,
-                                     percentile: float = 95.0,
+                                     P: float = 0.95,
                                      name: str = None) -> DistributionParameters:
     """
     Create hockey stick distribution parameters for pathogen concentrations.
 
     Based on McBride's formulation for right-skewed environmental microbiological data.
-    The distribution joins the median and maximum with a "hockey stick" shape.
+    The hockey stick distribution has three sections:
+    - Section 1 (X₀ to X₅₀): Linear increase, area = 0.5
+    - Section 2 (X₅₀ to X_P): Linear continuation, area = P - 0.5
+    - Section 3 (X_P to X₁₀₀): Linear decrease, area = 1 - P
 
     Args:
-        x_min: Minimum value (X₀)
-        x_median: Median value (X₅₀)
-        x_max: Maximum value (X₁₀₀)
-        percentile: Percentile for the "toe" of the hockey stick (default 95)
+        x_min: Minimum concentration (X₀)
+        x_median: Median concentration (X₅₀) - 50th percentile
+        x_max: Maximum concentration (X₁₀₀)
+        P: Breakpoint percentile as proportion (default 0.95 = 95th percentile)
+           Recommended range: 0.90 to 0.99
         name: Optional name for the distribution
 
     Returns:
         DistributionParameters for hockey stick sampling
 
+    Raises:
+        ValueError: If parameters don't satisfy x_min < x_median < x_max or P not in (0, 1)
+
+    Example:
+        >>> # Norovirus concentration: 500k to 1M (median) to 2M org/L
+        >>> dist = create_hockey_stick_distribution(
+        ...     x_min=500000,
+        ...     x_median=1000000,
+        ...     x_max=2000000,
+        ...     P=0.95
+        ... )
+
     Reference:
-        McBride (2009), "Microbial Water Quality and Human Health"
+        McBride, G. (2009), "Microbial Water Quality and Human Health"
         Section 9.3.2 - Hockey stick distribution
+        David Wood's R QMRA package (hockey.R)
     """
     if x_min >= x_median or x_median >= x_max:
-        raise ValueError("Must have x_min < x_median < x_max")
+        raise ValueError(f"Must have x_min ({x_min}) < x_median ({x_median}) < x_max ({x_max})")
 
-    if not 0 < percentile < 100:
-        raise ValueError("Percentile must be between 0 and 100")
+    if not 0 < P < 1:
+        raise ValueError(f"P (breakpoint percentile) must be between 0 and 1, got {P}")
 
     return DistributionParameters(
         distribution_type=DistributionType.HOCKEY_STICK,
@@ -553,10 +625,10 @@ def create_hockey_stick_distribution(x_min: float, x_median: float, x_max: float
             "x_min": x_min,
             "x_median": x_median,
             "x_max": x_max,
-            "percentile": percentile
+            "P": P
         },
         name=name,
-        description="Hockey stick distribution for right-skewed pathogen data"
+        description=f"Hockey stick distribution (P={P:.2%}) for right-skewed pathogen concentration data"
     )
 
 

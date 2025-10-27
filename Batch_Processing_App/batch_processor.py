@@ -687,9 +687,10 @@ class BatchProcessor:
         Run batch scenarios using simplified three-file approach.
 
         Files:
-        - dilution_data.csv: Time, Location, Dilution_Factor (raw data from models)
+        - dilution_data.csv: Time, Location, Dilution_Factor (raw data from hydrodynamic models)
         - pathogen_data.csv: Pathogen_ID, Pathogen_Name, Pathogen_Type,
-                             Min_Concentration, Median_Concentration, Max_Concentration
+                             Min_Concentration, Median_Concentration, Max_Concentration, P_Breakpoint
+                             (Hockey Stick distribution parameters: X0, X50, X100, P)
         - scenarios.csv: All scenario parameters (references Location and Pathogen_ID)
 
         Args:
@@ -747,8 +748,9 @@ class BatchProcessor:
             pathogen_min = pathogen_row['Min_Concentration']
             pathogen_median = pathogen_row['Median_Concentration']
             pathogen_max = pathogen_row['Max_Concentration']
+            pathogen_p = pathogen_row.get('P_Breakpoint', 0.95)  # Default to 0.95 if not specified
 
-            print(f"    Pathogen: {pathogen_type} (Hockey Stick: min={pathogen_min:.0e}, median={pathogen_median:.0e}, max={pathogen_max:.0e})")
+            print(f"    Pathogen: {pathogen_type} (Hockey Stick: X0={pathogen_min:.0e}, X50={pathogen_median:.0e}, X100={pathogen_max:.0e}, P={pathogen_p:.2f})")
 
             # Look up dilution data by Location
             location = scenario['Location']
@@ -770,6 +772,7 @@ class BatchProcessor:
                 pathogen_min=pathogen_min,
                 pathogen_median=pathogen_median,
                 pathogen_max=pathogen_max,
+                pathogen_p=pathogen_p,
                 treatment_lrv=scenario['Treatment_LRV'],
                 treatment_lrv_uncertainty=scenario.get('Treatment_LRV_Uncertainty', 0.2),
                 exposure_route=scenario['Exposure_Route'],
@@ -830,27 +833,29 @@ class BatchProcessor:
 
     def _run_assessment_with_distributions(self, pathogen, dilution_values,
                                             pathogen_min, pathogen_median, pathogen_max,
-                                            treatment_lrv, treatment_lrv_uncertainty,
-                                            exposure_route, volume_ml, volume_min, volume_max,
-                                            frequency_per_year, population, iterations):
+                                            pathogen_p=0.95,
+                                            treatment_lrv=0, treatment_lrv_uncertainty=0.2,
+                                            exposure_route='primary_contact', volume_ml=50, volume_min=None, volume_max=None,
+                                            frequency_per_year=20, population=10000, iterations=10000):
         """
         Run QMRA with empirical dilution ECDF and Hockey Stick pathogen distribution.
 
         Args:
             pathogen: Pathogen name
             dilution_values: Array of dilution factors for ECDF
-            pathogen_min: Min pathogen concentration
-            pathogen_median: Median pathogen concentration
-            pathogen_max: Max pathogen concentration
-            treatment_lrv: Log reduction value
-            treatment_lrv_uncertainty: Uncertainty in treatment
-            exposure_route: Exposure route
-            volume_ml: Mean ingestion volume
-            volume_min: Minimum volume
-            volume_max: Maximum volume
-            frequency_per_year: Exposure frequency
-            population: Exposed population
-            iterations: Monte Carlo iterations
+            pathogen_min: Min pathogen concentration (X₀)
+            pathogen_median: Median pathogen concentration (X₅₀)
+            pathogen_max: Max pathogen concentration (X₁₀₀)
+            pathogen_p: Breakpoint percentile for hockey stick (default 0.95)
+            treatment_lrv: Log reduction value (default 0)
+            treatment_lrv_uncertainty: Uncertainty in treatment (default 0.2)
+            exposure_route: Exposure route (default 'primary_contact')
+            volume_ml: Mean ingestion volume (default 50 mL)
+            volume_min: Minimum volume (default None = 0.7 * volume_ml)
+            volume_max: Maximum volume (default None = 1.3 * volume_ml)
+            frequency_per_year: Exposure frequency (default 20)
+            population: Exposed population (default 10000)
+            iterations: Monte Carlo iterations (default 10000)
 
         Returns:
             Dictionary with risk results
@@ -875,6 +880,7 @@ class BatchProcessor:
             x_min=pathogen_min,
             x_median=pathogen_median,
             x_max=pathogen_max,
+            P=pathogen_p,
             name="pathogen_concentration"
         )
         mc_simulator.add_distribution("pathogen_concentration", pathogen_dist)

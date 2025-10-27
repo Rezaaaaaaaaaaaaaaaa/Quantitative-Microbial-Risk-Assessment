@@ -430,11 +430,16 @@ def batch_scenarios_page():
 
     st.markdown("""
     Run multiple pre-configured scenarios using **three simple data files**:
-    - 🌊 **Dilution Data**: Time, Location, Dilution_Factor (from models)
-    - 🦠 **Pathogen Data**: Hockey Stick distribution (Min, Median, Max)
+    - 🌊 **Dilution Data**: Time, Location, Dilution_Factor (empirical from hydrodynamic models)
+    - 🦠 **Pathogen Data**: Hockey Stick distribution (X₀, X₅₀, X₁₀₀, P) parameters
     - 📋 **Scenarios**: All scenario parameters (references Location & Pathogen_ID)
 
-    **Benefits**: Simple, straightforward, empirical distributions
+    **Key Feature**: Hockey Stick Distribution (McBride 2009)
+    - Realistic right-skewed distribution for environmental pathogens
+    - P parameter controls tail behavior (default 0.95 for 95th percentile breakpoint)
+    - Empirical ECDF for dilution factors from actual modeling output
+
+    **Benefits**: Simple, straightforward, empirical distributions with statistical rigor
     """)
 
     # Tabs
@@ -466,10 +471,13 @@ def batch_scenarios_page():
 
             with col2:
                 st.markdown("**Pathogen Data**")
-                st.caption("Hockey Stick parameters")
+                st.caption("Hockey Stick parameters (X0, X50, X100, P)")
                 if Path(pathogen_file).exists():
                     df_path = pd.read_csv(pathogen_file)
-                    st.dataframe(df_path[['Pathogen_ID', 'Pathogen_Type', 'Median_Concentration']].head(5),
+                    cols_to_show = ['Pathogen_ID', 'Pathogen_Type', 'Median_Concentration', 'P_Breakpoint'] \
+                                   if 'P_Breakpoint' in df_path.columns \
+                                   else ['Pathogen_ID', 'Pathogen_Type', 'Median_Concentration']
+                    st.dataframe(df_path[cols_to_show].head(5),
                                use_container_width=True, height=200)
                     st.caption(f"{len(df_path)} pathogens")
 
@@ -530,13 +538,20 @@ def batch_scenarios_page():
             - `Location` - Site identifier (Site_A, Site_B, etc.)
             - `Dilution_Factor` - Dilution value from hydrodynamic model
 
-            **2. pathogen_data.csv** (6 columns - Hockey Stick only)
+            **2. pathogen_data.csv** (7 columns - Hockey Stick parameters)
+            Hockey Stick Distribution (McBride 2009) with three sections:
+            - Section 1 (X₀ to X₅₀): Linear increase, area = 0.5
+            - Section 2 (X₅₀ to X_P): Linear continuation, area = P - 0.5
+            - Section 3 (X_P to X₁₀₀): Linear decrease, area = 1 - P
+
+            **Columns:**
             - `Pathogen_ID` - Unique ID (PATH001, PATH002, ...)
             - `Pathogen_Name` - Descriptive name
             - `Pathogen_Type` - norovirus, campylobacter, cryptosporidium, e_coli, rotavirus, salmonella
-            - `Min_Concentration` - Minimum concentration (copies/L)
-            - `Median_Concentration` - Median concentration (copies/L)
-            - `Max_Concentration` - Maximum concentration (copies/L)
+            - `Min_Concentration` - Minimum concentration X₀ (copies/L)
+            - `Median_Concentration` - Median concentration X₅₀ (copies/L)
+            - `Max_Concentration` - Maximum concentration X₁₀₀ (copies/L)
+            - `P_Breakpoint` - Percentile breakpoint as proportion (0-1, default 0.95 for 95th percentile)
 
             **3. scenarios.csv** (All scenario parameters)
             - `Scenario_ID`, `Scenario_Name`, `Pathogen_ID`, `Location`, `Exposure_Route`
@@ -546,9 +561,11 @@ def batch_scenarios_page():
             - `Priority`, `Notes`
 
             **Key Points**:
-            - Dilution uses ECDF from all Location data automatically
-            - Pathogen uses Hockey Stick distribution (you determine min/median/max)
+            - Dilution uses Empirical CDF (ECDF) from all Location data automatically
+            - Pathogen uses Hockey Stick distribution (specify X₀, X₅₀, X₁₀₀, P)
+            - P (breakpoint percentile) determines distribution shape (0.90-0.99 typical)
             - Scenarios reference Location (not Dilution_ID) and Pathogen_ID
+            - Default P=0.95 if column omitted (backwards compatible)
             """)
 
     with tab2:
