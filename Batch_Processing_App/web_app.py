@@ -554,11 +554,24 @@ def batch_scenarios_page():
             - `P_Breakpoint` - Percentile breakpoint as proportion (0-1, default 0.95 for 95th percentile)
 
             **3. scenarios.csv** (All scenario parameters)
+
+            **Required columns:**
             - `Scenario_ID`, `Scenario_Name`, `Pathogen_ID`, `Location`, `Exposure_Route`
             - `Treatment_LRV`, `Treatment_LRV_Uncertainty`
             - `Ingestion_Volume_mL`, `Volume_Min_mL`, `Volume_Max_mL`
             - `Exposure_Frequency_per_Year`, `Exposed_Population`, `Monte_Carlo_Iterations`
             - `Priority`, `Notes`
+
+            **Optional columns (exposure-specific parameters):**
+            - `MHF` - Method Harmonisation Factor (default 1.0; use 18.5 for shellfish to account for bioaccumulation)
+            - **For shellfish exposure:**
+              - `BAF_Mean`, `BAF_SD`, `BAF_Min`, `BAF_Max` - Bioaccumulation Factor parameters
+              - `Meal_Size_Min`, `Meal_Size_Max` - Meal size bounds (grams)
+              - `Shellfish_Alpha`, `Shellfish_Beta`, `Shellfish_Gamma` - Log-logistic distribution parameters
+            - **For swimming exposure:**
+              - `Swim_Rate_Mean`, `Swim_Rate_SD` - Water ingestion rate (mL/hour)
+              - `Swim_Rate_Min`, `Swim_Rate_Max` - Rate bounds
+              - `Swim_Duration_Min`, `Swim_Duration_Mode`, `Swim_Duration_Max` - Duration (hours)
 
             **Key Points**:
             - Dilution uses Empirical CDF (ECDF) from all Location data automatically
@@ -566,6 +579,8 @@ def batch_scenarios_page():
             - P (breakpoint percentile) determines distribution shape (0.90-0.99 typical)
             - Scenarios reference Location (not Dilution_ID) and Pathogen_ID
             - Default P=0.95 if column omitted (backwards compatible)
+            - MHF adjusts concentration: adjusted_conc = original_conc × MHF
+            - Exposure_Route options: 'primary_contact', 'shellfish_consumption', 'contaminated_water'
             """)
 
     with tab2:
@@ -639,8 +654,17 @@ def spatial_assessment_page():
         iterations = st.slider("Monte Carlo iterations:", 1000, 50000, 10000, 1000)
 
     with col2:
-        st.markdown("#### Exposure Route")
-        exposure_route = st.radio("Select:", ["primary_contact", "shellfish_consumption"])
+        st.markdown("#### Exposure Route & Parameters")
+        exposure_route = st.radio("Route:", ["primary_contact", "shellfish_consumption", "contaminated_water"])
+
+        mhf = st.number_input(
+            "MHF (Method Harmonisation Factor):",
+            value=1.0,
+            min_value=0.1,
+            max_value=100.0,
+            step=0.1,
+            help="Conversion factor between measurement methods (1.0 for water, 18.5 for shellfish)"
+        )
 
         st.markdown("#### Output")
         output_name = st.text_input("Filename:", value="spatial_results")
@@ -691,7 +715,17 @@ def temporal_assessment_page():
             iterations = st.slider("Iterations:", 1000, 50000, 10000, 1000)
 
     with col2:
-        exposure_route = st.radio("Exposure route:", ["primary_contact", "shellfish_consumption"])
+        exposure_route = st.radio("Exposure route:", ["primary_contact", "shellfish_consumption", "contaminated_water"])
+
+        mhf = st.number_input(
+            "MHF (Measurement Harmonisation Factor):",
+            value=1.0,
+            min_value=0.1,
+            max_value=100.0,
+            step=0.1,
+            help="Conversion between measurement methods"
+        )
+
         output_name = st.text_input("Output filename:", value="temporal_results")
 
         if st.button("🚀 Run Temporal Assessment", type="primary", use_container_width=True):
@@ -755,7 +789,17 @@ def treatment_comparison_page():
             population = st.number_input("Population:", value=10000)
 
     with col2:
-        exposure_route = st.radio("Exposure:", ["primary_contact", "shellfish_consumption"])
+        exposure_route = st.radio("Exposure:", ["primary_contact", "shellfish_consumption", "contaminated_water"])
+
+        mhf = st.number_input(
+            "MHF:",
+            value=1.0,
+            min_value=0.1,
+            max_value=100.0,
+            step=0.1,
+            help="Method Harmonisation Factor"
+        )
+
         iterations = st.slider("Iterations:", 1000, 50000, 10000, 1000)
         output_name = st.text_input("Output:", value="treatment_comparison")
 
@@ -807,7 +851,17 @@ def multi_pathogen_page():
             iterations = st.slider("Iterations:", 1000, 50000, 10000, 1000)
 
     with col2:
-        exposure_route = st.radio("Exposure:", ["primary_contact", "shellfish_consumption"])
+        exposure_route = st.radio("Exposure:", ["primary_contact", "shellfish_consumption", "contaminated_water"])
+
+        mhf = st.number_input(
+            "MHF:",
+            value=1.0,
+            min_value=0.1,
+            max_value=100.0,
+            step=0.1,
+            help="Method Harmonisation Factor"
+        )
+
         output_name = st.text_input("Output:", value="multi_pathogen_results")
 
         if st.button("🚀 Run Multi-Pathogen Assessment", type="primary", use_container_width=True):
