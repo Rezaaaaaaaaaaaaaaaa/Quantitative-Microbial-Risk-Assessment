@@ -34,12 +34,73 @@ try:
         create_uniform_distribution,
         create_empirical_cdf_from_data,
         create_hockey_stick_distribution,
-        calculate_empirical_cdf
+        calculate_empirical_cdf,
+        # New exposure and illness modules
+        get_exposure_volume,
+        infection_to_illness,
+        calculate_illness_risk_metrics,
+        calculate_population_illness_cases
     )
     QMRA_MODULES_AVAILABLE = True
 except ImportError as e:
     warnings.warn(f"QMRA core modules not found ({e}). Using simplified calculations.")
     QMRA_MODULES_AVAILABLE = False
+
+
+def detect_exposure_route(scenario_row):
+    """
+    Detect exposure route from scenario data.
+
+    Returns the exposure route from the scenario, with fallback options.
+    """
+    if 'Exposure_Route' in scenario_row:
+        return scenario_row['Exposure_Route']
+    elif 'exposure_route' in scenario_row:
+        return scenario_row['exposure_route']
+    else:
+        return 'primary_contact'  # Default fallback
+
+
+def get_route_exposure_parameters(exposure_route, scenario_row):
+    """
+    Extract exposure route-specific parameters from scenario row.
+
+    Returns a dictionary with the appropriate parameters for the exposure route.
+    """
+    route_params = {}
+
+    exposure_route_lower = exposure_route.lower()
+
+    if exposure_route_lower in ['shellfish_consumption', 'shellfish']:
+        # Shellfish-specific parameters
+        route_params['alpha'] = scenario_row.get('Shellfish_Alpha', 2.2046)
+        route_params['beta'] = scenario_row.get('Shellfish_Beta', 75.072)
+        route_params['gamma'] = scenario_row.get('Shellfish_Gamma', -0.9032)
+        route_params['min_grams'] = scenario_row.get('Meal_Size_Min', 5.0)
+        route_params['max_grams'] = scenario_row.get('Meal_Size_Max', 800.0)
+        route_params['baf_mean'] = scenario_row.get('BAF_Mean', 44.9)
+        route_params['baf_sd'] = scenario_row.get('BAF_SD', 20.93)
+        route_params['baf_min'] = scenario_row.get('BAF_Min', 1.0)
+        route_params['baf_max'] = scenario_row.get('BAF_Max', 100.0)
+
+    elif exposure_route_lower in ['primary_contact', 'swimming', 'swim']:
+        # Swimming-specific parameters
+        route_params['mean_ingestion_rate'] = scenario_row.get('Swim_Rate_Mean', 53.0)
+        route_params['sd_ingestion_rate'] = scenario_row.get('Swim_Rate_SD', 75.0)
+        route_params['min_ingestion_rate'] = scenario_row.get('Swim_Rate_Min', 5.0)
+        route_params['max_ingestion_rate'] = scenario_row.get('Swim_Rate_Max', 200.0)
+        route_params['min_duration'] = scenario_row.get('Swim_Duration_Min', 0.2)
+        route_params['mode_duration'] = scenario_row.get('Swim_Duration_Mode', 1.0)
+        route_params['max_duration'] = scenario_row.get('Swim_Duration_Max', 4.0)
+
+    else:
+        # Default contaminated water/generic parameters
+        route_params['volume_ml'] = scenario_row.get('Volume_mL', 50.0)
+
+    # MHF (Method Harmonisation Factor) for measurement method conversion
+    route_params['mhf'] = scenario_row.get('MHF', 1.0)
+
+    return route_params
 
 
 class BatchProcessor:
@@ -617,11 +678,16 @@ class BatchProcessor:
                 dilution_factor_cv**2
             )
 
+            # Get exposure route and route-specific parameters
+            exposure_route = detect_exposure_route(scenario)
+            exposure_route_params = get_route_exposure_parameters(exposure_route, scenario)
+            mhf = scenario.get('MHF', 1.0)
+
             # Run QMRA with custom distributions
             result = self._run_single_assessment(
                 pathogen=scenario['Pathogen'],
                 concentration=receiving_water_conc,
-                exposure_route=scenario['Exposure_Route'],
+                exposure_route=exposure_route,
                 volume_ml=scenario['Volume_mL'],
                 frequency_per_year=scenario['Frequency_Year'],
                 population=scenario['Population'],
@@ -630,14 +696,16 @@ class BatchProcessor:
                 volume_min=volume_min,
                 volume_max=volume_max,
                 dilution_cv=dilution_factor_cv,
-                treatment_uncertainty=treatment_lrv_uncertainty
+                treatment_uncertainty=treatment_lrv_uncertainty,
+                exposure_route_params=exposure_route_params,
+                mhf=mhf
             )
 
             results.append({
                 'Scenario_ID': scenario_id,
                 'Scenario_Name': scenario_name,
                 'Pathogen': scenario['Pathogen'],
-                'Exposure_Route': scenario['Exposure_Route'],
+                'Exposure_Route': exposure_route,
                 'Effluent_Conc': scenario['Effluent_Conc'],
                 'Treatment_LRV': scenario['Treatment_LRV'],
                 'Dilution_Factor': scenario['Dilution_Factor'],
@@ -645,16 +713,23 @@ class BatchProcessor:
                 'Volume_mL': scenario['Volume_mL'],
                 'Frequency_Year': scenario['Frequency_Year'],
                 'Population': scenario['Population'],
+                'MHF': mhf,
                 'Infection_Risk_Median': result['pinf_median'],
-                'Annual_Risk_Median': result['annual_risk_median'],
+                'Illness_Risk_Median': result['pill_median'],
+                'Annual_Infection_Risk': result['annual_risk_median'],
+                'Annual_Illness_Risk': result.get('annual_illness_median', result['annual_risk_median']),
                 'Annual_Risk_5th': result['annual_5th'],
                 'Annual_Risk_95th': result['annual_95th'],
                 'Population_Impact': result['population_impact'],
+                'Population_Illness_Cases': result.get('population_illness_cases', 0),
+                'P_Illness_Given_Infection': result.get('p_illness_given_infection', 0),
+                'Population_Susceptibility': result.get('population_susceptibility', 1.0),
                 'Compliance_Status': 'COMPLIANT' if result['annual_risk_median'] <= 1e-4 else 'NON-COMPLIANT',
                 'Priority': scenario.get('Priority', 'Medium')
             })
 
-            print(f"  Risk: {result['annual_risk_median']:.2e}  {results[-1]['Compliance_Status']}")
+            # Print status with illness risk information
+            print(f"  Infection Risk: {result['pinf_median']:.2e} | Illness Risk: {result['pill_median']:.2e} | Annual: {result['annual_risk_median']:.2e}  {results[-1]['Compliance_Status']}")
 
         results_df = pd.DataFrame(results)
 
@@ -957,7 +1032,8 @@ class BatchProcessor:
                                volume_ml, frequency_per_year, population,
                                iterations=10000, concentration_cv=0.5,
                                volume_min=None, volume_max=None,
-                               dilution_cv=0.3, treatment_uncertainty=0.2):
+                               dilution_cv=0.3, treatment_uncertainty=0.2,
+                               exposure_route_params=None, mhf=1.0):
         """
         Run a single QMRA assessment.
 
@@ -976,12 +1052,15 @@ class BatchProcessor:
             volume_max: Maximum volume (default: volume_ml * 1.5)
             dilution_cv: Coefficient of variation for dilution (default 0.3)
             treatment_uncertainty: Uncertainty in treatment LRV (default 0.2)
+            exposure_route_params: Dictionary of route-specific parameters
+            mhf: Method Harmonisation Factor for measurement conversion (default 1.0)
         """
         if QMRA_MODULES_AVAILABLE:
             return self._run_full_qmra(pathogen, concentration, exposure_route,
                                       volume_ml, frequency_per_year, population, iterations,
                                       concentration_cv, volume_min, volume_max,
-                                      dilution_cv, treatment_uncertainty)
+                                      dilution_cv, treatment_uncertainty,
+                                      exposure_route_params, mhf)
         else:
             return self._run_simplified_qmra(pathogen, concentration, exposure_route,
                                             volume_ml, frequency_per_year, population, iterations,
@@ -990,9 +1069,12 @@ class BatchProcessor:
     def _run_full_qmra(self, pathogen, concentration, exposure_route,
                        volume_ml, frequency_per_year, population, iterations,
                        concentration_cv=0.5, volume_min=None, volume_max=None,
-                       dilution_cv=0.3, treatment_uncertainty=0.2):
+                       dilution_cv=0.3, treatment_uncertainty=0.2,
+                       exposure_route_params=None, mhf=1.0):
         """
         Run full QMRA with proper modules using custom distributions.
+
+        Includes exposure-specific parameter handling and proper illness modeling.
 
         Args:
             concentration_cv: Coefficient of variation for concentration
@@ -1000,6 +1082,8 @@ class BatchProcessor:
             volume_max: Maximum ingestion volume
             dilution_cv: Not used directly here (applied upstream)
             treatment_uncertainty: Not used directly here (applied upstream)
+            exposure_route_params: Dictionary with exposure route-specific parameters
+            mhf: Method Harmonisation Factor for measurement conversion
         """
         # Get pathogen parameters
         pathogen_info = self.pathogen_db.get_pathogen_info(pathogen)
@@ -1007,40 +1091,74 @@ class BatchProcessor:
         dr_params = self.pathogen_db.get_dose_response_parameters(pathogen, default_model_type)
         health_data = self.pathogen_db.get_health_impact_data(pathogen)
 
+        # Get illness parameters (with fallback to old method if not available)
+        try:
+            illness_params = self.pathogen_db.get_illness_parameters(pathogen)
+            p_illness_given_infection = illness_params['probability_illness_given_infection']
+            population_susceptibility = illness_params['population_susceptibility']
+        except:
+            # Fallback to old illness_to_infection_ratio if new method unavailable
+            p_illness_given_infection = health_data.get("illness_to_infection_ratio", 0.6)
+            population_susceptibility = 1.0
+
         # Create dose-response model
         dr_model = create_dose_response_model(default_model_type, dr_params)
 
         # Monte Carlo simulation
         mc_simulator = MonteCarloSimulator(random_seed=42)
 
-        # Add concentration distribution with custom CV
-        # CV relates to std for lognormal: std = sqrt(log(1 + CV^2))
+        # Add concentration distribution with custom CV and MHF adjustment
+        # MHF: Method Harmonisation Factor converts between measurement methods
+        adjusted_conc = concentration * mhf
         log_std = np.sqrt(np.log(1 + concentration_cv**2))
         conc_dist = create_lognormal_distribution(
-            mean=np.log(max(concentration, 1e-10)),
+            mean=np.log(max(adjusted_conc, 1e-10)),
             std=log_std,
             name="concentration"
         )
         mc_simulator.add_distribution("concentration", conc_dist)
 
-        # Add volume distribution with custom min/max
-        if volume_min is None:
-            volume_min = volume_ml * 0.5
-        if volume_max is None:
-            volume_max = volume_ml * 1.5
+        # Handle exposure route-specific volume distribution
+        if exposure_route_params and exposure_route.lower() in ['shellfish_consumption', 'shellfish']:
+            # Shellfish: use get_exposure_volume for meal size × BAF calculation
+            if not QMRA_MODULES_AVAILABLE:
+                raise RuntimeError("QMRA modules required for exposure-specific assessments")
 
-        vol_dist = create_uniform_distribution(
-            min_val=volume_min,
-            max_val=volume_max,
-            name="volume"
-        )
-        mc_simulator.add_distribution("volume", vol_dist)
+            # Generate exposure volumes using route-specific parameters
+            volumes = get_exposure_volume(
+                exposure_route,
+                iterations,
+                exposure_route_params,
+                seed=42
+            )
 
-        # QMRA model
+        elif exposure_route_params and exposure_route.lower() in ['primary_contact', 'swimming', 'swim']:
+            # Swimming: use get_exposure_volume for rate × duration calculation
+            if not QMRA_MODULES_AVAILABLE:
+                raise RuntimeError("QMRA modules required for exposure-specific assessments")
+
+            # Generate exposure volumes using route-specific parameters
+            volumes = get_exposure_volume(
+                exposure_route,
+                iterations,
+                exposure_route_params,
+                seed=42
+            )
+
+        else:
+            # Default: uniform distribution around volume_ml
+            if volume_min is None:
+                volume_min = volume_ml * 0.5
+            if volume_max is None:
+                volume_max = volume_ml * 1.5
+            volumes = np.random.uniform(volume_min, volume_max, iterations)
+
+        # QMRA model - calculate infection probability for each iteration
         def qmra_model(samples):
             conc = samples["concentration"]
-            vol = samples["volume"]
-            dose = (conc * vol) / 1000.0
+            # Use pre-generated volumes instead of sampling from distribution
+            # (volumes already account for exposure route specifics)
+            dose = (conc * volumes) / 1000.0  # Convert mL to L
             return dr_model.calculate_infection_probability(dose)
 
         # Run simulation
@@ -1050,23 +1168,46 @@ class BatchProcessor:
             variable_name="infection_probability"
         )
 
-        # Calculate risks
+        # Get infection probability samples
         pinf_samples = infection_results.samples
-        pill_inf_ratio = health_data["illness_to_infection_ratio"]
-        pill_samples = pinf_samples * pill_inf_ratio
-        annual_samples = 1 - np.power(1 - pinf_samples, frequency_per_year)
+
+        # Convert infection to illness using proper probability model
+        # P(illness) = P(infection) × P(ill|infected) × population_susceptibility
+        illness_samples = infection_to_illness(
+            pinf_samples,
+            p_illness_given_infection,
+            population_susceptibility,
+            seed=42
+        )
+
+        # Calculate annual risks (accounting for repeated exposures)
+        annual_infection_samples = 1 - np.power(1 - pinf_samples, frequency_per_year)
+        annual_illness_samples = 1 - np.power(1 - illness_samples, frequency_per_year)
+
+        # Calculate population illness cases
+        population_cases = population * np.mean(annual_illness_samples)
 
         return {
             'pinf_median': float(np.median(pinf_samples)),
             'pinf_mean': float(np.mean(pinf_samples)),
             'pinf_5th': float(np.percentile(pinf_samples, 5)),
             'pinf_95th': float(np.percentile(pinf_samples, 95)),
-            'pill_median': float(np.median(pill_samples)),
-            'annual_risk_median': float(np.median(annual_samples)),
-            'annual_mean': float(np.mean(annual_samples)),
-            'annual_5th': float(np.percentile(annual_samples, 5)),
-            'annual_95th': float(np.percentile(annual_samples, 95)),
-            'population_impact': int(population * np.median(annual_samples))
+            'pill_median': float(np.median(illness_samples)),
+            'pill_mean': float(np.mean(illness_samples)),
+            'pill_5th': float(np.percentile(illness_samples, 5)),
+            'pill_95th': float(np.percentile(illness_samples, 95)),
+            'annual_infection_median': float(np.median(annual_infection_samples)),
+            'annual_illness_median': float(np.median(annual_illness_samples)),
+            'annual_risk_median': float(np.median(annual_infection_samples)),  # Keep for backwards compatibility
+            'annual_mean': float(np.mean(annual_infection_samples)),
+            'annual_5th': float(np.percentile(annual_infection_samples, 5)),
+            'annual_95th': float(np.percentile(annual_infection_samples, 95)),
+            'annual_illness_mean': float(np.mean(annual_illness_samples)),
+            'population_impact': int(population * np.median(annual_infection_samples)),
+            'population_illness_cases': float(population_cases),
+            'p_illness_given_infection': float(p_illness_given_infection),
+            'population_susceptibility': float(population_susceptibility),
+            'mhf_applied': float(mhf)
         }
 
     def _run_simplified_qmra(self, pathogen, concentration, exposure_route,
