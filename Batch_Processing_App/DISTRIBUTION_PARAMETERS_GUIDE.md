@@ -1,8 +1,14 @@
 # Custom Distribution Parameters Guide
 
-**Version:** 2.0
-**Date:** October 2025
-**Enhancement:** Scenario-Specific Uncertainty Distributions
+**Version:** 1.2.0
+**Date:** November 2025
+**Enhancements:**
+- Scenario-Specific Uncertainty Distributions (v2.0)
+- Truncated Log-Logistic Distribution for Shellfish Meal Sizes (NEW)
+- Bioaccumulation Factor (BAF) for Shellfish Concentration (NEW)
+- Swimming Exposure with Rate & Duration Modeling (NEW)
+- Illness Modeling with Population Susceptibility (NEW)
+- Method Harmonisation Factor (MHF) for Measurement Conversion (NEW)
 
 ---
 
@@ -158,6 +164,138 @@ This combined CV is used in the **lognormal distribution** for concentration dur
 
 ---
 
+## New in v1.2.0: Truncated Log-Logistic & Exposure-Specific Distributions
+
+### Truncated Log-Logistic Distribution (Shellfish Meal Sizes)
+
+The system now supports **truncated log-logistic distribution** for modeling shellfish meal size consumption:
+
+**Distribution Characteristics:**
+- **Shape:** Right-skewed (realistic consumption pattern)
+- **Parameters:**
+  - `alpha` (α): Shape parameter (default 2.2046)
+  - `beta` (β): Shape parameter (default 75.072)
+  - `gamma` (γ): Location parameter (default -0.9032)
+  - `min_grams`: Minimum meal size (default 5g)
+  - `max_grams`: Maximum meal size (default 800g)
+
+**CSV Columns (Optional):**
+
+| Column | Default | Range | Meaning |
+|--------|---------|-------|---------|
+| `Shellfish_Alpha` | 2.2046 | 0.5-10 | Shape parameter α |
+| `Shellfish_Beta` | 75.072 | 10-200 | Shape parameter β |
+| `Shellfish_Gamma` | -0.9032 | any | Location parameter γ |
+| `Meal_Size_Min` | 5.0 | >0 | Minimum meal (grams) |
+| `Meal_Size_Max` | 800.0 | >Min | Maximum meal (grams) |
+
+**Example:**
+```csv
+# Standard shellfish scenario
+Exposure_Route,Shellfish_Alpha,Shellfish_Beta,Shellfish_Gamma,Meal_Size_Min,Meal_Size_Max
+shellfish_consumption,2.2046,75.072,-0.9032,5.0,800.0
+```
+
+### Bioaccumulation Factor (BAF) for Shellfish
+
+Shellfish filter-feed and concentrate pathogens from water. BAF models this concentration effect:
+
+**Distribution:** Truncated Normal
+- **Mean:** 44.9× (default)
+- **SD:** 20.93 (default)
+- **Range:** 1.0 - 100.0×
+
+**CSV Columns (Optional):**
+
+| Column | Default | Meaning |
+|--------|---------|---------|
+| `BAF_Mean` | 44.9 | Mean bioaccumulation factor |
+| `BAF_SD` | 20.93 | Standard deviation |
+| `BAF_Min` | 1.0 | Minimum BAF |
+| `BAF_Max` | 100.0 | Maximum BAF |
+
+**Method Harmonisation Factor (MHF):**
+- Accounts for difference in measurement method
+- **For water exposure (primary_contact):** MHF = 1.0
+- **For shellfish exposure:** MHF = 18.5 (accounts for bioaccumulation not included in water sampling)
+- Apply via: `adjusted_conc = original_conc × MHF`
+
+**Example:**
+```csv
+# Shellfish with custom BAF
+Exposure_Route,BAF_Mean,BAF_SD,BAF_Min,BAF_Max,MHF
+shellfish_consumption,45.0,21.0,1.0,100.0,18.5
+```
+
+### Swimming Exposure (Water Ingestion Rate & Duration)
+
+Models both ingestion rate and duration of swimming activity:
+
+**Ingestion Rate Distribution:** Truncated Lognormal
+- **Mean:** 53.0 mL/h
+- **SD:** 75.0 mL/h
+- **Range:** 5.0 - 200.0 mL/h
+
+**Duration Distribution:** Triangular (PERT)
+- **Min:** 0.2 hours (~12 min)
+- **Mode:** 1.0 hour
+- **Max:** 4.0 hours
+
+**CSV Columns (Optional):**
+
+| Column | Default | Meaning |
+|--------|---------|---------|
+| `Swim_Rate_Mean` | 53.0 | Ingestion rate (mL/h) |
+| `Swim_Rate_SD` | 75.0 | Rate SD |
+| `Swim_Rate_Min` | 5.0 | Rate minimum |
+| `Swim_Rate_Max` | 200.0 | Rate maximum |
+| `Swim_Duration_Min` | 0.2 | Duration minimum (hours) |
+| `Swim_Duration_Mode` | 1.0 | Duration mode |
+| `Swim_Duration_Max` | 4.0 | Duration maximum |
+
+**Total Volume = Ingestion_Rate × Duration**
+
+**Example:**
+```csv
+# Summer beach swimming
+Exposure_Route,Swim_Rate_Mean,Swim_Rate_SD,Swim_Duration_Min,Swim_Duration_Mode,Swim_Duration_Max,MHF
+primary_contact,55.0,80.0,0.2,1.2,4.0,1.0
+```
+
+### Illness Modeling (New in v1.2.0)
+
+Converts infection probability to illness probability accounting for:
+1. **P(ill | infected):** Fraction of infected who develop symptoms (pathogen-specific)
+2. **Population Susceptibility:** Fraction of population susceptible to pathogen
+
+**New CSV Columns:**
+None required - parameters are built-in by pathogen. If needed to override:
+
+| Pathogen | P(ill\|inf) | Susceptibility | WHO Risk Threshold |
+|----------|-----------|----------------|-------------------|
+| Norovirus | 0.60 | 0.74 | < 1e-4 annual |
+| Campylobacter | 0.80 | 1.00 | < 1e-4 annual |
+| Cryptosporidium | 1.00 | 1.00 | < 1e-4 annual |
+| E. coli O157:H7 | 0.90 | 1.00 | < 1e-4 annual |
+| Salmonella | 0.75 | 1.00 | < 1e-4 annual |
+| Rotavirus | 0.65 | 0.85 | < 1e-4 annual |
+
+**Formula:**
+```
+P(illness per exposure) = P(infection) × P(ill|inf) × susceptibility
+Annual Illness Risk = 1 - (1 - P(illness))^frequency
+Expected Cases = Population × Annual Illness Risk
+```
+
+**New Output Columns:**
+- `Illness_Risk_Median`: Median illness probability per exposure
+- `Annual_Illness_Risk`: Annual illness probability
+- `Population_Illness_Cases`: Expected annual cases in population
+- `P_Illness_Given_Infection`: Model parameter used
+- `Population_Susceptibility`: Model parameter used
+
+---
+
 ## Example Scenarios
 
 ### Scenario 1: High-Quality Monitoring
@@ -279,9 +417,30 @@ This compares low-uncertainty vs high-uncertainty scenarios and verifies that hi
 
 ## References
 
-- WHO (2016). Quantitative Microbial Risk Assessment - Uncertainty Analysis
+### Core QMRA References
+- WHO (2016). Quantitative Microbial Risk Assessment - Application for Water Safety Management
 - U.S. EPA (2019). Exposure Factors Handbook
-- Haas et al. (2014). QMRA 2nd Edition - Chapter 8: Uncertainty
+- Haas et al. (2014). QMRA 2nd Edition - Chapter 8: Uncertainty and Sensitivity Analysis
+
+### New v1.2.0 Features
+- Teunis et al. (2008). Cryptosporidium and Giardia in groundwater and drinking water supplies
+  - Source for norovirus dose-response and illness parameters
+- McBride et al. (2009). The Hockey Stick Distribution for Left-Skewed Microbial Data
+  - Inspiration for right-skewed pathogen concentration modeling
+- Wood et al. (2023). From_David R Package for QMRA
+  - Source for truncated log-logistic parameters and BAF methodology
+- Teunis & Havelaar (2000). The Beta Poisson Dose-Response Model is not always the best predictor
+  - Alternative dose-response models and uncertainty considerations
+
+### Shellfish & Bioaccumulation
+- Potasman et al. (1992). Infectious Aspects of Eating Sushi
+  - Shellfish consumption patterns and exposure parameters
+- ISOIEC 12457. Characterization of Waste - Leaching Behavior Tests
+  - Background on bioaccumulation factors in aquatic systems
+
+### Exposure & Illness Models
+- Regli et al. (1991). Modeling the Risk from Giardia and Viruses
+  - Foundation for infection-to-illness conversion methodology
 
 ---
 
