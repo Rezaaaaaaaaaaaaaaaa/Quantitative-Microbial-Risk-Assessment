@@ -2,7 +2,17 @@
 
 **Standalone Interactive Web-Based Quantitative Microbial Risk Assessment Tool**
 
-Version 1.0 | October 2025 | NIWA Earth Sciences New Zealand
+Version 1.2.0 | November 2025 | NIWA Earth Sciences New Zealand
+
+### Latest Release (v1.2.0) - Exposure-Specific & Illness Modeling
+
+**New Features:**
+- Truncated Log-Logistic Distribution for shellfish meal size modeling
+- Bioaccumulation Factor (BAF) for shellfish pathogen concentration
+- Swimming exposure with separate ingestion rate & duration modeling
+- Infection-to-Illness conversion with population susceptibility
+- Method Harmonisation Factor (MHF) for measurement method conversion
+- Enhanced risk metrics including expected population illness cases
 
 ---
 
@@ -74,9 +84,19 @@ Batch_Processing_App/
 ├── qmra_core/                    # Standalone QMRA modules (self-contained)
 │   ├── pathogen_database.py      # Pathogen parameters & dose-response
 │   ├── dose_response.py          # Dose-response models
-│   ├── monte_carlo.py            # Monte Carlo simulation
+│   ├── monte_carlo.py            # Monte Carlo simulation (includes truncated log-logistic)
+│   ├── exposure_parameters.py    # NEW: Exposure route-specific functions
+│   │   ├── BioaccumulationFactor (shellfish BAF)
+│   │   ├── ShellfishMealSize (truncated log-logistic)
+│   │   ├── SwimIngestionRate (truncated lognormal)
+│   │   ├── SwimDuration (triangular/PERT)
+│   │   └── get_exposure_volume() dispatcher
+│   ├── illness_model.py          # NEW: Infection-to-illness conversion
+│   │   ├── infection_to_illness()
+│   │   ├── calculate_population_illness_cases()
+│   │   └── WHO compliance functions
 │   └── data/
-│       └── pathogen_parameters.json  # Pathogen database
+│       └── pathogen_parameters.json  # Enhanced with illness parameters
 │
 ├── web_app.py                    # Main web application
 ├── batch_processor.py            # Core QMRA processing engine
@@ -398,6 +418,38 @@ The tool now supports **scenario-specific uncertainty** through custom distribut
 
 ## 🔬 Technical Details
 
+### Exposure Route-Specific Modeling (v1.2.0)
+
+**Shellfish Consumption:**
+- Meal size: Truncated log-logistic distribution (5-800 grams, mean ~75g)
+- Bioaccumulation Factor: Truncated normal (mean 44.9×, range 1-100×)
+- Total exposure: meal_size (g) × BAF (multiplier)
+- Method Harmonisation Factor: 18.5 (accounts for bioaccumulation not in water sampling)
+
+**Swimming/Primary Contact:**
+- Ingestion rate: Truncated lognormal (5-200 mL/h, mean 53 mL/h)
+- Duration: Triangular distribution (0.2-4 hours, mode 1 hour)
+- Total exposure: ingestion_rate (mL/h) × duration (h)
+- Method Harmonisation Factor: 1.0 (baseline water exposure)
+
+**Contaminated Water (Generic):**
+- Fixed volume or uniform distribution range
+- Method Harmonisation Factor: User-defined (1.0 default)
+
+### Illness Modeling (v1.2.0)
+
+**Infection to Illness Conversion:**
+- Formula: P(illness) = P(infection) × P(ill|infected) × population_susceptibility
+- Pathogen-specific parameters from WHO literature
+- Accounts for infected individuals who don't develop clinical symptoms
+- Population heterogeneity in susceptibility
+
+**Illness Risk Outputs:**
+- Per-exposure illness probability
+- Annual illness risk (accounting for repeated exposures)
+- Expected population illness cases per year
+- Compliance with WHO guideline (< 1e-4 annual infection risk)
+
 ### Assessment Methods
 
 - **Dose-Response Models:**
@@ -405,15 +457,18 @@ The tool now supports **scenario-specific uncertainty** through custom distribut
   - Exponential (Campylobacter, Cryptosporidium)
 
 - **Monte Carlo Simulation:**
-  - 10,000 iterations (default)
-  - Uncertainty quantification
-  - Percentile-based risk estimates
+  - 10,000 iterations (default, adjustable)
+  - Uncertainty quantification for all parameters
+  - Percentile-based risk estimates (5th, median, 95th)
+  - Proper propagation of uncertainties
 
 - **Risk Calculation:**
-  - Per-event infection risk
-  - Annual infection risk
-  - Population impact (expected illnesses)
-  - DALYs (Disability-Adjusted Life Years)
+  - Per-event infection risk (per exposure)
+  - Per-event illness risk (per exposure)
+  - Annual infection risk (accounting for frequency)
+  - Annual illness risk (accounting for frequency)
+  - Population impact (expected illnesses/year)
+  - WHO compliance assessment
 
 ### Data Processing
 
@@ -427,27 +482,48 @@ The tool now supports **scenario-specific uncertainty** through custom distribut
 ## 📞 Support & Documentation
 
 **Developer:** NIWA Earth Sciences New Zealand
-**Version:** 1.0
-**Release Date:** October 2025
+**Version:** 1.2.0
+**Release Date:** November 2025
+
+**Key Changes from v1.0:**
+- Added exposure-specific parameter modeling
+- Implemented illness modeling with population susceptibility
+- Support for multiple exposure routes with appropriate distributions
+- Method Harmonisation Factor for measurement method conversion
+- Enhanced risk metrics including expected population cases
 
 **Additional Resources:**
+- See `DISTRIBUTION_PARAMETERS_GUIDE.md` for v1.2.0 feature documentation
 - See `BATCH_PROCESSING_INPUTS_GUIDE.md` for detailed input file specifications
 - Check example files in `input_data/` directory
 - Review sample outputs in `outputs/results/`
+- Review new test suite: `test_new_features.py` for feature validation
 
 **For Questions:**
-- Review example scenarios
-- Check input file formats
-- Verify parameter units
+- Review example scenarios in input_data/batch_scenarios/
+- Check DISTRIBUTION_PARAMETERS_GUIDE.md for exposure-specific parameters
+- Verify parameter units and ranges
 - Consult QMRA literature (WHO, US EPA)
+- Check web app help text for MHF and exposure route guidance
 
 ---
 
 ## 📄 References
 
+**Core QMRA:**
 - WHO (2016). Quantitative Microbial Risk Assessment: Application for Water Safety Management
 - U.S. EPA (2019). Method for Assessing the Public Health Risk from Waterborne Pathogens
 - Haas et al. (2014). Quantitative Microbial Risk Assessment, 2nd Edition
+
+**New v1.2.0 Methods:**
+- Teunis et al. (2008). Cryptosporidium and Giardia in groundwater and drinking water supplies
+- Potasman et al. (1992). Infectious Aspects of Eating Sushi
+- McBride et al. (2009). The Hockey Stick Distribution for Left-Skewed Microbial Data
+- Wood et al. (2023). From_David R Package - Exposure-Specific QMRA Methods
+
+**Dose-Response Models:**
+- Teunis & Havelaar (2000). The Beta Poisson Dose-Response Model
+- Regli et al. (1991). Modeling the Risk from Giardia and Viruses in Drinking Water
 
 ---
 
