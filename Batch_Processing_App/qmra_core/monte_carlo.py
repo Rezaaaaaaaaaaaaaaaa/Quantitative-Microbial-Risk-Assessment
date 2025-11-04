@@ -29,6 +29,7 @@ class DistributionType(Enum):
     BINOMIAL = "binomial"
     EMPIRICAL_CDF = "empirical_cdf"  # For sampling dilution data
     HOCKEY_STICK = "hockey_stick"  # For pathogen concentration estimation
+    TRUNCATED_LOGLOGISTIC = "truncated_loglogistic"  # For shellfish meal sizes and swim ingestion rates
 
 
 @dataclass
@@ -53,7 +54,8 @@ class DistributionParameters:
             DistributionType.POISSON: ["mu"],
             DistributionType.BINOMIAL: ["n", "p"],
             DistributionType.EMPIRICAL_CDF: ["x_values", "probabilities"],  # x values and cumulative probs
-            DistributionType.HOCKEY_STICK: ["x_min", "x_median", "x_max"]  # min, median, max (P is optional)
+            DistributionType.HOCKEY_STICK: ["x_min", "x_median", "x_max"],  # min, median, max (P is optional)
+            DistributionType.TRUNCATED_LOGLOGISTIC: ["alpha", "beta", "min", "max"]  # Log-logistic params + bounds
         }
 
         required = required_params.get(self.distribution_type, [])
@@ -300,6 +302,58 @@ class MonteCarloSimulator:
 
                 # Ensure sample is within bounds
                 samples[i] = np.clip(samples[i], x_min, x_max)
+
+            return samples
+
+        elif dist_type == DistributionType.TRUNCATED_LOGLOGISTIC:
+            # Truncated Log-Logistic distribution for shellfish meal sizes and swim ingestion rates
+            # Based on David Wood's R implementation (From_David package)
+            # PDF: f(x) = (beta/alpha) * ((x-gamma)/alpha)^(beta-1) / (1 + ((x-gamma)/alpha)^beta)^2
+            # Default parameters (David's shellfish meal size):
+            #   alpha = 2.2046, beta = 75.072, gamma = -0.9032 (min=5g, max=800g)
+            # For swim ingestion rate: alpha, beta, min, max parameters provided in batch
+
+            alpha = params["alpha"]  # Shape parameter
+            beta = params["beta"]    # Shape parameter
+            x_min = params["min"]    # Lower truncation bound
+            x_max = params["max"]    # Upper truncation bound
+            gamma = params.get("gamma", 0)  # Location parameter (default 0)
+
+            # Validate parameters
+            if alpha <= 0 or beta <= 0:
+                raise ValueError(f"Log-logistic alpha ({alpha}) and beta ({beta}) must be positive")
+            if x_min >= x_max:
+                raise ValueError(f"Min ({x_min}) must be less than max ({x_max})")
+
+            # CDF of log-logistic: F(x) = 1 / (1 + ((alpha / (x - gamma))^beta))
+            # Generate samples using inverse CDF method with truncation
+
+            def loglogistic_cdf(x, alpha, beta, gamma):
+                """Cumulative distribution function of log-logistic."""
+                if np.any(x <= gamma):
+                    return np.zeros_like(x)
+                return 1.0 / (1.0 + (alpha / (x - gamma))**beta)
+
+            def loglogistic_icdf(u, alpha, beta, gamma):
+                """Inverse CDF (quantile function) of log-logistic."""
+                # Q(u) = gamma + alpha / (u^(-1/beta) - 1)^(1/beta)
+                if np.any((u <= 0) | (u >= 1)):
+                    warnings.warn("ICDF called with u outside (0,1)")
+                    u = np.clip(u, 1e-10, 1-1e-10)
+                return gamma + alpha / ((u**(-1.0/beta)) - 1.0)**(1.0/beta)
+
+            # Calculate CDF at truncation bounds
+            cdf_min = loglogistic_cdf(x_min, alpha, beta, gamma)
+            cdf_max = loglogistic_cdf(x_max, alpha, beta, gamma)
+
+            # Generate uniform samples and transform to truncated distribution
+            uniform_samples = np.random.uniform(0, 1, n_samples)
+            # Map to truncated range
+            u_truncated = cdf_min + uniform_samples * (cdf_max - cdf_min)
+            samples = loglogistic_icdf(u_truncated, alpha, beta, gamma)
+
+            # Ensure all samples are within bounds (numerical precision)
+            samples = np.clip(samples, x_min, x_max)
 
             return samples
 

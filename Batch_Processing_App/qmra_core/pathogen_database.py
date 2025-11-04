@@ -128,6 +128,46 @@ class PathogenDatabase:
             "pathogen_type": pathogen_info.get("pathogen_type", "unknown")
         }
 
+    def get_illness_parameters(self, pathogen_name: str) -> Dict:
+        """
+        Get illness conversion parameters for a specific pathogen.
+
+        These parameters convert infection probabilities to illness probabilities:
+        - P(illness) = P(infection) × P(ill|infected) × population_susceptibility
+
+        Args:
+            pathogen_name: Name of the pathogen
+
+        Returns:
+            Dictionary with:
+                - probability_illness_given_infection: Fraction of infected who become ill
+                - population_susceptibility: Fraction of population susceptible
+                - source: Citation for parameters
+                - notes: Additional context
+
+        Raises:
+            ValueError: If pathogen not found or illness parameters unavailable
+        """
+        pathogen_info = self.get_pathogen_info(pathogen_name)
+
+        if "illness_parameters" not in pathogen_info:
+            # Fallback: use illness_to_infection_ratio as P(ill|infected)
+            # and assume general population susceptibility
+            return {
+                "probability_illness_given_infection": pathogen_info.get("illness_to_infection_ratio", 0.5),
+                "population_susceptibility": 1.0,
+                "source": "Default fallback",
+                "notes": "Using illness_to_infection_ratio as probability of illness given infection"
+            }
+
+        illness_params = pathogen_info["illness_parameters"]
+        return {
+            "probability_illness_given_infection": illness_params.get("probability_illness_given_infection", 0.5),
+            "population_susceptibility": illness_params.get("population_susceptibility", 1.0),
+            "source": illness_params.get("source", "Unknown"),
+            "notes": illness_params.get("notes", "")
+        }
+
     def validate_exposure_route(self, pathogen_name: str, exposure_route: str) -> bool:
         """
         Check if an exposure route is valid for a specific pathogen.

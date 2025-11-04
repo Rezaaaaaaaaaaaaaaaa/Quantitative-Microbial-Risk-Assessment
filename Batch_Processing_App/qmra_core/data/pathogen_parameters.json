@@ -18,6 +18,12 @@
     },
     "illness_to_infection_ratio": 0.7,
     "dalys_per_case": 0.002,
+    "illness_parameters": {
+      "probability_illness_given_infection": 0.60,
+      "population_susceptibility": 0.74,
+      "source": "WHO (2016), Teunis et al. (2008)",
+      "notes": "60% of infected become ill; 74% of population susceptible"
+    },
     "exposure_routes": [
       "primary_contact",
       "shellfish_consumption",
@@ -47,6 +53,12 @@
     },
     "illness_to_infection_ratio": 0.3,
     "dalys_per_case": 0.005,
+    "illness_parameters": {
+      "probability_illness_given_infection": 0.80,
+      "population_susceptibility": 1.00,
+      "source": "WHO (2016), Teunis et al. (2005)",
+      "notes": "Highly pathogenic; 80% of infected become ill"
+    },
     "exposure_routes": [
       "contaminated_water",
       "food_consumption"
@@ -64,6 +76,12 @@
     },
     "illness_to_infection_ratio": 1.0,
     "dalys_per_case": 0.003,
+    "illness_parameters": {
+      "probability_illness_given_infection": 1.00,
+      "population_susceptibility": 1.00,
+      "source": "WHO (2016), Haas et al. (1996)",
+      "notes": "All infections result in illness; variable susceptibility by immune status"
+    },
     "exposure_routes": [
       "contaminated_water",
       "recreational_water"
@@ -87,6 +105,12 @@
     },
     "illness_to_infection_ratio": 0.5,
     "dalys_per_case": 0.015,
+    "illness_parameters": {
+      "probability_illness_given_infection": 0.90,
+      "population_susceptibility": 1.00,
+      "source": "WHO (2016), Haas et al. (1999)",
+      "notes": "Highly virulent; 90% of infected develop symptoms"
+    },
     "exposure_routes": [
       "contaminated_water",
       "food_consumption",
@@ -121,6 +145,12 @@
     },
     "illness_to_infection_ratio": 0.6,
     "dalys_per_case": 0.008,
+    "illness_parameters": {
+      "probability_illness_given_infection": 0.75,
+      "population_susceptibility": 1.00,
+      "source": "WHO (2016), Haas et al. (1999)",
+      "notes": "75% of infected become ill; commonly causes gastroenteritis"
+    },
     "exposure_routes": [
       "contaminated_water",
       "food_consumption"
@@ -154,6 +184,12 @@
     },
     "illness_to_infection_ratio": 0.5,
     "dalys_per_case": 0.012,
+    "illness_parameters": {
+      "probability_illness_given_infection": 0.65,
+      "population_susceptibility": 0.85,
+      "source": "WHO (2016), Ward et al. (1986)",
+      "notes": "65% of infected become ill; immunity develops with age"
+    },
     "exposure_routes": [
       "contaminated_water",
       "food_consumption",
