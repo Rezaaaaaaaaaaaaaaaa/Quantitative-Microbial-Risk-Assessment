@@ -1,0 +1,197 @@
+================================================================================
+AUTOMATED SCREENSHOT CAPTURE & REPORT GENERATION - COMPLETE SETUP
+================================================================================
+
+PROJECT: QMRA Batch Processing Web Application
+VERSION: 1.2.0
+DATE: November 2025
+
+================================================================================
+WHAT HAS BEEN CREATED
+================================================================================
+
+Four Python scripts for automated screenshot capture and reporting:
+
+1. capture_app_screenshots.py (10 KB)
+   - Automated Selenium-based screenshot capture
+   - Captures all 6 pages of the QMRA web app
+   - Generates manifest.json with metadata
+   - Creates index.html preview file
+
+2. insert_screenshots_to_word.py (5.3 KB)
+   - Reads manifest.json from captures
+   - Opens the professional Word document
+   - Inserts 6 screenshots with captions
+   - Creates: QMRA_Application_Overview_with_screenshots.docx
+
+3. demo_screenshot_usage.py (15 KB)
+   - Demonstration script
+   - Shows usage guide and workflow
+
+4. SCREENSHOT_AUTOMATION_README.md (11 KB)
+   - Complete step-by-step instructions
+   - Troubleshooting guide
+   - Best practices and tips
+
+================================================================================
+HOW TO USE (3 SIMPLE STEPS)
+================================================================================
+
+PREREQUISITE: Install packages (one time only)
+   pip install selenium webdriver-manager python-docx
+
+STEP 1: Start the Streamlit app (Terminal 1)
+   cd "c:\Users\moghaddamr\OneDrive - NIWA\Quantitative Microbial Risk Assessment\Batch_Processing_App"
+   streamlit run web_app.py
+
+   Expected: App loads at http://localhost:8502
+
+STEP 2: Capture screenshots (Terminal 2)
+   python capture_app_screenshots.py
+
+   Time: 2-3 minutes
+   Output: screenshots/ directory with 6 PNG images
+
+STEP 3: Insert into Word document
+   python insert_screenshots_to_word.py
+
+   Time: 10-30 seconds
+   Output: QMRA_Application_Overview_with_screenshots.docx
+
+STEP 4: Open and review
+   QMRA_Application_Overview_with_screenshots.docx
+
+   Ready to print or share!
+
+================================================================================
+WHAT GETS CAPTURED
+================================================================================
+
+6 Full-Page Screenshots:
+  1. Home Page - Main interface and sidebar navigation
+  2. Batch Scenarios - Pre-configured scenario selection
+  3. Spatial Assessment - Multi-site risk mapping
+  4. Temporal Assessment - Time-series analysis
+  5. Treatment Comparison - Technology comparison
+  6. Multi-Pathogen - Multi-pathogen evaluation
+
+Files Created:
+  - screenshots/01_home_page_*.png
+  - screenshots/02_batch_scenarios_*.png
+  - screenshots/03_spatial_assessment_*.png
+  - screenshots/04_temporal_assessment_*.png
+  - screenshots/05_treatment_comparison_*.png
+  - screenshots/06_multi_pathogen_*.png
+  - screenshots/manifest.json (metadata)
+  - screenshots/index.html (preview)
+  - QMRA_Application_Overview_with_screenshots.docx
+
+================================================================================
+REQUIREMENTS
+================================================================================
+
+Software:
+  - Python 3.8+
+  - Google Chrome browser (must be installed)
+  - Packages: selenium, webdriver-manager, python-docx
+
+Installation:
+  pip install selenium webdriver-manager python-docx
+
+Time to Run:
+  - Streamlit app startup: 5-10 seconds
+  - Screenshot capture: 2-3 minutes
+  - Word insertion: 10-30 seconds
+  - Total: 3-4 minutes
+
+Disk Space:
+  - Screenshots: ~3 MB
+  - Word document: ~2-3 MB
+  - Total: ~5-10 MB
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "Manifest not found"
+Solution: Run capture_app_screenshots.py first to create screenshots
+
+Problem: Chrome doesn't open
+Solution: Verify Chrome installed, close other windows, run as admin
+
+Problem: "ERR_CONNECTION_REFUSED"
+Solution: Ensure Streamlit running at http://localhost:8502
+
+Problem: Images blurry
+Solution: Maximize Chrome window, use larger monitor resolution
+
+For detailed help, see: SCREENSHOT_AUTOMATION_README.md
+
+================================================================================
+QUICK START CHECKLIST
+================================================================================
+
+[  ] 1. Install packages
+      pip install selenium webdriver-manager python-docx
+
+[  ] 2. Navigate to Batch_Processing_App directory
+      cd "c:\Users\moghaddamr\OneDrive - NIWA\Quantitative Microbial Risk Assessment\Batch_Processing_App"
+
+[  ] 3. Terminal 1: Start the Streamlit app
+      streamlit run web_app.py
+
+[  ] 4. Terminal 2: Capture screenshots
+      python capture_app_screenshots.py
+
+[  ] 5. Terminal 2: Insert into Word
+      python insert_screenshots_to_word.py
+
+[  ] 6. Open the new Word document
+      QMRA_Application_Overview_with_screenshots.docx
+
+[  ] 7. Review and share the report!
+
+================================================================================
+FILES READY TO USE
+================================================================================
+
+Main Scripts:
+  - Batch_Processing_App/capture_app_screenshots.py
+  - Batch_Processing_App/insert_screenshots_to_word.py
+  - Batch_Processing_App/SCREENSHOT_AUTOMATION_README.md
+
+Professional Document:
+  - Batch_Processing_App/QMRA_Application_Overview.docx
+
+Example:
+  - Batch_Processing_App/screenshots_example/manifest_example.json
+
+================================================================================
+BENEFITS
+================================================================================
+
+[OK] Fully Automated - No manual screenshot taking
+[OK] High Quality - 1920x1080+ resolution images
+[OK] Professional - Formatted Word document with captions
+[OK] Fast - Complete process in 3-4 minutes
+[OK] Repeatable - Run anytime to update report
+[OK] Documented - Comprehensive README included
+[OK] Error Handling - Built-in troubleshooting
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Review SCREENSHOT_AUTOMATION_README.md for detailed instructions
+2. Install packages: pip install selenium webdriver-manager python-docx
+3. Follow the 4-step quick start above
+4. Open the generated Word document
+5. Share with stakeholders!
+
+For questions, see SCREENSHOT_AUTOMATION_README.md (troubleshooting section)
+
+================================================================================
+CREATED FOR NIWA EARTH SCIENCES NEW ZEALAND
+QMRA Batch Processing Application v1.2.0
+November 2025
+================================================================================
