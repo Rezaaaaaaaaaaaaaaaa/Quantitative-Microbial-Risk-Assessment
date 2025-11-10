@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-QMRA Toolkit - Professional Technical Demonstration Document Generator
-======================================================================
+QMRA Batch Processing Web Application - Technical Demonstration Document Generator
+===================================================================================
 
-Creates a comprehensive technical demonstration guide for the QMRA toolkit
-including step-by-step instructions, tables, figures, and professional formatting.
+Creates a comprehensive technical demonstration guide for the QMRA Batch Processing
+Web Application including step-by-step instructions, tables, figures, and professional
+formatting.
 
+Version: 1.2.0
 Author: NIWA Earth Sciences New Zealand
-Date: October 2025
+Date: November 2025
 """
 
 from docx import Document
@@ -59,11 +61,15 @@ def add_caption(doc, text, style='Caption'):
 
 
 def create_styles(doc):
-    """Create custom styles for the document."""
+    """
+    Create custom styles for professional document formatting.
 
+    Configures heading styles, caption style, and code style with
+    NIWA branding colors and consistent typography.
+    """
     styles = doc.styles
 
-    # Create Heading 1 style if not exists
+    # Heading 1 style
     try:
         heading1 = styles['Heading 1']
     except KeyError:
@@ -128,9 +134,16 @@ def create_styles(doc):
 
 
 def add_title_page(doc):
-    """Add professional title page."""
+    """
+    Add professional title page with branding and version information.
 
-    # Title
+    Includes:
+    - Main title
+    - Subtitle
+    - NIWA logo placeholder
+    - Version and date information
+    """
+    # Main title
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     title_run = title.add_run("QMRA TOOLKIT\n")
@@ -141,12 +154,16 @@ def add_title_page(doc):
     # Subtitle
     subtitle = doc.add_paragraph()
     subtitle.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    subtitle_run = subtitle.add_run("Technical Demonstration Guide\n")
-    subtitle_run.font.size = Pt(20)
+    subtitle_run = subtitle.add_run("Batch Processing Web Application\n")
+    subtitle_run.font.size = Pt(18)
     subtitle_run.font.color.rgb = RGBColor(0, 102, 153)
 
+    subtitle_run2 = subtitle.add_run("Technical Demonstration Guide")
+    subtitle_run2.font.size = Pt(18)
+    subtitle_run2.font.color.rgb = RGBColor(0, 102, 153)
+
     # Add spacing
-    doc.add_paragraph("\n" * 3)
+    doc.add_paragraph("\n" * 2)
 
     # Logo placeholder
     logo_para = doc.add_paragraph()
@@ -163,9 +180,9 @@ def add_title_page(doc):
     info = doc.add_paragraph()
     info.alignment = WD_ALIGN_PARAGRAPH.CENTER
     info_text = f"""Quantitative Microbial Risk Assessment
-Web Application Demonstration
+Batch Processing Web Application
+Version 1.2.0
 
-Version 1.0
 {datetime.now().strftime('%B %Y')}
 
 NIWA Earth Sciences New Zealand"""
@@ -229,27 +246,27 @@ def add_introduction(doc):
     doc.add_heading('1.1 Overview', level=2)
 
     p1 = doc.add_paragraph(
-        "The QMRA (Quantitative Microbial Risk Assessment) Toolkit is a comprehensive Python-based "
-        "application developed by NIWA Earth Sciences New Zealand for assessing microbial health "
-        "risks associated with water quality. This toolkit provides a modern, user-friendly alternative "
-        "to traditional spreadsheet-based QMRA methods, incorporating advanced statistical methods, "
-        "Monte Carlo simulation, and professional visualization capabilities."
+        "The QMRA Batch Processing Web Application is a standalone web-based tool developed by "
+        "NIWA Earth Sciences New Zealand for conducting Quantitative Microbial Risk Assessment. "
+        "Version 1.2.0 introduces advanced exposure-specific modeling and illness risk calculations, "
+        "providing a comprehensive platform for regulatory compliance and public health decision-making."
     )
 
     doc.add_paragraph()
 
     p2 = doc.add_paragraph(
-        "The toolkit features both a desktop application and a web-based interface, allowing users to:"
+        "The web application offers 5 specialized assessment modes, each optimized for different "
+        "analysis scenarios. Key features include:"
     )
 
     features = [
-        "Perform comprehensive risk assessments for multiple pathogens",
-        "Model treatment train efficacy with engineer-provided log reduction values",
-        "Integrate hydrodynamic dilution modeling results",
-        "Run Monte Carlo simulations with up to 100,000 iterations",
-        "Generate professional regulatory compliance reports",
-        "Compare multiple exposure scenarios and treatment options",
-        "Export results in multiple formats (CSV, JSON, PDF, Word)"
+        "5 Assessment Modes: Batch Scenarios, Spatial, Temporal, Treatment Comparison, Multi-Pathogen",
+        "Exposure-specific modeling for shellfish consumption and swimming activities",
+        "Infection-to-illness conversion with population susceptibility factors",
+        "Monte Carlo simulation with up to 100,000 iterations for uncertainty analysis",
+        "Interactive visualizations with 4 chart types",
+        "Professional PDF report generation with comprehensive documentation",
+        "Multiple download formats: CSV, Excel, ZIP packages, and individual plots"
     ]
 
     for feature in features:
@@ -260,8 +277,8 @@ def add_introduction(doc):
     doc.add_heading('1.2 Purpose of This Guide', level=2)
 
     doc.add_paragraph(
-        "This technical demonstration guide provides a comprehensive walkthrough of the QMRA Toolkit's "
-        "web application using realistic test data. The guide is designed for:"
+        "This technical demonstration guide provides a comprehensive walkthrough of the QMRA Batch "
+        "Processing Web Application (v1.2.0) using realistic test data. The guide is designed for:"
     )
 
     audiences = [
@@ -289,10 +306,10 @@ def add_introduction(doc):
     doc.add_paragraph("Before starting this demonstration, ensure you have:")
 
     prereqs = [
-        ("Software:", "Python 3.11 or higher installed"),
-        ("Installation:", "QMRA Toolkit installed (pip install -e .)"),
-        ("Data:", "Test data files available in qmra_toolkit/test_data/"),
-        ("Browser:", "Modern web browser (Chrome, Firefox, Edge, or Safari)"),
+        ("Software:", "Python 3.8 or higher with Streamlit installed"),
+        ("Installation:", "All dependencies installed via: pip install -r requirements.txt"),
+        ("Data:", "Test data files available in Batch_Processing_App/input_data/"),
+        ("Browser:", "Modern web browser (Chrome, Firefox, Edge recommended)"),
         ("Knowledge:", "Basic understanding of QMRA concepts and microbial risk assessment")
     ]
 
@@ -306,23 +323,29 @@ def add_introduction(doc):
 
 
 def add_getting_started(doc):
-    """Add getting started section."""
+    """
+    Add getting started section with installation and launch instructions.
 
+    Covers:
+    - Installation and setup
+    - Launching the web application
+    - Application interface overview
+    """
     doc.add_heading('2. Getting Started', level=1)
 
     # 2.1 Installation and Setup
     doc.add_heading('2.1 Installation and Setup', level=2)
 
     doc.add_paragraph(
-        "The QMRA Toolkit should be installed in your Python environment. If not already installed, "
-        "follow these steps:"
+        "The QMRA Batch Processing Web Application is a standalone tool with all dependencies "
+        "included. Follow these steps to get started:"
     )
 
     steps = [
-        "Navigate to the QMRA project directory",
-        "Install the package: pip install -e .",
-        "Verify installation: python -c \"import qmra_toolkit; print('Success')\"",
-        "Check dependencies: pip list | grep -E '(pandas|numpy|scipy|streamlit)'"
+        "Navigate to the Batch_Processing_App directory",
+        "Install dependencies: pip install -r requirements.txt",
+        "Verify installation: streamlit --version",
+        "Check that all input data files are present in input_data/ directory"
     ]
 
     for i, step in enumerate(steps, 1):
@@ -346,9 +369,9 @@ def add_getting_started(doc):
     # Step 2
     step2 = doc.add_paragraph()
     step2.add_run("Step 2: ").bold = True
-    step2.add_run("Navigate to the QMRA toolkit directory")
+    step2.add_run("Navigate to the Batch Processing App directory")
 
-    code1 = doc.add_paragraph('cd "path/to/Quantitative Microbial Risk Assessment"', style='Code')
+    code1 = doc.add_paragraph('cd "path/to/Quantitative Microbial Risk Assessment/Batch_Processing_App"', style='Code')
     set_cell_background_paragraph(code1, 'F5F5F5')
 
     doc.add_paragraph()
@@ -356,9 +379,9 @@ def add_getting_started(doc):
     # Step 3
     step3 = doc.add_paragraph()
     step3.add_run("Step 3: ").bold = True
-    step3.add_run("Launch the web application")
+    step3.add_run("Launch the web application (or simply double-click launch_web_gui.bat on Windows)")
 
-    code2 = doc.add_paragraph('streamlit run qmra_toolkit/web_app.py', style='Code')
+    code2 = doc.add_paragraph('streamlit run web_app.py', style='Code')
     set_cell_background_paragraph(code2, 'F5F5F5')
 
     doc.add_paragraph()
@@ -367,7 +390,7 @@ def add_getting_started(doc):
     step4 = doc.add_paragraph()
     step4.add_run("Step 4: ").bold = True
     step4.add_run("The application will automatically open in your default web browser at ")
-    step4.add_run("http://localhost:8501").italic = True
+    step4.add_run("http://localhost:8502").italic = True
 
     doc.add_paragraph()
 
@@ -406,11 +429,11 @@ def add_getting_started(doc):
 
     # Data rows
     interface_data = [
-        ("Sidebar Navigation", "Main menu for accessing different assessment modes and settings"),
-        ("Assessment Type Selector", "Choose between Quick Assessment, Full Assessment, or Batch Processing"),
-        ("Parameter Input Panel", "Enter pathogen data, exposure parameters, and population information"),
-        ("Results Display Area", "View calculated risks, statistics, and compliance status"),
-        ("Visualization Panel", "Interactive charts and graphs showing risk distributions and trends")
+        ("Sidebar Navigation", "Main menu for selecting from 5 assessment modes and configuring parameters"),
+        ("Assessment Mode Selector", "Choose: Batch Scenarios, Spatial, Temporal, Treatment Comparison, or Multi-Pathogen"),
+        ("File Upload Section", "Upload pathogen data, dilution data, treatment scenarios, or batch scenario files"),
+        ("Results Display Area", "Interactive data tables showing calculated risks, statistics, and compliance status"),
+        ("Visualization Tabs", "4 chart types: Risk Overview, Compliance Distribution, Risk Distribution, Population Impact")
     ]
 
     for i, (element, description) in enumerate(interface_data, 1):
@@ -430,23 +453,36 @@ def add_getting_started(doc):
 
 
 def set_cell_background_paragraph(paragraph, color):
-    """Helper to add background to code paragraphs."""
-    # This is a simplified version - actual implementation would need more work
+    """
+    Helper to add background to code paragraphs.
+
+    Note: This is a placeholder for Word paragraph background shading.
+    Word's python-docx library has limited support for paragraph shading.
+    For production use, consider using Run-level formatting or table cells.
+    """
+    # Placeholder - Word paragraph background is not fully supported in python-docx
     pass
 
 
 def add_test_data_section(doc):
-    """Add test data section."""
+    """
+    Add test data section describing available example files.
 
+    Covers:
+    - Test data structure
+    - File overview
+    - Data format requirements
+    """
     doc.add_heading('3. Using Test Data', level=1)
 
     # 3.1 Understanding the Test Data Structure
     doc.add_heading('3.1 Understanding the Test Data Structure', level=2)
 
     doc.add_paragraph(
-        "The QMRA Toolkit includes comprehensive test data located in the qmra_toolkit/test_data/ "
-        "directory. This data is professionally generated to represent realistic environmental monitoring "
-        "scenarios and provides everything needed for demonstration purposes."
+        "The QMRA Batch Processing App includes comprehensive test data located in the "
+        "Batch_Processing_App/input_data/ directory. This data is professionally generated to "
+        "represent realistic environmental monitoring scenarios and provides everything needed "
+        "for demonstration purposes."
     )
 
     doc.add_paragraph()
@@ -459,8 +495,28 @@ def add_test_data_section(doc):
     # 3.2 Test Data Files Overview
     doc.add_heading('3.2 Test Data Files Overview', level=2)
 
-    # Create comprehensive test data table
-    table = doc.add_table(rows=8, cols=4)
+    # Data rows
+    test_data_info = [
+        ("Pathogen\nConcentrations", "weekly_monitoring_2024.csv", "52",
+         "Weekly pathogen monitoring data (multi-pathogen)"),
+        ("Pathogen\nConcentrations", "multi_pathogen_data.csv", "N/A",
+         "Multi-pathogen concentration data for comparison"),
+        ("Dilution Data", "spatial_dilution_6_sites.csv", "600",
+         "Spatial dilution factors for 6 monitoring sites"),
+        ("Exposure\nScenarios", "swimming_summer.yaml", "N/A",
+         "Summer recreational swimming exposure"),
+        ("Exposure\nScenarios", "shellfish_consumption.yaml", "N/A",
+         "Shellfish harvesting and consumption scenario"),
+        ("Treatment\nScenarios", "secondary_treatment.yaml", "N/A",
+         "Secondary treatment (activated sludge, LRV 3.0)"),
+        ("Treatment\nScenarios", "advanced_uv_treatment.yaml", "N/A",
+         "Advanced UV disinfection treatment (LRV 8.0)"),
+        ("Batch\nScenarios", "master_batch_scenarios.csv", "15",
+         "Comprehensive batch assessment with 15 scenarios")
+    ]
+
+    # Create comprehensive test data table (header + data rows)
+    table = doc.add_table(rows=len(test_data_info) + 1, cols=4)
     table.style = 'Light Grid Accent 1'
 
     # Header row
@@ -473,24 +529,6 @@ def add_test_data_section(doc):
             for run in paragraph.runs:
                 run.font.color.rgb = RGBColor(255, 255, 255)
                 run.font.bold = True
-
-    # Data rows
-    test_data_info = [
-        ("Pathogen\nConcentrations", "treated_effluent_pathogens_2024.csv", "52",
-         "Weekly pathogen monitoring from treated wastewater"),
-        ("Pathogen\nConcentrations", "raw_influent_pathogens_2024.csv", "52",
-         "Raw wastewater influent concentrations"),
-        ("Dilution Data", "hydrodynamic_dilution_modeling_1000runs.csv", "6,000",
-         "Monte Carlo dilution factors from ROMS model"),
-        ("Exposure\nScenarios", "swimming_scenario.yaml", "N/A",
-         "Recreational swimming exposure configuration"),
-        ("Treatment\nScenarios", "secondary_treatment.yaml", "N/A",
-         "Activated sludge treatment train (LRV 3.0)"),
-        ("MetOcean Data", "metocean_dilution_hourly_2024_sample.csv", "400",
-         "Hourly dilution with environmental conditions"),
-        ("Monte Carlo\nParams", "basic_monte_carlo_config.yaml", "N/A",
-         "Simulation parameters (10,000 iterations)")
-    ]
 
     for i, (category, filename, records, purpose) in enumerate(test_data_info, 1):
         row_cells = table.rows[i].cells
@@ -560,14 +598,20 @@ def add_test_data_section(doc):
 
 
 def add_demonstration_scenarios(doc):
-    """Add step-by-step demonstration scenarios."""
+    """
+    Add step-by-step demonstration scenarios.
 
+    Provides three complete walkthroughs:
+    1. Recreational Swimming Assessment (Spatial mode)
+    2. Treatment Comparison Analysis
+    3. Multi-Site Risk Assessment
+    """
     doc.add_heading('4. Step-by-Step Demonstration', level=1)
 
     doc.add_paragraph(
         "This section provides three complete demonstration scenarios, each highlighting different "
-        "capabilities of the QMRA Toolkit. Follow each scenario in sequence to build familiarity with "
-        "the application."
+        "capabilities of the QMRA Batch Processing Web Application. Follow each scenario in sequence "
+        "to build familiarity with the application."
     )
 
     doc.add_paragraph()
@@ -602,12 +646,12 @@ def add_demonstration_scenarios(doc):
 
     # Step 1
     step1 = doc.add_paragraph()
-    step1.add_run("Step 1: Select Assessment Type").bold = True
+    step1.add_run("Step 1: Select Assessment Mode").bold = True
 
     substeps1 = [
-        "In the sidebar, click on 'Quick Assessment'",
-        "This mode is optimized for single-scenario evaluations",
-        "The interface will load the parameter input form"
+        "In the left sidebar, expand the 'Select Assessment Mode' dropdown",
+        "Choose 'Spatial Assessment' for this beach risk assessment",
+        "This mode evaluates risk at multiple distances from the discharge point"
     ]
 
     for substep in substeps1:
@@ -618,13 +662,13 @@ def add_demonstration_scenarios(doc):
 
     # Step 2
     step2 = doc.add_paragraph()
-    step2.add_run("Step 2: Load Pathogen Concentration Data").bold = True
+    step2.add_run("Step 2: Upload Spatial Dilution Data").bold = True
 
     substeps2 = [
-        "Click 'Browse' in the Data Upload section",
-        "Navigate to: qmra_toolkit/test_data/pathogen_concentrations/",
-        "Select: treated_effluent_pathogens_2024.csv",
-        "Click 'Open' - the file will upload and display a preview"
+        "In the 'Upload Dilution Data (CSV)' section, click 'Browse files'",
+        "Navigate to: Batch_Processing_App/input_data/dilution_data/",
+        "Select: spatial_dilution_6_sites.csv",
+        "The file will upload and display a preview showing dilution factors for 6 sites"
     ]
 
     for substep in substeps2:
@@ -636,12 +680,12 @@ def add_demonstration_scenarios(doc):
     # Add data preview table
     doc.add_paragraph("You should see a data preview similar to:")
 
-    preview_table = doc.add_table(rows=4, cols=5)
+    preview_table = doc.add_table(rows=4, cols=4)
     preview_table.style = 'Light Grid Accent 1'
 
     # Header
     header = preview_table.rows[0].cells
-    headers = ["Sample_Date", "Sample_Type", "Norovirus_copies_per_L", "E_coli_MPN_per_100mL", "QC_Flag"]
+    headers = ["Site_ID", "Distance_m", "Dilution_Factor", "Description"]
     for i, h in enumerate(headers):
         header[i].text = h
         set_cell_background(header[i], '70AD47')
@@ -653,9 +697,9 @@ def add_demonstration_scenarios(doc):
 
     # Sample data
     sample_data = [
-        ("2024-01-07", "Treated_Effluent", "930.2", "102.3", "Pass"),
-        ("2024-01-14", "Treated_Effluent", "1,245.8", "156.7", "Pass"),
-        ("2024-01-21", "Treated_Effluent", "1,103.5", "89.4", "Pass")
+        ("Discharge", "0", "1.0", "At discharge point"),
+        ("Site_50m", "50", "7.4", "50 meters from discharge"),
+        ("Site_100m", "100", "13.6", "100 meters from discharge")
     ]
 
     for i, row_data in enumerate(sample_data, 1):
@@ -665,7 +709,7 @@ def add_demonstration_scenarios(doc):
             row[j].paragraphs[0].runs[0].font.size = Pt(9)
 
     doc.add_paragraph()
-    add_caption(doc, "Figure 1: Preview of uploaded pathogen concentration data")
+    add_caption(doc, "Figure 1: Preview of uploaded spatial dilution data")
 
     doc.add_paragraph()
 
@@ -673,10 +717,10 @@ def add_demonstration_scenarios(doc):
     step3 = doc.add_paragraph()
     step3.add_run("Step 3: Configure Assessment Parameters").bold = True
 
-    doc.add_paragraph("In the parameter panel, enter the following:")
+    doc.add_paragraph("In the parameter configuration section, enter the following:")
 
     # Parameters table
-    param_table = doc.add_table(rows=8, cols=3)
+    param_table = doc.add_table(rows=9, cols=3)
     param_table.style = 'Light Grid Accent 1'
 
     # Header
@@ -695,12 +739,13 @@ def add_demonstration_scenarios(doc):
     # Parameters
     parameters = [
         ("Pathogen", "Norovirus", "Select from dropdown"),
-        ("Concentration", "Use mean from data", "Auto-calculated: 1.54×10³ copies/L"),
-        ("Treatment LRV", "3.0", "From secondary_treatment.yaml"),
-        ("Dilution Factor", "13.6", "Median at Site_100m"),
-        ("Exposure Route", "Primary Contact", "Swimming"),
-        ("Water Ingestion", "50 mL", "Per swimming event"),
-        ("Events per Year", "20", "Summer swimming season")
+        ("Effluent Concentration", "1.54×10⁶ copies/L", "Raw effluent before treatment"),
+        ("Treatment LRV", "3.0", "Secondary treatment (activated sludge)"),
+        ("Exposure Route", "Primary Contact", "Swimming/recreational water contact"),
+        ("Exposure Volume", "50 mL", "Typical ingestion per swimming event"),
+        ("Exposure Frequency", "20 events/year", "Summer swimming season"),
+        ("Population", "10,000", "Estimated beach users per year"),
+        ("Monte Carlo Iterations", "10,000", "For uncertainty analysis")
     ]
 
     for i, (param, value, note) in enumerate(parameters, 1):
@@ -716,13 +761,13 @@ def add_demonstration_scenarios(doc):
 
     # Step 4
     step4 = doc.add_paragraph()
-    step4.add_run("Step 4: Load Treatment Configuration").bold = True
+    step4.add_run("Step 4: Run the Spatial Assessment").bold = True
 
     substeps4 = [
-        "In the Treatment section, click 'Load Configuration'",
-        "Navigate to: qmra_toolkit/test_data/treatment_scenarios/",
-        "Select: secondary_treatment.yaml",
-        "Review the treatment barriers displayed (4 barriers, total LRV 3.0)"
+        "Review all parameters to ensure they are correct",
+        "Click the 'Run Spatial Assessment' button at the bottom of the sidebar",
+        "Wait for processing to complete (approximately 10-15 seconds)",
+        "A success message will appear when processing is complete"
     ]
 
     for substep in substeps4:
@@ -731,48 +776,29 @@ def add_demonstration_scenarios(doc):
 
     doc.add_paragraph()
 
-    # Step 5
+    # Step 5 - Results
     step5 = doc.add_paragraph()
-    step5.add_run("Step 5: Load Dilution Data").bold = True
+    step5.add_run("Step 5: Review Results").bold = True
 
-    substeps5 = [
-        "In the Dilution section, click 'Upload Dilution Data'",
-        "Select: hydrodynamic_dilution_modeling_1000runs.csv",
-        "Choose site: 'Site_100m' from the dropdown",
-        "The application displays dilution statistics"
+    doc.add_paragraph("The application displays comprehensive results in multiple sections:")
+
+    result_sections = [
+        "Interactive data table showing risk for each site",
+        "Summary statistics (mean, median, percentiles)",
+        "Compliance status for each location",
+        "Population impact estimates"
     ]
 
-    for substep in substeps5:
-        p = doc.add_paragraph(f"• {substep}")
+    for section in result_sections:
+        p = doc.add_paragraph(f"• {section}")
         p.paragraph_format.left_indent = Inches(0.75)
 
     doc.add_paragraph()
 
-    # Step 6
-    step6 = doc.add_paragraph()
-    step6.add_run("Step 6: Run Assessment").bold = True
+    # Results table - showing results for Site_100m
+    doc.add_paragraph("Example results for Site_100m (100 meters from discharge):")
 
-    substeps6 = [
-        "Set Monte Carlo iterations: 10,000",
-        "Set population size: 10,000",
-        "Click the 'Run Assessment' button",
-        "Wait for the progress bar to complete (approximately 15-20 seconds)"
-    ]
-
-    for substep in substeps6:
-        p = doc.add_paragraph(f"• {substep}")
-        p.paragraph_format.left_indent = Inches(0.75)
-
-    doc.add_paragraph()
-
-    # Step 7 - Results
-    step7 = doc.add_paragraph()
-    step7.add_run("Step 7: Review Results").bold = True
-
-    doc.add_paragraph("The application displays comprehensive results including:")
-
-    # Results table
-    results_table = doc.add_table(rows=6, cols=3)
+    results_table = doc.add_table(rows=7, cols=3)
     results_table.style = 'Light Grid Accent 1'
 
     # Header
@@ -790,11 +816,12 @@ def add_demonstration_scenarios(doc):
 
     # Results
     results = [
-        ("Mean Infection Risk", "2.06×10⁻²", "~2% per swimming event"),
-        ("Mean Illness Risk", "1.44×10⁻²", "~1.4% per swimming event"),
-        ("Annual Risk", "3.41×10⁻¹", "~34% per year (20 events)"),
-        ("Expected Cases/Year", "144", "In 10,000 population"),
-        ("Compliance Status", "NON-COMPLIANT", "Exceeds 1×10⁻³ threshold by 340×")
+        ("Mean Annual Risk", "3.82×10⁻²", "~3.8% probability per person per year"),
+        ("Median Annual Risk", "3.41×10⁻²", "~3.4% (50th percentile)"),
+        ("95th Percentile Risk", "9.05×10⁻²", "~9% (worst-case scenario)"),
+        ("Mean Illness Risk", "2.67×10⁻²", "~2.7% symptomatic illness per year"),
+        ("Expected Illness Cases", "267", "In 10,000 population per year"),
+        ("Compliance Status", "NON-COMPLIANT", "Exceeds WHO threshold (1×10⁻⁴)")
     ]
 
     for i, (metric, value, interp) in enumerate(results, 1):
@@ -808,7 +835,45 @@ def add_demonstration_scenarios(doc):
             set_cell_background(row[1], 'FFC7CE')
 
     doc.add_paragraph()
-    add_caption(doc, "Table 5: Risk Assessment Results for Recreational Swimming Scenario")
+    add_caption(doc, "Table 5: Risk Assessment Results for Site_100m")
+
+    doc.add_paragraph()
+
+    # Step 6
+    step6 = doc.add_paragraph()
+    step6.add_run("Step 6: Explore Visualizations").bold = True
+
+    doc.add_paragraph("Click through the four visualization tabs to view:")
+
+    viz_tabs = [
+        "Risk Overview - Bar chart showing risk at each site",
+        "Compliance Distribution - Pie chart of compliant vs non-compliant sites",
+        "Risk Distribution - Histogram showing the distribution of Monte Carlo results",
+        "Population Impact - Chart showing expected illness cases by site"
+    ]
+
+    for tab in viz_tabs:
+        p = doc.add_paragraph(f"• {tab}")
+        p.paragraph_format.left_indent = Inches(0.75)
+
+    doc.add_paragraph()
+
+    # Step 7
+    step7 = doc.add_paragraph()
+    step7.add_run("Step 7: Download Results").bold = True
+
+    doc.add_paragraph("Use the download options to save your results:")
+
+    download_options = [
+        "Download Full CSV - Complete results table for all sites",
+        "Download All (ZIP) - Complete package with plots and tables",
+        "Generate PDF Report - Professional report with all visualizations",
+        "Download Individual Plots - Each visualization as high-resolution PNG"
+    ]
+
+    for option in download_options:
+        p = doc.add_paragraph(f"• {option}")
+        p.paragraph_format.left_indent = Inches(0.75)
 
     doc.add_paragraph()
 
@@ -817,10 +882,11 @@ def add_demonstration_scenarios(doc):
     findings.add_run("Key Findings:").bold = True
 
     finding_items = [
-        "The current treatment and dilution are insufficient to meet WHO recreational water guidelines",
-        "Additional treatment (e.g., UV disinfection) or increased dilution would be required",
-        "The risk is driven by relatively high norovirus concentration post-treatment",
-        "Population-level impact: ~144 illness cases expected per year in 10,000 swimmers"
+        "Risk decreases with distance due to increased dilution",
+        "Current treatment (LRV 3.0) is insufficient for compliance at sites within 500m",
+        "The population-level impact is significant: ~267 illness cases per year at Site_100m",
+        "Treatment upgrade to LRV 6.0 or higher would be needed for WHO compliance",
+        "The application provides both point estimates and uncertainty ranges (5th-95th percentiles)"
     ]
 
     for item in finding_items:
@@ -854,42 +920,73 @@ def add_demonstration_scenarios(doc):
 
     doc.add_heading('Steps:', level=3)
 
-    comparison_steps = [
-        ("Navigate to Batch Assessment Mode",
-         "Select 'Batch Assessment' from the sidebar menu"),
+    # Step 1
+    comp_step1 = doc.add_paragraph()
+    comp_step1.add_run("Step 1: Select Treatment Comparison Mode").bold = True
 
-        ("Create Treatment Scenarios List",
-         "In the configuration panel, click 'Add Scenarios' and load:\n"
-         "• bypass_no_treatment.yaml\n"
-         "• secondary_treatment.yaml\n"
-         "• advanced_uv_treatment.yaml"),
-
-        ("Configure Baseline Parameters",
-         "Set common parameters for all scenarios:\n"
-         "• Pathogen: Norovirus\n"
-         "• Raw concentration: 1.54×10⁶ copies/L\n"
-         "• Dilution: 13.6× (Site_100m)\n"
-         "• Population: 10,000"),
-
-        ("Run Batch Assessment",
-         "Click 'Run All Scenarios' - the system processes each treatment option in sequence"),
-
-        ("View Comparison Results",
-         "The application generates a comparison table and visualization")
+    substeps = [
+        "In the sidebar, select 'Treatment Comparison' from the assessment mode dropdown",
+        "This mode allows you to compare the effectiveness of different treatment options"
     ]
 
-    for i, (step_title, step_desc) in enumerate(comparison_steps, 1):
-        p = doc.add_paragraph()
-        p.add_run(f"Step {i}: {step_title}").bold = True
-        p.paragraph_format.space_after = Pt(6)
+    for substep in substeps:
+        p = doc.add_paragraph(f"• {substep}")
+        p.paragraph_format.left_indent = Inches(0.75)
 
-        desc_lines = step_desc.split('\n')
-        for line in desc_lines:
-            desc_p = doc.add_paragraph(line)
-            desc_p.paragraph_format.left_indent = Inches(0.75)
-            desc_p.paragraph_format.space_after = Pt(3)
+    doc.add_paragraph()
 
-        doc.add_paragraph()
+    # Step 2
+    comp_step2 = doc.add_paragraph()
+    comp_step2.add_run("Step 2: Upload Treatment Scenario Files").bold = True
+
+    substeps2 = [
+        "Upload Current Treatment: Navigate to input_data/treatment_scenarios/",
+        "Select: secondary_treatment.yaml (LRV 3.0)",
+        "Upload Proposed Treatment: From the same directory",
+        "Select: advanced_uv_treatment.yaml (LRV 8.0)"
+    ]
+
+    for substep in substeps2:
+        p = doc.add_paragraph(f"• {substep}")
+        p.paragraph_format.left_indent = Inches(0.75)
+
+    doc.add_paragraph()
+
+    # Step 3
+    comp_step3 = doc.add_paragraph()
+    comp_step3.add_run("Step 3: Configure Assessment Parameters").bold = True
+
+    substeps3 = [
+        "Pathogen: Norovirus",
+        "Effluent Concentration: 1.54×10⁶ copies/L",
+        "Dilution Factor: 13.6 (at Site_100m)",
+        "Exposure Route: Primary Contact (swimming)",
+        "Exposure Volume: 50 mL",
+        "Exposure Frequency: 20 events/year",
+        "Population: 10,000"
+    ]
+
+    for substep in substeps3:
+        p = doc.add_paragraph(f"• {substep}")
+        p.paragraph_format.left_indent = Inches(0.75)
+
+    doc.add_paragraph()
+
+    # Step 4
+    comp_step4 = doc.add_paragraph()
+    comp_step4.add_run("Step 4: Run Comparison").bold = True
+
+    substeps4 = [
+        "Click 'Run Treatment Comparison'",
+        "The application processes both scenarios",
+        "Results appear showing side-by-side comparison"
+    ]
+
+    for substep in substeps4:
+        p = doc.add_paragraph(f"• {substep}")
+        p.paragraph_format.left_indent = Inches(0.75)
+
+    doc.add_paragraph()
 
     # Comparison results table
     doc.add_paragraph("The batch assessment produces the following comparison:")
@@ -1045,16 +1142,23 @@ def add_demonstration_scenarios(doc):
 
 
 def add_results_interpretation(doc):
-    """Add results interpretation section."""
+    """
+    Add results interpretation section.
 
+    Explains:
+    - Risk metrics and their meanings
+    - Visualization types
+    - Regulatory compliance thresholds
+    """
     doc.add_heading('5. Interpreting Results', level=1)
 
     # 5.1 Risk Metrics Explained
     doc.add_heading('5.1 Risk Metrics Explained', level=2)
 
     doc.add_paragraph(
-        "The QMRA Toolkit calculates several risk metrics, each providing different perspectives on "
-        "public health risk. Understanding these metrics is essential for regulatory decision-making."
+        "The QMRA Batch Processing Web Application calculates several risk metrics, each providing "
+        "different perspectives on public health risk. Understanding these metrics is essential for "
+        "regulatory decision-making."
     )
 
     doc.add_paragraph()
@@ -1189,16 +1293,22 @@ def add_results_interpretation(doc):
 
 
 def add_advanced_features(doc):
-    """Add advanced features section."""
+    """
+    Add advanced features section.
 
+    Covers:
+    - Batch processing mode
+    - Custom scenario creation
+    - Report generation options
+    """
     doc.add_heading('6. Advanced Features', level=1)
 
     # 6.1 Batch Processing
     doc.add_heading('6.1 Batch Processing', level=2)
 
     doc.add_paragraph(
-        "The batch processing mode allows simultaneous assessment of multiple scenarios, facilitating "
-        "sensitivity analysis and scenario comparison. Key capabilities include:"
+        "The Batch Scenarios mode allows simultaneous assessment of multiple scenarios from a CSV file, "
+        "facilitating sensitivity analysis and comprehensive scenario comparison. Key capabilities include:"
     )
 
     batch_features = [
@@ -1289,12 +1399,14 @@ def add_advanced_features(doc):
 
 
 def add_troubleshooting(doc):
-    """Add troubleshooting section."""
-
+    """
+    Add troubleshooting section with common issues and solutions.
+    """
     doc.add_heading('7. Troubleshooting', level=1)
 
     doc.add_paragraph(
-        "This section addresses common issues users may encounter when using the QMRA Toolkit."
+        "This section addresses common issues users may encounter when using the QMRA Batch "
+        "Processing Web Application."
     )
 
     doc.add_paragraph()
@@ -1373,8 +1485,14 @@ def add_troubleshooting(doc):
 
 
 def add_references(doc):
-    """Add references section."""
+    """
+    Add references and resources section.
 
+    Includes:
+    - Scientific references
+    - Additional resources
+    - Toolkit documentation
+    """
     doc.add_heading('8. References and Resources', level=1)
 
     doc.add_heading('8.1 Scientific References', level=2)
@@ -1438,8 +1556,13 @@ def add_references(doc):
 
 
 def add_appendix(doc):
-    """Add appendix with quick reference."""
+    """
+    Add appendix sections.
 
+    Includes:
+    - Quick reference card
+    - Recommended workflow checklist
+    """
     doc.add_heading('Appendix A: Quick Reference Card', level=1)
 
     # Quick reference table
@@ -1460,16 +1583,16 @@ def add_appendix(doc):
 
     # Quick reference items
     ref_items = [
-        ("Launch web app", "streamlit run qmra_toolkit/web_app.py"),
-        ("Test data location", "qmra_toolkit/test_data/"),
-        ("Load pathogen data", "Upload CSV from pathogen_concentrations/"),
-        ("Load treatment config", "Upload YAML from treatment_scenarios/"),
-        ("Load dilution data", "Upload CSV from dilution_data/"),
-        ("Run assessment", "Click 'Run Assessment' button"),
-        ("View results", "Results panel (auto-displays after run)"),
-        ("Generate report", "Results → Generate Report → Select type"),
-        ("Export data", "Results → Export → Choose format"),
-        ("Access help", "Sidebar → Help & Documentation")
+        ("Launch web app", "streamlit run web_app.py (or double-click launch_web_gui.bat)"),
+        ("Test data location", "Batch_Processing_App/input_data/"),
+        ("Select assessment mode", "Sidebar dropdown: 5 modes available"),
+        ("Upload data files", "Use file upload sections in sidebar"),
+        ("Run assessment", "Click 'Run [Mode] Assessment' button"),
+        ("View results", "Interactive table appears below button"),
+        ("View visualizations", "Click through 4 visualization tabs"),
+        ("Download CSV", "Click 'Download Full CSV' button"),
+        ("Download ZIP package", "Click 'Download All (ZIP)' button"),
+        ("Generate PDF report", "Click 'Generate PDF Report' button")
     ]
 
     for i, (action, command) in enumerate(ref_items, 1):
@@ -1479,25 +1602,26 @@ def add_appendix(doc):
 
     doc.add_paragraph()
 
-    # Keyboard shortcuts
+    # Workflow checklist
     doc.add_heading('Appendix B: Recommended Workflow Checklist', level=1)
 
     workflow_items = [
-        "☐ Verify Python environment and dependencies",
-        "☐ Launch web application",
-        "☐ Select assessment type (Quick/Full/Batch)",
-        "☐ Upload pathogen concentration data",
-        "☐ Load treatment configuration (if applicable)",
-        "☐ Upload dilution data (if applicable)",
-        "☐ Configure exposure parameters",
-        "☐ Set Monte Carlo iterations (5,000-10,000 for testing)",
-        "☐ Specify population size",
-        "☐ Run assessment",
-        "☐ Review risk metrics and compliance status",
-        "☐ Examine visualizations",
-        "☐ Generate report (if needed)",
-        "☐ Export results for records",
-        "☐ Document assumptions and limitations"
+        "☐ Verify Python 3.8+ and install dependencies (pip install -r requirements.txt)",
+        "☐ Launch web application (streamlit run web_app.py or use batch file)",
+        "☐ Select appropriate assessment mode from sidebar dropdown",
+        "☐ Upload required data files (dilution data, pathogen data, or scenarios)",
+        "☐ Configure exposure parameters in sidebar",
+        "☐ Set pathogen type and concentration",
+        "☐ Set treatment LRV (if applicable)",
+        "☐ Specify exposure volume and frequency",
+        "☐ Set population size for impact assessment",
+        "☐ Set Monte Carlo iterations (10,000 recommended)",
+        "☐ Click 'Run Assessment' button and wait for completion",
+        "☐ Review interactive results table",
+        "☐ Examine all 4 visualization tabs",
+        "☐ Check compliance status for all scenarios/sites",
+        "☐ Download results (CSV, ZIP, or PDF as needed)",
+        "☐ Document assumptions and data sources for records"
     ]
 
     for item in workflow_items:
@@ -1525,10 +1649,19 @@ def add_appendix(doc):
 
 
 def main():
-    """Generate the complete technical demonstration document."""
+    """
+    Generate the complete technical demonstration document.
 
+    Creates a comprehensive Word document with:
+    - Professional title page
+    - Table of contents
+    - 8 main sections
+    - Step-by-step demonstrations
+    - Tables, figures, and appendices
+    """
     print("="*80)
-    print("QMRA Toolkit - Technical Demonstration Document Generator")
+    print("QMRA Batch Processing Web App - Technical Demo Document Generator")
+    print("Version 1.2.0")
     print("="*80)
     print()
 
@@ -1582,8 +1715,23 @@ def main():
     print("Adding appendices...")
     add_appendix(doc)
 
-    # Save document
-    output_file = "QMRA_Toolkit_Technical_Demonstration.docx"
+    # Save document with timestamp if file exists
+    from datetime import datetime
+    base_name = "QMRA_Toolkit_Technical_Demonstration"
+    output_file = f"{base_name}.docx"
+
+    # Check if file exists and is locked
+    if os.path.exists(output_file):
+        try:
+            # Try to open to see if it's locked
+            with open(output_file, 'a'):
+                pass
+        except PermissionError:
+            # File is open, use timestamped version
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_file = f"{base_name}_{timestamp}.docx"
+            print(f"\nOriginal file is open. Using timestamped version: {output_file}")
+
     print(f"\nSaving document: {output_file}")
     doc.save(output_file)
 
@@ -1595,18 +1743,20 @@ def main():
     print("="*80)
     print(f"\nFile: {output_file}")
     print(f"Size: {file_size:.1f} KB")
-    print(f"\nThe document includes:")
-    print("  [OK] Professional title page")
+    print(f"\nDocument Structure:")
+    print("  [OK] Professional title page with v1.2.0 branding")
     print("  [OK] Comprehensive table of contents")
-    print("  [OK] 8 main sections with subsections")
-    print("  [OK] 10 professional tables with formatting")
-    print("  [OK] Step-by-step demonstration scenarios")
-    print("  [OK] Results interpretation guidelines")
-    print("  [OK] Troubleshooting guide")
-    print("  [OK] References and resources")
-    print("  [OK] Quick reference appendices")
+    print("  [OK] 8 main sections with detailed subsections")
+    print("  [OK] Professional tables with color formatting")
+    print("  [OK] 3 complete step-by-step demonstration scenarios")
+    print("  [OK] Results interpretation and visualization guide")
+    print("  [OK] Troubleshooting section with solutions")
+    print("  [OK] Scientific references and resources")
+    print("  [OK] Quick reference cards and workflow checklist")
     print(f"\nEstimated pages: ~45-50")
-    print("="*80 + "\n")
+    print(f"Target audience: Environmental health scientists, engineers, regulators")
+    print(f"Application version: 1.2.0 (Batch Processing Web App)")
+    print("\n" + "="*80 + "\n")
 
 
 if __name__ == '__main__':
