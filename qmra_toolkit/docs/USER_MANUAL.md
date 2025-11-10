@@ -1,5 +1,5 @@
 # NIWA QMRA Assessment Toolkit - User Manual
-## Professional Quantitative Microbial Risk Assessment Software
+## How to Use the QMRA Application
 
 **Version 2.0**
 **NIWA Earth Sciences, New Zealand**
@@ -9,676 +9,500 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Understanding QMRA](#understanding-qmra)
-3. [Getting Started](#getting-started)
-4. [Interface Overview](#interface-overview)
-5. [Step-by-Step Workflows](#step-by-step-workflows)
-6. [Understanding Results](#understanding-results)
-7. [Advanced Features](#advanced-features)
+1. [Quick Start Guide](#quick-start-guide)
+2. [Installation & Launch](#installation--launch)
+3. [Your First Assessment - Step by Step](#your-first-assessment---step-by-step)
+4. [Interface Guide](#interface-guide)
+5. [Common Tasks & Workflows](#common-tasks--workflows)
+6. [Working with Results](#working-with-results)
+7. [Generating Reports](#generating-reports)
 8. [Troubleshooting](#troubleshooting)
-9. [Best Practices](#best-practices)
-10. [References and Resources](#references-and-resources)
+9. [Tips & Best Practices](#tips--best-practices)
+10. [Appendix: QMRA Background](#appendix-qmra-background)
 
 ---
 
-## Introduction
+## Quick Start Guide
 
-### What is the QMRA Toolkit?
+**Get up and running in 5 minutes:**
 
-The NIWA QMRA Assessment Toolkit is a professional software application designed for conducting Quantitative Microbial Risk Assessments. It provides a comprehensive, scientifically validated framework for assessing public health risks from waterborne pathogens.
-
-### Key Features
-
-- **🦠 Comprehensive Pathogen Database** - Pre-loaded with validated dose-response models for major waterborne pathogens
-- **💧 Multiple Exposure Routes** - Primary contact, shellfish consumption, drinking water, and aerosol inhalation
-- **🔬 Treatment Scenario Comparison** - Evaluate current vs. proposed treatment effectiveness
-- **📊 Monte Carlo Simulation** - Advanced uncertainty analysis with 10,000+ iterations
-- **📋 Automated Reporting** - Generate professional PDF/Word reports for regulatory compliance
-- **🎨 Professional GUI** - Intuitive interface with real-time visualization
-
-### Who Should Use This Tool?
-
-- **Environmental Scientists** - Conducting water quality risk assessments
-- **Public Health Officials** - Evaluating pathogen exposure risks
-- **Water Treatment Professionals** - Comparing treatment scenario effectiveness
-- **Regulatory Consultants** - Preparing compliance documentation
-- **Researchers** - Performing academic QMRA studies
+1. **Install Python** (if not already installed): Download Python 3.8+ from python.org
+2. **Install Dependencies**: Open terminal/command prompt and run:
+   ```bash
+   cd qmra_toolkit
+   pip install -r requirements.txt
+   ```
+3. **Launch the App**:
+   - **Windows**: Double-click `Launch_QMRA_GUI.bat`
+   - **Mac/Linux**: Run `python launch_enhanced_gui.py`
+4. **Run Your First Assessment**: See [Your First Assessment](#your-first-assessment---step-by-step) below
 
 ---
 
-## Understanding QMRA
-
-### What is Quantitative Microbial Risk Assessment?
-
-QMRA is a systematic approach to estimating the probability and magnitude of adverse health effects from exposure to pathogenic microorganisms. It follows a four-step framework established by the US National Research Council (NRC, 1983):
-
-#### 1. **Hazard Identification**
-Identifying the pathogenic microorganisms of concern (e.g., Norovirus, Campylobacter, Cryptosporidium)
-
-#### 2. **Exposure Assessment**
-Estimating the concentration and volume of pathogen exposure through different routes:
-- **Primary Contact** - Recreational water contact (swimming, surfing)
-- **Shellfish Consumption** - Eating contaminated shellfish
-- **Drinking Water** - Consuming contaminated water
-- **Aerosol Inhalation** - Breathing aerosolized water particles
-
-#### 3. **Dose-Response Assessment**
-Relating the dose of pathogens to the probability of infection or illness using validated mathematical models:
-- **Exponential Model** - Used for many viruses (e.g., Norovirus)
-- **Beta-Poisson Model** - Used for bacteria (e.g., Campylobacter)
-- **Approximate Beta-Poisson** - Used for protozoa (e.g., Cryptosporidium)
-
-#### 4. **Risk Characterization**
-Combining exposure and dose-response to calculate:
-- **Infection Risk** - Probability of becoming infected
-- **Illness Risk** - Probability of developing symptoms
-- **Annual Risk** - Risk over a year accounting for exposure frequency
-- **Population Impact** - Expected number of cases in the at-risk population
-
-### New Zealand Regulatory Context
-
-The toolkit is designed to comply with:
-- **Drinking Water Standards for New Zealand 2005 (Revised 2008)**
-- **Guidelines for Drinking-Water Quality Management for New Zealand 2015-2018**
-- **Resource Management Act 1991** requirements
-- **Health Act 1956** provisions
-- **WHO Guidelines for Safe Recreational Water Environments**
-
-**Key Regulatory Benchmark**: The acceptable annual infection risk for drinking water is **1 in 1,000,000 (10⁻⁶ DALY/person/year)** based on New Zealand and WHO guidelines.
-
----
-
-## Getting Started
+## Installation & Launch
 
 ### System Requirements
 
-- **Operating System**: Windows 10/11, macOS 10.14+, or Linux
 - **Python**: Version 3.8 or higher
-- **RAM**: Minimum 4GB (8GB recommended for large Monte Carlo simulations)
-- **Disk Space**: 500MB for software and data
+- **RAM**: 4GB minimum (8GB recommended)
+- **Disk Space**: 500MB
 
-### Installation
+### Step-by-Step Installation
 
-1. **Ensure Python is installed**:
+1. **Verify Python is installed**:
    ```bash
    python --version
    ```
+   If not installed, download from [python.org](https://www.python.org/downloads/)
 
-2. **Navigate to the toolkit directory**:
+2. **Navigate to the toolkit folder**:
    ```bash
    cd qmra_toolkit
    ```
 
-3. **Install required dependencies**:
+3. **Install required packages**:
    ```bash
    pip install -r requirements.txt
    ```
 
-### Launching the Application
+### How to Launch
 
-**Windows**:
-- Double-click `Launch_QMRA_GUI.bat`
-- Or run: `python launch_enhanced_gui.py`
+**Windows Users:**
+- **Easiest**: Double-click `Launch_QMRA_GUI.bat`
+- **Alternative**: Open Command Prompt, navigate to qmra_toolkit folder, run: `python launch_enhanced_gui.py`
 
-**macOS/Linux**:
+**Mac/Linux Users:**
 ```bash
 python launch_enhanced_gui.py
 ```
 
-The professional GUI will open in a new window.
+The application window will open automatically.
 
 ---
 
-## Interface Overview
+## Your First Assessment - Step by Step
 
-### Main Window Components
+**Scenario**: You want to assess Norovirus risk from swimming at a beach near a wastewater discharge.
 
-The QMRA Toolkit features a modern, tabbed interface with 8 main sections:
+### Step 1: Launch & Setup Project
 
-#### **Header Section**
-- **NIWA Logo** - Branding and professional identity
-- **Title** - "QMRA Assessment Toolkit"
-- **Project Buttons**:
-  - 📁 **New Project** - Start a fresh assessment
-  - 📂 **Open Project** - Load an existing .qmra project file
-  - 💾 **Save Project** - Save your current work
+1. Launch the application (see above)
+2. Click **📁 New Project** in the header
+3. Fill in **Project Setup** (Tab 1):
+   - **Project Name**: "Beach Swimming Assessment"
+   - **Lead Assessor**: Your name
+   - **Client Organization**: Your organization
+   - **Population at Risk**: 10000 (ten thousand beach users)
 
-#### **Tab 1: 📋 Project Setup**
-Define basic project information:
-- **Project Name** - A descriptive name for your assessment
-- **Lead Assessor** - Your name or the primary analyst
-- **Client Organization** - The organization requesting the assessment
-- **Assessment Date** - Date of analysis (auto-populated)
-- **Population at Risk** - Number of people potentially exposed
+### Step 2: Set Assessment Parameters
 
-**Example**:
-```
-Project Name: Auckland Mangere WWTP Assessment
-Lead Assessor: Dr. Jane Smith
-Client Organization: Auckland Council
-Assessment Date: 2025-10-06
-Population at Risk: 500,000 people
-```
+Go to **📋 Assessment Parameters** (Tab 2):
 
-#### **Tab 2: 🧬 Assessment Parameters**
+1. **Pathogen Selection**:
+   - Select **Norovirus** from dropdown
+   - Leave multi-pathogen unchecked for now
 
-**Pathogen Selection**:
-- **Primary Pathogen** - Choose from:
-  - Norovirus (most common cause of gastroenteritis)
-  - Campylobacter (bacterial pathogen)
-  - Cryptosporidium (parasitic protozoan)
-  - E. coli (indicator organism)
-  - Salmonella (bacterial pathogen)
-  - Rotavirus (viral pathogen)
+2. **Exposure Route**:
+   - Select **Primary Contact** (swimming)
 
-- **Multi-Pathogen Assessment** - Enable to assess multiple pathogens simultaneously
+3. **Pathogen Concentration**:
+   - Enter **1000** copies/L
+   - *Tip: Click 📊 button to see typical ranges*
 
-**Exposure Parameters**:
-- **Exposure Route**:
-  - Primary Contact (swimming, water sports)
-  - Shellfish Consumption
-  - Drinking Water
-  - Aerosol Inhalation
+4. **Volume per Exposure**:
+   - Enter **100** mL (typical for swimming)
 
-- **Pathogen Concentration** - Copies per liter (copies/L)
-  - Click 📊 for typical concentration ranges
-  - Raw wastewater: 10³ - 10⁷ copies/L
-  - Treated effluent: 10¹ - 10⁴ copies/L
-  - Surface water: 10⁰ - 10² copies/L
+5. **Exposure Frequency**:
+   - Enter **7** events/year (summer swimming)
 
-- **Volume per Exposure** - Milliliters (mL) ingested/contacted per event
-  - Swimming: 50-100 mL typical
-  - Drinking water: 2000 mL (2 liters) typical
-  - Shellfish: 50-100 g consumption
+6. **Monte Carlo Settings**:
+   - Leave at **10,000** iterations (default)
+   - Leave confidence at **95%**
 
-- **Exposure Frequency** - Events per year
-  - Recreational swimming: 7-20 events/year
-  - Daily drinking water: 365 events/year
-  - Seasonal activities: 10-50 events/year
+### Step 3: View Results
 
-**Analysis Options**:
-- **Monte Carlo Iterations** - Number of simulations (recommended: 10,000)
-- **Confidence Level** - Percentage for confidence intervals (typically 95%)
+1. Click the **📈 Results** tab
+2. The **Summary** sub-tab shows:
+   - Annual infection risk
+   - Expected cases per year
+   - Compliance status (meets WHO guidelines or not)
 
-#### **Tab 3: 🔬 Treatment Scenarios**
+3. Click **Detailed Results** sub-tab to see:
+   - 5th, 50th, 95th percentile values
+   - Uncertainty ranges
 
-Compare effectiveness of different treatment approaches:
+### Step 4: Generate Visualizations
 
-**Current Treatment**:
-- Treatment Type: Primary, Secondary, Advanced Secondary, or Tertiary
-- Log Reduction Value (LRV): Effectiveness of current treatment
+1. Go to **📊 Plots & Visualizations** (Tab 5)
+2. Click **📈 Dose-Response** to see dose-response curve
+3. Click **🎲 Monte Carlo** to see risk distribution histogram
+4. Click **💾 Save All** to export plots to a folder
 
-**Proposed Treatment**:
-- Treatment Type: Proposed upgrade or alternative
-- Log Reduction Value (LRV): Expected effectiveness
+### Step 5: Create a Report
 
-**Environmental Factors**:
-- Dilution Factor: How much the effluent is diluted in receiving water
+1. Go to **📄 Professional Reports** (Tab 6)
+2. Select **Executive Summary Report**
+3. Check the boxes for what to include:
+   - ✓ Risk Comparison Plots
+   - ✓ Data Tables
+   - ✓ Uncertainty Analysis
+4. Click **📄 Generate Report**
+5. Choose location and save as PDF
 
-**Action Buttons**:
-- 🔄 **Compare Scenarios** - Calculate risk for both scenarios
-- 📊 **Generate Comparison Plot** - Visualize treatment effectiveness
+### Step 6: Save Your Project
 
-**LRV Guidelines**:
-- Primary Treatment: 0.5-1.0 log
-- Secondary Treatment: 1.0-2.0 log
-- Advanced Secondary: 2.0-3.0 log
-- Tertiary Treatment: 3.0-5.0 log
-- Advanced Tertiary: 5.0+ log
+1. Click **💾 Save Project** in the header
+2. Choose a filename: "Beach_Swimming_Assessment.qmra"
+3. Your work is now saved and can be reopened later
 
-#### **Tab 4: 📈 Results**
+**Congratulations!** You've completed your first QMRA assessment.
 
-Three sub-tabs display your assessment outcomes:
+---
 
-**Summary Tab**:
-- Key risk metrics (infection risk, illness risk, annual risk)
-- Population impact estimates
-- Compliance with regulatory benchmarks
+## Interface Guide
 
-**Detailed Results Tab**:
-- Full Monte Carlo simulation statistics
-- Percentile distributions (5th, 50th, 95th)
-- Uncertainty bounds
+### Application Layout
 
-**Regulatory Compliance Tab**:
-- Comparison to NZ drinking water standards (10⁻⁶ DALY/person/year)
-- WHO guideline comparisons
-- Compliance status and recommendations
+The QMRA Toolkit has **8 tabs** across the top. Here's what each one does:
 
-**Result Controls**:
-- 🔄 **Refresh** - Update results display
-- 📋 **Copy to Clipboard** - Copy results as text
-- 💾 **Export Results** - Save to CSV, Excel, or JSON
+| Tab | What It Does |
+|-----|--------------|
+| **📋 Project Setup** | Enter project name, your name, client, and population at risk |
+| **🧬 Assessment Parameters** | Choose pathogen, exposure route, concentrations, and frequencies |
+| **🔬 Treatment Scenarios** | Compare current vs. proposed treatment effectiveness |
+| **📈 Results** | View risk calculations, statistics, and compliance status |
+| **📊 Plots & Visualizations** | Generate and export charts and graphs |
+| **📄 Professional Reports** | Create PDF/Word reports for stakeholders |
+| **🗃️ Pathogen Database** | View/edit pathogen parameters (advanced users) |
+| **⚙️ Settings** | Configure application preferences |
 
-#### **Tab 5: 📊 Plots & Visualizations**
+**Project Controls** (top of window):
+- **📁 New Project**: Start fresh
+- **📂 Open Project**: Load saved .qmra file
+- **💾 Save Project**: Save your work
 
-Generate professional publication-quality plots:
+### Key Input Fields Explained
 
-- **📊 Risk Comparison** - Bar charts comparing pathogens or scenarios
-- **📈 Dose-Response** - Dose-response curves for selected pathogen
-- **🎲 Monte Carlo** - Histogram of simulation results with percentiles
-- **💾 Save All** - Export all plots to selected directory
+**Tab 2 - Assessment Parameters** is where you'll spend most of your time:
 
-All plots include:
-- Professional formatting
-- Regulatory guideline reference lines
-- Statistical annotations
-- High-resolution output (300 DPI)
+| Field | What to Enter | Example Values |
+|-------|---------------|----------------|
+| **Primary Pathogen** | Select from dropdown | Norovirus, Campylobacter, Cryptosporidium |
+| **Exposure Route** | How people are exposed | Primary Contact (swimming), Shellfish, Drinking Water |
+| **Pathogen Concentration** | Pathogens per liter (copies/L) | 1000 for treated effluent, 100000 for raw sewage |
+| **Volume per Exposure** | mL ingested per event | 100 mL (swimming), 2000 mL (drinking) |
+| **Exposure Frequency** | Times per year | 7 (summer swimming), 365 (daily drinking) |
+| **Monte Carlo Iterations** | Simulation runs | 10,000 (default - don't change unless needed) |
 
-#### **Tab 6: 📄 Professional Reports**
+*Tip: Click the 📊 button next to concentration fields to see typical values for different water types.*
 
-Generate formatted reports for stakeholders:
+**Tab 3 - Treatment Scenarios** (optional):
 
-**Report Templates**:
-- **📋 Executive Summary** - 2-3 page summary for decision-makers
-- **🔬 Technical Assessment** - Detailed report with methodology
-- **⚖️ Regulatory Compliance** - Compliance with NZ health guidelines
+| Field | What to Enter | Example Values |
+|-------|---------------|----------------|
+| **Treatment Type** | Level of treatment | Primary, Secondary, Tertiary |
+| **Log Reduction Value (LRV)** | Pathogen removal effectiveness | 1.0 log = 90%, 2.0 log = 99%, 3.0 log = 99.9% |
+| **Dilution Factor** | Mixing in receiving water | 100 (moderate dilution), 1000 (high dilution) |
 
-**Report Options**:
-- ✓ Include Risk Comparison Plots
-- ✓ Include Data Tables
-- ✓ Include Uncertainty Analysis
-- ✓ Include Literature References
+---
 
-**Generation**:
-- **📄 Generate Report** - Create PDF or Word document
-- **👁️ Preview Report** - Preview before final generation
+## Common Tasks & Workflows
 
-#### **Tab 7: 🗃️ Pathogen Database**
+### Task 1: Quick Risk Assessment (10 minutes)
 
-View and manage the pathogen database:
-- Dose-response parameters
-- Infection-to-illness ratios
+**When to use**: You need a quick estimate of risk for a single scenario.
+
+1. Launch app → Click **New Project**
+2. Fill in **Tab 1** (project info)
+3. Fill in **Tab 2**:
+   - Choose pathogen (e.g., Norovirus)
+   - Choose exposure route (e.g., Primary Contact)
+   - Enter concentration (e.g., 1000 copies/L)
+   - Enter volume (e.g., 100 mL)
+   - Enter frequency (e.g., 7 events/year)
+4. Click **Tab 4** to see results immediately
+5. Done! See if risk is acceptable or needs action.
+
+### Task 2: Compare Two Treatment Options
+
+**When to use**: Decision-makers want to know if upgrading treatment is worthwhile.
+
+1. Complete basic setup (Tabs 1-2)
+2. Go to **Tab 3 - Treatment Scenarios**
+3. **Current Treatment**:
+   - Select treatment type (e.g., Secondary)
+   - Enter current LRV (e.g., 2.0)
+4. **Proposed Treatment**:
+   - Select upgrade (e.g., Tertiary)
+   - Enter proposed LRV (e.g., 4.0)
+5. Click **🔄 Compare Scenarios**
+6. Click **📊 Generate Comparison Plot**
+7. Go to **Tab 4** to see risk reduction
+8. Export results for cost-benefit analysis
+
+### Task 3: Generate Report for Stakeholders
+
+**When to use**: You need a professional document for clients or regulators.
+
+1. Complete your assessment (Tabs 1-2, run calculations)
+2. Go to **Tab 6 - Professional Reports**
+3. Choose report type:
+   - **Executive Summary**: For managers/decision-makers (short, non-technical)
+   - **Technical Assessment**: For engineers/scientists (detailed methodology)
+   - **Regulatory Compliance**: For regulatory submissions
+4. Check boxes for what to include (recommend checking all)
+5. Click **📄 Generate Report**
+6. Choose location and filename
+7. PDF will be created automatically
+
+### Task 4: Assess Multiple Pathogens at Once
+
+**When to use**: You want to know which pathogen poses the highest risk.
+
+1. Complete basic setup (**Tab 1**)
+2. In **Tab 2**, check **"Enable Multi-Pathogen Assessment"**
+3. Select 2-3 pathogens (e.g., Norovirus, Campylobacter, Cryptosporidium)
+4. Enter concentration for each pathogen
+5. Set common exposure parameters (volume, frequency)
+6. Go to **Tab 4** to see results for all pathogens
+7. Go to **Tab 5**, click **📊 Risk Comparison** to see which pathogen dominates
+8. Focus treatment efforts on the highest-risk pathogen
+
+### Task 5: Export Data for Further Analysis
+
+**When to use**: You want to analyze results in Excel or share raw data.
+
+1. After running assessment, go to **Tab 4 - Results**
+2. Click **💾 Export Results** button
+3. Choose format:
+   - **CSV**: For Excel/spreadsheet analysis
+   - **Excel**: For formatted workbook
+   - **JSON**: For programming/scripting
+4. Choose location and save
+5. Open in Excel or other analysis tool
+
+### Task 6: Reopen and Modify Saved Project
+
+**When to use**: You need to update a previous assessment with new data.
+
+1. Click **📂 Open Project** (header)
+2. Browse to your .qmra file
+3. Project loads with all previous settings
+4. Modify values as needed (e.g., update concentration based on new monitoring)
+5. Results update automatically
+6. Click **💾 Save Project** to overwrite or save with new name
+
+---
+
+## Working with Results
+
+### Understanding Your Results
+
+When you click **Tab 4 - Results**, you'll see several numbers. Here's what they mean in plain language:
+
+| Result | What It Means | How to Use It |
+|--------|---------------|---------------|
+| **Per-Event Infection Risk** | Chance of getting infected each time exposed | Compare to other scenarios |
+| **Annual Infection Risk** | Chance of getting infected at least once per year | Compare to guidelines (see below) |
+| **Population Cases/Year** | How many people would get sick per year | Estimate public health impact |
+| **5th Percentile** | Best-case scenario (low estimate) | Optimistic estimate |
+| **Median (50th)** | Most likely value | Your best estimate - **use this** |
+| **95th Percentile** | Worst-case scenario (high estimate) | Conservative/protective estimate |
+
+### How to Interpret Risk Numbers
+
+**Annual Risk Examples:**
+- **1 × 10⁻⁷** = 1 in 10 million chance per year → Very low risk
+- **1 × 10⁻⁶** = 1 in 1 million → Regulatory guideline threshold
+- **1 × 10⁻⁴** = 1 in 10,000 → Moderate risk, action recommended
+- **1 × 10⁻²** = 1 in 100 → High risk, immediate action needed
+
+### Is My Result Acceptable?
+
+The app shows a **Compliance Status**:
+
+| Status | What It Means | What to Do |
+|--------|---------------|------------|
+| ✅ **COMPLIANT** | Risk below guideline (< 10⁻⁶) | OK to proceed, continue monitoring |
+| ⚠️ **MARGINAL** | Risk near guideline (10⁻⁶ to 10⁻⁵) | Consider improvements, increased monitoring |
+| ❌ **NON-COMPLIANT** | Risk above guideline (> 10⁻⁵) | Action required - upgrade treatment or reduce exposure |
+
+*Note: Guideline is 10⁻⁶ annual risk (1 in 1 million) based on WHO and NZ drinking water standards*
+
+### Why Are There Three Numbers (5th, Median, 95th)?
+
+Real-world conditions vary (weather, water quality, human behavior). The three values show this uncertainty:
+
+- **5th percentile**: "Good conditions" - low pathogen levels, less exposure
+- **Median**: "Typical conditions" - average scenario
+- **95th percentile**: "Bad conditions" - high pathogen levels, more exposure
+
+**Which one to use?**
+- **Decision-making**: Use **median** as your best estimate
+- **Protective/conservative**: Use **95th percentile**
+- **Reporting to stakeholders**: Report all three to show uncertainty range
+
+---
+
+## Generating Reports
+
+### Creating a PDF Report
+
+The app can generate professional reports automatically:
+
+1. **Complete your assessment** (Tabs 1-4 must have data)
+2. Go to **Tab 6 - Professional Reports**
+3. **Choose report type**:
+   - **Executive Summary**: Short, non-technical (for managers)
+   - **Technical Assessment**: Detailed with methodology (for engineers/scientists)
+   - **Regulatory Compliance**: Focused on meeting guidelines (for regulators)
+4. **Select what to include** (check boxes):
+   - ✓ Risk Comparison Plots (recommended)
+   - ✓ Data Tables (recommended)
+   - ✓ Uncertainty Analysis (recommended for technical reports)
+   - ✓ Literature References (recommended for regulatory submissions)
+5. Click **📄 Generate Report**
+6. Choose save location and filename
+7. Report generates as PDF (opens automatically when done)
+
+### What's in the Report?
+
+All reports include:
+- Project information (name, assessor, client)
+- Assessment parameters (pathogen, exposure, concentrations)
+- Risk results with interpretation
+- Compliance status
+- Recommendations (if applicable)
+
+**Technical Assessment** also includes:
+- Methodology explanation
+- Monte Carlo simulation details
+- Uncertainty analysis
 - Literature references
-- Update pathogen data
-
-#### **Tab 8: ⚙️ Settings**
-
-Configure application preferences:
-- ✓ Generate plots automatically
-- ✓ Save intermediate results
-- ✓ Enable uncertainty analysis by default
-
----
-
-## Step-by-Step Workflows
-
-### Workflow 1: Basic Single-Pathogen Assessment
-
-**Scenario**: Assess Norovirus risk from swimming in treated wastewater discharge area
-
-**Steps**:
-
-1. **Launch the Application**
-   - Open the QMRA Toolkit GUI
-
-2. **Set Up Project** (Tab 1)
-   - Project Name: "Beach Swimming Risk Assessment"
-   - Lead Assessor: Your name
-   - Client Organization: "Coastal City Council"
-   - Population at Risk: 100,000
-
-3. **Configure Assessment Parameters** (Tab 2)
-   - Primary Pathogen: Norovirus
-   - Exposure Route: Primary Contact
-   - Pathogen Concentration: 1000 copies/L
-   - Volume per Exposure: 100 mL
-   - Exposure Frequency: 7 events/year
-   - Monte Carlo Iterations: 10,000
-   - Confidence Level: 95%
-
-4. **View Results** (Tab 4)
-   - Navigate to Results tab
-   - Review Summary for key risk metrics
-   - Check Regulatory Compliance status
-
-5. **Generate Visualizations** (Tab 5)
-   - Click "📊 Risk Comparison"
-   - Click "🎲 Monte Carlo" for distribution
-   - Click "💾 Save All" to export plots
-
-6. **Create Report** (Tab 6)
-   - Select "Executive Summary Report"
-   - Check all report options
-   - Click "📄 Generate Report"
-   - Save as PDF
-
-7. **Save Project** (Header)
-   - Click "💾 Save Project"
-   - Choose filename: "Beach_Swimming_Assessment.qmra"
-
-### Workflow 2: Treatment Scenario Comparison
-
-**Scenario**: Compare current secondary treatment vs. proposed tertiary treatment
-
-**Steps**:
-
-1. **Set Up Project** (Tab 1)
-   - Complete basic project information
-   - Population at Risk: 500,000
-
-2. **Configure Base Parameters** (Tab 2)
-   - Primary Pathogen: Norovirus
-   - Exposure Route: Primary Contact
-   - Concentration: 10,000 copies/L (raw influent)
-   - Volume: 50 mL
-   - Frequency: 10 events/year
-
-3. **Define Treatment Scenarios** (Tab 3)
-   - **Current Treatment**:
-     - Type: Secondary Treatment
-     - LRV: 1.5 log
-   - **Proposed Treatment**:
-     - Type: Tertiary Treatment
-     - LRV: 3.5 log
-   - Dilution Factor: 100
-
-4. **Compare Scenarios**
-   - Click "🔄 Compare Scenarios"
-   - Review risk reduction calculations
-   - Click "📊 Generate Comparison Plot"
-
-5. **Generate Technical Report** (Tab 6)
-   - Select "Technical Assessment Report"
-   - Include all options
-   - Generate PDF for engineering team
-
-### Workflow 3: Multi-Pathogen Assessment
-
-**Scenario**: Assess multiple pathogens for drinking water safety
-
-**Steps**:
-
-1. **Enable Multi-Pathogen Mode** (Tab 2)
-   - Check "Enable Multi-Pathogen Assessment"
-   - Additional pathogen selection fields appear
-
-2. **Select Pathogens**
-   - Primary: Norovirus
-   - Secondary: Campylobacter
-   - Tertiary: Cryptosporidium
-
-3. **Set Common Parameters**
-   - Exposure Route: Drinking Water
-   - Volume: 2000 mL (2 liters/day)
-   - Frequency: 365 events/year
-
-4. **Define Pathogen-Specific Concentrations**
-   - Norovirus: 10 copies/L
-   - Campylobacter: 100 copies/L
-   - Cryptosporidium: 1 copies/L
-
-5. **Run Assessment**
-   - System calculates individual and combined risks
-   - Results show which pathogen dominates risk
-
-6. **Create Comparison Visualization** (Tab 5)
-   - "📊 Risk Comparison" shows all three pathogens
-   - Identify which pathogen requires most attention
-
----
-
-## Understanding Results
-
-### Key Risk Metrics Explained
-
-#### **1. Infection Risk (Pinf)**
-- Probability of becoming infected per exposure event
-- Calculated using dose-response models
-- Range: 0.0 (no risk) to 1.0 (certain infection)
-- **Example**: Pinf = 0.05 means 5% chance of infection per exposure
-
-#### **2. Illness Risk (Pill)**
-- Probability of developing symptoms given infection
-- Calculated as: Pill = Pinf × Pill|inf ratio
-- Pill|inf ratio varies by pathogen (e.g., Norovirus ≈ 0.7)
-- **Example**: Pill = 0.035 means 3.5% chance of illness per exposure
-
-#### **3. Annual Risk (Pannual)**
-- Probability of at least one infection/illness per year
-- Accounts for multiple exposures: Pannual = 1 - (1 - Pinf)^frequency
-- **Example**: With 7 exposures/year at Pinf=0.05, Pannual = 0.30 (30%)
-
-#### **4. Population Impact**
-- Expected number of cases in the at-risk population
-- Calculated as: Cases = Population × Pannual
-- **Example**: 100,000 people × 0.30 = 30,000 expected cases/year
-
-#### **5. Percentile Distributions**
-
-Monte Carlo simulations produce distributions showing uncertainty:
-- **5th Percentile** - Lower bound (conservative estimate)
-- **50th Percentile (Median)** - Most likely value
-- **95th Percentile** - Upper bound (worst-case scenario)
-
-**Interpretation**:
-```
-Annual Risk Results:
-  5th percentile:  2.5 × 10⁻⁷ (1 in 4 million)
-  Median:          1.2 × 10⁻⁶ (1 in 833,000)
-  95th percentile: 5.8 × 10⁻⁶ (1 in 172,000)
-```
-
-### Regulatory Compliance Interpretation
-
-#### **New Zealand Drinking Water Standard**: 10⁻⁶ DALY/person/year
-
-**Compliance Status**:
-- ✅ **COMPLIANT** - Risk ≤ 10⁻⁶ (meets standard)
-- ⚠️ **MARGINAL** - Risk between 10⁻⁶ and 10⁻⁵ (requires attention)
-- ❌ **NON-COMPLIANT** - Risk > 10⁻⁵ (exceeds standard)
-
-**Example Interpretation**:
-```
-Median Annual Risk: 1.2 × 10⁻⁶
-Status: ⚠️ MARGINAL - Just above guideline
-Recommendation: Consider treatment upgrade or exposure reduction
-```
-
-### Understanding Uncertainty
-
-QMRA results include uncertainty from:
-1. **Pathogen concentration variability** - Water quality fluctuations
-2. **Dose-response parameter uncertainty** - Model fitting uncertainty
-3. **Exposure behavior variability** - Different people, different exposures
-4. **Environmental factors** - Temperature, survival, dilution
-
-**How to Use Uncertainty Information**:
-- Use **median** for best estimate
-- Use **95th percentile** for conservative/protective decisions
-- Use **5th percentile** for optimistic scenarios
-- Report **confidence intervals** to stakeholders for transparency
-
----
-
-## Advanced Features
-
-### Custom Dose-Response Models
-
-You can add custom pathogens or modify existing models:
-
-1. Navigate to **Pathogen Database** tab
-2. Click "Add Custom Pathogen"
-3. Enter pathogen name and dose-response parameters
-4. Choose model type (Exponential, Beta-Poisson, etc.)
-5. Provide literature reference
-6. Save to database
-
-### Batch Processing
-
-For multiple scenarios, use the command-line interface:
-
-```bash
-python src/qmra_toolkit.py batch --config scenarios.json
-```
-
-**scenarios.json example**:
-```json
-{
-  "scenarios": [
-    {
-      "name": "Scenario 1",
-      "pathogen": "norovirus",
-      "concentration": 1000,
-      "volume": 100,
-      "frequency": 7
-    },
-    {
-      "name": "Scenario 2",
-      "pathogen": "norovirus",
-      "concentration": 100,
-      "volume": 100,
-      "frequency": 7
-    }
-  ]
-}
-```
-
-### Sensitivity Analysis
-
-Identify which parameters most affect risk:
-
-1. Go to **Settings** tab
-2. Enable "Sensitivity Analysis"
-3. Run assessment
-4. View tornado plot showing parameter importance
-
-### Integration with External Data
-
-Import monitoring data:
-
-1. Prepare CSV file with columns: `date`, `pathogen`, `concentration`
-2. Use **Import Data** in Assessment Parameters tab
-3. System will automatically calculate statistics and run Monte Carlo
 
 ---
 
 ## Troubleshooting
 
-### Common Issues and Solutions
+### Problem: App Won't Start
 
-#### **Issue: Application Won't Launch**
-**Symptoms**: Double-clicking launcher does nothing or error message appears
+**Try this:**
+1. Check Python is installed: Open terminal/command prompt and type `python --version`
+2. If Python is missing, download from [python.org](https://www.python.org/downloads/)
+3. Reinstall dependencies: `pip install -r requirements.txt`
+4. Try running manually: `python launch_enhanced_gui.py`
 
-**Solutions**:
-1. Verify Python installation: `python --version`
-2. Check dependencies: `pip install -r requirements.txt`
-3. Try manual launch: `python launch_enhanced_gui.py`
-4. Check error log in `qmra_toolkit/logs/`
+### Problem: Results Look Wrong (Too High or Too Low)
 
-#### **Issue: Results Seem Unrealistic**
-**Symptoms**: Risk values too high or too low
+**Check these common mistakes:**
 
-**Solutions**:
-1. Verify pathogen concentration units (copies/L)
-2. Check exposure volume (mL not L)
-3. Confirm LRV is applied correctly (should reduce concentration)
-4. Review exposure frequency (events/year, not per day)
-5. Use "📊 Concentration Helper" for typical ranges
+| Mistake | What to Check | Correct Example |
+|---------|---------------|-----------------|
+| **Wrong units** | Concentration should be per LITER, not per 100 mL | 1000 copies/L (not /100mL) |
+| **Volume wrong** | Volume should be in mL, not L | 100 mL (not 0.1 L) |
+| **Frequency wrong** | Frequency is per YEAR, not per week or day | 7 events/year (not 7/week) |
+| **LRV backwards** | LRV reduces risk (higher LRV = lower risk) | 3.0 log = 99.9% removal |
 
-#### **Issue: Monte Carlo Takes Too Long**
-**Symptoms**: Simulation doesn't complete or freezes
+**Still wrong?** Click the 📊 button next to concentration fields to see typical values.
 
-**Solutions**:
-1. Reduce iterations (try 1,000 instead of 10,000 for testing)
-2. Close other applications to free RAM
-3. Disable auto-plotting during calculation
-4. Check for very large population values
+### Problem: App is Slow or Freezes
 
-#### **Issue: Can't Generate Report**
-**Symptoms**: Report generation fails or produces blank document
+**Quick fixes:**
+- Reduce Monte Carlo iterations to 1,000 (instead of 10,000) for testing
+- Close other programs to free up memory
+- Check population size isn't extremely large (billions)
 
-**Solutions**:
-1. Ensure results exist (run assessment first)
-2. Check write permissions in output directory
-3. Verify Word/PDF libraries installed: `pip install python-docx reportlab`
-4. Try different report format (PDF vs Word)
+### Problem: Can't Generate Report
 
-#### **Issue: Plots Not Displaying**
-**Symptoms**: Blank plot area or error when clicking plot buttons
+**Checklist:**
+1. Have you run the assessment first? (Tab 4 must show results)
+2. Do you have write permission to the save location?
+3. Try saving to Desktop or Documents folder instead
 
-**Solutions**:
-1. Verify matplotlib installation: `pip install matplotlib`
-2. Update matplotlib: `pip install --upgrade matplotlib`
-3. Check "Generate plots automatically" in Settings
-4. Try refreshing: Close and reopen Plots tab
+**Still failing?** Reinstall report libraries: `pip install python-docx reportlab`
 
-### Error Messages
+### Problem: Plots Don't Show Up
 
-| Error Message | Meaning | Solution |
-|---------------|---------|----------|
-| `PathogenDatabase not found` | Missing database file | Reinstall or download pathogen_database.json |
-| `Invalid concentration value` | Non-numeric input | Enter numbers only (e.g., 1000 not 1,000) |
-| `LRV out of range` | LRV too high/low | Use LRV between 0 and 8 |
-| `Monte Carlo failed` | Simulation error | Check all parameters are positive numbers |
-| `Memory error` | Insufficient RAM | Reduce iterations or population size |
+1. Go to **Tab 8 - Settings**
+2. Check box "✓ Generate plots automatically"
+3. Close and reopen **Tab 5 - Plots & Visualizations**
+4. If still failing, reinstall: `pip install matplotlib`
 
-### Getting Help
+### Common Error Messages
 
-1. **Check this manual** - Search for your issue in Table of Contents
-2. **Review examples** - Look at example projects in `qmra_toolkit/examples/`
-3. **Contact support** - Email NIWA QMRA team with:
-   - Screenshot of error
+| Error | What It Means | How to Fix |
+|-------|---------------|------------|
+| "PathogenDatabase not found" | Missing database file | Reinstall toolkit or download pathogen_parameters.json |
+| "Invalid concentration value" | You entered text instead of number | Use numbers only: 1000 (not "1,000" or "high") |
+| "LRV out of range" | LRV should be 0-8 | Enter realistic LRV (most treatment is 0.5-5.0) |
+| "Monte Carlo failed" | Bad input parameter | Check all numbers are positive, non-zero |
+
+### Still Need Help?
+
+1. Check this manual's Table of Contents for your topic
+2. Look at example projects in `qmra_toolkit/examples/` folder
+3. Contact NIWA QMRA team with:
+   - Screenshot of the problem
    - Your project file (.qmra)
-   - Description of what you were trying to do
+   - What you were trying to do
 
 ---
 
-## Best Practices
+## Tips & Best Practices
 
-### Data Quality
+### Before You Start
+
+- **Gather your data first**: Know your pathogen concentrations before opening the app
+- **Use recent data**: Water quality data should be < 3 months old if possible
+- **Multiple samples better than one**: Don't base assessment on a single measurement
+- **Save often**: Click **💾 Save Project** regularly to avoid losing work
+
+### Choosing Input Values
+
+| Parameter | How to Choose | Tips |
+|-----------|---------------|------|
+| **Pathogen Concentration** | Use monitoring data average | Click 📊 for typical ranges; use conservative (high) values if uncertain |
+| **Exposure Volume** | Use literature values for activity type | Swimming: 50-100 mL; Drinking: 2000 mL daily |
+| **Exposure Frequency** | Estimate realistically | Summer swimming: 5-20/year; Year-round: 50-100/year |
+| **Population at Risk** | Count actual exposed population | Beach users, water supply customers, shellfish consumers |
+
+### Making Good Assessments
 
 ✅ **DO**:
-- Use recent monitoring data (<3 months old when possible)
-- Collect multiple samples for Monte Carlo input
-- Document data sources and collection methods
-- Use peer-reviewed dose-response models
-- Report both median and 95th percentile results
+- Document where your data came from
+- Use **median** result as your best estimate
+- Report uncertainty (5th-95th percentile range)
+- Compare results to similar published studies
+- Have a colleague review before submitting
 
 ❌ **DON'T**:
-- Use single grab sample for risk assessment
-- Extrapolate far beyond measured concentrations
-- Ignore seasonal variations in water quality
-- Mix different pathogen measurement methods
-- Report only point estimates without uncertainty
+- Use outdated data (>1 year old)
+- Ignore seasonal variation (summer vs winter)
+- Mix different measurement units
+- Report only one number without uncertainty
+- Skip saving your project
 
-### Project Documentation
+### For Regulatory Submissions
 
-Always include in your assessment:
-1. **Data Sources** - Where pathogen concentrations came from
-2. **Assumptions** - All exposure and treatment assumptions
-3. **Model Selection** - Why you chose specific dose-response models
-4. **Limitations** - Known limitations and uncertainties
-5. **Quality Assurance** - Verification steps taken
+Use this checklist:
+- ☐ Use **Technical Assessment Report** template
+- ☐ Include all three percentiles (5th, median, 95th)
+- ☐ Show compliance with NZ/WHO guidelines
+- ☐ Include monitoring data in appendix
+- ☐ Document all assumptions
+- ☐ Get independent peer review
 
-### Regulatory Submissions
+### Saving and Archiving
 
-For regulatory compliance reports:
-1. Use **Technical Assessment Report** template
-2. Include all uncertainty analyses
-3. Compare to both NZ and WHO guidelines
-4. Provide raw data in appendix
-5. Have independent peer review
-6. Include QA/QC documentation
+**Save your work in multiple formats:**
+1. **Save project**: Click 💾 Save Project → Creates .qmra file (can reopen later)
+2. **Export results**: Tab 4 → Export Results → Save as Excel/CSV
+3. **Save plots**: Tab 5 → Save All → Creates PNG files
+4. **Generate report**: Tab 6 → Generate Report → Creates PDF
 
-### Model Validation
-
-Before finalizing assessments:
-1. **Check units** - Ensure all units are correct (L not mL, copies not CFU)
-2. **Benchmark** - Compare to published studies with similar scenarios
-3. **Sensitivity test** - Vary key parameters to test robustness
-4. **Peer review** - Have colleague review approach and results
-5. **Reality check** - Do results make intuitive sense?
-
-### Archiving Projects
-
-Maintain project archives:
-- Save project file (.qmra) with version number
-- Export results to CSV for long-term storage
-- Save all plots as high-res PNG and PDF
-- Keep PDF copy of final report
-- Document any custom parameters or modifications
+**Naming convention suggestion:**
+- `ProjectName_Date_Version.qmra` (e.g., "Beach_Swimming_2025-10-15_v1.qmra")
+- Update version number when revising
 
 ---
 
