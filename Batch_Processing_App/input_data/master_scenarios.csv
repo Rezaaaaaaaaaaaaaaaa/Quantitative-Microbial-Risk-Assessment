@@ -5,9 +5,9 @@ S003,Beach_B_Summer_Good_Dilution,PATH003,DIL010,primary_contact,3,0.3,50,40,70,
 S004,Beach_C_Variable_Conditions,PATH004,DIL006,primary_contact,3,0.4,50,35,75,20,8000,10000,Medium,Variable pathogen and dilution
 S005,Shellfish_Area_1_High_Quality,PATH001,DIL004,shellfish_consumption,3,0.3,100,80,150,24,5000,10000,High,Commercial shellfish area - good conditions
 S006,Shellfish_Area_2_Moderate,PATH004,DIL005,shellfish_consumption,3,0.4,100,70,130,18,3000,10000,Medium,Secondary shellfish area
-S007,Beach_A_Campylobacter,PATH006,DIL001,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Medium,Campylobacter assessment
-S008,Beach_A_Cryptosporidium,PATH007,DIL001,primary_contact,2.5,0.5,50,35,75,25,15000,10000,Low,Crypto assessment - lower LRV
-S009,Beach_A_Ecoli,PATH008,DIL001,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Low,E. coli indicator assessment
+S007,Beach_A_Low_Concentration,PATH003,DIL001,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Medium,Low norovirus concentration scenario
+S008,Beach_A_Variable_Uncertainty,PATH004,DIL001,primary_contact,2.5,0.5,50,35,75,25,15000,10000,Low,Variable norovirus with higher uncertainty
+S009,Beach_A_Hockey_Stick_Distribution,PATH005,DIL001,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Low,Hockey stick distribution assessment
 S010,Beach_D_No_Treatment_Worst_Case,PATH010,DIL007,primary_contact,0,0,50,30,100,20,5000,10000,High,Bypass scenario - no treatment very poor dilution
 S011,Beach_A_UV_Upgrade,PATH001,DIL001,primary_contact,8,0.5,50,35,75,25,15000,10000,High,With UV disinfection upgrade
 S012,Beach_A_MBR_Best_Case,PATH001,DIL001,primary_contact,9.3,0.3,50,40,70,25,15000,10000,High,With MBR upgrade - most reliable

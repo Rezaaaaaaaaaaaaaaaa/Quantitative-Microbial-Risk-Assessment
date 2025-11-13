@@ -3,9 +3,9 @@ S001,Site_A_Norovirus_Summer,PATH001,Site_A,primary_contact,3,0.3,50,35,75,25,15
 S002,Site_B_Norovirus_Summer,PATH001,Site_B,primary_contact,3,0.3,50,35,75,25,8000,10000,High,Secondary beach summer
 S003,Site_C_Norovirus_Summer,PATH001,Site_C,primary_contact,3,0.3,50,35,75,25,10000,10000,Medium,Remote beach summer
 S004,Site_A_Norovirus_Winter,PATH002,Site_A,primary_contact,3,0.5,30,20,50,8,2000,10000,Medium,Winter swimmers
-S005,Site_A_Campylobacter,PATH003,Site_A,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Medium,Campylobacter assessment
-S006,Site_A_Cryptosporidium,PATH004,Site_A,primary_contact,2.5,0.5,50,35,75,25,15000,10000,Low,Crypto lower LRV
-S007,Site_A_Ecoli,PATH006,Site_A,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Low,E.coli indicator
+S005,Site_A_Norovirus_High_LRV,PATH001,Site_A,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Medium,Higher treatment LRV scenario
+S006,Site_A_Norovirus_Low_LRV,PATH002,Site_A,primary_contact,2.5,0.5,50,35,75,25,15000,10000,Low,Lower treatment LRV scenario
+S007,Site_A_Norovirus_High_Load,PATH005,Site_A,primary_contact,3.5,0.3,50,35,75,25,15000,10000,Low,High pathogen load scenario
 S008,Shellfish_Site_C,PATH001,Site_C,shellfish_consumption,3,0.3,100,80,150,24,5000,10000,High,Commercial shellfish area
 S009,Site_A_No_Treatment,PATH005,Site_A,primary_contact,0,0,50,30,100,20,5000,10000,High,Bypass scenario worst case
 S010,Site_A_UV_Treatment,PATH001,Site_A,primary_contact,8,0.5,50,35,75,25,15000,10000,High,UV disinfection upgrade
@@ -13,4 +13,4 @@ S011,Site_A_MBR_Treatment,PATH001,Site_A,primary_contact,9.3,0.3,50,40,70,25,150
 S012,Site_B_Poor_Dilution,PATH001,Site_B,primary_contact,3,0.4,50,30,80,25,12000,10000,High,Enclosed bay poor mixing
 S013,Site_C_Excellent_Dilution,PATH001,Site_C,primary_contact,3,0.3,50,40,65,25,12000,10000,Low,Open coast excellent dilution
 S014,Peak_Weekend_Site_A,PATH002,Site_A,primary_contact,3,0.5,75,50,120,40,20000,10000,High,Peak summer weekend
-S015,Multi_Pathogen_Site_A,PATH007,Site_A,primary_contact,3,0.3,50,35,75,25,15000,10000,Medium,Rotavirus assessment
+S015,Sensitivity_Analysis_Site_A,PATH005,Site_A,primary_contact,3,0.3,50,35,75,25,15000,10000,Medium,High load sensitivity analysis
