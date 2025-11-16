@@ -231,6 +231,9 @@ class PathogenDatabase:
         """
         Get the default dose-response model type for a pathogen.
 
+        CRITICAL: For norovirus, MUST use Beta-Binomial (exact model).
+        Beta-Poisson is INVALID for norovirus because beta=0.055 << 1.
+
         Args:
             pathogen_name: Name of the pathogen
 
@@ -244,25 +247,58 @@ class PathogenDatabase:
         if "dose_response_models" not in pathogen_info:
             raise ValueError(f"No dose-response models available for {pathogen_name}")
 
-        available_models = list(pathogen_info["dose_response_models"].keys())
+        available_models = pathogen_info["dose_response_models"]
 
-        # Prefer beta_poisson if available, otherwise use the first available
-        if "beta_poisson" in available_models:
-            return "beta_poisson"
+        # CRITICAL: For norovirus, use Beta-Binomial (exact model)
+        # Beta-Poisson approximation is INVALID (underestimates risk by 2-4x)
+        if pathogen_name.lower() == "norovirus":
+            if "beta_binomial" in available_models:
+                return "beta_binomial"
+            else:
+                raise ValueError(
+                    "Beta-Binomial model required for norovirus but not found in database. "
+                    "Beta-Poisson approximation is INVALID (beta=0.055 << 1)."
+                )
+
+        # For other pathogens, filter out deprecated models and select first valid one
+        non_deprecated_models = [
+            name for name, params in available_models.items()
+            if not params.get("deprecated", False)
+        ]
+
+        if non_deprecated_models:
+            # Prefer beta_binomial, then beta_poisson, then exponential
+            for preferred in ["beta_binomial", "beta_poisson", "exponential"]:
+                if preferred in non_deprecated_models:
+                    return preferred
+            return non_deprecated_models[0]
         else:
-            return available_models[0]
+            # All models deprecated, return first and warn
+            import warnings
+            warnings.warn(
+                f"All dose-response models for {pathogen_name} are deprecated. "
+                f"Using first available: {list(available_models.keys())[0]}"
+            )
+            return list(available_models.keys())[0]
 
 
 # Convenience function for common use case
 def get_norovirus_parameters() -> Dict:
     """
-    Get norovirus dose-response parameters using default Beta-Poisson model.
+    Get norovirus dose-response parameters using CORRECT Beta-Binomial model.
+
+    CRITICAL: Uses Beta-Binomial (exact model) NOT Beta-Poisson (invalid approximation).
+    Beta-Poisson approximation underestimates norovirus risk by 2-4x at low doses.
 
     Returns:
-        Dictionary containing norovirus Beta-Poisson parameters
+        Dictionary containing norovirus Beta-Binomial parameters
+
+    Reference:
+        - Teunis et al. (2008) "Norwalk virus: How infectious is it?"
+        - McBride (2017) Bell Island QMRA, Appendix B
     """
     db = PathogenDatabase()
-    return db.get_dose_response_parameters("norovirus", "beta_poisson")
+    return db.get_dose_response_parameters("norovirus", "beta_binomial")
 
 
 if __name__ == "__main__":
@@ -271,14 +307,21 @@ if __name__ == "__main__":
 
     print("Available pathogens:", db.get_available_pathogens())
 
-    # Get norovirus information
-    norovirus_params = db.get_dose_response_parameters("norovirus")
-    print(f"Norovirus Beta-Poisson parameters: {norovirus_params}")
+    # Get norovirus information using CORRECT Beta-Binomial model
+    default_model = db.get_default_model_type("norovirus")
+    print(f"\nNorovirus default model: {default_model}")
+
+    norovirus_params = db.get_dose_response_parameters("norovirus", default_model)
+    print(f"Norovirus {default_model} parameters: {norovirus_params}")
 
     # Get environmental data
     env_data = db.get_environmental_data("norovirus")
-    print(f"Norovirus environmental data: {env_data}")
+    print(f"\nNorovirus environmental data: {env_data}")
 
     # Validate exposure route
     valid_route = db.validate_exposure_route("norovirus", "primary_contact")
-    print(f"Primary contact valid for norovirus: {valid_route}")
+    print(f"\nPrimary contact valid for norovirus: {valid_route}")
+
+    # Get illness parameters
+    illness_params = db.get_illness_parameters("norovirus")
+    print(f"\nNorovirus illness parameters: {illness_params}")

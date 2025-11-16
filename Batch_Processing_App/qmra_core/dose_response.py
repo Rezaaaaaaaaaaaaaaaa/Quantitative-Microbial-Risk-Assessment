@@ -184,6 +184,131 @@ class ExponentialModel(DoseResponseModel):
         return float(dose)
 
 
+class BetaBinomialModel(DoseResponseModel):
+    """
+    Beta-Binomial dose-response model (EXACT - CONDITIONAL MODEL).
+
+    This is the CORRECT model for highly infectious viruses like norovirus
+    where the Beta-Poisson approximation is INVALID.
+
+    Formula: P(infection) = 1 - B(α, β+dose) / B(α, β)
+
+    Where B is the beta function: B(α,β) = Γ(α)Γ(β)/Γ(α+β)
+
+    Using log-gamma functions to avoid numerical overflow:
+    P = 1 - exp(gammaln(β+dose) + gammaln(α+β) - gammaln(α+β+dose) - gammaln(β))
+
+    CRITICAL: This model MUST be used for norovirus because:
+    - Norovirus parameters: α = 0.04, β = 0.055
+    - Beta-Poisson requires: β >> 1 (much greater than 1)
+    - For norovirus: β = 0.055 << 1, so Beta-Poisson is INVALID
+    - Using Beta-Poisson underestimates risk by 2-4× at low doses
+
+    References:
+    - Teunis et al. (2008) "Norwalk virus: How infectious is it?"
+    - McBride (2017) Bell Island QMRA, Appendix B (Equation 5, page 34)
+    - Haas (2002) "Conditional dose-response relationships"
+    """
+
+    def validate_parameters(self) -> None:
+        """Validate Beta-Binomial parameters."""
+        required_params = ["alpha", "beta"]
+        for param in required_params:
+            if param not in self.parameters:
+                raise ValueError(f"Missing required parameter: {param}")
+
+        if self.parameters["alpha"] <= 0:
+            raise ValueError("Alpha parameter must be positive")
+        if self.parameters["beta"] <= 0:
+            raise ValueError("Beta parameter must be positive")
+
+        # Check if Beta-Poisson approximation would be invalid
+        alpha = self.parameters["alpha"]
+        beta = self.parameters["beta"]
+        if beta < 1:
+            warnings.warn(
+                f"Beta-Binomial model is appropriate for these parameters "
+                f"(α={alpha}, β={beta}). Beta-Poisson approximation would be "
+                f"INVALID because β << 1. Using exact Beta-Binomial is correct.",
+                category=UserWarning
+            )
+
+    def calculate_infection_probability(self, dose: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
+        """
+        Calculate infection probability using Beta-Binomial model.
+
+        This is the CONDITIONAL model where individual doses are known.
+
+        Formula: P(inf) = 1 - B(α, β+i) / B(α, β)
+
+        Implemented using log-gamma functions:
+        P = 1 - exp(gammaln(β+i) + gammaln(α+β) - gammaln(α+β+i) - gammaln(β))
+
+        Args:
+            dose: Pathogen dose (organisms/virions)
+
+        Returns:
+            Probability of infection (0-1)
+
+        Example:
+            >>> model = BetaBinomialModel({"alpha": 0.04, "beta": 0.055})
+            >>> prob = model.calculate_infection_probability(1)
+            >>> # prob ≈ 0.421 (42.1% infection probability for 1 norovirus virion)
+        """
+        dose = np.asarray(dose)
+        alpha = self.parameters["alpha"]
+        beta = self.parameters["beta"]
+
+        # Handle zero and negative doses
+        if np.any(dose < 0):
+            warnings.warn("Negative doses encountered, setting to zero")
+            dose = np.maximum(dose, 0)
+
+        # Beta-Binomial formula using log-gamma functions
+        # This avoids numerical overflow/underflow issues with large gamma values
+        log_prob_complement = (
+            gammaln(beta + dose) +
+            gammaln(alpha + beta) -
+            gammaln(alpha + beta + dose) -
+            gammaln(beta)
+        )
+
+        # Calculate probability
+        prob = 1.0 - np.exp(log_prob_complement)
+
+        # Ensure probabilities are in valid range [0, 1]
+        prob = np.clip(prob, 0, 1)
+
+        return prob if prob.shape else float(prob)
+
+    def calculate_dose_for_risk(self, target_risk: float) -> float:
+        """
+        Calculate dose required to achieve target infection risk.
+
+        For Beta-Binomial model, this requires numerical solution.
+
+        Args:
+            target_risk: Target infection probability (0-1)
+
+        Returns:
+            Required dose (organisms)
+        """
+        if not 0 < target_risk < 1:
+            raise ValueError("Target risk must be between 0 and 1")
+
+        from scipy.optimize import brentq
+
+        def risk_difference(dose):
+            return self.calculate_infection_probability(dose) - target_risk
+
+        # Search for dose between 0 and 10^6 organisms
+        try:
+            dose = brentq(risk_difference, 0, 1e6)
+            return float(dose)
+        except ValueError:
+            raise ValueError(f"Could not find dose for target risk {target_risk}")
+
+
 class HypergeometricModel(DoseResponseModel):
     """
     Hypergeometric dose-response model.
@@ -238,7 +363,7 @@ def create_dose_response_model(model_type: str, parameters: Dict) -> DoseRespons
     Factory function to create dose-response models.
 
     Args:
-        model_type: Type of model ("beta_poisson", "exponential", "hypergeometric")
+        model_type: Type of model ("beta_binomial", "beta_poisson", "exponential", "hypergeometric")
         parameters: Model parameters
 
     Returns:
@@ -246,8 +371,13 @@ def create_dose_response_model(model_type: str, parameters: Dict) -> DoseRespons
 
     Raises:
         ValueError: If model type is not recognized
+
+    Note:
+        For norovirus, use "beta_binomial" (EXACT model) instead of "beta_poisson" (invalid approximation).
+        Beta-Poisson approximation is only valid when β >> 1.
     """
     model_types = {
+        "beta_binomial": BetaBinomialModel,
         "beta_poisson": BetaPoissonModel,
         "exponential": ExponentialModel,
         "hypergeometric": HypergeometricModel

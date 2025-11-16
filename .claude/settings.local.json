@@ -1,10 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git push:*)",
+      "Bash(dir /B:*)",
+      "Bash(dir:*)",
+      "Bash(python:*)",
+      "Bash(\"CRITICAL_ASSESSMENT_REPORT.md\")",
+      "Bash(streamlit run:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(python:*)"
+      "Bash(git commit -m \"$(cat <<''EOF''\nProduction Mode implementation and comprehensive technical documentation\n\nCRITICAL FIXES:\n- Fixed batch_processor.py sys.path issue (QMRA modules now import correctly)\n- Cleaned all input data files to norovirus-only for Production Mode\n- Fixed scenarios.csv and master_scenarios.csv pathogen ID references\n- Removed non-norovirus pathogens from pathogen_library.csv\n\nPRODUCTION MODE:\n- All example data files now contain ONLY norovirus (validated pathogen)\n- pathogen_data.csv: 3 norovirus entries (PATH001, PATH002, PATH005)\n- scenarios.csv: 15 scenarios, all norovirus references only\n- master_scenarios.csv: 15 scenarios, all norovirus (PATH003-004 are norovirus variants)\n- pathogen_library.csv: 7 norovirus definitions (removed campylobacter, crypto, e.coli)\n\nNEW DOCUMENTATION:\n- TECHNICAL_USER_MANUAL.md (75+ pages professional user guide)\n  * Focus on HOW TO USE with minimal theory\n  * All 5 assessment workflows documented\n  * Production Mode validation status\n  * QMRA methodology and interpretation guide\n  * Troubleshooting and support information\n  \n- SCREENSHOT_INSTRUCTIONS.md (manual and automated screenshot capture guide)\n- capture_screenshots_automated.bat (Windows automation script)\n- README_EXAMPLE_DATA.md (production vs research file documentation)\n- norovirus_monitoring_data.csv (production-ready monitoring data)\n- VERIFICATION_SUMMARY.md (complete verification of David''s comments)\n- DOCUMENTATION_UPDATE_SUMMARY.md (summary of all changes)\n- RESPONSE_TO_DAVID.md (concise email response draft)\n\nSCREENSHOT AUTOMATION:\n- Updated capture_app_screenshots.py (port 8502→8501)\n- Created automated batch script for screenshot capture\n- Deleted old screenshots (ready for new captures)\n\nVALIDATION STATUS:\n✅ Beta-Binomial model verified (exact match to David''s Excel)\n✅ Norovirus parameters: α=0.04, β=0.055 (Teunis 2008)\n✅ Production Mode enforces norovirus-only assessments\n✅ All example data production-ready (contract scope)\n\n🤖 Generated with Claude Code (https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,15 @@
+Package: testPackage
+Title: Automate QMRA
+Version: 0.0.0.9000
+Authors@R: 
+    person("David", "Wood", , "David.Wood@NIWA.co.nz", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Creates an R version of Graham McBrides QMRA spreadsheets.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3.9000
+NeedsCompilation: no
+Packaged: 2024-01-11 23:34:37 UTC; wooddr
+Author: David Wood [aut, cre] (YOUR-ORCID-ID)
+Maintainer: David Wood <David.Wood@NIWA.co.nz>

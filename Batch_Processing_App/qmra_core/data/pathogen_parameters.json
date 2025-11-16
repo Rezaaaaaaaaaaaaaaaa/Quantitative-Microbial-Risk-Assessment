@@ -3,12 +3,23 @@
     "name": "Norovirus",
     "pathogen_type": "virus",
     "dose_response_models": {
+      "beta_binomial": {
+        "alpha": 0.04,
+        "beta": 0.055,
+        "source": "Teunis et al. (2008) - EXACT Beta-Binomial model",
+        "notes": "CORRECT model for norovirus. Beta-Poisson approximation is INVALID (beta << 1). Reference: McBride (2017) Bell Island QMRA Appendix B.",
+        "r_squared": 0.85,
+        "id50_infection": 26,
+        "model_type": "conditional"
+      },
       "beta_poisson": {
         "alpha": 0.04,
         "beta": 0.055,
-        "source": "Teunis et al. (2008)",
-        "notes": "Optimized model for human norovirus",
-        "r_squared": 0.85
+        "source": "Teunis et al. (2008) - INVALID approximation",
+        "notes": "WARNING: This approximation is INVALID for norovirus (beta=0.055 << 1). Underestimates risk by 2-4x at low doses. Use beta_binomial instead.",
+        "r_squared": 0.85,
+        "deprecated": true,
+        "replacement": "beta_binomial"
       },
       "exponential": {
         "r": 0.5,
