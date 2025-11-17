@@ -1,0 +1,13 @@
+Sample_ID,Sample_Date,Norovirus_copies_per_L,Sample_Volume_L,Laboratory,QC_Flag
+MP001,6/2/2024,512,3,NIWA Christchurch,Pass
+MP002,6/9/2024,2204,3,NIWA Christchurch,Pass
+MP003,6/16/2024,1336,3,NIWA Christchurch,Pass
+MP004,6/23/2024,382,3,NIWA Christchurch,Pass
+MP005,6/30/2024,731,3,NIWA Christchurch,Pass
+MP006,7/7/2024,3484,3,NIWA Christchurch,Pass
+MP007,7/14/2024,200,3,NIWA Christchurch,Pass
+MP008,7/21/2024,812,3,NIWA Christchurch,Pass
+MP009,7/28/2024,2660,3,NIWA Christchurch,Pass
+MP010,8/4/2024,597,3,NIWA Christchurch,Pass
+MP011,8/11/2024,681,3,NIWA Christchurch,Pass
+MP012,8/18/2024,1026,3,NIWA Christchurch,Pass

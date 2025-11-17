@@ -1,0 +1,11 @@
+Dilution_ID,Dilution_Name,Dilution_Type,Dilution_Value,Dilution_Min,Dilution_Max,Dilution_Data_File,Notes
+DIL001,Typical_Beach_100x,fixed,100,,,,"Standard 100x dilution for typical beach scenarios"
+DIL002,Poor_Mixing_50x,fixed,50,,,,"Poor mixing conditions - enclosed bay"
+DIL003,Excellent_Mixing_500x,fixed,500,,,,"Open coast with excellent dilution"
+DIL004,Shellfish_Area_High_800x,fixed,800,,,,"Commercial shellfish area - high dilution"
+DIL005,Shellfish_Area_Medium_500x,fixed,500,,,,"Secondary shellfish area - moderate dilution"
+DIL006,Variable_Beach_75x,lognormal,75,25,150,,"Variable conditions with CV=0.4"
+DIL007,Very_Poor_25x,fixed,25,,,,"Very poor dilution - worst case"
+DIL008,Excellent_1000x,fixed,1000,,,,"Extremely good dilution"
+DIL009,Discharge_Point_ECDF,ecdf,,,,spatial_dilution_6_sites.csv,"Empirical distribution from hydrodynamic model - 6 sites"
+DIL010,Moderate_200x,fixed,200,,,,"Moderate dilution conditions"

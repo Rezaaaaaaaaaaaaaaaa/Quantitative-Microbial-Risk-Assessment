@@ -1,0 +1,24 @@
+scenario_name: Swimming - Winter Season
+exposure_route: primary_contact
+description: Limited recreational swimming during winter months
+season: Winter (June - August)
+
+population:
+  size: 2000
+  description: Winter swimmers and surfers
+  age_distribution:
+    children_0_5: 0.05
+    children_6_12: 0.10
+    adults_13_64: 0.75
+    elderly_65plus: 0.10
+
+exposure_parameters:
+  water_ingestion_volume_mL: 30
+  exposure_duration_minutes: 45
+  events_per_year: 8
+  peak_usage_days: 30
+  typical_swimmers_per_day: 50
+
+pathogen: norovirus
+risk_threshold: 0.001
+notes: Lower exposure frequency and volume during winter

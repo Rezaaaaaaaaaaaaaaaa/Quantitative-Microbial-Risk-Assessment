@@ -1,0 +1,32 @@
+scenario_name: Secondary Biological Treatment
+description: Activated sludge with secondary clarification
+treatment_barriers:
+  - name: Screening
+    type: physical
+    lrv: 0.2
+    variability: 0.1
+
+  - name: Primary Settling
+    type: physical
+    lrv: 0.8
+    variability: 0.3
+
+  - name: Activated Sludge
+    type: biological
+    lrv: 1.5
+    variability: 0.5
+    description: Aerobic biological treatment
+    srt_days: 10
+    hrt_hours: 8
+
+  - name: Secondary Clarifier
+    type: physical
+    lrv: 0.5
+    variability: 0.2
+
+total_log_reduction: 3.0
+pathogen_specific_lrv:
+  cryptosporidium: 2.5
+  norovirus: 2.0
+  bacteria: 3.5
+notes: Standard municipal wastewater treatment

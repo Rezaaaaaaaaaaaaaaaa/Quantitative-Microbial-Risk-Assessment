@@ -1,0 +1,4 @@
+Pathogen_ID,Pathogen_Name,Pathogen_Type,Min_Concentration,Median_Concentration,Max_Concentration,P_Breakpoint
+PATH001,Norovirus_Summer,norovirus,500000,1000000,2000000,0.95
+PATH002,Norovirus_Winter,norovirus,800000,1500000,3000000,0.95
+PATH005,Norovirus_High_Load,norovirus,1000000,2000000,4000000,0.95

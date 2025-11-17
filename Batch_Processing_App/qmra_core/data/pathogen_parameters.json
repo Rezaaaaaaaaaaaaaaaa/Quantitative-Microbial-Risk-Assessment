@@ -27,13 +27,13 @@
         "notes": "Conservative exponential approximation"
       }
     },
-    "illness_to_infection_ratio": 0.7,
+    "illness_to_infection_ratio": 0.37,
     "dalys_per_case": 0.002,
     "illness_parameters": {
-      "probability_illness_given_infection": 0.60,
+      "probability_illness_given_infection": 0.5,
       "population_susceptibility": 0.74,
-      "source": "WHO (2016), Teunis et al. (2008)",
-      "notes": "60% of infected become ill; 74% of population susceptible"
+      "source": "McBride et al. (2013) - Excel QMRA_Shellfish_191023_Nino_SUMMER.xlsx Global data C13, C12",
+      "notes": "EXCEL VALUES: Pr(ill|inf)=0.5 (C13); P(susceptible)=0.74 (C12); Combined=0.37"
     },
     "exposure_routes": [
       "primary_contact",

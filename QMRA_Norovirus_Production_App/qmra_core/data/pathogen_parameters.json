@@ -1,0 +1,54 @@
+{
+  "norovirus": {
+    "name": "Norovirus",
+    "pathogen_type": "virus",
+    "dose_response_models": {
+      "beta_binomial": {
+        "alpha": 0.04,
+        "beta": 0.055,
+        "source": "Teunis et al. (2008) - EXACT Beta-Binomial model",
+        "notes": "CORRECT model for norovirus. Beta-Poisson approximation is INVALID (beta << 1). Reference: McBride (2017) Bell Island QMRA Appendix B.",
+        "r_squared": 0.85,
+        "id50_infection": 26,
+        "model_type": "conditional"
+      },
+      "beta_poisson": {
+        "alpha": 0.04,
+        "beta": 0.055,
+        "source": "Teunis et al. (2008) - INVALID approximation",
+        "notes": "WARNING: This approximation is INVALID for norovirus (beta=0.055 << 1). Underestimates risk by 2-4x at low doses. Use beta_binomial instead.",
+        "r_squared": 0.85,
+        "deprecated": true,
+        "replacement": "beta_binomial"
+      },
+      "exponential": {
+        "r": 0.5,
+        "source": "Alternative simplified model",
+        "notes": "Conservative exponential approximation"
+      }
+    },
+    "illness_to_infection_ratio": 0.37,
+    "dalys_per_case": 0.002,
+    "illness_parameters": {
+      "probability_illness_given_infection": 0.5,
+      "population_susceptibility": 0.74,
+      "source": "McBride et al. (2013) - Excel QMRA_Shellfish_191023_Nino_SUMMER.xlsx Global data C13, C12",
+      "notes": "EXCEL VALUES: Pr(ill|inf)=0.5 (C13); P(susceptible)=0.74 (C12); Combined=0.37"
+    },
+    "exposure_routes": [
+      "primary_contact",
+      "shellfish_consumption",
+      "contaminated_water"
+    ],
+    "environmental_data": {
+      "survival_time_days": 60,
+      "inactivation_rate_per_day": 0.1,
+      "typical_concentrations": {
+        "raw_wastewater": 1e6,
+        "treated_wastewater": 1e3,
+        "recreational_water": 10,
+        "shellfish_tissue": 1e3
+      }
+    }
+  }
+}

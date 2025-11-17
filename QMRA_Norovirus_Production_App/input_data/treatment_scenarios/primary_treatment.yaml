@@ -1,0 +1,22 @@
+scenario_name: Primary Treatment Only
+description: Screening and primary settling
+treatment_barriers:
+  - name: Coarse Screening
+    type: physical
+    lrv: 0.2
+    variability: 0.05
+    description: Removes large solids
+
+  - name: Primary Settling
+    type: physical
+    lrv: 0.8
+    variability: 0.2
+    description: Gravity settling
+    retention_time_hours: 2.5
+
+total_log_reduction: 1.0
+pathogen_specific_lrv:
+  cryptosporidium: 0.8
+  norovirus: 0.5
+  bacteria: 1.2
+notes: Basic physical treatment, minimal pathogen removal
