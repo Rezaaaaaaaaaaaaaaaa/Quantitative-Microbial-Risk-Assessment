@@ -19,7 +19,8 @@
       "Bash(xcopy:*)",
       "Bash(robocopy:*)",
       "Bash(del README.md)",
-      "Bash(README.md)"
+      "Bash(README.md)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
