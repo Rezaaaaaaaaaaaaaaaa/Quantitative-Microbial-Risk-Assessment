@@ -95,7 +95,7 @@ def create_niwa_user_guide():
     print("Adding main content sections...")
 
     # 1. INTRODUCTION
-    heading = doc.add_heading('1. Introduction to QMRA', level=1)
+    heading = doc.add_heading('Introduction to QMRA', level=1)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -108,7 +108,7 @@ def create_niwa_user_guide():
     )
 
     # 1.1 QMRA Framework
-    heading = doc.add_heading('1.1 The QMRA Framework', level=2)
+    heading = doc.add_heading('The QMRA Framework', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -129,7 +129,7 @@ def create_niwa_user_guide():
         para.add_run(desc)
 
     # 1.2 Application Purpose
-    heading = doc.add_heading('1.2 Application Purpose and Scope', level=2)
+    heading = doc.add_heading('Application Purpose and Scope', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -155,9 +155,9 @@ def create_niwa_user_guide():
     doc.add_page_break()
 
     # 2. GETTING STARTED
-    heading = doc.add_heading('2. Getting Started', level=1)
+    heading = doc.add_heading('Getting Started', level=1)
 
-    heading2 = doc.add_heading('2.1 Launching the Application', level=2)
+    heading2 = doc.add_heading('Launching the Application', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -203,7 +203,7 @@ def create_niwa_user_guide():
     run.font.size = Pt(10)
 
     # 2.2 Production Mode
-    heading2 = doc.add_heading('2.2 Production Mode vs Research Mode', level=2)
+    heading2 = doc.add_heading('Production Mode vs Research Mode', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -238,7 +238,7 @@ def create_niwa_user_guide():
     doc.add_page_break()
 
     # 3. BETA-BINOMIAL MODEL (CRITICAL SECTION)
-    heading = doc.add_heading('3. Dose-Response Model: Beta-Binomial (Norovirus)', level=1)
+    heading = doc.add_heading('Dose-Response Model: Beta-Binomial (Norovirus)', level=1)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -254,7 +254,7 @@ def create_niwa_user_guide():
         'mathematically correct formulation. This is NOT the same as the Beta-Poisson approximation.'
     )
 
-    heading2 = doc.add_heading('3.1 Beta-Binomial Formula (CORRECT)', level=2)
+    heading2 = doc.add_heading('Beta-Binomial Formula (CORRECT)', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -285,7 +285,7 @@ def create_niwa_user_guide():
         para = doc.add_paragraph(param, style='Normal')
         para.paragraph_format.left_indent = Inches(0.75)
 
-    heading2 = doc.add_heading('3.2 Why Beta-Poisson is INVALID for Norovirus', level=2)
+    heading2 = doc.add_heading('Why Beta-Poisson is INVALID for Norovirus', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -321,7 +321,7 @@ def create_niwa_user_guide():
         para = doc.add_paragraph(consequence, style='Normal')
         para.paragraph_format.left_indent = Inches(0.75)
 
-    heading2 = doc.add_heading('3.3 Validation and Verification', level=2)
+    heading2 = doc.add_heading('Validation and Verification', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -374,7 +374,7 @@ def create_niwa_user_guide():
     doc.add_page_break()
 
     # 4. ASSESSMENT WORKFLOWS
-    heading = doc.add_heading('4. Assessment Workflows', level=1)
+    heading = doc.add_heading('Assessment Workflows', level=1)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -399,7 +399,7 @@ def create_niwa_user_guide():
         para.add_run(desc)
 
     # Add detailed workflow instructions for each
-    heading2 = doc.add_heading('4.1 Spatial Assessment (Detailed Example)', level=2)
+    heading2 = doc.add_heading('Spatial Assessment (Detailed Example)', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -424,9 +424,9 @@ def create_niwa_user_guide():
     doc.add_page_break()
 
     # 5. RESULTS INTERPRETATION
-    heading = doc.add_heading('5. Understanding Results', level=1)
+    heading = doc.add_heading('Understanding Results', level=1)
 
-    heading2 = doc.add_heading('5.1 Risk Metrics', level=2)
+    heading2 = doc.add_heading('Risk Metrics', level=2)
 
     metrics = [
         ('Mean Dose (organisms per exposure)',
@@ -448,7 +448,7 @@ def create_niwa_user_guide():
         run.bold = True
         para.add_run(description)
 
-    heading2 = doc.add_heading('5.2 WHO Guideline Compliance', level=2)
+    heading2 = doc.add_heading('WHO Guideline Compliance', level=2)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -479,7 +479,7 @@ def create_niwa_user_guide():
     doc.add_page_break()
 
     # 6. REFERENCES
-    heading = doc.add_heading('6. References', level=1)
+    heading = doc.add_heading('References', level=1)
 
     references = [
         'Teunis, P.F.M., Moe, C.L., Liu, P., Miller, S.E., Lindesmith, L., Baric, R.S., Le Pendu, J., & Calderon, R.L. (2008). Norwalk virus: How infectious is it? Journal of Medical Virology, 80(8), 1468-1476.',
