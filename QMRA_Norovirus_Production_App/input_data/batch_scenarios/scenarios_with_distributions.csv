@@ -1,7 +1,0 @@
-Scenario_ID,Scenario_Name,Pathogen,Use_ECDF_Dilution,Use_Hockey_Pathogen,Pathogen_Min,Pathogen_Median,Pathogen_Max,Dilution_File,Treatment_LRV,Exposure_Route,Volume_mL,Frequency_Year,Population,Iterations,Notes
-S_ECDF_001,Beach_A_ECDF_Only,norovirus,TRUE,FALSE,,,1000000,spatial_dilution_6_sites.csv,3.0,primary_contact,50,25,15000,10000,Uses ECDF for dilution but fixed pathogen concentration
-S_HOCKEY_002,Beach_A_Hockey_Only,norovirus,FALSE,TRUE,10000,1000000,10000000,spatial_dilution_6_sites.csv,3.0,primary_contact,50,25,15000,10000,Uses Hockey Stick for pathogen but median dilution only
-S_BOTH_003,Beach_A_Both_Distributions,norovirus,TRUE,TRUE,10000,1000000,10000000,spatial_dilution_6_sites.csv,3.0,primary_contact,50,25,15000,10000,Uses both ECDF dilution and Hockey Stick pathogen - RECOMMENDED
-S_OLD_004,Beach_A_Legacy_Mode,norovirus,FALSE,FALSE,,,800000,spatial_dilution_6_sites.csv,3.0,primary_contact,50,25,15000,10000,Backward compatible - uses median dilution and fixed pathogen
-S_BOTH_005,Beach_B_Conservative,norovirus,TRUE,TRUE,50000,2000000,20000000,spatial_dilution_6_sites.csv,3.0,primary_contact,50,20,10000,10000,More conservative estimate with wider pathogen range
-S_BOTH_006,Shellfish_Area,norovirus,TRUE,TRUE,5000,500000,5000000,spatial_dilution_6_sites.csv,2.0,shellfish_consumption,25,12,5000,10000,Shellfish consumption scenario with both distributions

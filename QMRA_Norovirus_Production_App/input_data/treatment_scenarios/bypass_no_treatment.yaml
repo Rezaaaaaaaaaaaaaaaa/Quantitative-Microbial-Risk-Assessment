@@ -1,9 +1,0 @@
-scenario_name: Bypass - No Treatment
-description: Raw wastewater discharge without treatment (worst case scenario)
-treatment_barriers: []
-total_log_reduction: 0.0
-pathogen_specific_lrv:
-  cryptosporidium: 0.0
-  norovirus: 0.0
-  bacteria: 0.0
-notes: Emergency bypass or untreated discharge scenario for comparison
