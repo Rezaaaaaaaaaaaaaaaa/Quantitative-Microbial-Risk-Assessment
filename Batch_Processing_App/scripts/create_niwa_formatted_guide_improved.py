@@ -265,7 +265,8 @@ def create_niwa_user_guide():
     ]
 
     for i, step in enumerate(steps, 1):
-        para = doc.add_paragraph(f'{i}. {step}', style='Numbered para - Level 1')
+        para = doc.add_paragraph(f'{i}. {step}', style='Body Text')
+        para.paragraph_format.left_indent = Inches(0.5)
 
     para = doc.add_paragraph()
     para.style = 'Body Text'
@@ -485,7 +486,8 @@ def create_niwa_user_guide():
     ]
 
     for i, step in enumerate(steps, 1):
-        para = doc.add_paragraph(f'{i}. {step}', style='Numbered para - Level 1')
+        para = doc.add_paragraph(f'{i}. {step}', style='Body Text')
+        para.paragraph_format.left_indent = Inches(0.5)
 
     # 4.2 Spatial Assessment
     heading2 = doc.add_heading('Spatial Risk Assessment', level=2)
@@ -513,7 +515,8 @@ def create_niwa_user_guide():
     ]
 
     for i, step in enumerate(steps, 1):
-        para = doc.add_paragraph(f'{i}. {step}', style='Numbered para - Level 1')
+        para = doc.add_paragraph(f'{i}. {step}', style='Body Text')
+        para.paragraph_format.left_indent = Inches(0.5)
 
     # 4.3 Temporal Assessment
     heading2 = doc.add_heading('Temporal Risk Assessment', level=2)
@@ -540,7 +543,8 @@ def create_niwa_user_guide():
     ]
 
     for i, step in enumerate(steps, 1):
-        para = doc.add_paragraph(f'{i}. {step}', style='Numbered para - Level 1')
+        para = doc.add_paragraph(f'{i}. {step}', style='Body Text')
+        para.paragraph_format.left_indent = Inches(0.5)
 
     # 4.4 Treatment Comparison
     heading2 = doc.add_heading('Treatment Technology Comparison', level=2)
@@ -568,7 +572,8 @@ def create_niwa_user_guide():
     ]
 
     for i, step in enumerate(steps, 1):
-        para = doc.add_paragraph(f'{i}. {step}', style='Numbered para - Level 1')
+        para = doc.add_paragraph(f'{i}. {step}', style='Body Text')
+        para.paragraph_format.left_indent = Inches(0.5)
 
     # 4.5 Multi-Pathogen Assessment
     heading2 = doc.add_heading('Multi-Pathogen Assessment', level=2)
@@ -603,7 +608,8 @@ def create_niwa_user_guide():
     ]
 
     for i, step in enumerate(steps, 1):
-        para = doc.add_paragraph(f'{i}. {step}', style='Numbered para - Level 1')
+        para = doc.add_paragraph(f'{i}. {step}', style='Body Text')
+        para.paragraph_format.left_indent = Inches(0.5)
 
     doc.add_page_break()
 
