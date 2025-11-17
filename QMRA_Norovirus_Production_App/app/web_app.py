@@ -165,14 +165,22 @@ def create_risk_distribution_plot(df):
         plt.tight_layout()
         return fig
 
-    # Histogram
-    ax1.hist(np.log10(df['Annual_Risk_Median']), bins=20, color='steelblue', alpha=0.7, edgecolor='black')
-    ax1.set_xlabel('Log10(Annual Risk)', fontsize=12, fontweight='bold')
-    ax1.set_ylabel('Frequency', fontsize=12, fontweight='bold')
-    ax1.set_title('Risk Distribution (Histogram)', fontsize=13, fontweight='bold')
-    ax1.axvline(x=np.log10(1e-4), color='orange', linestyle='--', linewidth=2, label='WHO Threshold')
-    ax1.legend()
-    ax1.grid(True, alpha=0.3)
+    # Histogram - filter out zero/very small values before log10
+    risk_values = df['Annual_Risk_Median'].values
+    # Filter out values <= 0 or extremely small values that would cause -inf
+    valid_risks = risk_values[risk_values > 1e-15]
+
+    if len(valid_risks) > 0:
+        ax1.hist(np.log10(valid_risks), bins=20, color='steelblue', alpha=0.7, edgecolor='black')
+        ax1.set_xlabel('Log10(Annual Risk)', fontsize=12, fontweight='bold')
+        ax1.set_ylabel('Frequency', fontsize=12, fontweight='bold')
+        ax1.set_title('Risk Distribution (Histogram)', fontsize=13, fontweight='bold')
+        ax1.axvline(x=np.log10(1e-4), color='orange', linestyle='--', linewidth=2, label='WHO Threshold')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3)
+    else:
+        ax1.text(0.5, 0.5, 'No valid risk values to plot',
+                ha='center', va='center', fontsize=14, transform=ax1.transAxes)
 
     # Box plot by risk classification
     if 'Risk_Classification' in df.columns:
